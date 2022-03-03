@@ -13,6 +13,15 @@ def get_variable():
     return is_prod
 
 
+def get_connection():
+    from airflow.hooks.base_hook import BaseHook
+
+    connection = BaseHook.get_connection("postgres_main")
+    conn_password = connection.password
+    conn_login = connection.login
+    return conn_password, conn_login
+
+
 # Default settings applied to all tasks
 default_args = {
     'owner': 'airflow',
@@ -35,3 +44,8 @@ with DAG(
         task_id='example_variable',
         python_callable=get_variable,
     )
+    t2 = PythonOperator(
+        task_id='example_connection',
+        python_callable=get_connection,
+    )
+    t1 >> t2
