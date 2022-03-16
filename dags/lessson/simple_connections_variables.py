@@ -6,9 +6,6 @@ from datetime import datetime, timedelta
 
 def get_variable():
     from airflow.models import Variable
-    """
-    Gets totalTestResultsIncrease field from Covid API for given state and returns value
-    """
     is_prod = Variable.get("is_prod")
     return is_prod
 
