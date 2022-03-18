@@ -1,8 +1,8 @@
 from datetime import timedelta
+
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
-
 
 with DAG(
     'first DAG',
@@ -21,22 +21,18 @@ with DAG(
     tags=['step 2'],
 ) as dag:
 
-
     t1 = BashOperator(
         task_id='print_pwd',
         bash_command='pwd',
     )
 
-
     def print_date(ds):
         print(ds)
         print("My first function for PythonOperator")
-
 
     t2 = PythonOperator(
         task_id='print_date',
         python_callable=print_date,
     )
-
 
     t1 >> t2
