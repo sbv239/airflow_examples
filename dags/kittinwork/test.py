@@ -3,7 +3,7 @@ from airflow.operators.python_operator import PythonOperator
 from datetime import datetime
 
 default_args = {
-    'owner': 'grigory51',
+    'owner': 'kittinwork',
     'depends_on_past': False,
     'start_date': datetime(2021, 8, 20),
     'retries': 0
