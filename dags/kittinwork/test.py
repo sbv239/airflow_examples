@@ -10,7 +10,7 @@ default_args = {
 }
 
 dag = DAG(
-    'hello_world',
+    'hello_StartML',
     default_args=default_args,
     schedule_interval='00 12 * * 1'
 )
