@@ -21,8 +21,8 @@ with DAG(
         )
 
 
-        def print_task_number(task_n: int):
-            print(f'task number is: {task_n}')
+    def print_task_number(task_n: int):
+        print(f'task number is: {task_n}')
 
     for task_number in range(20):
         python_task = PythonOperator(
