@@ -2,6 +2,7 @@ from airflow import DAG
 from datetime import datetime, timedelta
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
+from textwrap import dedent
 with DAG\
     (
     "task_3_v_zabolotskij",
@@ -30,3 +31,19 @@ with DAG\
                 task_id = "PY_task_" + str(task),
                 python_callable = task_number
             )
+    bash_task.doc_md = dedent(
+        """ \
+        #bash_task DESCRIPTION
+        'f"You will know more about bash_task"`    
+        **10** Auto generated *BashOperator* tasks.
+        """
+    )
+
+    py_task.doc_md = dedent(
+        """ \
+        #py_task DESCRIPTION
+        'f"You will know more about py_task"`
+        **Py_task** have a function *task_number*
+        which printing task number. 
+        """
+    )
