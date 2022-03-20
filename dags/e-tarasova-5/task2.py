@@ -41,7 +41,7 @@ with DAG(
         print(f"task number is: {task_number}")
 
     for i in range(20):
-        t2 = PythomOperator(
+        t2 = PythonOperator(
             task_id = 'task_number'+str(i),
             python_callable=get_task_number,
             op_kwargs={'task_number': i}
