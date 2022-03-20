@@ -24,7 +24,6 @@ with DAG\
     echo "{{ run_id }}"
         """
     )
-  
     task_1 = BashOperator(
         task_id = "templated_print_ts_run_id",
         bash_command = templated_code
