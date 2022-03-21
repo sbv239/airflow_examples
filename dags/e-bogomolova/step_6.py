@@ -27,5 +27,4 @@ with DAG(
             task_id='echo_' + str(i),
             bash_command='echo $NUMBER',
         )
-
-    t1
+        t1
