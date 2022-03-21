@@ -16,7 +16,7 @@ with DAG\
     description = "DAG for task #3",
     ) as dag:
 
-    for task in range(30):
+    for task in range(10):
         NUMBER = task
         if task <= 10:
             bash_task = BashOperator(
