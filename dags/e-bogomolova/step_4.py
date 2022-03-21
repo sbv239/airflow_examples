@@ -1,4 +1,4 @@
-from datetime import timedelta
+from datetime import datetime, timedelta
 from textwrap import dedent
 
 from airflow import DAG
@@ -6,7 +6,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-    'dynamic tasks',
+    'e_bogomolova_step_4',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -15,11 +15,11 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),
     },
-    description='DAG for step 3',
+    description='DAG_for_e_bogomolova_step_4',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 3, 18),
     catchup=False,
-    tags=['step 3'],
+    tags=['step_4'],
 ) as dag:
 
     for i in range(10):
