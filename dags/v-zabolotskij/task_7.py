@@ -29,6 +29,6 @@ with DAG\
                 return f"task number is: {task_number}"
             py_task = PythonOperator(
                 task_id = "PY_task_" + str(task),
-                python_callable = task_number,
+                python_callable = print_task_num,
                 op_kwargs = {"task_number": task}
                  )
