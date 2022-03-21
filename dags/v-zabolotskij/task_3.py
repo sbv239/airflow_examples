@@ -14,6 +14,10 @@ with DAG\
         'retry_delay': timedelta(minutes=5), 
     },
     description = "DAG for task #3",
+    schedule_interval = timedelta(days=1),
+    start_date = datetime(2022, 3, 20),
+    catchup = False,
+    tags = ["task_3"]
     ) as dag:
 
     for task in range(30):
@@ -24,7 +28,7 @@ with DAG\
                 bash_command = f"echo {task}"            
             )
         else:
-            def print_task_num(task_number):
+            def print_task_num(**kwargs):
                 return f"task number is: {task_number}"
             py_task = PythonOperator(
                 task_id = "PY_task_" + str(task),
