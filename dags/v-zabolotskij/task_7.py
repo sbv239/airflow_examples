@@ -4,7 +4,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 with DAG\
     (
-    "task_3_v_zabolotskij",
+    "task_7_v_zabolotskij",
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -24,10 +24,11 @@ with DAG\
                 bash_command = f"echo {task}"            
             )
         else:
-            def task_number(task_number = task, ts, run_id, **kwargs):
+            def print_task_num(task_number, ts, run_id):
                 print(ts,run_id, sep='\n')
                 return f"task number is: {task_number}"
             py_task = PythonOperator(
                 task_id = "PY_task_" + str(task),
-                python_callable = task_number
-            )
+                python_callable = task_number,
+                op_kwargs = {"task_number": task}
+                 )
