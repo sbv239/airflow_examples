@@ -26,9 +26,9 @@ with DAG(
         print(run_id)
 
     for i in range(20):
-        task_p = PythonOperator(
+        t1 = PythonOperator(
             task_id='task_number_' + str(i),
             python_callable=print_task_number,
             op_kwargs={'task_number': i},
         )
-        task_b
+        t1
