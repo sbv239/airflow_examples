@@ -22,7 +22,7 @@ with DAG(
 ) as dag:
 
     for i in range(10):
-        os.environ['NUMBER'] = str(i)
+        env = {'NUMBER': str(i)}
         t1 = BashOperator(
             task_id='echo_' + str(i),
             bash_command='echo $NUMBER',
