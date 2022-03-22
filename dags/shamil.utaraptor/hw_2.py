@@ -28,12 +28,12 @@ with DAG(
     for i in range(1, 31):
         if i <= 10:
             task = BashOperator(
-                task_id='print_loop_iteration',  # id, будет отображаться в интерфейсе
+                task_id=f'print_loop_iteration_{i}',  # id, будет отображаться в интерфейсе
                 bash_command=f'echo {i}',  # какую bash команду выполнить в этом таске
             )
         else:
             task = PythonOperator(
-                task_id="print_task_number",
+                task_id=f"print_task_number_{i}",
                 python_callable=print_task,
                 op_kwargs={'task_number': i}
             )
