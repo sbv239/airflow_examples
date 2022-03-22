@@ -2,7 +2,7 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
-from datetime import timedelta
+from datetime import timedelta, datetime
 
 
 def print_context(ds):
@@ -21,7 +21,7 @@ with DAG(
     },
     description='DAG for the first homework',
     schedule_interval=timedelta(days=1),
-    start_date=datetime(2022, 3, 22),
+    start_date=datetime(year=2022, month=3, day=22),
     catchup=False,
     tags=['hw_1_shamil.utaraptor'],
 ) as dag:
