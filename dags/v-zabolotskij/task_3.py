@@ -19,7 +19,6 @@ with DAG\
     catchup = False,
     tags = ["task_3"]
     ) as dag:
-
     for task in range(30):
 
         if task <= 10:
