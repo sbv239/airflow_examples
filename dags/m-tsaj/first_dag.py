@@ -20,7 +20,7 @@ with DAG(
     )
 
 
-    def print_ds(ds, **kwargs):
+    def print_ds(ds):
         print(ds)
 
 
