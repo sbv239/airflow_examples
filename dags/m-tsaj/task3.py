@@ -13,7 +13,7 @@ with DAG(
             'retries': 1,
             'retry_delay': timedelta(minutes=5)
         },
-        description='First dag',
+        description='Cyclic tasks dag',
         schedule_interval=timedelta(days=1),
         start_date=datetime(2021, 3, 20),
         catchup=False,
@@ -33,5 +33,5 @@ with DAG(
         python_task = PythonOperator(
             task_id=f'print_task_{task_number}',
             python_callable=print_task_number,
-            op_kwargs=task_number,
+            op_kwargs={'task_n': task_number},
         )
