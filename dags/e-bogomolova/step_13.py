@@ -1,7 +1,8 @@
 from datetime import datetime, timedelta
+
 from airflow import DAG
-from airflow.operators.python import BranchingOperator, BashOperator
 from airflow.operators.dummy import DummyOperator
+from airflow.operators.python import BashOperator, BranchingOperator
 
 
 def get_condition():
