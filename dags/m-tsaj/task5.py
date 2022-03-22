@@ -2,11 +2,12 @@ from airflow import DAG
 from airflow.operators.python import PythonOperator
 from airflow.operators.bash import BashOperator
 from datetime import datetime, timedelta
-from textwrap import dedent
+
+import os
 
 
 with DAG(
-        'dynamic_tasks_dag',
+        'dag_6_m-tsaj',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
@@ -15,23 +16,17 @@ with DAG(
             'retries': 1,
             'retry_delay': timedelta(minutes=5),
         },
-        description='Dynamic tasks dag',
+        description='Pass NUMBER variable to bash operator',
         schedule_interval=timedelta(days=1),
         start_date=datetime(2021, 3, 20),
         catchup=False,
 ) as dag:
     for i in range(10):
+        os.environ['NUMBER'] = str(i)
         bash_task = BashOperator(
             task_id=f'echo_task_{i}',
-            bash_command=f'echo {i}',
+            bash_command='echo $NUMBER',
         )
-
-    bash_task.doc_md = dedent(
-        """
-        #### Bash tasks documentation
-        10 consequential tasks, executing the `echo` bash command
-        """
-    )
 
 
     def print_task_number(task_n: int):
@@ -44,10 +39,3 @@ with DAG(
             python_callable=print_task_number,
             op_kwargs={'task_n': task_number},
         )
-
-    python_task.doc_md = dedent(
-        """
-         #### Python tasks documentation
-        20 consequential tasks, simply printing the *task number*
-        """
-    )
