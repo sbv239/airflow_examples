@@ -26,7 +26,7 @@ with DAG(
     tags=['hw_1_shamil.utaraptor'],
 ) as dag:
     t1 = BashOperator(
-        task_id='print_current_dir',  # id, будет отображаться в интерфейсе
+        task_id='print_current_folder',  # id, будет отображаться в интерфейсе
         bash_command='pwd',  # какую bash команду выполнить в этом таске
     )
 
