@@ -28,7 +28,7 @@ with DAG\
                 bash_command = f"echo {task}"            
             )
         else:
-            def print_task_num(**kwargs):
+            def print_task_num(task_number):
                 return f"task number is: {task_number}"
             py_task = PythonOperator(
                 task_id = "PY_task_" + str(task),
