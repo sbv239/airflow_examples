@@ -12,7 +12,10 @@ def set_xcom_func(ti):
 
 def get_xcom_func(ti):
     # value_read = ti.xcom_pull(key='sample_xcom_key')
-    value_read = ti.xcom_pull(task_ids='set_xcom')
+    value_read = ti.xcom_pull(
+        key='sample_xcom_key',
+        task_ids='set_xcom'
+    )
     print(value_read)
 
 
@@ -33,11 +36,12 @@ with DAG(
 ) as dag:
     t1 = PythonOperator(
         task_id='set_xcom',
-        python_callable=set_xcom_func
+        python_callable=set_xcom_func,
     )
 
     t2 = PythonOperator(
-        task_id='get_xcom'
+        task_id='get_xcom',
+        python_callable=get_xcom_func
     )
 
     t1 >> t2
