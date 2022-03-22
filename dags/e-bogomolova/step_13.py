@@ -8,8 +8,7 @@ from airflow.operators.python import BranchPythonOperator
 
 def get_condition():
     from airflow.models import Variable
-    is_startml = Variable.get('is_startml')
-    if is_startml is True:
+    if Variable.get('is_startml') is True:
         return "startml_desc"
     return "not_startml_desc"
 
@@ -43,7 +42,8 @@ with DAG(
 
     task_3 = BranchPythonOperator(
         task_id='determine_course',
-        python_callable=get_condition
+        python_callable=get_condition,
+        trigger_rule='all_done'
     )
 
     start = DummyOperator(
