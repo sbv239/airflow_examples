@@ -8,7 +8,8 @@ from airflow.operators.python import BranchPythonOperator
 
 def get_condition():
     from airflow.models import Variable
-    if Variable.get('is_startml') is True:
+    is_startml = Variable.get('is_startml')
+    if is_startml is True:
         return "startml_desc"
     return "not_startml_desc"
 
