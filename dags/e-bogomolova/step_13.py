@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.dummy import DummyOperator
-from airflow.operators.python import BranchingOperator
+from airflow.operators.python import BranchPythonOperator
 
 
 def get_condition():
