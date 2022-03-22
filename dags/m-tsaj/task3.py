@@ -1,7 +1,7 @@
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 from airflow.operators.bash import BashOperator
-from datetime import timedelta
+from datetime import datetime, timedelta
 
 with DAG(
         'dynamic_tasks_dag',
@@ -13,6 +13,10 @@ with DAG(
             'retries': 1,
             'retry_delay': timedelta(minutes=5)
         },
+        description='First dag',
+        schedule_interval=timedelta(days=1),
+        start_date=datetime(2021, 3, 20),
+        catchup=False,
 ) as dag:
     for i in range(10):
         bash_task = BashOperator(
@@ -23,6 +27,7 @@ with DAG(
 
     def print_task_number(task_n: int):
         print(f'task number is: {task_n}')
+
 
     for task_number in range(20):
         python_task = PythonOperator(
