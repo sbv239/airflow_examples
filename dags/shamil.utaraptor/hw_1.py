@@ -10,7 +10,7 @@ def print_context(ds):
 
 
 with DAG(
-    "homework_1"
+    "hw_1_shamil.utaraptor",
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -23,7 +23,7 @@ with DAG(
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 3, 22),
     catchup=False,
-    tags=['hw_1'],
+    tags=['hw_1_shamil.utaraptor'],
 ) as dag:
     t1 = BashOperator(
         task_id='print_current_dir',  # id, будет отображаться в интерфейсе
