@@ -15,7 +15,7 @@ with DAG(
         },
         description='First dag',
         schedule_interval=timedelta(days=1),
-        start_date=datetime(2021, 1, 1),
+        start_date=datetime(2021, 3, 20),
         catchup=False,
         tags=['example'],
 ) as dag:
