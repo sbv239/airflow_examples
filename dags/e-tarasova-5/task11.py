@@ -34,7 +34,7 @@ with DAG(
 ) as dag:
     t1 = PythonOperator(
         task_id='is_startml',
-        bash_command=get_variable,
+        python_callable=get_variable,
     )
 
     t1
