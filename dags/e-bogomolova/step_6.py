@@ -25,6 +25,6 @@ with DAG(
         os.environ['NUMBER'] = str(i)
         t1 = BashOperator(
             task_id='echo_' + str(i),
-            bash_command="echo $NUMBER",
+            bash_command="echo '{}'".format(os.environ['NUMBER']),
         )
         t1
