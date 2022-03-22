@@ -10,7 +10,7 @@ def print_task(task_number):
 
 
 with DAG(
-    "hw_1_shamil.utaraptor",
+    "hw_2_shamil.utaraptor",
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -23,13 +23,13 @@ with DAG(
     schedule_interval=timedelta(days=1),
     start_date=datetime(year=2022, month=3, day=22),
     catchup=False,
-    tags=['hw_1_shamil.utaraptor'],
+    tags=['hw_2_shamil.utaraptor'],
 ) as dag:
     for i in range(1, 31):
         if i <= 10:
             task = BashOperator(
                 task_id=f'print_loop_iteration_{i}',  # id, будет отображаться в интерфейсе
-                bash_command=f'echo {i} ',  # какую bash команду выполнить в этом таске
+                bash_command=f'echo {i}',  # какую bash команду выполнить в этом таске
             )
         else:
             task = PythonOperator(
