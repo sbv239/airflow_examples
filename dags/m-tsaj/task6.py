@@ -6,7 +6,7 @@ from textwrap import dedent
 
 
 with DAG(
-        'dynamic_tasks_dag',
+        'dag_7_m-tsaj',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
@@ -15,7 +15,7 @@ with DAG(
             'retries': 1,
             'retry_delay': timedelta(minutes=5),
         },
-        description='Dynamic tasks dag',
+        description='Dynamic tasks dag with python operator adjustments',
         schedule_interval=timedelta(days=1),
         start_date=datetime(2021, 3, 20),
         catchup=False,
@@ -34,7 +34,9 @@ with DAG(
     )
 
 
-    def print_task_number(task_n: int):
+    def print_task_number(task_n: int, ts, run_id, **kwargs):
+        print(ts)
+        print(run_id)
         print(f'task number is: {task_n}')
 
 
