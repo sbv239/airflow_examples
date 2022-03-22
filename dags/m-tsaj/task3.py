@@ -4,7 +4,7 @@ from airflow.operators.bash import BashOperator
 from datetime import datetime, timedelta
 
 with DAG(
-        'dynamic_tasks_dag',
+        'dag_3_m-tsaj',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
