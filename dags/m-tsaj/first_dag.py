@@ -13,6 +13,11 @@ with DAG(
             'retries': 1,
             'retry_delay': timedelta(minutes=5),
         },
+        description='First dag',
+        schedule_interval=timedelta(days=1),
+        start_date=datetime(2021, 1, 1),
+        catchup=False,
+        tags=['example'],
 ) as dag:
     t1 = BashOperator(
         task_id='print_working_directory',
