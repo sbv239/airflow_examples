@@ -2,6 +2,7 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 from datetime import datetime, timedelta
+from textwrap import dedent
 
 with DAG(
         'first_dag',
@@ -24,6 +25,13 @@ with DAG(
         bash_command='pwd',
     )
 
+    t1.doc_md = dedent(
+        """
+        #### Task 1 documentation
+        This task executes the `pwd` bash command
+        """
+    )
+
 
     def print_ds(ds):
         print(ds)
@@ -32,6 +40,20 @@ with DAG(
     t2 = PythonOperator(
         task_id='print_the_ds',
         python_callable=print_ds,
+    )
+
+    t2.doc_md(
+        """
+        #### Task 2 documentation
+        This task prints the **ds** variable
+        """
+    )
+
+    dag.doc_md(
+        """
+        #### first_dag documentation
+        A simple dag featuring a bash- and a python- operators
+        """
     )
 
     t1 >> t2

@@ -2,16 +2,18 @@ from airflow import DAG
 from airflow.operators.python import PythonOperator
 from airflow.operators.bash import BashOperator
 from datetime import datetime, timedelta
+from textwrap import dedent
+
 
 with DAG(
-        'dag_3_m-tsaj',
+        'dynamic_tasks_dag',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
             'email_on_failure': False,
             'email_on_retry': False,
             'retries': 1,
-            'retry_delay': timedelta(minutes=5)
+            'retry_delay': timedelta(minutes=5),
         },
         description='Cyclic tasks dag',
         schedule_interval=timedelta(days=1),
@@ -24,6 +26,13 @@ with DAG(
             bash_command=f'echo {i}',
         )
 
+    bash_task.doc_md = dedent(
+        """
+        #### Bash tasks documentation
+        10 consequential tasks, executing the `echo` bash command
+        """
+    )
+
 
     def print_task_number(task_n: int):
         print(f'task number is: {task_n}')
@@ -35,3 +44,10 @@ with DAG(
             python_callable=print_task_number,
             op_kwargs={'task_n': task_number},
         )
+
+    python_task.doc_md = dedent(
+        """
+         #### Python tasks documentation
+        20 consequential tasks, simply printing the *task number*
+        """
+    )
