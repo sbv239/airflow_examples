@@ -3,7 +3,7 @@ from airflow import DAG
 from airflow.operators.python import PythonOperator
 
 
-def check_task_num(ts, run_id, **kwargs):
+def check_task_num(ts, run_id, task_number):
     print(f"task number is: {task_number}")
     print(ts)
     print(run_id)
