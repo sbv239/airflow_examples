@@ -2,13 +2,15 @@ from airflow import DAG
 from airflow.operators.python import PythonOperator
 from datetime import datetime, timedelta
 
+
 def push(ti):
     ti.xcom_push(key='sample_xcom_key', value="xcom test")
 
 
 def pull(ti):
-    t = ti.xcom_pull(key='sample_xcom_key')
+    t = ti.xcom_pull(key='sample_xcom_key', task_ids='push')
     print(t)
+
 
 with DAG('hw_8_vorotnikov', default_args={
     'depends_on_past': False,
