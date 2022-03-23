@@ -23,8 +23,8 @@ with DAG(
 ) as dag:
 
     t1 = BashOperator(
-        task_id = 'execute_pwd'
-        bash_command = 'pwd'
+        task_id = 'execute_pwd',
+        bash_command = 'pwd',
     )
 
     def print_ds(ds):
