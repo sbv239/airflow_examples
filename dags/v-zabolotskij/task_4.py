@@ -14,13 +14,16 @@ with DAG\
         'retries': 1,
         'retry_delay': timedelta(minutes=5), 
     },
-    description = "DAG for task #3",
+    description = "DAG for task #4",
     schedule_interval = timedelta(days=1),
     start_date = datetime(2022, 3, 20),
     catchup = False,
     tags = ["task_4"]
 
     ) as dag:
+
+    def print_task_num(task_number):
+                print (f"task number is: {task_number}")
 
     for task in range(30):
 
@@ -30,11 +33,9 @@ with DAG\
                 bash_command = f"echo {task}"            
             )
         else:
-            def task_number(task_number):
-                return f"task number is: {task_number}"
             py_task = PythonOperator(
                 task_id = "PY_task_" + str(task),
-                python_callable = task_number,
+                python_callable = print_task_num,
                 op_kwargs = {"task_number": task}
             )
     bash_task.doc_md = dedent(
@@ -52,4 +53,6 @@ with DAG\
         **Py_task** have a function *task_number*
         which printing task number. 
         """
-    )
+         )
+
+    bash_task >> py_task 
