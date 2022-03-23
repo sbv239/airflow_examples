@@ -45,11 +45,11 @@ with DAG(
                 python_callable=task,
                 op_kwargs={'task_number': i},
             )
-        task_python.doc_md = dedent(
-            """\
-        #### Python Task
-        `task_python` *call* task function `def task(task_number):` 
-         which prints `task number is: {task_number}` for `PythonOperator`
-        """
-        )
+            task_python.doc_md = dedent(
+                """\
+            #### Python Task
+            `task_python` *call* task function `def task(task_number):` 
+            which prints `task number is: {task_number}` for `PythonOperator`
+            """
+            )
 
