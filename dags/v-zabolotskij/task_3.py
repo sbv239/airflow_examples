@@ -5,7 +5,7 @@ from airflow.operators.python import PythonOperator
 from textwrap import dedent
 with DAG\
     (
-    "task_4_v_zabolotskij",
+    "task_3_v_zabolotskij",
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -18,7 +18,7 @@ with DAG\
     schedule_interval = timedelta(days=1),
     start_date = datetime(2022, 3, 20),
     catchup = False,
-    tags = ["task_4"]
+    tags = ["task_3"]
 
     ) as dag:
 
