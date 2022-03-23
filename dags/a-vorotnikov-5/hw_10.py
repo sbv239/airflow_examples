@@ -15,7 +15,7 @@ def postgres():
                 GROUP BY user_id
                 ORDER BY count(post_id) DESC'''
                            )
-            return cursor.fetchone()
+            return print(cursor.fetchone())
 
 
 with DAG('hw_10_vorotnikov', default_args={
