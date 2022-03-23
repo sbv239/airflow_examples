@@ -17,7 +17,7 @@ with DAG('hm_2_vorotnikov', default_args={
     'retry_delay': timedelta(minutes=5),
 }, start_date=datetime(2022, 3, 20), catchup=False) as dag:
     for i in range(1, 31):
-        if i <= 9:
+        if i <= 10:
             task = BashOperator(task_id='BashOp_t_' + str(i), bash_command=f"echo {i}")
         else:
             task = PythonOperator(task_id='P_op_t_' + str(i), python_callable=check_task_num,
