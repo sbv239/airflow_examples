@@ -21,20 +21,19 @@ with DAG(
     catchup = False,
     tags = ['hw_2'],
 ) as dag:
-    for i in range(1, 11):
-        task_bash = BashOperator(
-            task_id = "echo_" + str(i),
-            bash_command = f"echo {i}",
-        )
 
     def print_func(task_number):
         print(f"task number is: {task_number}")
 
-    for i in range(11, 31):
-        task_pyth = PythonOperator(
-            task_id = 'task_' + str(i),
-            python_callable = print_func,
-            op_kwargs={'task_number': i},
-        )
-
-    task_bash >> task_pyth
+    for i in range(1, 31):
+        if i < 11:
+            task_bash = BashOperator(
+                task_id = "echo_" + str(i),
+                bash_command = f"echo {i}",
+            )
+        else:
+            task_pyth = PythonOperator(
+                task_id = 'task_' + str(i),
+                python_callable = print_func,
+                op_kwargs={'task_number': i},
+            )
