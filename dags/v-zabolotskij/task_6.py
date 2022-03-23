@@ -23,7 +23,7 @@ with DAG\
     ) as dag:
 
     for task in range(10):
-        os.environ['NUMBER'] = task
+        os.environ['NUMBER'] = str(task)
         if task <= 10:
             bash_task = BashOperator(
                 task_id = "BO_task_" + str(task),
