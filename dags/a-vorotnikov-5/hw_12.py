@@ -27,4 +27,4 @@ with DAG('hw_12_vorotnikov', default_args={
     t4 = BashOperator(task_id='not_startml_desc', bash_command='echo "Not a startML course, sorry"')
     t5 = DummyOperator(task_id='after_branching')
 
-    t1 >> [t2] >> [t3, t4] >> t5
+    t1 >> t2 >> [t3, t4] >> t5
