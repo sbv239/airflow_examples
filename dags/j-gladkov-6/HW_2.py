@@ -23,8 +23,8 @@ with DAG(
 ) as dag:
     for i in range(1, 11):
         task_bash = BashOperator(
-            task_id = "echo" + str(i),
-            bash_command = f"echo{i}",
+            task_id = "echo_" + str(i),
+            bash_command = f"echo {i}",
         )
 
     def print_func(task_number):
@@ -37,4 +37,4 @@ with DAG(
             op_kwargs={'task_number': i},
         )
 
-task_bash >> task_pyth
+    task_bash >> task_pyth
