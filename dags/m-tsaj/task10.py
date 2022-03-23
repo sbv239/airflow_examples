@@ -16,10 +16,10 @@ def get_query():
         with conn.cursor() as cursor:
             cursor.execute(
                 """
-               SELECT id, COUNT(action)
+               SELECT user_id, COUNT(action)
                FROM feed_action
                WHERE action = "like"
-               GROUP BY action
+               GROUP BY user_id
                ORDER BY COUNT(action) DESC
                LIMIT 1
                 """
