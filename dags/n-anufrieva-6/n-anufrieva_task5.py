@@ -27,8 +27,8 @@ with DAG(
         """
     {% for i in range(5) %}
         echo "{{ ts }}"
-        echo "{{ run_id }}"
     {% endfor %}
+    echo "{{ run_id }}"
     """
     )
 
