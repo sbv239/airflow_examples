@@ -22,6 +22,10 @@ with DAG\
 
     ) as dag:
 
+
+    def print_task_number(task_number):
+        return f"task number is: {task_number}"
+
     for task in range(30):
 
         if task <= 10:
@@ -30,26 +34,10 @@ with DAG\
                 bash_command = f"echo {task}"            
             )
         else:
-            def print_task_number(task_number):
-                return f"task number is: {task_number}"
             py_task = PythonOperator(
                 task_id = "PY_task_" + str(task),
                 python_callable = print_task_number,
                 op_kwargs = {"task_number": task}
             )
-    bash_task.doc_md = dedent(
-        """ \
-        #bash_task DESCRIPTION
-        'f"You will know more about bash_task"`    
-        **10** Auto generated *BashOperator* tasks.
-        """
-    )
 
-    py_task.doc_md = dedent(
-        """ \
-        #py_task DESCRIPTION
-        'f"You will know more about py_task"`
-        **Py_task** have a function *task_number*
-        which printing task number. 
-        """
-    )
+bash_task >> py_task
