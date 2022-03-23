@@ -23,16 +23,15 @@ with DAG(
         print(f"task number is: {task_number}")
 
 
-    for i in range(10):
-        task_bash = BashOperator(
-            task_id='bash_task_' + str(i),
-            bash_command=f"echo {i}",
-        )
-    for i in range(20):
-        task_python = PythonOperator(
-            task_id='python_task_' + str(i),
-            python_callable=task,
-            op_kwargs={'task_number': i},
-        )
-
-    task_bash >> task_python
+    for i in range(30):
+        if i < 10:
+            task_bash = BashOperator(
+                task_id='bash_task_' + str(i),
+                bash_command=f"echo {i}",
+            )
+        else:
+            task_python = PythonOperator(
+                task_id='python_task_' + str(i),
+                python_callable=task,
+                op_kwargs={'task_number': i},
+            )
