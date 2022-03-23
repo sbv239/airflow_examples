@@ -54,3 +54,5 @@ with DAG\
         which printing task number. 
         """
          )
+
+    bash_task >> py_task 
