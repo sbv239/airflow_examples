@@ -5,7 +5,7 @@ import psycopg2
 
 
 def get_query():
-    from airflow.hooks.base import BaseHook
+    from airflow.hooks.base_hook import BaseHook
 
     creds = BaseHook.get_connection('startml_feed')
 
@@ -47,4 +47,4 @@ with DAG(
         python_callable=get_query,
     )
 
-
+    t1
