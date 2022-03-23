@@ -15,6 +15,10 @@ with DAG\
         'retry_delay': timedelta(minutes=5), 
     },
     description = "DAG for task #2",
+    schedule_interval = timedelta(days=1),
+    start_date = datetime(2022, 3, 20),
+    catchup = False,
+    tags = ["task_2"]
     ) as dag:
 
     task_1 = BashOperator(task_id = "Bash_operator_task",
