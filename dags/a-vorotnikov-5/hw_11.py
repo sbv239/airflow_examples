@@ -8,7 +8,7 @@ def var():
     return print(Variable.get("is_startml"))
 
 
-with DAG('hw_10_vorotnikov', default_args={
+with DAG('hw_11_vorotnikov', default_args={
     'depends_on_past': False,
     'email': ['airflow@example.com'],
     'email_on_failure': False,
