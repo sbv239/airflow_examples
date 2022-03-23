@@ -12,7 +12,7 @@ def pull(ti):
     print(t)
 
 
-with DAG('hw_8_vorotnikov', default_args={
+with DAG('hw_9_vorotnikov', default_args={
     'depends_on_past': False,
     'email': ['airflow@example.com'],
     'email_on_failure': False,
