@@ -8,9 +8,9 @@ def print_context(ds):
     return print(ds)
 
 
-with DAG('task1', default_args={
+with DAG('hm_1_vorotnikov', default_args={
     'depends_on_past': False,
-    'email': ['airflow@example.com'],
+    'email': ['dududupi@yandex.ru'],
     'email_on_failure': False,
     'email_on_retry': False,
     'retries': 1,
