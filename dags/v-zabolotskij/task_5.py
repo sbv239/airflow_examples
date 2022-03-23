@@ -14,6 +14,10 @@ with DAG\
         'retry_delay': timedelta(minutes=5), 
     },
     description = "DAG for task #5",
+    schedule_interval = timedelta(days=1),
+    start_date = datetime(2022, 3, 20),
+    catchup = False,
+    tags = ["task_5"]
     ) as dag:
 
     templated_code = dedent(
