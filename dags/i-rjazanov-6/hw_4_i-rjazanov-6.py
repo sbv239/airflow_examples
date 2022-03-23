@@ -6,7 +6,7 @@ from airflow.operators.python import PythonOperator
 
 with DAG(
         # Название таск-дага
-        'hw_3_i-rjazanov-6',
+        'hw_4_i-rjazanov-6',
 
         default_args={
             'depends_on_past': False,
