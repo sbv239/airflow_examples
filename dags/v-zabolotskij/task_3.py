@@ -24,7 +24,7 @@ with DAG\
 
 
     def print_task_number(task_number):
-        return f"task number is: {task_number}"
+        print(f"task number is: {task_number}")
 
     for task in range(30):
 
