@@ -7,7 +7,7 @@ import psycopg2
 def get_query():
     from airflow.hooks.base import BaseHook
 
-    creds = BaseHook('startml_feed')
+    creds = BaseHook.get_connection('startml_feed')
 
     with psycopg2.connect(
             f"postgresql://{creds.login}:{creds.password}"
