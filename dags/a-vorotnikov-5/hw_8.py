@@ -4,11 +4,11 @@ from datetime import datetime, timedelta
 
 
 def push(ti):
-    ti.xcom_push(key='sample_xcom_key', value="xcom test")
+    ti.xcom_push(key='sample_xcom_key', value='xcom test')
 
 
 def pull(ti):
-    t = ti.xcom_pull(key='sample_xcom_key', task_ids='push')
+    t = ti.xcom_pull(key='sample_xcom_key', task_ids='push_data')
     print(t)
 
 
@@ -20,6 +20,6 @@ with DAG('hw_8_vorotnikov', default_args={
     'retries': 1,
     'retry_delay': timedelta(minutes=5),
 }, start_date=datetime(2022, 3, 20), catchup=False) as dag:
-    t1 = PythonOperator(task_id='push data', python_callable=push)
-    t2 = PythonOperator(task_id='pull data', python_callable=pull)
+    t1 = PythonOperator(task_id='push_data', python_callable=push)
+    t2 = PythonOperator(task_id='pull_data', python_callable=pull)
     t1 >> t2
