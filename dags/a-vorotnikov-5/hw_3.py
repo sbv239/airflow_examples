@@ -23,13 +23,13 @@ with DAG('hw_3_vorotnikov', default_args={
             task.doc_md = dedent(""" 
             ####Task_Documentation 
             **напечатает** `f"echo {i}"`, где `i` *номер итерации* 
-            используя BashOperator
+            используя #BashOperator
             """)
         else:
             task = PythonOperator(task_id='P_op_t_' + str(i), python_callable=check_task_num,
                                   op_kwargs={'task_number': i})
             task.doc_md = dedent(""" 
             ####Task_Documentation 
-            **напечатает** `"task number is: {task_number}"`, где `i` *номер итерации*
-            используя  PythonOperator
+            **напечатает** `"task number is: {task_number}"`, где {'task_number': i} *номер итерации*
+            используя  #PythonOperator
             """)
