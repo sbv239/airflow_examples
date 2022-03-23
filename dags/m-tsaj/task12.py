@@ -51,4 +51,4 @@ with DAG(
         task_id='end',
     )
 
-    start >> branch_op >> end
+    start >> branch_op >> [t1, t2] >> end
