@@ -38,5 +38,11 @@ with DAG(
             python_callable=print_context,
             op_kwargs={'task_number': i }
     )
+    t2.doc_md = dedent(
+        """\
+    # Task with PythonOperator
+    This **task** *printing* 10 consecutive numbers
+    in the form `task number is: {task_number}`
 
+    """
     t1 >> t2
