@@ -32,24 +32,24 @@ with DAG(
                 task_id = "echo_" + str(i),
                 bash_command = f"echo {i}",
             )
+            task_bash.doc_md = dedent(
+                f"""\
+                ## Task Documentation
+                This *task* executes `echo {i}` in `bash consol` **airflow**
+
+                """
+            )
         else:
             task_pyth = PythonOperator(
                 task_id = 'task_' + str(i),
                 python_callable = print_func,
                 op_kwargs={'task_number': i},
             )
-    task_bash.doc_md = dedent(
-        """\
-    ## Task Documentation
-    This *task* executes `echo` in `bash consol` **airflow**
 
-    """
-    )
+            task_pyth.doc_md = dedent(
+                f"""\
+                ## Task Documentation
+                This *task* surprise surprise prints `task number {i}` in **airflow**
 
-    task_pyth.doc_md = dedent(
-        """\
-    ## Task Documentation
-    This *task* surprise surprise prints `task number` in **airflow**
-
-    """
-    )
+                """
+            )
