@@ -1,4 +1,6 @@
 from datetime import timedelta, datetime
+from textwrap import dedent
+
 default_args={
     'depends_on_past': False,
     'email': ['airflow@example.com'],
@@ -12,6 +14,7 @@ default_args={
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python_operator import PythonOperator
+
 
 with DAG(
     'hw_3_t-volkov-5',
@@ -27,7 +30,13 @@ with DAG(
             task_id='looping_bash_operator_' + str(i),
             bash_command=f'echo {i}'
         )
-   
+        t1.doc_md = dedent(
+            """\
+        #### Task 1 Documentation
+        **current** _bash_ command loops `echo {i}`
+
+        """
+        )  
    
     def print_task_number(task_number, **kwargs):
         print(f'task number is: {task_number}')
@@ -38,4 +47,11 @@ with DAG(
             python_callable=print_task_number,  
             op_kwargs={'task_number' : i}
         )
+        t2.doc_md = dedent(
+            """\
+        #### Task 2 Documentation
+        **current** _python_ command loops `task_number is: {i}`
+
+        """
+        )  
         t1>>t2
