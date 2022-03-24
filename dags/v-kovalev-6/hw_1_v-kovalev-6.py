@@ -22,9 +22,13 @@ with DAG(
     tags=['example'],
 ) as dag:
 
+    def print_ds(ds):
+        print(ds)
+        print("Another message")
+        
     t1 = PythonOperator(
         task_id='print_ds',
-        python_callable=print(ds),
+        python_callable=print_ds,
     )
 
     t2 = BashOperator(
