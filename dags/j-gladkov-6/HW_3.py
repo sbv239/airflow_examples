@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 from textwrap import dedent
 
 with DAG(
-    'hw_2_j-gladkov-6',
+    'hw_3_j-gladkov-6',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -20,7 +20,7 @@ with DAG(
     schedule_interval = timedelta(days=1),
     start_date = datetime(2022, 3, 22),
     catchup = False,
-    tags = ['hw_2'],
+    tags = ['hw_3'],
 ) as dag:
 
     def print_func(task_number):
