@@ -13,6 +13,7 @@ def return_date(date):
     return date
 
 with DAG(
+    dag_id = 'hw_2_a-kizenko',
     default_args={
     'depends_on_past': False,
     'email': ['airflow@example.com'],
