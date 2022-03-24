@@ -6,7 +6,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-        'hw_2_a-donskoj-5',
+        'hw_1_a-donskoj-5',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
@@ -34,7 +34,7 @@ with DAG(
 
     for i in range(11, 31):
         t2 = PythonOperator(
-            task_id='func_2_2',
+            task_id='strange_print_function',
             python_callable=func,
             op_kwargs={'num': i}
         )
