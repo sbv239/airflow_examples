@@ -17,7 +17,7 @@ from airflow.operators.python_operator import PythonOperator
 
 
 with DAG(
-    'hw_3_t-volkov-5',
+    'hw_2_t-volkov-5',
     default_args=default_args,
     description='God bless my creature',
     schedule_interval=timedelta(days=1),
