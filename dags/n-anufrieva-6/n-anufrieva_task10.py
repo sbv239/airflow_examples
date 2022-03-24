@@ -9,7 +9,7 @@ def return_string():
 
 def get_string_value(ti):
     get_value = ti.xcom_pull(
-        key='return_string',
+        key='return_value',
         task_ids='get_return'
     )
     print(get_value)
