@@ -36,4 +36,4 @@ with DAG(
         python_callable=func
     )
 
-    t1 >> t2
+    t1 >> t2 
