@@ -19,13 +19,13 @@ with DAG(
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 1, 1),
     catchup=False,
-    tags=['example'],
+    tags=['hw_1'],
 ) as dag:
 
     def print_ds(ds):
         print(ds)
         print("Another message")
-        
+
     t1 = PythonOperator(
         task_id='print_ds',
         python_callable=print_ds,
