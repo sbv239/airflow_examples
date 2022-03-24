@@ -1,4 +1,6 @@
 from datetime import timedelta, datetime
+from textwrap import dedent
+
 default_args={
     'depends_on_past': False,
     'email': ['airflow@example.com'],
@@ -13,8 +15,9 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python_operator import PythonOperator
 
+
 with DAG(
-    'hw_2_t-volkov-5',
+    'hw_3_t-volkov-5',
     default_args=default_args,
     description='God bless my creature',
     schedule_interval=timedelta(days=1),
@@ -22,16 +25,33 @@ with DAG(
     catchup=False
 ) as dag:
 
-    t1 = BashOperator(
-        task_id="pwd_execute",
-        bash_command="pwd"
-    )
-    def print_context(ds, **kwargs):
-        print(ds)
-        return 'Yip'
+    for i in range(10):
+        t1 = BashOperator(
+            task_id='looping_bash_operator_' + str(i),
+            bash_command=f'echo {i}'
+        )
+        t1.doc_md = dedent(
+            """\
+        #### Task 1 Documentation
+        **current** _bash_ command loops `echo {i}`
 
-    t2 = PythonOperator(
-        task_id='print_the_ds',
-        python_callable=print_context,  # свойственен только для PythonOperator - передаем саму функцию
-    )
-    t1>>t2
+        """
+        )  
+   
+    def print_task_number(task_number, **kwargs):
+        print(f'task number is: {task_number}')
+   
+    for i in range(20):
+        t2 = PythonOperator(
+            task_id='looping_python_operator_' + str(i),
+            python_callable=print_task_number,  
+            op_kwargs={'task_number' : i}
+        )
+        t2.doc_md = dedent(
+            """\
+        #### Task 2 Documentation
+        **current** _python_ command loops `task_number is: {i}`
+
+        """
+        )  
+        t1>>t2
