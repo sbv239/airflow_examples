@@ -24,7 +24,7 @@ with DAG(
 
     for i in range(10):
         t1 = BashOperator(
-            task_id=f'looping bash operator_' + str(i),
+            task_id='looping bash operator_' + str(i),
             bash_command=f'echo {i}'
         )
    
