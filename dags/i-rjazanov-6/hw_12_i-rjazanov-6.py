@@ -44,11 +44,11 @@ with DAG(
 
     t1 = PythonOperator(
         task_id='startml_desc',
-        python_callable=startml_desc_func(),)
+        python_callable=startml_desc_func)
 
     t2= PythonOperator(
         task_id='not_startml_desc',
-        python_callable=not_startml_desc())
+        python_callable=not_startml_desc)
 
     start = DummyOperator(task_id='before_branching')
     finish = DummyOperator(task_id='after_branching')
@@ -63,7 +63,7 @@ with DAG(
 
     branch_task = BranchPythonOperator(
         task_id='determine_course',
-        python_callable=func_branch(),
+        python_callable=func_branch,
         trigger_rule="all_done",
         dag=dag)
 
