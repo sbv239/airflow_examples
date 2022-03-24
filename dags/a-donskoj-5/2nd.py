@@ -39,4 +39,4 @@ with DAG(
             op_kwargs={'num': i}
         )
 
-    t1 >> t2
+    t1 >> t2 
