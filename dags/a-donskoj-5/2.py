@@ -37,6 +37,6 @@ with DAG(
             task_id='task_number_' + str(i),
             python_callable=func,
             op_kwargs={'num': i}
-        )
+        ) 
 
     t1 >> t2
