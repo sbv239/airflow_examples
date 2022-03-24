@@ -26,9 +26,14 @@ with DAG(
         bash_command='pwd'
     )
 
+    def func(ds, **kwargs):
+        print(ds)
+        print('Great!')
+        return
+
     t2 = PythonOperator(
         task_id='strange_print_function',
         python_callable=func
     )
 
-    t1 >> t2 
+    t1 >> t2
