@@ -10,11 +10,11 @@ default_args={
 
 
 from airflow import DAG
-from airflow.operator.bash import BashOperator
+from airflow.operators.bash import BashOperator
 from airflow.operators.python_operator import PythonOperator
 
 with DAG(
-    'task11.2',
+    'hw_2_t-volkov-5',
     default_args=default_args,
     description='God bless my creature',
     schedule_interval=timedelta(days=1),
