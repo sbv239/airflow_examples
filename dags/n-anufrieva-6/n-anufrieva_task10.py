@@ -33,9 +33,10 @@ with DAG(
 ) as dag:
 
     task_1 = PythonOperator(
-        task_id='string',
+        task_id='get_return',
         python_callable=return_string,
     )
+
     task_2 = PythonOperator(
         task_id='get_string',
         python_callable=get_string_value,
