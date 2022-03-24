@@ -4,19 +4,18 @@ from datetime import datetime, timedelta
 
 
 def test(ti):
-    sample_xcom_key = 'xcom test'
     ti.xcom_push(
         key='sample_xcom_key',
-        value=sample_xcom_key
+        value='xcom test'
     )
 
 
 def get_test_value(ti):
-    sample_xcom_key = ti.xcom_pull(
+    get_value = ti.xcom_pull(
         key='sample_xcom_key',
-        task_ids='test'
+        task_ids='test_XCom'
     )
-    print(sample_xcom_key)
+    print(get_value)
 
 
 with DAG(
