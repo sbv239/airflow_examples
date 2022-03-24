@@ -6,7 +6,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-        'task 1',
+        'hw_1_a-donskoj-5',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
@@ -22,7 +22,7 @@ with DAG(
         tags=['example'],
 ) as dag:
     t1 = BashOperator(
-        task_id='print our directory',
+        task_id='print_our_directory',
         bash_command='pwd'
     )
 
@@ -34,7 +34,7 @@ with DAG(
 
 
     t2 = PythonOperator(
-        task_id='strange print function!',
+        task_id='strange_print_function',
         python_callable=func
     )
 
