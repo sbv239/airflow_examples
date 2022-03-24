@@ -21,8 +21,8 @@ with DAG(
 ) as dag:
 
     def get_variables():
-        v = Variable.get("is_startml")
-        print(v)
+        is_startml = Variable.get("is_startml")
+        print(is_startml)
 
     task_1 = PythonOperator(
         task_id='print_variable',
