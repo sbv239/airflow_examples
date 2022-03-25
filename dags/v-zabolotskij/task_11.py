@@ -15,7 +15,7 @@ def get_connect():
             order by count(*) desc
             limit 1           
             """)
-    return cursor.fetchone()   
+    return print(cursor.fetchone())   
    
 with DAG\
     (
