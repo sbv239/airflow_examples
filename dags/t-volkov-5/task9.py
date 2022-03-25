@@ -30,7 +30,7 @@ with DAG(
 
     def xcom_var_pull(ti):
         pulled_value = ti.xcom_pull(
-                        key='returned_value',
+                        key='return_value',
                         task_ids = 'push_var_into_xcom'
                         )
         print(pulled_value)
