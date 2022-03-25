@@ -23,30 +23,30 @@ with DAG(
     tags=['hw_3'],
 ) as dag:
 
-    for i in range(10):
-        t1 = BashOperator(
-            task_id='bash_operator_' + str(i),
-            bash_command=f"echo {i}",
-        )
-        t1.doc_md = dedent(
-            f"""\
-        #### Task Documentation
-        This **task** *starts* command `echo {i}`
-        """
-        )
-
     def task_number(task_number):
         print(f"task number is: {task_number}")
 
-    for i in range(20):
-        t2 = PythonOperator(
-            task_id='python_operator_' + str(i),
-            python_callable=task_number,
-            op_kwargs={'task_number': i}
-        )
-        t2.doc_md = dedent(
-            f"""\
-                #### Task Documentation
-                This **task** *starts* `python_operator_{i}`
-        """
-        )
+    for i in range(30):
+        if i <= 10:
+            t1 = BashOperator(
+                task_id='bash_operator_' + str(i),
+                bash_command=f"echo {i}",
+            )
+            t1.doc_md = dedent(
+                f"""\
+            #### Task Documentation
+            This **task** *starts* bash_command = `echo {i}`
+            """
+            )
+        else:
+            t2 = PythonOperator(
+                task_id='python_operator_' + str(i),
+                python_callable=task_number,
+                op_kwargs={'task_number': i}
+            )
+            t2.doc_md = dedent(
+                f"""\
+            #### Task Documentation
+            This **task** *starts* `python_operator_{i}`
+            """
+            )
