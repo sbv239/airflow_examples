@@ -4,7 +4,7 @@ from airflow.operators.python import PythonOperator
 
 def get_connect():
     from airflow.providers.postgres.operators.postgres import PostgresHook
-    postgres = PostgresHook(postgres_conn_id="postgresql://robot-startml-ro:pheiph0hahj1Vaif@postgres.lab.karpov.courses:6432/startml")
+    postgres = PostgresHook(postgres_conn_id="startml_feed")
     
     with postgres.get_conn() as conn:
          with conn.cursor() as cursor:
