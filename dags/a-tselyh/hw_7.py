@@ -35,6 +35,7 @@ with DAG(
     catchup=False,
     tags=['hw_7'],
 ) as dag:
+
     t1 = BashOperator(
     for i in range(10):
         task_id='templated_' + str(i)',  # id, будет отображаться в интерфейсе
@@ -45,13 +46,14 @@ with DAG(
         for i in range(20):
             task_id="'task_number_' + str(i)",
             python_callable=print_context,
-            op_kwargs={kwargs['task_number']: i}
+            op_kwargs={'kwargs['task_number']': i}
     )
     t2.doc_md = dedent(
         """
     # Task with PythonOperator
     This **task** *printing* 10 consecutive numbers
     in the form `task number is: {task_number}`
+        """
+    )
 
-    """
     t1 >> t2
