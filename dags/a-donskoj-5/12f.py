@@ -8,7 +8,7 @@ from airflow.providers.postgres.operators.postgres import PostgresHook
 
 
 with DAG(
-        'hw_11_a-donskoj-5',
+        'hw_12_a-donskoj-5',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
@@ -17,12 +17,13 @@ with DAG(
             'retries': 1,
             'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
         },
-        description='DAG in 11 step',
+        description='DAG in 12 step',
         schedule_interval=timedelta(days=1),
         start_date=datetime(2022, 3, 25),
         catchup=False,
-        tags=['task 11'],
+        tags=['task 12'],
 ) as dag:
+
     def get_variable():
         from airflow.models import Variable
 
