@@ -19,7 +19,7 @@ templated_command = dedent(
     """
 
 with DAG(
-    "hw_7_a-tselyh",
+    "hw_7_a-tselyh_",
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -35,19 +35,19 @@ with DAG(
     tags=['hw_7'],
 ) as dag:
     t1 = BashOperator(
-    for i in range 10:
+    for i in range(10):
         task_id='templated_' + str(i)',  # id, будет отображаться в интерфейсе
-        bash_command= templated_command,  # какую bash команду выполнить в этом таске
+        bash_command= templated_command  # какую bash команду выполнить в этом таске
     )
 
     t2 = PythonOperator(
         for i in range(20):
             task_id="'task_number_' + str(i)",
             python_callable=print_context,
-            op_kwargs={kwargs['task_number']: i }
+            op_kwargs={kwargs['task_number']: i}
     )
     t2.doc_md = dedent(
-        """\
+        """
     # Task with PythonOperator
     This **task** *printing* 10 consecutive numbers
     in the form `task number is: {task_number}`
