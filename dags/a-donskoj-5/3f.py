@@ -26,7 +26,7 @@ with DAG(
         t1 = BashOperator(
             task_id='print_'+str(i),
             bash_command=f"echo {i}"
-        )
+        ) 
 
         t1.doc_md = dedent(
             """
