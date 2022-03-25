@@ -9,7 +9,7 @@ def return_smth():
 def get_return(ti):
     
     print(ti.xcom_pull(key = 'return_value',
-                       task_ids = "tracking function"))    
+                       task_ids = 'tracking_function'))    
     
 
 with DAG\
@@ -31,12 +31,12 @@ with DAG\
     ) as dag:
         
         task_1 = PythonOperator(
-            task_id = "tracking function",
+            task_id = "tracking_function",
             python_callable = return_smth          
             )
         
         task_2 = PythonOperator(
-            task_id = "get tracking return",
+            task_id = "get_tracking_return",
             python_callable = get_return
             )
         
