@@ -19,7 +19,7 @@ def noML_here():
               
 with DAG\
     (
-    "task_12_v_zabolotskij",
+    "task_13_v_zabolotskij",
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -28,11 +28,11 @@ with DAG\
         'retries': 1,
         'retry_delay': timedelta(minutes=5), 
     },
-    description = "DAG for task #12",
+    description = "DAG for task #13",
     schedule_interval = timedelta(days=1),
     start_date = datetime(2022, 3, 20),
     catchup = False,
-    tags = ["task_12"]
+    tags = ["task_13"]
     ) as dag:
         
         dummy_1 = DummyOperator(
