@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 from textwrap import dedent
 
 with DAG(
-    'hw_6_j-gladkov-6',
+    'hw_8_j-gladkov-6',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -20,7 +20,7 @@ with DAG(
     schedule_interval = timedelta(days=1),
     start_date = datetime(2022, 3, 22),
     catchup = False,
-    tags = ['hw_6'],
+    tags = ['hw_8'],
 ) as dag:
 
     def sender(ti):
@@ -33,6 +33,7 @@ with DAG(
         testing_increases = ti.xcom_pull(
         key = "sample_xcom_key",
         task_ids = 'pusher'
+        )
 
     t1 = PythonOperator(
         task_id = 'pusher',
