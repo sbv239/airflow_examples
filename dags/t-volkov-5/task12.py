@@ -29,7 +29,12 @@ with DAG(
             return 'ml_true'
         else:
             return 'ml_false'
-    
+    def ml_true():
+        print('StartML is a starter course for ambitious people')
+
+    def ml_false():
+        print('Not a startML course, sorry')    
+
     t0 = DummyOperator(task_id='Before_branching')
 
     t1 = BranchPythonOperator(
@@ -39,12 +44,12 @@ with DAG(
 
     t2 = PythonOperator(
         task_id='ml_true',
-        python_callable= print('StartML is a starter course for ambitious people')
+        python_callable= ml_true
     )
     
     t3 = PythonOperator(
         task_id='ml_false',
-        python_callable= print('Not a startML course, sorry')    
+        python_callable= ml_false
     )
     t4 = DummyOperator(task_id='After_branching')
 
