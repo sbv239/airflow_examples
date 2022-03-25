@@ -32,6 +32,7 @@ with DAG(
                     ''')
                 query_result = cursor.fetchall()
                 cursor.close()
+                print(query_result)
                 return query_result
 
     t1 = PythonOperator(
