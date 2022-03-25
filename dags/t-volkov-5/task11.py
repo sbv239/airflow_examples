@@ -24,8 +24,8 @@ with DAG(
 ) as dag:
 
     def airflow_var_test():
-        isstartml = Variable.get("isstartml")
-        print(isstartml)
+        is_startml = Variable.get("is_startml")
+        print(is_startml)
 
     t1 = PythonOperator(
         task_id='print_airflow_variable',
