@@ -34,7 +34,7 @@ with DAG(
         if i < 11:
             task_bash = BashOperator(
                 task_id = "echo_" + str(i),
-                bash_command = templ_comma,
+                bash_command = f"echo {i}",
                 env={"NUMBER": str(i)}
             )
         else:
