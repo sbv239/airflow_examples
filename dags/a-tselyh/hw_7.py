@@ -7,7 +7,7 @@ from airflow.operators.python import PythonOperator
 from datetime import timedelta, datetime
 
 
-def print_context(ts, run_id,  **kwargs):
+def print_context(task_n: int, ts, run_id, **kwargs):
     print("task number is: {kwargs['task_number']}")
     print(ts)
     print(run_id)
@@ -35,18 +35,16 @@ with DAG(
     catchup=False,
     tags=['hw_7'],
 ) as dag:
-
-    t1 = BashOperator(
     for i in range(1,11):
-        task_id='templated_' + str(i)',  # id, будет отображаться в интерфейсе
+        t1 = BashOperator(
+        task_id='BO7' + str(i)',  # id, будет отображаться в интерфейсе
         bash_command= templated_command  # какую bash команду выполнить в этом таске
     )
-
-    t2 = PythonOperator(
-        for i in range(1,21):
-            task_id="'task_number_' + str(i)",
+    for task_number in range(1, 21):
+        t2 = PythonOperator(
+            task_id=f'print_task_{task_number}',
             python_callable=print_context,
-            op_kwargs={'kwargs['task_number']': i}
+            op_kwargs={'task_number': task_n}
     )
     t2.doc_md = dedent(
         """
