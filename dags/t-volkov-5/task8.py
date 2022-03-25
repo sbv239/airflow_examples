@@ -32,10 +32,11 @@ with DAG(
     )
 
     def xcom_var_pull(ti):
-        ti.xcom_pull(
-        key='sample_xcom_key',
-        tasks = 'push var into xcom'
-    )
+        pulled_value = ti.xcom_pull(
+                        key='sample_xcom_key',
+                        tasks = 'push var into xcom'
+                        )
+        print(pulled_value)
 
     t1 = PythonOperator(
         task_id='push_var_into_xcom',
