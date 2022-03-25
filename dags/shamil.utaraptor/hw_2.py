@@ -33,7 +33,7 @@ with DAG(
                 bash_command=f'echo {i}',  # какую bash команду выполнить в этом таске
             )
             task.doc_md = dedent(
-                """
+                """\
                 ### Task documentation
                 Runs bash command `echo` to print cycle iteration.
                 Cycle starts from **one**. bash operator is used in first *ten* iterations.
@@ -46,7 +46,7 @@ with DAG(
                 op_kwargs={'task_number': i}
             )
             task.doc_md = dedent(
-                """
+                """\
                 ### Task documentation
                 Runs Python function to print cycle iteration.
                 Cycle starts from **one**. Python is used after first *ten* iterations.
