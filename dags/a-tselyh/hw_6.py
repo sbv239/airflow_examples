@@ -5,7 +5,7 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 
 with DAG(
-    'a-tselyh_step_5',
+    'hw_5_a-tselyh',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -32,9 +32,10 @@ with DAG(
 
     t1 = BashOperator(
     for i in range(10):
-        task_id='Bash_echo_' + str(i)',  # id, будет отображаться в интерфейсе
-        bash_command="echo $NUMBER",
-        env={"NUMBER": str(i)})
-    )
+        os.environ['NUMBER'] = str(i)
+        t1 = BashOperator(
+            task_id='echo_' + str(i),
+            bash_command="echo '{}'".format(os.environ['NUMBER']),
+        )
 
     t1
