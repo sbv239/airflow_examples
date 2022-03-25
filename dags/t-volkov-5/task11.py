@@ -22,9 +22,11 @@ with DAG(
     start_date=datetime(2022, 3, 20),
     catchup=False
 ) as dag:
+
     def airflow_var_test():
         isstartml = Variable.get("isstartml")
-        return isstartml
+        print(isstartml)
+
     t1 = PythonOperator(
         task_id='print_airflow_variable',
         python_callable=airflow_var_test
