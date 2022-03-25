@@ -30,7 +30,7 @@ with DAG(
         else:
             return 'ml_false'
     
-    t0 = DummyOperator(task_id='Before branching')
+    t0 = DummyOperator(task_id='Before_branching')
 
     t1 = BranchPythonOperator(
         task_id='get_startml_status',
@@ -46,7 +46,7 @@ with DAG(
         task_id='ml_false',
         python_callable= print('Not a startML course, sorry')    
     )
-    t4 = DummyOperator(task_id='After branching')
+    t4 = DummyOperator(task_id='After_branching')
 
 
     t0>>t1>>[t2,t3]>>t4
