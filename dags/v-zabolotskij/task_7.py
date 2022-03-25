@@ -22,7 +22,7 @@ with DAG\
         
     def print_task_num(task_number, ts, run_id):
             print(ts,run_id, sep='\n')
-            return f"task number is: {task_number}"
+            print(f"task number is: {task_number}")
 
     for task in range(30):
         if task <= 10:
