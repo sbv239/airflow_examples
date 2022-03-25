@@ -27,9 +27,9 @@ with DAG(
     tags=['hw_3'],
 ) as dag:
     t1 = BashOperator(
-    for i in range(10):
-        task_id='echo_' + str(i)',  # id, будет отображаться в интерфейсе
-        bash_command= f"echo {i} ",  # какую bash команду выполнить в этом таске
+        for i in range(10):
+            task_id='echo_' + str(i)',  # id, будет отображаться в интерфейсе
+            bash_command= f"echo {i} ",  # какую bash команду выполнить в этом таске
     )
 
     t2 = PythonOperator(
