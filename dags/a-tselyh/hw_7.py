@@ -5,12 +5,12 @@ from airflow.operators.python import PythonOperator
 from datetime import timedelta, datetime
 
 
-def print_context(ts, run_id,**kwargs,):
+def print_context(ts, run_id,  **kwargs):
     print("task number is: {kwargs['task_number']}")
     print(ts)
     print(run_id)
 
-  templated_command = dedent(
+templated_command = dedent(
         """
     {% for i in range({NUMBER}) %}
         echo "{{ ts }}"
@@ -41,7 +41,7 @@ with DAG(
     )
 
     t2 = PythonOperator(
-        for i in range 20:
+        for i in range(20):
             task_id="'task_number_' + str(i)",
             python_callable=print_context,
             op_kwargs={kwargs['task_number']: i }
