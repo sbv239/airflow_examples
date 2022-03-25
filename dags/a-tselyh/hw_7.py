@@ -8,7 +8,7 @@ from datetime import timedelta, datetime
 def print_context(ts, run_id,**kwargs,):
     print("task number is: {kwargs['task_number']}")
     print(ts)
-    print(run_id))
+    print(run_id)
 
   templated_command = dedent(
         """
