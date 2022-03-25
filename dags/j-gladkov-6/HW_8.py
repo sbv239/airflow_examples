@@ -30,11 +30,11 @@ with DAG(
         )
 
     def receiver(ti):
-        testing_increases = ti.xcom_pull(
+        xcom_info = ti.xcom_pull(
         key = "sample_xcom_key",
         task_ids = 'pusher'
         )
-        print("sample_xcom_key")
+        print(xcom_info)
 
     t1 = PythonOperator(
         task_id = 'pusher',
