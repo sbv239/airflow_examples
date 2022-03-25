@@ -38,12 +38,12 @@ with DAG(
     )
 
     t1 = PythonOperator(
-        task_id='push var into xcom',
+        task_id='push_var_into_xcom',
         python_callable=xcom_var_push
     )
 
     t2 = PythonOperator(
-        task_id='pull var from xcom',
+        task_id='pull_var_from_xcom',
         python_callable=xcom_var_pull
     )
     
