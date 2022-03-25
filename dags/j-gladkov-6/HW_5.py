@@ -29,6 +29,6 @@ with DAG(
 
         task_bash = BashOperator(
             task_id = "echo_" + str(i),
-            bash_command = "echo $NUMBER ",
-            env={"NUMBER": i}
+            bash_command = "echo $NUMBER",
+            env={"NUMBER": str(i)}
         )
