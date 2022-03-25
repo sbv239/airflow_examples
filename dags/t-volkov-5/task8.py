@@ -36,7 +36,7 @@ with DAG(
                         key='sample_xcom_key',
                         tasks = 'push var into xcom'
                         )
-        return pulled_value
+        print(pulled_value)
 
     t1 = PythonOperator(
         task_id='push_var_into_xcom',
