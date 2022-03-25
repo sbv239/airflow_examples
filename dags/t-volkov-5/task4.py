@@ -17,7 +17,7 @@ from airflow.operators.python_operator import PythonOperator
 
 
 with DAG(
-    'hw_3_t-volkov-5',
+    'hw_4_t-volkov-5',
     default_args=default_args,
     description='God bless my creature',
     schedule_interval=timedelta(days=1),
@@ -25,33 +25,23 @@ with DAG(
     catchup=False
 ) as dag:
 
-    for i in range(10):
+    def print_ts_and_runid(ts, run_id, **kwargs):
+        print(ts)
+        print(run_id)
+
+    for i in range(5):
         t1 = BashOperator(
-            task_id='looping_bash_operator_' + str(i),
-            bash_command=f'echo {i}'
+            task_id='bash_print_ts_and_runid_' + str(i),
+            bash_command='echo "ts={{ ts }} | run_id={{ run_id }}"'
         )
         t1.doc_md = dedent(
             """\
         #### Task 1 Documentation
-        **current** _bash_ command loops `echo {i}`
+        bash command loops print `ts` and `run_id` with jinja help
 
         """
         )  
    
-    def print_task_number(task_number, **kwargs):
-        print(f'task number is: {task_number}')
-   
-    for i in range(20):
-        t2 = PythonOperator(
-            task_id='looping_python_operator_' + str(i),
-            python_callable=print_task_number,  
-            op_kwargs={'task_number' : i}
-        )
-        t2.doc_md = dedent(
-            """\
-        #### Task 2 Documentation
-        **current** _python_ command loops `task_number is: {i}`
+    
 
-        """
-        )  
-        t1>>t2
+        t1
