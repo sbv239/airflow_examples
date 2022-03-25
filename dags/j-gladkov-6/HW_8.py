@@ -27,22 +27,24 @@ with DAG(
         ti.xcom_push(
         key = "sample_xcom_key",
         value = "xcom test"
-    )
+        )
 
     def receiver(ti):
         testing_increases = ti.xcom_pull(
         key = "sample_xcom_key",
         task_ids = 'pusher'
         )
+        print("sample_xcom_key")
 
     t1 = PythonOperator(
         task_id = 'pusher',
-        python_callable = print_func,
+        python_callable = sender,
     )
 
     t2 = PythonOperator(
         task_id = 'puller',
-        python_callable = print_func,
+        python_callable = receiver,
+
     )
 
     t1 >> t2
