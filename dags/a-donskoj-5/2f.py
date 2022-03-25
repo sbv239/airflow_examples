@@ -22,7 +22,7 @@ with DAG(
         tags=['task 2'],
 ) as dag:
 
-    for i in range(1, 11):
+    for i in range(10):
         t1 = BashOperator(
             task_id='print_'+str(i),
             bash_command=f"echo {i}"
@@ -31,7 +31,7 @@ with DAG(
     def func(num):
         print(f"task number is: {num}")
 
-    for i in range(11, 31):
+    for i in range(20):
         t2 = PythonOperator(
             task_id='task_number_' + str(i),
             python_callable=func,
