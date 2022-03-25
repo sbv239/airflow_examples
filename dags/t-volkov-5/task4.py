@@ -35,7 +35,7 @@ with DAG(
     )
 
     t1 = BashOperator(
-        task_id='bash_print_ts_and_runid_' + str(i),
+        task_id='bash_print_ts_and_runid',
         bash_command= templated_command
     )
     t1.doc_md = dedent(
