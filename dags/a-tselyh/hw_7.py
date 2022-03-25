@@ -20,7 +20,7 @@ templated_command = dedent(
     echo "{{ run_id }}"
     """)
 with DAG(
-    "hw_7_a-tselyh_",
+    "hw_7_a-tselyh",
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -37,13 +37,13 @@ with DAG(
 ) as dag:
 
     t1 = BashOperator(
-    for i in range(10):
+    for i in range(1,11):
         task_id='templated_' + str(i)',  # id, будет отображаться в интерфейсе
         bash_command= templated_command  # какую bash команду выполнить в этом таске
     )
 
     t2 = PythonOperator(
-        for i in range(20):
+        for i in range(1,21):
             task_id="'task_number_' + str(i)",
             python_callable=print_context,
             op_kwargs={'kwargs['task_number']': i}
