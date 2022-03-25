@@ -39,7 +39,7 @@ with DAG(
         python_callable = print_func,
     )
 
-    t1 = PythonOperator(
+    t2 = PythonOperator(
         task_id = 'puller',
         python_callable = print_func,
     )
