@@ -25,23 +25,27 @@ with DAG(
     catchup=False
 ) as dag:
 
-    def print_ts_and_runid(ts, run_id, **kwargs):
-        print(ts)
-        print(run_id)
+    templated_command = dedent(
+    '''
+    {% for i in range(5) %}
+        echo "{{ ts }}"
+        echo "{{ run_id }}"
+    {% endfor %}
+    '''
+    )
 
-    for i in range(5):
-        t1 = BashOperator(
-            task_id='bash_print_ts_and_runid_' + str(i),
-            bash_command='echo "ts={{ ts }} | run_id={{ run_id }}"'
-        )
-        t1.doc_md = dedent(
-            """\
-        #### Task 1 Documentation
-        bash command loops print `ts` and `run_id` with jinja help
+    t1 = BashOperator(
+        task_id='bash_print_ts_and_runid_' + str(i),
+        bash_command= templated_command
+    )
+    t1.doc_md = dedent(
+        """\
+    #### Task 1 Documentation
+    bash command loops print `ts` and `run_id` with jinja help
 
-        """
+    """
         )  
    
     
 
-        t1
+    t1
