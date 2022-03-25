@@ -6,7 +6,7 @@ from airflow.operators.dummy import DummyOperator
 def changing_branches():
     from airflow.models import Variable
     
-    if Variable.get("is_startml") == True:
+    if Variable.get("is_startml") == 'True':
         return "startml_desc"
     else:
         return "not_startml_desc"
