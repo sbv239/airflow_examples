@@ -4,6 +4,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 from datetime import datetime, timedelta
+from textwrap import dedent
 
 with DAG(
     'hw_4_j-gladkov-6',
@@ -35,5 +36,5 @@ with DAG(
         task_id = 'template_printer',
         bash_command = templ_comma,
     )
-    
+
     alone_task
