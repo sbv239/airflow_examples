@@ -20,7 +20,7 @@ templated_command = dedent(
     echo "{{ run_id }}"
     """)
 with DAG(
-    "hw_7_a-tselyh",
+    "what_the_hw7",
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
