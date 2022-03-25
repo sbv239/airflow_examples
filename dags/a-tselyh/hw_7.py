@@ -1,3 +1,5 @@
+from textwrap import dedent
+
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
@@ -16,8 +18,7 @@ templated_command = dedent(
         echo "{{ ts }}"
     {% endfor %}
     echo "{{ run_id }}"
-    """
-
+    """)
 with DAG(
     "hw_7_a-tselyh_",
     default_args={
