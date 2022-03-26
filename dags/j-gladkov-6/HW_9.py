@@ -30,6 +30,7 @@ with DAG(
         message = ti.xcom_pull(
         key = "return_value",
         task_ids = 'pusher'
+        )
 
     t1 = PythonOperator(
         task_id = 'pusher',
