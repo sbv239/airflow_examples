@@ -23,7 +23,7 @@ with DAG(
 
     def push_xcom(ti):
         ti.xcom_push(
-            key='sample_xcom_key'
+            key='sample_xcom_key',
             value='xcom test'
         )
 
@@ -33,6 +33,7 @@ with DAG(
             task_ids='push_xcom'
         )
         print(testing_pull)
+
     t1 = PythonOperator(
         task_id='push_xcom',
         python_callable=push_xcom,
