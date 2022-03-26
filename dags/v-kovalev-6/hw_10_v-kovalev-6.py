@@ -36,7 +36,7 @@ with DAG(
                     LIMIT 1 
                     '''
                 )
-                results = cursor.fetchall()
+                results = cursor.fetchone()
                 return results
 
 
