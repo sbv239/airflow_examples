@@ -22,33 +22,32 @@ with DAG(
         tags=['task 6'],
 ) as dag:
 
-    for i in range(10):
-        t1 = BashOperator(
-            task_id='print_'+str(i),
-            bash_command=f"echo {i}"
-        )
-
-        t1.doc_md = dedent(
-            """
-        # BashOperator-TASK
-        """
-        )
-
     def func(num, ts, run_id, **kwargs):
         print(f"task number is: {num}")
         print(f"ts = {ts}")
         print(f"run_id = {run_id}")
 
-    for i in range(20):
-        t2 = PythonOperator(
-            task_id='task_number_' + str(i),
-            python_callable=func,
-            op_kwargs={'num': i}
-        )
+    for i in range(31):
+        if i <= 10:
+            t = BashOperator(
+                task_id='print_'+str(i),
+                bash_command=f"echo {i}"
+            )
 
-    t2.doc_md = dedent(
-        """
-    # PythonOperator-TASK
-    """)
+            t.doc_md = dedent(
+                """
+            # BashOperator-TASK
+            """
+            )
 
-    t1 >> t2
+        else:
+            t = PythonOperator(
+                task_id='task_number_' + str(i),
+                python_callable=func,
+                op_kwargs={'num': i}
+            )
+
+            t.doc_md = dedent(
+                """
+            # PythonOperator-TASK
+            """)
