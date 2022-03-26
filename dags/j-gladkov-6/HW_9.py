@@ -31,6 +31,7 @@ with DAG(
         key = "return_value",
         task_ids = 'pusher'
         )
+        print(message)
 
     t1 = PythonOperator(
         task_id = 'pusher',
