@@ -15,7 +15,10 @@ def notstartml():
 
 def chose_your_destiny():
     from airflow.models import Variable
-    if Variable.get("is_startml") return 'startml_desc' else return 'not_startml_desc'
+    if Variable.get("is_startml"):
+        return 'startml_desc'
+    else:
+        return 'not_startml_desc'
 
 with DAG(
     'hw_12_j-gladkov-6',
