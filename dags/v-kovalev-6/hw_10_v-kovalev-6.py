@@ -23,7 +23,7 @@ with DAG(
 ) as dag:
 
 
-    def get_user_max_likes()
+    def get_user_max_likes():
         postgres = PostgresHook(postgres_conn_id="startml_feed")
         with postgres.get_conn() as conn:
             with conn.cursor() as cursor:
