@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+rom datetime import datetime, timedelta
 from textwrap import dedent
 
 from airflow import DAG
@@ -22,20 +22,19 @@ with DAG(
         tags=['task 2'],
 ) as dag:
 
-    for i in range(10):
-        t1 = BashOperator(
-            task_id='print_'+str(i),
-            bash_command=f"echo {i}"
-        )
-
     def func(num):
         print(f"task number is: {num}")
 
-    for i in range(20):
-        t2 = PythonOperator(
-            task_id='task_number_' + str(i),
-            python_callable=func,
-            op_kwargs={'num': i}
-        )
+    for i in range(31):
+        if i<=10:
+            t = BashOperator(
+                task_id='print_'+str(i),
+                bash_command=f"echo {i}"
+            )
 
-    t1 >> t2
+        else:
+            t = PythonOperator(
+                task_id='task_number_' + str(i),
+                python_callable=func,
+                op_kwargs={'num': i}
+            )
