@@ -37,7 +37,7 @@ with DAG(
         python_callable = returner,
     )
 
-    t1 = PythonOperator(
+    t2 = PythonOperator(
         task_id = 'puller',
         python_callable = receiver,
     )
