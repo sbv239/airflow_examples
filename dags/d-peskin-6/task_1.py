@@ -20,7 +20,7 @@ with DAG(
     catchup=False,
     tags=['DP HW1']
 ) as dag:
-    t1 = BashOperator(task_id = "Bash operator task", bash_command = "pwd",)
+    t1 = BashOperator(task_id = "Bash operator task", bash_command = "pwd ")
 
 
     def print_ds(ds):
