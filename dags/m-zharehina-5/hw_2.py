@@ -26,24 +26,16 @@ with DAG(
     catchup=False,
     tags=['hw_2_m_zharehina_5'],
     ) as dag:
-       
-    i = 1
-    while i < 11:
-        t1 = BashOperator(
-            task_id='hw_2_m_zharehina_5_task_number_' + str(i),
-            bash_command=f'echo {i}',
-        )
-        i += 1
-        t1
-
-    def print_task_number(task_number):
-        print(f'task number is: {task_number}')
-
-    for j in range(i+1, 21):
-        t2 = PythonOperator(
-            task_id='hw_2_m_zharehina_5_task_number_' + str(i),
-            python_callable=print_task_number,
-            op_kwargs={'task_number': i},
-        )
-        t2
+    
+    def print_num(task_number):
+        return print(f"task number is: {task_number}")
+        
+    for i in range(1, 31):
+        if i <= 10:
+            task = BashOperator(task_id='hw_2_m_zharehina_5_task_' + str(i), 
+                                bash_command=f"echo {i}")
+        else:
+            task = PythonOperator(task_id='hw_2_m_zharehina_5_task_' + str(i), 
+                                  python_callable=print_num,
+                                  op_kwargs={'task_number': int(i)})
     
