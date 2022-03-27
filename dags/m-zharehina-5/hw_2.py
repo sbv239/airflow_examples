@@ -1,5 +1,5 @@
 """
-hw_1_m-zharehina-5
+hw_2_m-zharehina-5
 """
 from datetime import datetime, timedelta
 from textwrap import dedent
@@ -27,20 +27,23 @@ with DAG(
     tags=['hw_2_m_zharehina_5'],
     ) as dag:
        
-    for i in range(10):
-        task_b = BashOperator(
-            task_id='echo_' + str(i),
+    i = 1
+    while i < 11:
+        t1 = BashOperator(
+            task_id='hw_2_m_zharehina_5_task_number_' + str(i),
             bash_command=f'echo {i}',
         )
+        i += 1
+        t1
 
     def print_task_number(task_number):
         print(f'task number is: {task_number}')
 
-    for i in range(20):
-        task_p = PythonOperator(
-            task_id='task_number_' + str(i),
+    for j in range(i+1, 21):
+        t2 = PythonOperator(
+            task_id='hw_2_m_zharehina_5_task_number_' + str(i),
             python_callable=print_task_number,
             op_kwargs={'task_number': i},
         )
-        task_b >> task_p
+        t2
     
