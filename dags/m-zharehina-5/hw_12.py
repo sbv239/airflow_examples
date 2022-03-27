@@ -11,6 +11,11 @@ from airflow.operators.python_operator import PythonOperator
 
 from airflow.providers.postgres.operators.postgres import PostgresHook
 
+from airflow.operators.python import BranchPythonOperator
+from airflow.operators.bash import BashOperator
+from airflow.operators.dummy import DummyOperator
+
+
 ###################
 
 
