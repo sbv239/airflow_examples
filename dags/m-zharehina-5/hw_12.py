@@ -11,7 +11,15 @@ from airflow.operators.python_operator import PythonOperator
 
 from airflow.providers.postgres.operators.postgres import PostgresHook
 
-        
+
+def get_branch():
+    from airflow.models import Variable
+    if Variable.get("is_startml"):
+        return "startml_desc"
+    else:
+        return "not_startml_desc"
+    
+    
 with DAG(
     'hw_12_m_zharehina_5',
     default_args={
@@ -29,24 +37,13 @@ with DAG(
     tags=['hw_12_m_zharehina_5'],
     ) as dag:   
     
-    def choose_branch():
-        from airflow.models import Variable
-        if Variable.get("is_startml"):
-            return "startml_desc"
-        else:
-            return "not_startml_desc"
-    
-    dummy_op_start = DummyOperator(task_id='before_branching')
-    
-    branch_op = BranchPythonOperator(task_id='determine_course', 
-                              python_callable=choose_branch)
-    
-    bash_op_1 = BashOperator(task_id='startml_desc', 
+    t1 = DummyOperator(task_id='before_branching')
+    t2 = BranchPythonOperator(task_id='determine_course', 
+                              python_callable=get_branch)
+    t3 = BashOperator(task_id='startml_desc', 
                       bash_command='echo "StartML is a starter course for ambitious people"')
-    
-    bash_op_2 = BashOperator(task_id='not_startml_desc', 
+    t4 = BashOperator(task_id='not_startml_desc', 
                       bash_command='echo "Not a startML course, sorry"')
-    
-    dummy_op_end = DummyOperator(task_id='after_branching')
+    t5 = DummyOperator(task_id='after_branching')
 
-    dummy_op_start >> branch_op >> [bash_op_1, bash_op_2] >> dummy_op_end
+    t1 >> t2 >> [t3, t4] >> t5
