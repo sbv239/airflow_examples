@@ -26,29 +26,22 @@ with DAG(
     catchup=False,
     tags=['hw_2_m_zharehina_5'],
     ) as dag:
-    
-    templated_command = dedent(
-    """
-    {% for i in range(10) %}
-        print(f"echo {i}")
-    {% endfor %}
-    """
-    )
-    
-    t1 = BashOperator(
-        task_id='hw_2_m_zharehina_5',
-        depends_on_past=False,
-        bash_command=templated_command,
-    )
-    
-    def print_var(i):
-        print(i)
-    
-    for i in range(5):
-        task = PythonOperator(
-            task_id='hw_2_m_zharehina_5_print_i_' + str(i),
-            python_callable=print_var,
-            op_kwargs={'i': int(i)},
+       
+    for i in range(10):
+        task_b = BashOperator(
+            task_id='echo_' + str(i),
+            bash_command=f'echo {i}',
         )
-        task_id
+        task_b
+
+    def print_task_number(task_number):
+        print(f'task number is: {task_number}')
+
+    for i in range(20):
+        task_p = PythonOperator(
+            task_id='task_number_' + str(i),
+            python_callable=print_task_number,
+            op_kwargs={'task_number': i},
+        )
+        task_p
     
