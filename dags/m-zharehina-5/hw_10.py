@@ -41,4 +41,5 @@ with DAG(
     catchup=False,
     tags=['hw_10_m_zharehina_5'],
     ) as dag:   
+    
     task1 = PythonOperator(task_id='hw_10_m_zharehina_5', python_callable=postgres)
