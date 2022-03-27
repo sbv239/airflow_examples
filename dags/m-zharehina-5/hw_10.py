@@ -12,6 +12,19 @@ from airflow.operators.python_operator import PythonOperator
 from airflow.providers.postgres.operators.postgres import PostgresHook
 
 
+def postgres():
+    postgres = PostgresHook(postgres_conn_id='startml_feed')
+    with postgres.get_conn() as conn:
+        with conn.cursor() as cursor:
+            cursor.execute('''
+                    SELECT user_id, count(post_id)
+                    FROM feed_action
+                    WHERE action = 'like'
+                    GROUP BY user_id
+                    ORDER BY count(post_id) DESC''')
+            return print(cursor.fetchone())
+
+        
 with DAG(
     'hw_10_m_zharehina_5',
     default_args={
@@ -27,18 +40,5 @@ with DAG(
     start_date=datetime(2022, 3, 26),
     catchup=False,
     tags=['hw_10_m_zharehina_5'],
-    ) as dag:
-    
-    def postgres():
-        postgres = PostgresHook(postgres_conn_id='startml_feed')
-        with postgres.get_conn() as conn:
-            with conn.cursor() as cursor:
-                cursor.execute('''
-                    SELECT user_id, count(post_id)
-                    FROM feed_action
-                    WHERE action = 'like'
-                    GROUP BY user_id
-                    ORDER BY count(post_id) DESC''')
-                return print(cursor.fetchone())
-    
-    task1 = PythonOperator(task_id='max_like_user', python_callable=postgres)
+    ) as dag:   
+    task1 = PythonOperator(task_id='hw_10_m_zharehina_5', python_callable=postgres)
