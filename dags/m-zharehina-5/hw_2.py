@@ -30,7 +30,7 @@ with DAG(
     i = 1
     while i < 11:
         t1 = BashOperator(
-            task_id='hw_2_m_zharehina_5_task_number_' + str(i),
+            task_id='hw_2_m_zharehina_5_task_num_' + str(i),
             bash_command=f'echo {i}',
         )
         i += 1
@@ -39,9 +39,9 @@ with DAG(
     def print_task_number(task_number):
         print(f'task number is: {task_number}')
 
-    for j in range(i+1, 21):
+    for j in range(i, 21):
         t2 = PythonOperator(
-            task_id='hw_2_m_zharehina_5_task_number_' + str(i),
+            task_id='hw_2_m_zharehina_5_task_num_' + str(j),
             python_callable=print_task_number,
             op_kwargs={'task_number': i},
         )
