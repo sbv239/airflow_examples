@@ -15,7 +15,7 @@ with DAG(
         'retry_delay': timedelta(minutes=5)
     },
     description='DAG for task 1',
-    shedule_interval=timedelta(days=1),
+    schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 3, 27),
     catchup=False,
     tags=['DP HW1']
