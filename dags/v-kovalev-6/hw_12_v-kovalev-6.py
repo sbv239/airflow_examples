@@ -44,7 +44,7 @@ with DAG(
     )
 
     t4 = PythonOperator(
-        task_id='startml_desc',
+        task_id='not_startml_desc',
         python_callable=print("Not a startML course, sorry"),
     )
 
