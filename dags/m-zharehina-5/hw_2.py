@@ -32,7 +32,6 @@ with DAG(
             task_id='echo_' + str(i),
             bash_command=f'echo {i}',
         )
-        task_b
 
     def print_task_number(task_number):
         print(f'task number is: {task_number}')
@@ -43,5 +42,5 @@ with DAG(
             python_callable=print_task_number,
             op_kwargs={'task_number': i},
         )
-        task_p
+        task_b >> task_p
     
