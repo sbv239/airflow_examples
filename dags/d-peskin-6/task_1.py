@@ -20,13 +20,13 @@ with DAG(
     catchup=False,
     tags=['DP HW1']
 ) as dag:
-    t1 = BashOperator(task_id = 'Bash operator task', bash_command = 'pwd')
+    t1 = BashOperator(task_id = "Bash operator task", bash_command = "pwd",)
 
 
     def print_ds(ds):
         print(ds)
         return  'Ok'
 
-    t2 = PythonOperator(task_id = 'Python operator task', python_callable = print_ds)
+    t2 = PythonOperator(task_id = "Python operator task", python_callable = print_ds)
 
     t1 >> t2
