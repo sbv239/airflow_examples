@@ -28,6 +28,12 @@ with DAG(
         else:
             return "not_startml_desc"
 
+    def startml_desc():
+        print("StartML is a starter course for ambitious people")
+
+    def not_startml_desc():
+        print("Not a startML course, sorry")
+
 
     t1 = DummyOperator(
         task_id='start'
@@ -40,16 +46,17 @@ with DAG(
 
     t3 = PythonOperator(
         task_id='startml_desc',
-        python_callable=print("StartML is a starter course for ambitious people"),
+        python_callable=startml_desc,
     )
 
     t4 = PythonOperator(
         task_id='not_startml_desc',
-        python_callable=print("Not a startML course, sorry"),
+        python_callable=not_startml_desc,
     )
 
     t5 = DummyOperator(
-        task_id='end'
+        task_id='end',
+        trigger_rule='none_failed_or_skipped'
     )
 
     t1 >> t2 >> [t3, t4] >> t5
