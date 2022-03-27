@@ -1,5 +1,4 @@
 from datetime import datetime, timedelta
-from textwrap import dedent
 
 from airflow import DAG
 from airflow.operators.bash import BashOperator
@@ -16,8 +15,8 @@ with DAG(
         'retry_delay': timedelta(minutes=5)
     },
     description='DAG for task 1',
-    sheduled_interval=timedelta(days=1),
-    startdate=datetime(2022, 3, 27),
+    shedule_interval=timedelta(days=1),
+    start_date=datetime(2022, 3, 27),
     catchup=False,
     tags=['DP HW1']
 ) as dag:
