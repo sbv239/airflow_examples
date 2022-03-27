@@ -37,13 +37,13 @@ with DAG(
     tags=['hw_12_m_zharehina_5'],
     ) as dag:   
     
-    t1 = DummyOperator(task_id='before_branching')
-    t2 = BranchPythonOperator(task_id='determine_course', 
+    t1 = DummyOperator(task_id='hw_12_m_zharehina_5_t1')
+    t2 = BranchPythonOperator(task_id='hw_12_m_zharehina_5_t2', 
                               python_callable=get_branch)
     t3 = BashOperator(task_id='startml_desc', 
                       bash_command='echo "StartML is a starter course for ambitious people"')
     t4 = BashOperator(task_id='not_startml_desc', 
                       bash_command='echo "Not a startML course, sorry"')
-    t5 = DummyOperator(task_id='after_branching')
+    t5 = DummyOperator(task_id='hw_12_m_zharehina_5_t5')
 
     t1 >> t2 >> [t3, t4] >> t5
