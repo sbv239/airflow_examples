@@ -21,7 +21,7 @@ with DAG(
         tags=['hw_2']
 ) as dag:
     t1 = BashOperator(
-        task_id='do_pwd',
+        task_id='do_pwd_',
         bash_command='pwd',
     )
 
@@ -37,7 +37,7 @@ with DAG(
 
 
     t2 = PythonOperator(
-        task_id='print_ds',
+        task_id='print_ds_',
         python_callable=print_ds,
     )
 
