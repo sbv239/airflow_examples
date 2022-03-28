@@ -30,13 +30,13 @@ with DAG(
     )
 
     t1 = BashOperator(
-        task_id='print_ts_and_run_id',
+        task_id='print_ts_and_run_id_',
         bash_command=print_ts_run_id
     )
 
     t1.doc_md = dedent(
         """
-        # Создаем __DAG__ _**типа `BashOperator`**_
+        ## Создаем __DAG__ _**типа `BashOperator`**_
         этот оператор использует шаблонизированную команду __`print_ts_run_id`__
         """
     )
