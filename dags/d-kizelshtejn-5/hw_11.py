@@ -21,7 +21,7 @@ def user_id_max_like():
                 LIMIT 1
                 """
             )
-            return cursor.fetchall()
+            return cursor.fetchone()
 
 
 with DAG(
