@@ -38,18 +38,3 @@ with DAG(
                 python_callable = print_func,
                 op_kwargs={'task_number': i},
             )
-    task_bash.doc_md = dedent(
-        """\
-    ## Task Documentation
-    This *task* executes `echo` in `bash consol` **airflow**
-
-    """
-    )
-
-    task_pyth.doc_md = dedent(
-        """\
-    ## Task Documentation
-    This *task* surprise surprise prints `task number` in **airflow**
-
-    """
-    )
