@@ -15,7 +15,7 @@ def user_id_max_like():
                 """
                 SELECT user_id, COUNT(action) AS count_like
                 FROM "feed_action"
-                WHERE action = "like"
+                WHERE action = 'like'
                 GROUP BY user_id
                 ORDER BY count_like DESC
                 LIMIT 1
