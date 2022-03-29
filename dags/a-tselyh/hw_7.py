@@ -11,7 +11,7 @@ from airflow.operators.python import PythonOperator
 from datetime import timedelta, datetime
 
 with DAG(
-    "the_hw7",
+    "new_hw7",
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -28,15 +28,15 @@ with DAG(
 ) as dag:
 
     def print_context(task_n: int, ts, run_id, **kwargs):
-        print("task number is: {'task_n'}")
+        print(f'task number is: {task_n}')
         print(ts)
         print(run_id)
 
     for task_n in range(1, 21):
         t1 = PythonOperator(
-            task_id='task_number_' + str(i),
+            task_id='task_number_is' + str(i),
             python_callable=print_context,
-            op_kwargs={'task_number': task_n}
+            op_kwargs={'task_number': task_n},
         )
 
         t1
