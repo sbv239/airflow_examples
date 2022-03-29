@@ -27,13 +27,13 @@ with DAG(
     tags=['hw_3'],
 ) as dag:
     t1 = BashOperator(
-    for i in range 10:
-        task_id='echo_' + str(i)',  # id, будет отображаться в интерфейсе
-        bash_command= f"echo {i} ",  # какую bash команду выполнить в этом таске
+        for i in range(10):
+            task_id='echo_' + str(i)',  # id, будет отображаться в интерфейсе
+            bash_command= f"echo {i} ",  # какую bash команду выполнить в этом таске
     )
 
     t2 = PythonOperator(
-        for i in range 20:
+        for i in range(20):
             task_id="'task_number_' + str(i)",
             python_callable=print_context,
             op_kwargs={'task_number': i }
