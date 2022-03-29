@@ -35,14 +35,15 @@ with DAG(
             используя BashOperator
             """)
 
-        task = PythonOperator(
-            task_id = f'print_task_{i}',
-            python_callable = print_task_number,
-            op_kwargs = {'task_number': i}
-        )
-        task.doc_md = dedent("""
-        # Task_Documentation 
-        **напечатает** `"task number is: {task_number}"`, где `i` *номер итерации*
-        используя  PythonOperator
-        """)
+        else:
+            task = PythonOperator(
+                task_id = f'print_task_{i}',
+                python_callable = print_task_number,
+                op_kwargs = {'task_number': i}
+            )
+            task.doc_md = dedent("""
+            # Task_Documentation 
+            **напечатает** `"task number is: {task_number}"`, где `i` *номер итерации*
+            используя  PythonOperator
+            """)
     task

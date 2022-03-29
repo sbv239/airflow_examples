@@ -29,10 +29,11 @@ with DAG(
                 bash_command = f'echo {i}',
             )
 
-        task = PythonOperator(
-            task_id = f'print_task_{i}',
-            python_callable = print_task_number,
-            op_kwargs = {'task_number': i}
-    )
+        else:
+            task = PythonOperator(
+                task_id = f'print_task_{i}',
+                python_callable = print_task_number,
+                op_kwargs = {'task_number': i}
+        )
 
     task
