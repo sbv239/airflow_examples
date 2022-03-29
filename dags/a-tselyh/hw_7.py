@@ -5,7 +5,6 @@ Hello, these are DAG docs.
 from textwrap import dedent
 
 from airflow import DAG
-from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 from datetime import timedelta, datetime
@@ -18,13 +17,13 @@ with DAG(
         'email_on_failure': False,
         'email_on_retry': False,
         'retries': 1,
-        'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
+        'retry_delay': timedelta(minutes=5),
     },
     description='oh_my_DAG',
     schedule_interval=timedelta(days=1),
-    start_date=datetime(year=2022, month=3, day=22),
+    start_date=datetime(2022, 3, 18),
     catchup=False,
-    tags=['hw_7'],
+    tags=['step_7'],
 ) as dag:
 
     def print_context(task_n: int, ts, run_id, **kwargs):
@@ -40,4 +39,3 @@ with DAG(
         )
 
         t1
-
