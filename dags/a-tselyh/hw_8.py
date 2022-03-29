@@ -19,7 +19,7 @@ def get_xcom_f(ti):
 
 
 with DAG(
-        'a-ts_dag_8',
+        'a-tselyh_dag_8',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
@@ -34,12 +34,12 @@ with DAG(
         catchup=False,
 ) as dag:
     t1 = PythonOperator(
-        task_id='set_xcom',
+        task_id='set_xcom_',
         python_callable=set_xcom_f,
     )
 
     t2 = PythonOperator(
-        task_id='get_xcom',
+        task_id='get_xcom_',
         python_callable=get_xcom_f,
     )
 
