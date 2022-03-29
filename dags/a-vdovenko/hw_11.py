@@ -1,6 +1,5 @@
 from datetime import timedelta, datetime
 from airflow import DAG
-from airflow.providers.postgres.operators.postgres import PostgresHook
 from airflow.operators.python import PythonOperator
 
 def variable():
