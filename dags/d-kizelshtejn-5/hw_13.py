@@ -10,8 +10,7 @@ def select_task():
     from airflow.models import Variable
 
     is_startml = Variable.get("is_startml")
-    print(is_startml)
-    if is_startml == True:
+    if is_startml:
         return "startml_desc"
     return "not_startml_desc"
 
