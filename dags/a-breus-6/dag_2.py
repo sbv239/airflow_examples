@@ -7,16 +7,16 @@ from airflow import DAG
 with DAG(
     'task_3_breus',
 
-default_args={
+    default_args={
 
     'depends_on_past': False,
     'email': ['airflow@example.com'],
     'email_on_failure': False,
     'email_on_retry': False,
     'retries': 1,
-    'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
+    'retry_delay': timedelta(minutes=5),  
     'retry_delay': timedelta(minutes=5), 
-},
+    },
 
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 3, 31),
