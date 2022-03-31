@@ -1,6 +1,7 @@
 from airflow import DAG
 from datetime import timedelta, datetime
-from airflow.operators.bash import BashOperator, PythonOperator
+from airflow.operators.bash import BashOperator
+from airflow.operators.python import PythonOperator
 
 with DAG(
     'task_2_breus',
@@ -12,7 +13,7 @@ default_args={
     'email_on_failure': False,
     'email_on_retry': False,
     'retries': 1,
-    'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
+    'retry_delay': timedelta(minutes=5), 
 },
 
     schedule_interval=timedelta(days=1),
