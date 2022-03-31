@@ -1,9 +1,9 @@
 from airflow import DAG
-from datetime import timedelta
+from datetime import timedelta, datetime
 from airflow.operators.bash import BashOperator, PythonOperator
 
 with DAG(
-    'HW1',
+    'task_2_breus',
 
 default_args={
 
