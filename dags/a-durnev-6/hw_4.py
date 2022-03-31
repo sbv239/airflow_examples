@@ -4,9 +4,9 @@ from airflow import DAG
 
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
-
+from textwrap import dedent
 with DAG(
-    'DAV_3',
+    'DAV 4',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -15,7 +15,7 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),
         },
-    description='DAV_3',
+    description='First DAG',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 1, 1),
     catchup=False,
@@ -26,6 +26,12 @@ with DAG(
         t1 = BashOperator(
             task_id='bash_operators_' + str(i),
             bash_command=f"echo {i}",
+        )
+        t1.doc_md = dedent(
+            f"""\
+            #### Bash operator doc
+            **Example task** * bash_command * = `echo {i}`
+            """
         )
 
 
@@ -40,4 +46,11 @@ with DAG(
             task_id='python_operators_' + str(i),
             python_callable=task_number,
             op_kwargs={'task_number': i}
+        )
 
+        t2.doc_md = dedent(
+            f"""\
+            #### Python operator doc
+            **Example task** * python_command * = `task_number({i})`
+            """
+        )
