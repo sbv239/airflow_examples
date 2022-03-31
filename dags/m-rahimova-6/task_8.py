@@ -24,10 +24,11 @@ def pusher(ti):
 
 
 def puller(ti):
-    ti.xcom_pull(
+    xcom_value = ti.xcom_pull(
         key='sample_xcom_key',
         task_ids='pusher'
     )
+    print(xcom_value)
 
 
 with DAG(
@@ -60,4 +61,3 @@ with DAG(
     )
 
     t1 >> t2
-    
