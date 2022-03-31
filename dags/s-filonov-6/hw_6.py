@@ -44,6 +44,7 @@ description='A simple tutorial DAG',
             )
         else:
             t2 = PythonOperator(
+            task_id='python_' + str(i),
             python_callable=print_args,
             op_kwargs={'task_number': i}
           )
