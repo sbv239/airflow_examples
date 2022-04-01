@@ -35,4 +35,4 @@ with DAG(
                 python_callable=func,
                 op_kwargs = {'w' : i}
             )
-        t1>>t2
+    t1>>t2
