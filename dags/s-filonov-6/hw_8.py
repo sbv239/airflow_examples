@@ -24,13 +24,13 @@ def extract_testing_increases(ti):
     """
     testing_increases = ti.xcom_pull(
         key='sample_xcom_key',
-        task_ids="get Xcom"
+        task_ids="python_xcom_set"
     )
     print("Xcom printing:" + testing_increases)
 
 
 with DAG(
-'s-filonov-6_hw8a',
+'s-filonov-6_hw8b',
 default_args={
     'depends_on_past': False,
     'email': ['airflow@example.com'],
