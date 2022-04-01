@@ -22,21 +22,20 @@ with DAG(
         tags=['a.veselov-1'],
 ) as dag:
 
+    def print_ds(ds):
+        print(f'Внутренняя переменная airflow ds: {ds}')
+        print(f'А также посмотрим и остальные переменные: {kwargs}')
 
-def print_ds(ds):
-    print(f'Внутренняя переменная airflow ds: {ds}')
-    print(f'А также посмотрим и остальные переменные: {kwargs}')
+    python_task = PythonOperator(
+        task_id = 'print_ds',
+        python_callable = print_ds,
+        dag = dag
+    )
 
-python_task = PythonOperator(
-    task_id = 'print_ds',
-    python_callable = print_ds,
-    dag = dag
-)
+    bash_task = BashOperator(
+        task_id = 'print_our_directory',
+        bash_command = 'pwd',
+        dag = dag
+    )
 
-bash_task = BashOperator(
-    task_id = 'print_our_directory',
-    bash_command = 'pwd',
-    dag = dag
-)
-
-python_task >> bash_task
+    python_task >> bash_task
