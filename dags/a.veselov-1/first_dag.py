@@ -17,6 +17,7 @@ with DAG(
         dag_id = 'a_veselov_task_1_DAG',
         default_args = default_args,
         description = '',
+        catchup = False,
         schedule_interval = datetime.timedelta(days=1),
         start_date=datetime.datetime(2022, 1, 1),
         tags=['a.veselov-1'],
