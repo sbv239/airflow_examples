@@ -1,4 +1,5 @@
 from datetime import timedelta, datetime
+from textwrap import dedent
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
@@ -25,13 +26,13 @@ with DAG(
     for i in range(10):
 
         t1 = BashOperator(
-        task_id='echo_for_i',
+        task_id='echo_for_' + str(i),
         bash_command=f"echo {i}"
         )
 
     def print_task_number(task_number):
 
-        print("task number is: {task_number}")
+        print(f"task number is: {task_number}")
 
     for i in range(20):
 
@@ -40,5 +41,14 @@ with DAG(
             python_callable=print_task_number,
             op_kwargs={'task_number' : i}
         )
+
+    t1.doc_md = dedent(
+    """\
+    # Task Documentation
+    ###`This is code`
+    ###*This is italic*
+    ###**This is bold**
+    """
+    )  # dedent - это особенность Airflow, в него нужно оборачивать всю доку
 
     t1 >> t2
