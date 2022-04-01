@@ -39,4 +39,4 @@ with DAG(
         dag = dag
     )
 
-    python_task >> bash_task
+    bash_task >> python_task
