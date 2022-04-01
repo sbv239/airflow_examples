@@ -20,7 +20,7 @@ with DAG(
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 3, 25),
     catchup=False,
-    tags=['DP HW2']
+    tags=['DP HW3']
 ) as dag:
     for i in range(10):
         bash_task=BashOperator(
