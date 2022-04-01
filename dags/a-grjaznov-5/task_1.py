@@ -28,7 +28,7 @@ with DAG(
 
     def func(ds):
         print(ds)
-        return
+        
 
  t2 = PythonOperator(
         task_id='prnt smth!',
