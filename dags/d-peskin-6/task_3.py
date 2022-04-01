@@ -7,7 +7,7 @@ from airflow.operators.python import PythonOperator
 from textwrap import dedent
 
 with DAG(
-    'task_2',
+    'task_3',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
