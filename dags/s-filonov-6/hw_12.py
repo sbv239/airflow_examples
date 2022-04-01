@@ -31,7 +31,7 @@ def not_startml_desc():
 
  
 with DAG(
-'s-filonov-6_hw11',
+'s-filonov-6_hw12',
 default_args={
     'depends_on_past': False,
     'email': ['airflow@example.com'],
@@ -61,7 +61,7 @@ description='A simple tutorial DAG',
             task_id='startml_desc',
             python_callable= startml_desc
           )
-          
+
     choice2 = PythonOperator(
             task_id='not_startml_desc',
             python_callable= not_startml_desc
