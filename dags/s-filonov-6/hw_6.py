@@ -31,9 +31,9 @@ description='A simple tutorial DAG',
 ) as dag:
 
     def print_args(ts, run_id, **kwargs):
-        print(ts)
-        print(run_id)
-        print("task nr: {kwargs['task_number']}") 
+        print("print_ts: " + ts)
+        print("print_run_id: " + run_id)
+        print("task nr: " + {kwargs['task_number']}) 
 
     for i in range(30):
         if i < 10:
@@ -46,5 +46,5 @@ description='A simple tutorial DAG',
             t2 = PythonOperator(
             task_id='python_' + str(i),
             python_callable=print_args,
-            op_kwargs={'task_number': i}
+            op_kwargs={'task_number': str(i)}
           )
