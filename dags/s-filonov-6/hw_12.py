@@ -9,12 +9,19 @@ from airflow import DAG
 
 from airflow.operators.bash import BashOperator
 from airflow.operators.python_operator import PythonOperator
+from airflow.operators.python import BranchPythonOperator
+from airflow.operators.dummy import DummyOperator
 
 def try_branching():
-    if is_startml == True:
+    """
+    Variable
+    """
+    from airflow.models import Variable
+    var = Variable.get("is_startml")
+    if var:
         return "startml_desc"
     else:
-        return "not_startml_desc"
+        return "not_startml_desc" 
 
 def startml_desc():
     return "StartML is a starter course for ambitious people"
@@ -23,7 +30,6 @@ def not_startml_desc():
     return "Not a startML course, sorry" 
 
  
-
 with DAG(
 's-filonov-6_hw11',
 default_args={
@@ -51,9 +57,18 @@ description='A simple tutorial DAG',
         python_callable=try_branching
     )
 
+    choice1 = PythonOperator(
+            task_id='startml_desc',
+            python_callable= startml_desc
+          )
+    choice2 = PythonOperator(
+            task_id='not_startml_desc',
+            python_callable= not_startml_desc
+          )
+
 
     t2 = DummyOperator(
         task_id='run_this_last',
     )
 
-    t1 >> branching >> t2
+    t1 >> branching >> [choice1, choice2] >> t2
