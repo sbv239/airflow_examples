@@ -33,7 +33,7 @@ description='A simple tutorial DAG',
     def print_args(ts, run_id, **kwargs):
         print("print_ts: " + ts)
         print("print_run_id: " + run_id)
-        print("task nr: " + {kwargs['task_number']}) 
+        print("task nr: " + kwargs['task_number']) 
 
     for i in range(30):
         if i < 10:
