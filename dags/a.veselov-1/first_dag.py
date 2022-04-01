@@ -23,9 +23,9 @@ with DAG(
         tags=['a.veselov-1'],
 ) as dag:
 
-    def print_ds(ds, kwargs):
+    def print_ds(ds, **kwargs):
         print(f'Внутренняя переменная airflow ds: {ds}')
-        print(f'А также посмотрим и остальные переменные: {kwargs}')
+        print(f'А также посмотрим и остальные переменные: {**kwargs}')
 
     python_task = PythonOperator(
         task_id = 'print_ds',
