@@ -61,11 +61,11 @@ description='A simple tutorial DAG',
             task_id='startml_desc',
             python_callable= startml_desc
           )
+          
     choice2 = PythonOperator(
             task_id='not_startml_desc',
             python_callable= not_startml_desc
           )
-
 
     t2 = DummyOperator(
         task_id='run_this_last',
