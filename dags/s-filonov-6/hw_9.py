@@ -16,19 +16,19 @@ def return_str():
     """
     return "Airflow tracks everything"
 
-def extract_testing_increases(ti):
+def extract_xcom(ti):
     """
     Get and print key-value from Xcom
     """
-    testing_increases = ti.xcom_pull(
-        key='sample_xcom_key',
+    get_value = ti.xcom_pull(
+        key='return_value',
         task_ids="print_string_sf"
     )
-    print("checking xcom that... " + testing_increases)
+    print("checking xcom that... " + get_value)
 
 
 with DAG(
-'s-filonov-6_hw9',
+'s-filonov-6_hw9f1',
 default_args={
     'depends_on_past': False,
     'email': ['airflow@example.com'],
@@ -52,7 +52,7 @@ description='A simple tutorial DAG',
 
     t2 = PythonOperator(
             task_id='py_xcom_extract',
-            python_callable= extract_testing_increases,
+            python_callable= extract_xcom,
           )
 
     t1 >> t2
