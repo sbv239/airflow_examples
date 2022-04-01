@@ -57,4 +57,4 @@ description='A simple tutorial DAG',
             python_callable= extract_testing_increases,
           )
 
-t1 >> t2
+    t1 >> t2
