@@ -23,13 +23,13 @@ with DAG(
 ) as dag:
     templated_command = dedent(
         """
-    {% for i in range(5) %}
-        echo "{{ ds }}"
-        {% endfor %}
+        {% for i in range(5) %}
+            echo "{{ ds }}"
+            {% endfor %}
         echo "{{run_id}}"
     """
     )
-            t1 = BashOperator(
-                task_id='bash_babash',
-                bash_command= templated_command
-            )
+    t1 = BashOperator(
+        task_id='bash_babash',
+        bash_command= templated_command
+        )
