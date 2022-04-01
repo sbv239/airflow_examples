@@ -1,5 +1,5 @@
 from airflow import DAG
-
+from airflow.operators.bash import BashOperator
 from airflow.models import Variable
 from datetime import datetime, timedelta
 from airflow.operators.python import PythonOperator, BranchPythonOperator
