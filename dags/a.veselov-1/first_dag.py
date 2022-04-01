@@ -22,7 +22,7 @@ with DAG(
         tags=['a.veselov-1'],
 ) as dag:
 
-    def print_ds(ds):
+    def print_ds(ds, kwargs):
         print(f'Внутренняя переменная airflow ds: {ds}')
         print(f'А также посмотрим и остальные переменные: {kwargs}')
 
