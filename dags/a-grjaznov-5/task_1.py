@@ -30,9 +30,8 @@ with DAG(
         print(ds)
         print('ok')
 
-
     t2 = PythonOperator(
-        task_id='prnt smth',
+        task_id='prnt_smth',
         python_callable=func
     )
 
