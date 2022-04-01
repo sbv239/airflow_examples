@@ -3,7 +3,7 @@ from airflow.operators.python_operator import PythonOperator
 from datetime import datetime, timedelta
 
 with DAG(
-    'task_8_grjaznov',
+    'task_9_grjaznov',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
@@ -12,11 +12,11 @@ with DAG(
             'retries': 1,
             'retry_delay': timedelta(minutes=5)
         },
-    description='task_8_DAG',
+    description='task_9_DAG',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 3, 31),
     catchup=False,
-    tags=['hw_8_a-grjaznov-5'],
+    tags=['hw_9_a-grjaznov-5'],
 ) as dag:
     def func():
         return "Airflow tracks everything"
