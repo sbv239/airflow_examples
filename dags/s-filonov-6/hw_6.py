@@ -13,7 +13,7 @@ from airflow.operators.python_operator import PythonOperator
     
 
 with DAG(
-'s-filonov-6_hw6',
+'s-filonov-6_hw6a',
 default_args={
     'depends_on_past': False,
     'email': ['airflow@example.com'],
