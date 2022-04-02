@@ -4,6 +4,12 @@ from airflow.operators.python import PythonOperator
 from datetime import datetime, timedelta
 from textwrap import dedent
 
+
+def print_logic_date(ds):
+    print(ds)
+    return 'Lol Lol See The Logs Buddy'
+
+
 with DAG(
     'first_dag',
     default_args={
@@ -24,10 +30,6 @@ with DAG(
         task_id='print_directory',
         bash_command='pwd'
     )
-
-    def print_logic_date(ds):
-        print(ds)
-        return 'Lol Lol See The Logs Buddy'
 
     t2 = PythonOperator(
         task_id='print_date',
