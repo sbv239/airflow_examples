@@ -19,7 +19,7 @@ with DAG(
     default_args=default_args,
     description='Simple first dag',
     schedule_interval=timedelta(days=1),
-    start_date=datetime(2022, 4, 3),
+    start_date=datetime(2022, 3, 20),
     catchup=False
 ) as dag:
 
