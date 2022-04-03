@@ -43,7 +43,7 @@ with DAG(
     tags=['task_8'],
 ) as dag:
         t1 = PythonOperator(
-                task_id = "top_user"
+                task_id = "top_user",
                 python_callable = my_request
         )
 
