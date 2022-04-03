@@ -23,6 +23,14 @@ with DAG(
     catchup=False
 ) as dag:
 
+    dag.doc_md = dedent("""\
+    #Dag documentation
+    **Sample documentation to task 3**
+    *There are two tasks in this dag:*
+    `t1 >> t2`
+    Task 4 done!
+    """)
+
     t0 = BashOperator(
         task_id=f"print_0",
         bash_command=f"echo 0"
