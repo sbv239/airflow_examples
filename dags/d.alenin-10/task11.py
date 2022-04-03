@@ -26,6 +26,7 @@ def get_top_user():
                 COUNT(*) AS amt
             FROM feed_action
             WHERE action = 'like'
+            GROUP BY user_id
             ORDER BY amt DESC
             LIMIT 1
             """)
