@@ -20,7 +20,7 @@ def push_xcom(ti):
 
 def get_xcom(ti):
     data = ti.xcom_pull(
-        key="Airflow tracks everything",
+        key="return_value",
         task_ids='get_data'
     )
     print(data)
