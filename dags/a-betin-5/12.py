@@ -15,7 +15,7 @@ def get_var():
 
 
 with DAG(
-    'HW_11_a-betin-5',
+    'HW_12_a-betin-5',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -25,7 +25,7 @@ with DAG(
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
     },
     # Описание DAG (не тасок, а самого DAG)
-    description='A 11th DAG',
+    description='A 12th DAG',
     # С какой даты начать запускать DAG
     # Каждый DAG "видит" свою "дату запуска"
     # это когда он предположительно должен был
@@ -34,7 +34,7 @@ with DAG(
     # Запустить за старые даты относительно сегодня
     catchup=False,
     # теги, способ помечать даги
-    tags=['task_11'],
+    tags=['task_12'],
 ) as dag:
         def startml_desc():
                 print("StartML is a starter course for ambitious people")
