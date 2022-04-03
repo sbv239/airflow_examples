@@ -36,7 +36,7 @@ with DAG(
             os.environ['NUMBER'] = str(i)
             bash_op = BashOperator(
                 task_id='print_task'+str(i),  # id, будет отображаться в интерфейсе
-                bash_command=f"echo $NUMBER"  # какую bash команду выполнить в этом таске
+                bash_command="echo '{}'".format(os.environ['NUMBER'])  # какую bash команду выполнить в этом таске
             )
         else:
             python_op = PythonOperator(
