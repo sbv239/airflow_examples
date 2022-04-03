@@ -31,9 +31,11 @@ with DAG(
         bash_command="echo $NUMBER"
         )
 
-    def print_task_number(task_number):
+    def print_task_number(ts, run_id, **kwargs):
 
-        print(f"task number is: {task_number}")
+        print(f"task number is: {kwargs['task_number']}")
+        print(ts)
+        print(run_id)
 
     for i in range(20):
 
