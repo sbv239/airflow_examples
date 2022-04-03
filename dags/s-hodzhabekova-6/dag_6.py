@@ -26,7 +26,7 @@ with DAG(
         print('ts: ', ts)
         print('run_id: ', run_id)
         tn = kwargs['task_number']
-        print("task number is: {tn}")
+        print("task number is: ", tn)
 
     for i in range(10, 30):
         task = PythonOperator(
