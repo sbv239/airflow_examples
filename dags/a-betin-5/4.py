@@ -2,10 +2,9 @@ from datetime import datetime, timedelta
 from airflow import DAG
 
 from airflow.operators.bash import BashOperator
-from airflow.operators.python import PythonOperator
 
 with DAG(
-    'HW_2_a-betin-5',
+    'HW_4_a-betin-5',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -15,7 +14,7 @@ with DAG(
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
     },
     # Описание DAG (не тасок, а самого DAG)
-    description='A second DAG',
+    description='A 4th DAG',
     # С какой даты начать запускать DAG
     # Каждый DAG "видит" свою "дату запуска"
     # это когда он предположительно должен был
@@ -24,24 +23,21 @@ with DAG(
     # Запустить за старые даты относительно сегодня
     catchup=False,
     # теги, способ помечать даги
-    tags=['second'],
+    tags=['fourth'],
 ) as dag:
-    def print_task(num):
-        print(f"task number is: {num}")
 
+    templated_command = dedent(
+        """
+    {% for i in range(5) %}
+        echo "{{ ts }}"
+        echo "{{ run_id }}"
+    {% endfor %}
+    """
+    )
 
-    for i in range(30):
-        if i < 10:
-            bash_op = BashOperator(
-                task_id='print_task'+str(i),  # id, будет отображаться в интерфейсе
-                bash_command=f"echo {i}"  # какую bash команду выполнить в этом таске
-            )
-        else:
-            python_op = PythonOperator(
-                task_id='task_number_' + str(i),
-                python_callable=print_task,
-                op_kwargs={'num': i}
-            )
+    main = BashOperator(
+        task_id='print_info',  # id, будет отображаться в интерфейсе
+        bash_command=templated_command,  # какую bash команду выполнить в этом таске
+    )
 
-    bash_op >> python_op
-
+    main
