@@ -15,7 +15,7 @@ default_args = {
 
 
 with DAG(
-    'hw_3_d.alenin-10',
+    'hw_5_d.alenin-10',
     default_args=default_args,
     description='Simple first dag',
     schedule_interval=timedelta(days=1),
