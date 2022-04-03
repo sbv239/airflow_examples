@@ -31,6 +31,13 @@ with DAG(
             value='xcom test'
         )
 
+    def pull_xcom_func(ti):
+        value_read = ti.xcom_pull(
+            key='sample_xcom_key',
+            task_ids='push_xcom'
+        )
+        print(value_read)
+
 
     t1 = PythonOperator(
         task_id='push_xcom',
@@ -43,14 +50,6 @@ with DAG(
     В этом таске мы **кладём** информацию
     """
     )
-
-
-    def pull_xcom_func(ti):
-        value_read = ti.xcom_pull(
-            key='sample_xcom_key',
-            task_ids='set_xcom'
-        )
-        print(value_read)
 
 
     t2 = PythonOperator(
