@@ -23,16 +23,9 @@ with DAG(
     catchup=False
 ) as dag:
 
-    t0 = BashOperator(
-        task_id=f"print_0",
-        bash_command=f"echo $NUMBER",
-        env={"NUMBER": 0}
-    )
-
-    for i in range(1, 10):
+    for i in range(10):
         t = BashOperator(
             task_id=f"print_{i}",
             bash_command=f"echo $NUMBER",
-            env={"NUMBER": i}
+            env={"NUMBER": str(i)}
         )
-        t0 >> t
