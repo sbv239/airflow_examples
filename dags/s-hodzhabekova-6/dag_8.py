@@ -13,7 +13,7 @@ def push_operator(ti):
 def pull_operator(ti):
     sample_xcom_key = ti.xcom_pull(
         key = 'sample_xcom_key',
-        task_ids = 'pull_data'
+        task_ids = 'push_data'
     )
     
     print(f'sample_xcom_key {sample_xcom_key}')
