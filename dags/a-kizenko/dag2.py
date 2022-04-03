@@ -20,7 +20,7 @@ def startml_desc():
     print("StartML is a starter course for ambitious people")
     
 with DAG(
-        'hw_13_d-kizelshtejn-5',
+        'hw_13_d-kizenko-5',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
