@@ -20,6 +20,7 @@ def print_variable():
     print(is_startml)
 
 
+
 with DAG(
     'hw_12_d.alenin-10',
     default_args=default_args,
