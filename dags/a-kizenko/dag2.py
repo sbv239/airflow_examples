@@ -9,7 +9,7 @@ def select_task():
     from airflow.models import Variable
 
     is_startml = Variable.get("is_startml")
-    if is_startml == True:
+    if is_startml:
         return "startml_desc"
     return "not_startml_desc"
 
@@ -20,7 +20,7 @@ def startml_desc():
     print("StartML is a starter course for ambitious people")
     
 with DAG(
-        'hw_13_d-kizenko-5',
+        'hw_13_d-kizenko-5_',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
