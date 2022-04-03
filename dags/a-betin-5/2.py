@@ -44,3 +44,5 @@ with DAG(
             )
     )
 
+    bash_op >> python_op
+
