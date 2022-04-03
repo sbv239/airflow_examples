@@ -24,7 +24,7 @@ with DAG(
     # Запустить за старые даты относительно сегодня
     catchup=False,
     # теги, способ помечать даги
-    tags=['first'],
+    tags=['second'],
 ) as dag:
     def print_task(num):
         print(f"task number is: {num}")
