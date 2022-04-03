@@ -28,7 +28,7 @@ with DAG(
     def get_implicit_xcom(ti):
 
         result = ti.xcom_pull(
-            key=['return_value']['push_to_xcom_implicit']
+            task_ids='push_to_xcom_implicit'
         )
 
         print(result)
