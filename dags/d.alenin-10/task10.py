@@ -15,16 +15,12 @@ default_args = {
 
 
 def push_xcom(ti):
-    ti.xcom_push(
-        key="sample_xcom_key",
-        value="xcom test"
-    )
     return "Airflow tracks everything"
 
 
 def get_xcom(ti):
     data = ti.xcom_pull(
-        key="sample_xcom_key",
+        key="Airflow tracks everything",
         task_ids='get_data'
     )
     print(data)
