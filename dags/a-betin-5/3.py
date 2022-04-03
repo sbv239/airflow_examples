@@ -6,7 +6,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-    'HW_2_a-betin-5',
+    'HW_3_a-betin-5',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -16,7 +16,7 @@ with DAG(
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
     },
     # Описание DAG (не тасок, а самого DAG)
-    description='A second DAG',
+    description='A 3rd DAG',
     # С какой даты начать запускать DAG
     # Каждый DAG "видит" свою "дату запуска"
     # это когда он предположительно должен был
@@ -25,7 +25,7 @@ with DAG(
     # Запустить за старые даты относительно сегодня
     catchup=False,
     # теги, способ помечать даги
-    tags=['first'],
+    tags=['third'],
 ) as dag:
     def print_task(num):
         print(f"task number is: {num}")
