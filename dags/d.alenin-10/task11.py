@@ -31,7 +31,6 @@ def get_top_user():
             """)
             return cursor.fetchall()
 
-
 with DAG(
     'hw_11_d.alenin-10',
     default_args=default_args,
