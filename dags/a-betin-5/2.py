@@ -42,7 +42,6 @@ with DAG(
                 python_callable=print_task,
                 op_kwargs={'num': i}
             )
-    )
 
     bash_op >> python_op
 
