@@ -39,14 +39,14 @@ with DAG(
         print(f"task number is: {task_number}")
 
     t1 = PythonOperator(
-        task_id='print_date',
+        task_id='print_task_num_10',
         python_callable=print_task_number,
         op_kwargs={'task_number': 10}
     )
 
     for i in range(11, 30):
         t = PythonOperator(
-            task_id='print_date',
+            task_id=f"print_task_num_{i}",
             python_callable=print_task_number,
             op_kwargs={'task_number': i}
         )
