@@ -37,7 +37,7 @@ with DAG(
                     from feed_action
                     where action = 'like'
                     group by user_id
-                    order by count(action)
+                    order by count(action) desc
                     limit 1
                     """)
                 
