@@ -1,10 +1,12 @@
 from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.operators.python import PythonOperator
-from airflow.providers.postgres.operators.postgres import PostgresHook
+
 
 def my_request():
-        postgres = PostgresHook(postgres_conn_id='startml_feed')
+        from airflow.providers.postgres.operators.postgres import PostgresHook
+
+        postgres = PostgresHook(postgres_conn_id="startml_feed")
         with postgres.get_conn() as conn:
                 with conn.cursor() as cursor:
                         cursor.execute(
@@ -17,6 +19,7 @@ def my_request():
                                 LIMIT 1
                                 """
                         )
+                        return cursor.fetchall()
 
 
 
@@ -40,7 +43,7 @@ with DAG(
     # Запустить за старые даты относительно сегодня
     catchup=False,
     # теги, способ помечать даги
-    tags=['task_8'],
+    tags=['task_10'],
 ) as dag:
         t1 = PythonOperator(
                 task_id = "top_user",
