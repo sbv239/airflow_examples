@@ -37,12 +37,12 @@ with DAG(
 
     t1 = PythonOperator(
         task_id='push_data',
-        python_callable='push_operator',
+        python_callable=push_operator,
     )
 
     t2 = PythonOperator(
         task_id='pull_data',
-        python_callable='pull_operator',
+        python_callable=pull_operator,
 
     )
 
