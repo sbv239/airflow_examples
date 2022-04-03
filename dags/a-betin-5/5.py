@@ -6,7 +6,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-    'HW_2_a-betin-5',
+    'HW_5_a-betin-5',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -25,7 +25,7 @@ with DAG(
     # Запустить за старые даты относительно сегодня
     catchup=False,
     # теги, способ помечать даги
-    tags=['second'],
+    tags=['task_5'],
 ) as dag:
     def print_task(num):
         print(f"task number is: {num}")
