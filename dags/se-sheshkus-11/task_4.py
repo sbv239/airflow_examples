@@ -24,21 +24,6 @@ with DAG(
 
 
 
-    for i in range(10):
-        t1 = BashOperator(
-            task_id='bash_operator_' + str(i),
-            bash_command=f"echo {i}",
-        )
-
-        t1.doc_md = dedent(
-            f"""\
-        # Task Documentation
-        This **task** *execute* bash_command = `echo {i}`
-        """
-        )
-
-
-
     cmd_template = dedent(
         '''
         {% for i in range(5) %}
