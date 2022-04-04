@@ -23,18 +23,6 @@ with DAG(
 ) as dag:
 
 
-    t1 = BashOperator(
-        task_id='print_dir',
-        bash_command='pwd')
-
-    def print_ds(ds):
-        print(ds)
-        print('ok')
-
-    t2 = PythonOperator(
-        task_id='print_ds',
-        python_callable=print_ds)
-
 
     for i in range(10):
         t1 = BashOperator(
@@ -54,4 +42,4 @@ with DAG(
 
 
 
-    t1 >> t2
+    t1 >> t2  
