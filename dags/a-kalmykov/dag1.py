@@ -5,7 +5,8 @@ from datetime import datetime, timedelta
 from textwrap import dedent
 from airflow import DAG
 
-from airflow.operators.bash import BashOperator, PythonOperator
+from airflow.operators.bash import BashOperator
+from airflow.operators.python import PythonOperator
 
 from default_args import default_args
 
@@ -22,7 +23,7 @@ with DAG(
         schedule_interval=timedelta(days=1),
         start_date=datetime(2022, 4, 5),
         catchup=False,
-        tags=['kalmykov'],
+        tags=['a-kalmykov'],
 ) as dag:
 
     t1 = PythonOperator(
