@@ -28,7 +28,7 @@ with DAG(
         default_args=default_args,
         description='Dag 1 Kalmykov',
         schedule_interval=timedelta(days=1),
-        start_date=datetime(2022, 4, 5),
+        start_date=datetime(2022, 4, 4),
         catchup=False,
         tags=['a-kalmykov'],
 ) as dag:
