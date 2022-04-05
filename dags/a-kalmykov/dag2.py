@@ -33,7 +33,8 @@ with DAG(
         if idx < 20:
             task = BashOperator(
                 task_id=f'bash_echo_{idx}',
-                bash_command=f'echo task number is {idx}',
+                bash_command=f'echo $NUMBER',
+                env={"NUMBER": f'{{{{ {idx} }}}}'},
             )
         else:
             task = PythonOperator(
