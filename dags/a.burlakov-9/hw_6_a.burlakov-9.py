@@ -6,6 +6,8 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
+import os
+
 with DAG(
     'a.burlakov-9_task_5',
     # Параметры по умолчанию для тасок
