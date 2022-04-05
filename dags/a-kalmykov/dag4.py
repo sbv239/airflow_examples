@@ -22,7 +22,7 @@ def print_task_num(task_num):
 with DAG(
         dag_id='a-kalmykov-dag-4',
         default_args=default_args,
-        description='Dag 2 Kalmykov',
+        description='Dag 4 Kalmykov',
         schedule_interval=timedelta(days=1),
         start_date=datetime(2022, 4, 4),
         catchup=False,
