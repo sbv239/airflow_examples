@@ -1,5 +1,5 @@
 """
-#### Dag 1
+#### Dag 2
 """
 from datetime import datetime, timedelta
 from textwrap import dedent
@@ -55,4 +55,5 @@ with DAG(
 
     dag.doc_md = __doc__
 
-    tasks[0] << tasks[1:]
+    # tasks[0] >> tasks[1:]
+    tasks
