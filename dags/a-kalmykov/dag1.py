@@ -1,6 +1,3 @@
-"""
-#### Dag 1
-"""
 from datetime import datetime, timedelta
 from textwrap import dedent
 from airflow import DAG
@@ -24,7 +21,7 @@ def print_date(ds, **kwargs):
 
 
 with DAG(
-        dag_id = 'a-kalmykov-dag-1',
+        dag_id='a-kalmykov-dag-1',
         default_args=default_args,
         description='Dag 1 Kalmykov',
         schedule_interval=timedelta(days=1),
@@ -32,7 +29,6 @@ with DAG(
         catchup=False,
         tags=['a-kalmykov'],
 ) as dag:
-
     t1 = PythonOperator(
         task_id='print_date',
         python_callable=print_date,
@@ -43,19 +39,23 @@ with DAG(
         task_id='cur_dir',
         bash_command='pwd',
     )
+    dag.doc_md = dedent("""
+                        #### Dag 1
+                        *Dag 1 Dag 1*
+                        `Dag 1 Dag 1 Dag 1`
+                        **Dag 1 Dag 1**
+                        """)
     t1.doc_md = dedent(
         """
     #### Print Date
-    prints the current date
+    `prints` *the* **current** date
     """
     )
     t2.doc_md = dedent(
         """
     #### Print Dir
-    prints the directory where the script is located
+    **prints** the *directory* `where the script` is located
     """
     )
-    dag.doc_md = __doc__
 
     t2 >> t1
-

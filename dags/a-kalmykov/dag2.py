@@ -1,6 +1,3 @@
-"""
-#### Dag 2
-"""
 from datetime import datetime, timedelta
 from textwrap import dedent
 from airflow import DAG
@@ -47,13 +44,17 @@ with DAG(
         task.doc_md = dedent(
             """
         #### Print Task Number
-        prints number of the current task
+        `prints` *number* **of the current** task
         """
         )
         tasks.append(task)
 
 
-    dag.doc_md = __doc__
+    dag.doc_md = """
+                    #### Dag 2
+                    `prints` *number* **of the current** task
+                    #### `prints` *number* **of the current** task
+                    """
 
     # tasks[0] >> tasks[1:]
     tasks
