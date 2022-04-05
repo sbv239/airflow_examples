@@ -16,13 +16,13 @@ def print_date(ds, **kwargs):
 
 
 with DAG(
-        'tutorial',
+        dag_id = 'a-kalmykov-dag-1',
         default_args=default_args,
-        description='A simple tutorial DAG',
+        description='Dag 1 Kalmykov',
         schedule_interval=timedelta(days=1),
-        start_date=datetime(2022, 1, 1),
+        start_date=datetime(2022, 4, 5),
         catchup=False,
-        tags=['example'],
+        tags=['kalmykov'],
 ) as dag:
 
     t1 = PythonOperator(
