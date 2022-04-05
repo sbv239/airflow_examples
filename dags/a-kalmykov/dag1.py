@@ -8,7 +8,7 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
-from default_args import default_args
+from .default_args import default_args
 
 
 def print_date(ds, **kwargs):
