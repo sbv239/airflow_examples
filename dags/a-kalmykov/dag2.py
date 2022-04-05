@@ -15,8 +15,8 @@ default_args = {
 }
 
 
-def print_task_num(task_num):
-    print(f'python task number is {task_num}')
+def print_task_num(ts, run_id, task_number):
+    print(f'ts={ts}\nrun_id={run_id}\ntask_number={task_number}')
 
 
 with DAG(
@@ -39,7 +39,7 @@ with DAG(
             task = PythonOperator(
                 task_id=f'python_print_{idx}',
                 python_callable=print_task_num,
-                op_kwargs={'task_num': idx}
+                op_kwargs={'task_number': idx}
             )
         task.doc_md = dedent(
             """
