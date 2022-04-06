@@ -28,8 +28,11 @@ def user_top_like():
   with postgres.get_conn() as conn:
     with conn.cursor() as cursor:
       cursor.execute("""                   
-      SELECT user_id, COUNT(user_id) as c
-      FROM feed_action WHERE action = "like" GROUP BY user_id ORDER BY c DESC LIMIT 1
+    SELECT user_id, COUNT(user_id) as c
+    FROM feed_action 
+    WHERE action = 'like'
+    GROUP BY user_id 
+    ORDER BY c DESC LIMIT 1
       """)
       result = cursor.fetchone()
     return result
