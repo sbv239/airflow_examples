@@ -20,7 +20,7 @@ with DAG(
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 1, 1),
     catchup=False,
-    tags=[T4'],
+    tags=['T4'],
 ) as dag:
 
     templated_command = dedent(
