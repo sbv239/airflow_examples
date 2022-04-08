@@ -35,13 +35,13 @@ with DAG(
         print(tp)
 
     t1 = PythonOperator(
-        task_id='push_xcom',
-        python_callable=push_xcom,
+        task_id='f_xcom',
+        python_callable=f_xcom,
     )
 
     t2 = PythonOperator(
-        task_id='pull_xcom',
-        python_callable=pull_xcom,
+        task_id='s_xcom',
+        python_callable=s_xcom,
     )
 
     t1 >> t2
