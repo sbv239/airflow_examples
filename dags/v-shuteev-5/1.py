@@ -40,28 +40,26 @@ with DAG(
     # теги, способ помечать даги
     tags=['example'],
 ) as dag:
+    def my_print_function(msg):
+        print(msg)
+        return 0
 
-
-    def my_sleeping_function(random_base):
-        time.sleep(random_base)
-        task_p = PythonOperator(
-            task_id='sleep_for_py',  # в id можно делать все, что разрешают строки в python
-            python_callable=my_sleeping_function,
-            op_kwargs={'random_base': float(4) / 10},
-        )
+    task_p = PythonOperator(
+        task_id='my_py_print',  # в id можно делать все, что разрешают строки в python
+        python_callable=my_print_function,
+        op_kwargs={'ds': 'hi'},
+    )
 
 
     # t1, t2, t3 - это операторы (они формируют таски, а таски формируют даг)
     t1 = BashOperator(
-        task_id='print_date',  # id, будет отображаться в интерфейсе
+        task_id='python_print_date',  # id, будет отображаться в интерфейсе
         bash_command='date',  # какую bash команду выполнить в этом таске
     )
 
     t2 = BashOperator(
-        task_id='sleep',
-        depends_on_past=False,  # переопределили настройку из DAG
-        bash_command='sleep 5',
-        retries=3,  # тоже переопределили retries (было 1)
+        task_id='print_pwd',  # id, будет отображаться в интерфейсе
+        bash_command='pwd',  # какую bash команду выполнить в этом таске
     )
     t1.doc_md = dedent(
         """\
