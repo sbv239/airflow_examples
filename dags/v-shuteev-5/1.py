@@ -44,7 +44,7 @@ with DAG(
         print(msg)
         return 0
 
-    task_p = PythonOperator(
+    taskp = PythonOperator(
         task_id='my_py_print',  # в id можно делать все, что разрешают строки в python
         python_callable=my_print_function,
         op_kwargs={'ds': 'hi'},
@@ -94,7 +94,7 @@ with DAG(
     )
 
     # А вот так в Airflow указывается последовательность задач
-    t1 >> [t2, t3] >> task_p
+    t1 >> [t2, t3] >> taskp
     # будет выглядеть вот так
     #      -> t2
     #  t1 | 
