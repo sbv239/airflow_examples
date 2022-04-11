@@ -42,12 +42,12 @@ with DAG(
 
 
     def my_sleeping_function(random_base):
-    time.sleep(random_base)
-    task_p = PythonOperator(
-        task_id='sleep_for_py',  # в id можно делать все, что разрешают строки в python
-        python_callable=my_sleeping_function,
-        op_kwargs={'random_base': float(4) / 10},
-    )
+        time.sleep(random_base)
+        task_p = PythonOperator(
+            task_id='sleep_for_py',  # в id можно делать все, что разрешают строки в python
+            python_callable=my_sleeping_function,
+            op_kwargs={'random_base': float(4) / 10},
+        )
 
 
     # t1, t2, t3 - это операторы (они формируют таски, а таски формируют даг)
