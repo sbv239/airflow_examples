@@ -41,7 +41,7 @@ with DAG(
 ) as dag:
 
 
-def my_sleeping_function(random_base):
+    def my_sleeping_function(random_base):
     time.sleep(random_base)
     task_p = PythonOperator(
         task_id='sleep_for_py',  # в id можно делать все, что разрешают строки в python
