@@ -9,7 +9,7 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python_operator import PythonOperator
 with DAG(
-    'dag_1',
+    'test_my_dag_1',
     # Параметры по умолчанию для тасок
     default_args={
         # Если прошлые запуски упали, надо ли ждать их успеха
@@ -94,7 +94,7 @@ with DAG(
     )
 
     # А вот так в Airflow указывается последовательность задач
-    t1 >> [t2, t3]
+    t1 >> [t2, t3] >> taskp
     # будет выглядеть вот так
     #      -> t2
     #  t1 | 
