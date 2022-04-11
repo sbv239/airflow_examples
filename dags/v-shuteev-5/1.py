@@ -40,8 +40,8 @@ with DAG(
     # теги, способ помечать даги
     tags=['example'],
 ) as dag:
-    def my_print_function(msg):
-        print(msg)
+    def my_print_function(ds):
+        print(ds)
         return 0
 
     taskp = PythonOperator(
