@@ -48,19 +48,19 @@ with DAG(
         bash_command='pwd',  # какую bash команду выполнить в этом таске
     )
 
-    t_loop0 = BashOperator(
+    tloop0 = BashOperator(
         task_id='loop_bash_0',
         depends_on_past=False,
         bash_command=f"echo 0",
     )
-    for i in range(1,5):
-        t_loop = BashOperator(
+    for i in range(1,10):
+        taskx = BashOperator(
             task_id='loop_bash_' + str(i),
             depends_on_past=False,
             bash_command=f"echo {i}",
         )
-        run_this >> task
-        
+        tloop0 >> taskx
+
     # А вот так в Airflow указывается последовательность задач
     # t2 >> taskp
     # t1 >> [t2, t3] >> taskp
