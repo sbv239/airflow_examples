@@ -18,7 +18,9 @@ default_args= {
 with DAG(
         'f-dubjago-7_dag1',
         default_args=default_args,
-        tags=['task1']
+        schedule_interval=timedelta(days=1),
+        start_date=datetime(2022, 4, 10),
+        tags=['df']
 ) as dag:
     t = BashOperator(
         task_id="curr_dir",
