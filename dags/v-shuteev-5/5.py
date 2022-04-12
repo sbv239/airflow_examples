@@ -32,7 +32,7 @@ with DAG(
             task_id='loop_bash_' + str(i),
             depends_on_past=False,
             bash_command="echo $NUMBER",
-            env={"NUMBER": i},
+            env={"NUMBER": str(i)},
         )
         # tloop0 >> taskx
     # А вот так в Airflow указывается последовательность задач
