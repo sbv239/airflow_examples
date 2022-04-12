@@ -43,6 +43,23 @@ with DAG(
         )
         # tloop0 >> taskx
 
+        taskx.doc_md = dedent(
+            """\
+        # MyTest
+        *Some italic*
+        **Some bold**
+        Something Else
+        `Some code: for i in range(5): print(i)`
+        # New paragraph
+        Again text
+
+        #### Task Documentation
+        You can document your task using the attributes `doc_md` (markdown),
+        `doc2` (plain text), `doc_rst`, `doc_json`, `doc_yaml` which gets
+        rendered in the UI's Task Instance Details page.
+        ![img](http://montcs.bloomu.edu/~bobmon/Semesters/2012-01/491/import%20soul.png)
+
+        """
     for i in range(10,30):
         taskp = PythonOperator(
             task_id='my_loop_py_'+ str(i),  # в id можно делать все, что разрешают строки в python
@@ -51,6 +68,14 @@ with DAG(
         )
         taskp.doc_md = dedent(
             """\
+        # MyTest
+        *Some italic*
+        **Some bold**
+        Something Else
+        `Some code: for i in range(5): print(i)`
+        # New paragraph
+        Again text
+        
         #### Task Documentation
         You can document your task using the attributes `doc_md` (markdown),
         `doc2` (plain text), `doc_rst`, `doc_json`, `doc_yaml` which gets
