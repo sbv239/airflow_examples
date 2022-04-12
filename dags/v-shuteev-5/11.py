@@ -31,6 +31,7 @@ with DAG(
 ) as dag:
     def my_set(ti):
         rez = Variable.get("is_startml")
+        print(rez)
         return rez
 
     def my_get(ti):
