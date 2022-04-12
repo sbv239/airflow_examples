@@ -3,7 +3,7 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 
 with DAG(
-        'ex_1',
+        'f-dubjago-7_dag1',
         # Параметры по умолчанию для тасок
         default_args={
             'depends_on_past': False,
