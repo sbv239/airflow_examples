@@ -9,7 +9,7 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python_operator import PythonOperator
 with DAG(
-    'shuteev_my_dag_2',
+    'shuteev_my_dag_3',
     # Параметры по умолчанию для тасок
     default_args={
         'depends_on_past': False,
