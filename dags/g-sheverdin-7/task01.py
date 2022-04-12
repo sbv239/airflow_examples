@@ -24,6 +24,7 @@ with DAG(
     t1 = BashOperator(
         task_id='print_pwd',
         bash_command=pwd,
+        dag=dag,
     )
 
     def print_ds(ds, **kwarg):
