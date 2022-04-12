@@ -13,7 +13,7 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),
     }
-    description='The task number 1',
+    description='The task number one',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 4, 11),
     catchup=False,
@@ -24,7 +24,6 @@ with DAG(
     t1 = BashOperator(
         task_id='print_pwd',
         bash_command=pwd,
-        dag=dag,
     )
 
     def print_ds(ds, **kwarg):
