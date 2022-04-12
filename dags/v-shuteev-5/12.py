@@ -76,7 +76,7 @@ with DAG(
     #     task_id='my_p_set',  # в id можно делать все, что разрешают строки в python
     #     python_callable=my_set,)
 
-    tellme >> dummy1 >> branchf >> dummy2
+    tellme >> dummy1 >> branchf >> [dummy4ye,dummy4ye2] >> dummy2
     # А вот так в Airflow указывается последовательность задач
     # t2 >> taskp
     # t1 >> [t2, t3] >> taskp
