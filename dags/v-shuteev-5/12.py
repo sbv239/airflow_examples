@@ -33,18 +33,8 @@ with DAG(
     def choose_val():
         rez = Variable.get("is_startml")
         if (rez):
-            return 'Task_Yes'
-        return 'Task_No'
-
-    # def my_get(ti):
-    #     text_val = ti.xcom_pull(
-    #         task_ids='my_p_set'
-    #     )
-    #     print(f'My XCOM val is: {text_val} ')
-    #     # print('The value is: {}'.format(
-    #     #     ti.xcom_pull(task_ids='hello_world')
-    #     # ))
-
+            return 'startml_desc'
+        return 'not_startml_desc'
 
     dummy1=DummyOperator(
         task_id='before_branching'
@@ -53,30 +43,21 @@ with DAG(
         task_id='after_branching'
     )
 
-    dummy4ye=DummyOperator(
-        task_id='Task_Yes'
+    is_true = BashOperator(
+        task_id='startml_desc',  # id, будет отображаться в интерфейсе
+        bash_command='echo "StartML is a starter course for ambitious people"',  # какую bash команду выполнить в этом таске
     )
-    dummy4ye2=DummyOperator(
-        task_id='Task_No'
-    )
-    # pygetter = PythonOperator(
-    #     task_id='my_p_get',  # в id можно делать все, что разрешают строки в python
-    #     python_callable=my_get,)
-
-    tellme = BashOperator(
-        task_id='print_msg',  # id, будет отображаться в интерфейсе
-        bash_command='echo "hello my friend"',  # какую bash команду выполнить в этом таске
+    is_false = BashOperator(
+        task_id='not_startml_desc',  # id, будет отображаться в интерфейсе
+        bash_command='echo "Not a startML course, sorry"',  # какую bash команду выполнить в этом таске
     )
 
     branchf = BranchPythonOperator(
         task_id='determine_course',
         python_callable=choose_val
     )
-    # pysetter = PythonOperator(
-    #     task_id='my_p_set',  # в id можно делать все, что разрешают строки в python
-    #     python_callable=my_set,)
 
-    tellme >> dummy1 >> branchf >> [dummy4ye,dummy4ye2] >> dummy2
+    dummy1 >> branchf >> [is_true,is_false] >> dummy2
     # А вот так в Airflow указывается последовательность задач
     # t2 >> taskp
     # t1 >> [t2, t3] >> taskp
