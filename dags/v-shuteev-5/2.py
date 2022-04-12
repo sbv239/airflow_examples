@@ -59,8 +59,14 @@ with DAG(
             depends_on_past=False,
             bash_command=f"echo {i}",
         )
-        tloop0 >> taskx
+        # tloop0 >> taskx
 
+    for i in range(10,30):
+        taskp = PythonOperator(
+            task_id='my_loop_py_'+ str(i),  # в id можно делать все, что разрешают строки в python
+            python_callable=my_print_function,
+            op_kwargs={'ds': str(i)},
+        )
     # А вот так в Airflow указывается последовательность задач
     # t2 >> taskp
     # t1 >> [t2, t3] >> taskp
