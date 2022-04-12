@@ -13,15 +13,17 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),
     }
-    description='The task number 2',
+    description='The task number 1',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 4, 11),
     catchup=False,
-    tags=['task_02'],
+    tags=['g-sheverdin-7-task01'],
 ) as dag:
+
+    pwd = "{{ pwd }}"
     t1 = BashOperator(
-        task_id='print_date',
-        bash_command='{{ pwd }}',
+        task_id='print_pwd',
+        bash_command=pwd,
     )
 
     def print_ds(ds, **kwarg):
@@ -29,7 +31,7 @@ with DAG(
         return None
 
     t2 = PythonOperator(
-        task_id='print_pwd',
+        task_id='print_ds',
         python_callable=print_ds,
     )
 
