@@ -27,33 +27,10 @@ with DAG(
     tags=['shuteev'],
 ) as dag:
     def my_print_function(ds):
-        print(ds)
+        print(f'task number is: {ds}')
         return 0
 
-    taskp = PythonOperator(
-        task_id='my_py_print',  # в id можно делать все, что разрешают строки в python
-        python_callable=my_print_function,
-        op_kwargs={'ds': 'hi'},
-    )
-
-
-    # t1, t2, t3 - это операторы (они формируют таски, а таски формируют даг)
-    t1 = BashOperator(
-        task_id='python_print_date',  # id, будет отображаться в интерфейсе
-        bash_command='date',  # какую bash команду выполнить в этом таске
-    )
-
-    t2 = BashOperator(
-        task_id='print_pwd',  # id, будет отображаться в интерфейсе
-        bash_command='pwd',  # какую bash команду выполнить в этом таске
-    )
-
-    tloop0 = BashOperator(
-        task_id='loop_bash_0',
-        depends_on_past=False,
-        bash_command=f"echo 0",
-    )
-    for i in range(1,10):
+    for i in range(0,10):
         taskx = BashOperator(
             task_id='loop_bash_' + str(i),
             depends_on_past=False,
