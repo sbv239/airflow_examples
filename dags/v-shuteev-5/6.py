@@ -28,12 +28,11 @@ with DAG(
 ) as dag:
     def my_print_function(ts,run_id,task_number):
         print(f'task number is: {task_number} but ts:{ts} and run_id:{run_id}')
-        return 0
     for i in range(10,30):
         taskp = PythonOperator(
             task_id='my_loop_py_'+ str(i),  # в id можно делать все, что разрешают строки в python
             python_callable=my_print_function,
-            op_kwargs={'task_number ': str(i)},
+            op_kwargs={'task_number': str(i)},
         )
     # А вот так в Airflow указывается последовательность задач
     # t2 >> taskp
