@@ -24,7 +24,7 @@ with DAG(
 ) as dag:
     t = BashOperator(
         task_id="curr_dir",
-        bash_command="pwd ",  # обратите внимание на пробел в конце!
+        bash_command="pwd",  # обратите внимание на пробел в конце!
     )
 
 
