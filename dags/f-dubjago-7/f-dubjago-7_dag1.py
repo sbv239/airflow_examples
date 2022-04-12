@@ -1,6 +1,7 @@
 # Для объявления DAG нужно импортировать класс из airflow
 from airflow import DAG
 from airflow.operators.bash import BashOperator
+from datetime import datetime, timedelta
 
 with DAG(
         'f-dubjago-7_dag1',
@@ -12,7 +13,8 @@ with DAG(
             'email_on_retry': False,
             'retries': 1,
             'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
-        }
+        },
+        tags=['task1']
 ) as dag:
     t = BashOperator(
         task_id="give_dir",
