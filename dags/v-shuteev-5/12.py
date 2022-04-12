@@ -8,7 +8,7 @@ from airflow import DAG
 # Будем иногда называть операторы тасками (tasks)
 from airflow.operators.bash import BashOperator
 from airflow.operators.dummy import DummyOperator
-from airflow.operators.python_operator import PythonOperator
+from airflow.operators.python_operator import PythonOperator, BranchPythonOperator
 from airflow.providers.postgres.operators.postgres import PostgresHook
 from airflow.models import Variable
 
@@ -63,6 +63,11 @@ with DAG(
     #     task_id='my_p_get',  # в id можно делать все, что разрешают строки в python
     #     python_callable=my_get,)
 
+    tellme = BashOperator(
+        task_id='print_msg',  # id, будет отображаться в интерфейсе
+        bash_command='echo "hello my friend"',  # какую bash команду выполнить в этом таске
+    )
+
     branchf = BranchPythonOperator(
         task_id='determine_course',
         python_callable=choose_val
@@ -71,7 +76,7 @@ with DAG(
     #     task_id='my_p_set',  # в id можно делать все, что разрешают строки в python
     #     python_callable=my_set,)
 
-    dummy1 >> branchf >> dummy2
+    tellme >> dummy1 >> branchf >> dummy2
     # А вот так в Airflow указывается последовательность задач
     # t2 >> taskp
     # t1 >> [t2, t3] >> taskp
