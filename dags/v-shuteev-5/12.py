@@ -7,7 +7,7 @@ from airflow import DAG
 # Операторы - это кирпичики DAG, они являются звеньями в графе
 # Будем иногда называть операторы тасками (tasks)
 from airflow.operators.bash import BashOperator
-classairflow.operators.dummy import DummyOperator
+from airflow.operators.dummy import DummyOperator
 from airflow.operators.python_operator import PythonOperator
 from airflow.providers.postgres.operators.postgres import PostgresHook
 from airflow.models import Variable
