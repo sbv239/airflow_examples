@@ -45,7 +45,7 @@ with DAG(
 
         taskx.doc_md = dedent(
             """\
-        # MyTest
+        # MyTest kek
         *Some italic*
         **Some bold**
         Something Else
@@ -60,6 +60,7 @@ with DAG(
         ![img](http://montcs.bloomu.edu/~bobmon/Semesters/2012-01/491/import%20soul.png)
 
         """
+        )
     for i in range(10,30):
         taskp = PythonOperator(
             task_id='my_loop_py_'+ str(i),  # в id можно делать все, что разрешают строки в python
