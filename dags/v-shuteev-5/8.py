@@ -39,14 +39,15 @@ with DAG(
         )
         print(f'My XCOM val is: {text_val} ')
 
-    taskp = PythonOperator(
+    pygetter = PythonOperator(
         task_id='my_p_get',  # в id можно делать все, что разрешают строки в python
         python_callable=my_get,)
 
-    taskp = PythonOperator(
+    pysetter = PythonOperator(
         task_id='my_p_set',  # в id можно делать все, что разрешают строки в python
         python_callable=my_set,)
 
+    pysetter >> pygetter
     # А вот так в Airflow указывается последовательность задач
     # t2 >> taskp
     # t1 >> [t2, t3] >> taskp
