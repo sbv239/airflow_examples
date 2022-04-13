@@ -31,11 +31,23 @@ with DAG(
                 bash_command=f'echo {i}'
             )
 
+            task.doc_md = """
+                # BashOperator task documentation
+                Running command `echo {i}`
+                *i* is **task** number
+            """
+
         else:
             task = PythonOperator(
                 task_id=f'print_task_{i}',
                 python_callable=print_i,
                 op_kwargs={'task_number': i}
             )
+
+            task.doc_md = """
+                # PythonOperator task documentation
+                Running command `print('task number is: {task_number}')`
+                *task_number* is **task** number
+            """
 
         task
