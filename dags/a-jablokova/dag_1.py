@@ -31,7 +31,7 @@ with DAG(
     # Каждый DAG "видит" свою "дату запуска"
     # это когда он предположительно должен был
     # запуститься. Не всегда совпадает с датой на вашем компьютере
-    start_date=datetime(2022, 3, 10),
+    start_date=datetime(2022, 4, 10),
     # Запустить за старые даты относительно сегодня
     # https://airflow.apache.org/docs/apache-airflow/stable/dag-run.html
     catchup=False,
