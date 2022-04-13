@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 from textwrap import dedent
 from airflow import DAG
-from airflow.operators.bash import BashOperator
+from airflow.operators.bash import BashOperator, PythonOperator
 
 with DAG(
     'g-sheverdin-7_task01',
