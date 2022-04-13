@@ -29,7 +29,7 @@ with DAG(
         )
 
     def pull(ti):
-        t = ti.xcom_pull(key='return value', task_ids='push_data')
+        t = ti.xcom_pull(key='return_value', task_ids='push_data')
         print(t)
 
     t2 = PythonOperator(
