@@ -33,6 +33,7 @@ with DAG(
     *в них выполнена команда,*
     `использующая переменную цикла: "f"echo {i}"`
        """
+       )
 
     def task_number(task_number):
         print(f'task number is: {task_number}')
@@ -51,5 +52,6 @@ with DAG(
     *Этого добились, передавая переменную через op_kwargs и принимая ее на стороне функции.*
     `Функция печатает "task number is: {task_number}", где task_number - номер задания из цикла.`
         """
+        )
 
     t1 >> t2
