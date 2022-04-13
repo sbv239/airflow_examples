@@ -28,7 +28,7 @@ with DAG(
 
 
     def print_task_number(task_number):
-        print(f'task number is: {task_number}')
+        print(f'task number is -  {task_number}')
 
 
     for i in range(20):
