@@ -28,12 +28,12 @@ with DAG(
         )
 
     def task_number(task_number):
-        print('task number is: {task_number}')
+        print(f'task number is: {task_number}')
         return None
 
     for i in range(11, 31):
         t2 = PythonOperator(
-            task_id='task_number' + str(task_number),
+            task_id='task_number' + str(i),
             python_callable=task_number,
             op_kwargs={'task_number': i}
         )
