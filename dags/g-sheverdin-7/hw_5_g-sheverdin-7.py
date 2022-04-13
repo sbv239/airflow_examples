@@ -31,7 +31,7 @@ with DAG(
             os.environ['NUMBER'] = str(i)
             t1 = BashOperator(
                 task_id='print_task' + str(i),
-                bash_command="print_task '{}'".format(os.environ['NUMBER'])
+                bash_command="echo $NUMBER"
             )
         else:
             t2 = PythonOperator(
