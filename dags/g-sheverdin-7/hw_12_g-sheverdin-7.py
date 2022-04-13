@@ -7,8 +7,7 @@ from airflow.models import Variable
 def get_condition():
     if Variable.get('is_startml'):
         return "startml_desc"
-    else:
-        return "not_startml_desc"
+    return "not_startml_desc"
 
 with DAG(
     'g-sheverdin-7_task12',
@@ -27,28 +26,35 @@ with DAG(
     tags=['g-sheverdin-7-task12'],
 ) as dag:
 
+    def startml_desc():
+            print("StartML is a starter course for ambitious people")
+
+
+    def not_startml_desc():
+            print("Not a startML course, sorry")
+
     start = DummyOperator(
-        task_id='before_branching',
+            task_id='before_branching'
     )
 
-    branch_op = BranchPythonOperator(
-        task_id='determine_course',
-        provide_context=True,
-        python_callable=func,
+    t1 = BranchPythonOperator(
+            task_id='check_course',
+            python_callable=get_var,
+            trigger_rule='one_success'
     )
 
-    t1 = BashOperator(
-        task_id='startml_desc',
-        bash_command='echo "StartML is a starter course for ambitious people"',
+    t2 = PythonOperator(
+            task_id='startml_desc',
+            python_callable=startml_desc,
     )
 
-    t2 = BashOperator(
-        task_id='not_startml_desc',
-        bash_command='echo "Not a startML course, sorry"',
+    t3 = PythonOperator(
+            task_id='not_startml_desc',
+            python_callable=not_startml_desc,
     )
 
-    end = DummyOperator(
-        task_id='after_branching',
+    finish = DummyOperator(
+            task_id='after_branching'
     )
 
-    start >> branch_op >> [t1, t2] >> end
+    start >> t1 >> [t2, t3] >> finish
