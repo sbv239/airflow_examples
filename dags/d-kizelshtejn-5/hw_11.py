@@ -10,7 +10,7 @@ def user_id_max_like():
 
     postgres = PostgresHook(postgres_conn_id="startml_feed")
     with postgres.get_conn() as conn:
-        with conn.cursor() as cursor:
+        with conn.cursor(cursor_factory=RealDictCursor) as cursor:
             cursor.execute(
                 """
                 SELECT user_id, COUNT(action) AS count_like
