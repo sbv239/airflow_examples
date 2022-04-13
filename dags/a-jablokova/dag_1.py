@@ -13,7 +13,7 @@ with DAG(
         # Если прошлые запуски упали, надо ли ждать их успеха
         'depends_on_past': False,
         # Кому писать при провале
-        'email': ['formusor2016@gmail.com'],
+        'email': ['airflow@example.com'],
         # А писать ли вообще при провале?
         'email_on_failure': False,
         # Писать ли при автоматическом перезапуске по провалу
