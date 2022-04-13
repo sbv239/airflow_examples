@@ -39,7 +39,7 @@ with DAG(
 
     t1 = BranchPythonOperator(
             task_id='check_course',
-            python_callable=get_var,
+            python_callable=get_condition,
             trigger_rule='one_success'
     )
 
