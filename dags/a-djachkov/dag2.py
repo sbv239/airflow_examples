@@ -22,13 +22,13 @@ with DAG(
 
     for i in range(10):
         task1 = BashOperator(
-            task_id='print_' + str(i),
+            task_id='print: ' + str(i),
             bash_command=f"echo {i}"
         )
 
 
     def print_task_number(task_number):
-        print(f'task number is: {task_number}')
+        print(f'task number is -  {task_number}')
 
 
     for i in range(20):
