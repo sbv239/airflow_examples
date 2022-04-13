@@ -22,22 +22,11 @@ with DAG(
     tags=['g-sheverdin-7-task05'],
 ) as dag:
 
-    for i in range(1, 11):
+    for i in range(1 , 11):
         os.environ['NUMBER'] = str(i)
         t1 = BashOperator(
-            task_id='echo' + str(i),
-            bash_command='echo "{}"'.format(os.environ['NUMBER']),
+            task_id='echo_' + str(i),
+            bash_command="echo '{}'".format(os.environ['NUMBER']),
         )
 
-    def task_number(task_number):
-        print(f'task number is: {task_number}')
-        return None
-
-    for i in range(11, 31):
-        t2 = PythonOperator(
-            task_id='task_number' + str(i),
-            python_callable=task_number,
-            op_kwargs={'task_number': i}
-        )
-
-    t1 >> t2
+    t1
