@@ -12,7 +12,7 @@ with DAG(
         'email_on_retry': False,
         'retries': 1,
         'retry_delay': timedelta(minutes=5),
-    }
+    },
     description='g-sheverdin-7_DAG_task01',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 4, 11),
@@ -23,7 +23,6 @@ with DAG(
     t1 = BashOperator(
         task_id='print_pwd',
         bash_command='pwd',
-        dag=dag
     )
 
     def print_ds(ds, **kwarg):
