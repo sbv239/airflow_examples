@@ -22,7 +22,7 @@ with DAG(
 
     for i in range(10):
         task1 = BashOperator(
-            task_id='print_' + str(i),
+            task_id='print: ' + str(i),
             bash_command=f"echo {i}"
         )
 
