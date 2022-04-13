@@ -3,6 +3,7 @@ from textwrap import dedent
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python_operator import PythonOperator
+from psycopg2.extras import RealDictCursor
 
 
 def user_id_max_like():
