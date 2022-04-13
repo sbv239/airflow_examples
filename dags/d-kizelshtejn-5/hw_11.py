@@ -14,11 +14,11 @@ def user_id_max_like():
         with conn.cursor(cursor_factory=RealDictCursor) as cursor:
             cursor.execute(
                 """
-                SELECT user_id, COUNT(action) AS count_like
+                SELECT user_id, COUNT(action) AS count
                 FROM "feed_action"
                 WHERE action = 'like'
                 GROUP BY user_id
-                ORDER BY count_like DESC
+                ORDER BY count DESC
                 LIMIT 1
                 """
             )
