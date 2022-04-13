@@ -4,11 +4,6 @@ from airflow.operators.python import PythonOperator, BranchPythonOperator
 from airflow.operators.dummy import DummyOperator
 from airflow.models import Variable
 
-def get_condition():
-    if Variable.get('is_startml'):
-        return "startml_desc"
-    return "not_startml_desc"
-
 with DAG(
     'g-sheverdin-7_task12',
     default_args={
@@ -25,6 +20,11 @@ with DAG(
     catchup=False,
     tags=['g-sheverdin-7-task12'],
 ) as dag:
+
+    def get_condition():
+        if Variable.get('is_startml') == 'True':
+            return "startml_desc"
+        return "not_startml_desc"
 
     def startml_desc():
             print("StartML is a starter course for ambitious people")
