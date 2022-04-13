@@ -33,7 +33,7 @@ with  DAG(
     tags = ['hw_1'],
 ) as dag:
     t1 = BashOperator(
-        task_id = 'run PWD command',
+        task_id = 'execute_pwd',
         bash_command = 'pwd',
     )
 
