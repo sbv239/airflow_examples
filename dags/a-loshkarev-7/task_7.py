@@ -13,7 +13,7 @@ def print_i(ts, run_id, task_number):
 
 
 with DAG(
-    'aloshkarev_task_6',
+    'aloshkarev_task_7',
     default_args = {
         'depends_on_past': False,
         'email': ['airflow@example.com'],
