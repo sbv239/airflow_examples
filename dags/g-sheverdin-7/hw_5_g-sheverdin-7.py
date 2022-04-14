@@ -1,3 +1,4 @@
+import os
 from datetime import datetime, timedelta
 from textwrap import dedent
 from airflow import DAG
@@ -23,10 +24,9 @@ with DAG(
 
     for i in range(1, 11):
         t1 = BashOperator(
-            import os
-            os.environ['NUMBER'] = str(i),
-            task_id='task_number' +str(i),
-            bash_command= f'echo $NUMBER',
+            env={"NUMBER": i},
+            task_id='task_number' + str(i),
+            bash_command= "echo $NUMBER",
         )
 
     def task_number(task_number):
