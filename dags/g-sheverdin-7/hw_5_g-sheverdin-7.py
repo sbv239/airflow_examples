@@ -3,7 +3,6 @@ from textwrap import dedent
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python_operator import PythonOperator
-import os
 
 with DAG(
     'g-sheverdin-7_task02',
@@ -24,6 +23,7 @@ with DAG(
 
     for i in range(1, 11):
         t1 = BashOperator(
+            import os
             os.environ['NUMBER'] = str(i),
             task_id='task_number' +str(i),
             bash_command= f'echo $NUMBER',
