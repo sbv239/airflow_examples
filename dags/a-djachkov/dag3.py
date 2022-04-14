@@ -28,7 +28,7 @@ with DAG(
 
         task1.doc_md = dedent(
             """\
-            # Task Documentation
+            ## Task Documentation
             Первые **10 задач** типа *BashOperator*,  
             в них выполнена команда, использующая переменную цикла:  `"f"echo {i}"`   
             """
@@ -47,7 +47,7 @@ with DAG(
         )
         task2.doc_md = dedent(
             """\
-            # Task Documentation
+            ## Task Documentation
             Оставшиеся **20 задач** типа *PythonOperator*,  
             функция задействует переменную из цикла.  
             Этого добились, передавая переменную через `op_kwargs`   
