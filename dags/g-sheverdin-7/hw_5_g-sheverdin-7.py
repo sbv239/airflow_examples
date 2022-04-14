@@ -1,4 +1,3 @@
-import os
 from datetime import datetime, timedelta
 from textwrap import dedent
 from airflow import DAG
@@ -39,5 +38,3 @@ with DAG(
             python_callable=task_number,
             op_kwargs={'task_number': i}
         )
-
-    t1 >> t2
