@@ -28,8 +28,8 @@ with DAG(
 
     for i in range(1, 31):
         if i < 11:
-            os.environ['NUMBER'] = str(i)
             t1 = BashOperator(
+                os.environ['NUMBER'] = str(i)
                 task_id='print_task' + str(i),
                 bash_command="echo $NUMBER"
             )
