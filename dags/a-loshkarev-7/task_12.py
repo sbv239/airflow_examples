@@ -6,7 +6,7 @@ from airflow.models import Variable
 
 
 def branching_func():
-    var = Variable.get('is_startml')
+    var = Variable.get('is_startml') == 'True'
 
     if var:
         return 'startml_desc'
@@ -34,18 +34,21 @@ with DAG(
     catchup=False,
 ) as dag:
     branching = BranchPythonOperator(
-            task_id='branch_task',
-            python_callable=branching_func
-        )
+        task_id='branch_task',
+        python_callable=branching_func,
+        dag=dag
+    )
 
     t1 = PythonOperator(
-            task_id='startml_desc',
-            python_callable=task_1
-        )
+        task_id='startml_desc',
+        python_callable=task_1,
+        dag=dag
+    )
 
     t2 = PythonOperator(
-            task_id='not_startml_desc',
-            python_callable=task_2
-        )
+        task_id='not_startml_desc',
+        python_callable=task_2,
+        dag=dag
+    )
 
     branching >> [t1, t2]
