@@ -3,6 +3,7 @@ from textwrap import dedent
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python_operator import PythonOperator
+from psycopg2.extras import RealDictCursor
 
 
 def user_id_max_like():
@@ -10,14 +11,14 @@ def user_id_max_like():
 
     postgres = PostgresHook(postgres_conn_id="startml_feed")
     with postgres.get_conn() as conn:
-        with conn.cursor() as cursor:
+        with conn.cursor(cursor_factory=RealDictCursor) as cursor:
             cursor.execute(
                 """
-                SELECT user_id, COUNT(action) AS count_like
+                SELECT user_id, COUNT(action) AS count
                 FROM "feed_action"
                 WHERE action = 'like'
                 GROUP BY user_id
-                ORDER BY count_like DESC
+                ORDER BY count DESC
                 LIMIT 1
                 """
             )
