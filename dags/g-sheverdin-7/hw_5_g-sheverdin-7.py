@@ -1,9 +1,9 @@
-import os
 from datetime import datetime, timedelta
 from textwrap import dedent
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python_operator import PythonOperator
+import os
 
 with DAG(
     'g-sheverdin-7_task05',
