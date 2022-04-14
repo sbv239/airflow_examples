@@ -2,6 +2,7 @@ from airflow import DAG
 from airflow.models import Variable
 from airflow.operators.python import PythonOperator, BranchPythonOperator
 from airflow.operators.dummy import DummyOperator
+from airflow.operators.bash import BashOperator
 from datetime import datetime, timedelta
 
 
@@ -26,44 +27,37 @@ with DAG(
         task_id = 'start'
     )
 
-    def _choose_branch():
-        is_startml = Variable.get('is_startml')
+    def choose_branch():
+        is_startml = Variable.get("is_startml")
+        print(f'is_startml: {is_startml}')
+        print(type(is_startml))
         if is_startml:
-            return 'startml_desc'
+            return "startml_desc"
         else:
-            return 'not_startml_desc'
+            return "not_startml_desc"
 
-    choose_branch = BranchPythonOperator(
+    choose_course = BranchPythonOperator(
         task_id = 'choose_branch',
-        python_callable = _choose_branch,
+        python_callable = choose_branch,
     )
 
-    def startml_desc():
-        print('StartML is a starter course for ambitious people')
-
-    startml =  PythonOperator(
+    startml =  BashOperator(
         task_id = 'startml_desc',
-        python_callable = startml_desc,
+        bash_command = 'echo "StartML is a starter course for ambitious people"',
     )
 
-    def not_startml_desc():
-        print('Not a startML course, sorry')
-
-    not_startml =  PythonOperator(
+    not_startml =  BashOperator(
         task_id = 'not_startml_desc',
-        python_callable = not_startml_desc,
+        bash_command = 'echo "Not a startML course, sorry"',
     )
 
     end = DummyOperator(
         task_id = 'end'
     )
 
-    start >> choose_branch >> [startml, not_startml] >> end
+    start >> choose_course >> [startml, not_startml] >> end
     #                           -->    startml   --
     #                          |                   |
     # start -> choose_branch --                    |--> end
     #                          |                   | 
     #                           -->  not_startml --
-
-
-
