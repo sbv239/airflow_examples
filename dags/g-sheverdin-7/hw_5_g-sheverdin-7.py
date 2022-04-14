@@ -23,10 +23,10 @@ with DAG(
 ) as dag:
 
     for i in range(1, 11):
-        os.environ['NUMBER'] = str(i)
         t1 = BashOperator(
+            os.environ['NUMBER'] = str(i),
             task_id='task_number' +str(i),
-            bash_command= f'echo $NUMBER'
+            bash_command= f'echo $NUMBER',
         )
 
     def task_number(task_number):
