@@ -20,17 +20,17 @@ with DAG(
 ) as dag:
     for task_number in range(1, 11):
         task = BashOperator(
-            task_id=f'hw_1_m-valishevskij-7_{task_number}',
+            task_id=f'hw_2_m-valishevskij-7_{task_number}',
             bash_command=f"echo {task_number}"
         )
 
     def print_task_number(task_number):
-        print(f'task number is : {i}')
+        print(f'task number is : {task_number}')
         return 'i printed'
 
     for task_number in range(11, 31):
         task = PythonOperator(
-            task_id=f'hw_1_m-valishevskij-7_{task_number}',
+            task_id=f'hw_2_m-valishevskij-7_{task_number}',
             python_callable=print_task_number,
             op_kwargs={'task_number': task_number}
         )
