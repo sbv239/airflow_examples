@@ -1,12 +1,12 @@
-from datetime import datetime, timedelta #12
+from datetime import datetime, timedelta
 from airflow import DAG
-from airflow.models import Variable
-from airflow.operators.bash import BashOperator
-from airflow.operators.python import PythonOperator
 from airflow.operators.python import BranchPythonOperator
+from airflow.operators.bash import BashOperator
 from airflow.operators.dummy import DummyOperator
 
-def choise():
+
+def get_choise():
+    from airflow.models import Variable
     if Variable.get('is_startml'):
         return 'startml_desc'
     else:
@@ -24,19 +24,19 @@ with DAG(
     },
     description='A simple tutorial DAG',
     schedule_interval=timedelta(days=1),
-    start_date=datetime(2022, 4, 15),
+    start_date=datetime(2022, 4, 13),
     catchup=False,
     tags=['tsuranov'],
 ) as dag:
 
     t1 = DummyOperator(task_id='dummy_begin')
 
-    t2 = BranchPythonOperator(task_id='choise', python_callable=choise)
+    t2 = BranchPythonOperator(task_id='choise', python_callable=get_choise)
 
     t3 = BashOperator(task_id='startml_desc', bash_command='echo "StartML is a starter course for ambitious people"')
-    
+
     t4 = BashOperator(task_id='not_startml_desc', bash_command='echo "Not a startML course, sorry"')
-    
+
     t5 = DummyOperator(task_id='dummy_end')
-    
+
     t1 >> t2 >> [t3, t4] >> t5
