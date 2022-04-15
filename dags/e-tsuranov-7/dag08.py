@@ -20,6 +20,6 @@ with DAG(
     tags=['tsuranov'],
 ) as dag:
 
-    t1 = PythonOperator(task_id='PythonOperator_t1', python_callable=lambda ti: ti.xcom_push(key='key1', value='value1'))
-    t2 = PythonOperator(task_id='PythonOperator_t2', python_callable=lambda ti: print(ti.xcom_pull(key='key1', test_ids='PythonOperator_t1')))
+    t1 = PythonOperator(task_id='PythonOperator_t1', python_callable=lambda ti: ti.xcom_push(key='sample_xcom_key', value='xcom test'))
+    t2 = PythonOperator(task_id='PythonOperator_t2', python_callable=lambda ti: print(ti.xcom_pull(key='sample_xcom_key', test_ids='PythonOperator_t1')))
     t1 >> t2
