@@ -4,7 +4,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-        'hw_1_a-djachkov',
+        'hw_2_a-djachkov',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
@@ -38,4 +38,4 @@ with DAG(
             op_kwargs={'task_number': i},
         )
 
-        task1 >> task2
+    task1 >> task2
