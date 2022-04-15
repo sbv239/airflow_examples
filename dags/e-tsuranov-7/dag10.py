@@ -8,7 +8,7 @@ def postgres_connect():
     postgres = PostgresHook(postgres_conn_id='startml_feed')
     with postgres.get_conn() as conn:
         with conn.cursor(cursor_factory=RealDictCursor) as cursor:
-            cursor.execute('select user_id, count(post_id) from feed_action WHERE action = ''like'' group by user_id group by count(post_id) desc limit 1')
+            cursor.execute("select user_id, count(post_id) from feed_action where action = 'like' group by user_id order by count(post_id) desc limit 1")
             return print(cursor.fetchone())
 
 with DAG(
