@@ -18,7 +18,7 @@ with DAG(
         catchup=False,
         tags=['valishevskij']
 ) as dag:
-    for i in range(1, 21):
+    for i in range(1, 11):
         task = BashOperator(
             task_id=f'hw_1_m-valishevskij-7_{i}',
             bash_command=f"echo {i}"
@@ -28,7 +28,7 @@ with DAG(
         print(i)
         return 'i printed'
 
-    for i in range(10, 31):
+    for i in range(11, 31):
         task = PythonOperator(
             task_id=f'hw_1_m-valishevskij-7_{i}',
             python_callable=print_i,
