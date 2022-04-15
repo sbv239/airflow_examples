@@ -14,7 +14,7 @@ with DAG(
             'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
         },
         schedule_interval=timedelta(days=1),
-        start_date=datetime(2022, 4, 21),
+        start_date=datetime(2022, 4, 14),
         catchup=False,
         tags=['valishevskij']
 ) as dag:
