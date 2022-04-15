@@ -1,9 +1,16 @@
 from datetime import datetime, timedelta #12
 from airflow import DAG
 from airflow.models import Variable
+from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 from airflow.operators.python import BranchPythonOperator
 from airflow.operators.dummy import DummyOperator
+
+def choise():
+    if Variable.get('is_startml'):
+        return 'startml_desc'
+    else:
+        return 'not_startml_desc'
 
 with DAG(
     'hw_12_e-tsuranov-7',
@@ -24,11 +31,11 @@ with DAG(
 
     t1 = DummyOperator(task_id='dummy_begin')
 
-    t2 = BranchPythonOperator(task_id='choise', python_callable=lambda: 'startml_desc' if (Variable.get('is_startml') == True) else 'not_startml_desc')
+    t2 = BranchPythonOperator(task_id='choise', python_callable=choise)
 
-    t3 = PythonOperator(task_id='startml_desc', python_callable=lambda: print('StartML is a starter course for ambitious people'))
+    t3 = BashOperator(task_id='startml_desc', bash_command='echo "StartML is a starter course for ambitious people"')
     
-    t4 = PythonOperator(task_id='not_startml_desc', python_callable=lambda: print('Not a startML course, sorry'))
+    t4 = BashOperator(task_id='not_startml_desc', bash_command='echo "Not a startML course, sorry"')
     
     t5 = DummyOperator(task_id='dummy_end')
     
