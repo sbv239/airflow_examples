@@ -34,7 +34,7 @@ with DAG(
     
     for num in range(10):
         bash_task = BashOperator(
-            task_id = f"print {num} in terminal",
+            task_id = f"print_{num}_in_terminal",
             bash_command = f"echo {num} ")
         
     
@@ -43,7 +43,7 @@ with DAG(
         
     for n in range(20):
         python_task = PythonOperator(
-            task_id = f"python_task - {n}",
+            task_id = f"python_task_{n}",
             python_callable=print_tsk_num,
             op_kwargs = {"task_num": n}
         )
