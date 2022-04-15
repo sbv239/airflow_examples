@@ -22,12 +22,16 @@ with DAG(
         default_args=default_args,
         schedule_interval=timedelta(days=1),
         start_date=datetime(2022, 4, 16),
-        tags=['df']
+        tags=['df'],
+        catchup=False
 ) as dag:
-    dag.doc_md = __doc__
+    t = BashOperator(
+        task_id="curr_dir",
+        bash_command="pwd",
+    )
 
     for i in range(10):
-        t = BashOperator(
+        t1 = BashOperator(
             task_id='BashOperator' + str(i),
             bash_command=f'echo {i}',
         )
