@@ -47,6 +47,7 @@ with DAG(
             python_callable=print_tsk_num,
             op_kwargs = {"task_num": n}
         )
+     
         
     bash_task >> python_task
     
