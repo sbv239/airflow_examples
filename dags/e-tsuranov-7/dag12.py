@@ -1,9 +1,9 @@
 from datetime import datetime, timedelta #12
 from airflow import DAG
+from airflow.models import Variable
 from airflow.operators.python import PythonOperator
 from airflow.operators.python import BranchPythonOperator
 from airflow.operators.dummy import DummyOperator
-
 
 with DAG(
     'hw_12_e-tsuranov-7',
@@ -24,7 +24,7 @@ with DAG(
 
     t1 = DummyOperator(task_id='dummy_begin')
 
-    t2 = BranchPythonOperator(task_id='choise', python_callable=lambda: 'startml_desc' if Variable.get('is_startml') else 'not_startml_desc')
+    t2 = BranchPythonOperator(task_id='choise', python_callable=lambda: 'startml_desc' if (Variable.get('is_startml') == True) else 'not_startml_desc')
 
     t3 = PythonOperator(task_id='startml_desc', python_callable=lambda: print('StartML is a starter course for ambitious people'))
     
@@ -32,4 +32,4 @@ with DAG(
     
     t5 = DummyOperator(task_id='dummy_end')
     
-    t1 >> t2 >> [t3,t4] >> t5
+    t1 >> t2 >> [t3, t4] >> t5
