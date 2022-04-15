@@ -27,7 +27,7 @@ with DAG(
         task.doc_md = dedent(
             f"""
             ###Task Documentation
-            *BashOperator* printing _task_ number: `{task_number}`
+            **BashOperator** printing *task number*: `{task_number}`
             """
         )
 
@@ -45,7 +45,7 @@ with DAG(
         task.doc_md = dedent(
             f"""
                     ###Task Documentation
-                    *PythonOperator* printing _task_ number: `{task_number}`
+                    **PythonOperator** printing *task number*: `{task_number}`
                     """
         )
 
