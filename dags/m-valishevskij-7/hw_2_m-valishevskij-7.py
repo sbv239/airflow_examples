@@ -18,20 +18,20 @@ with DAG(
         catchup=False,
         tags=['valishevskij']
 ) as dag:
-    for i in range(1, 11):
+    for task_number in range(1, 11):
         task = BashOperator(
-            task_id=f'hw_1_m-valishevskij-7_{i}',
-            bash_command=f"echo {i}"
+            task_id=f'hw_1_m-valishevskij-7_{task_number}',
+            bash_command=f"echo {task_number}"
         )
 
-    def print_i(i):
-        print(i)
+    def print_task_number(task_number):
+        print(f'task number is : {i}')
         return 'i printed'
 
-    for i in range(11, 31):
+    for task_number in range(11, 31):
         task = PythonOperator(
-            task_id=f'hw_1_m-valishevskij-7_{i}',
-            python_callable=print_i,
-            op_kwargs={'i': i}
+            task_id=f'hw_1_m-valishevskij-7_{task_number}',
+            python_callable=print_task_number,
+            op_kwargs={'task_number': task_number}
         )
 
