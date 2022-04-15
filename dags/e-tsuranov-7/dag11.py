@@ -1,19 +1,10 @@
-from datetime import datetime, timedelta #10
+from datetime import datetime, timedelta #11
 from airflow import DAG
 from airflow.operators.python import PythonOperator
-from airflow.providers.postgres.operators.postgres import PostgresHook
-from psycopg2.extras import RealDictCursor
-#cursor_factory=RealDictCursor
-
-def postgres_connect():
-    postgres = PostgresHook(postgres_conn_id='startml_feed')
-    with postgres.get_conn() as conn:
-        with conn.cursor(cursor_factory=RealDictCursor) as cursor:
-            cursor.execute("select user_id, count(post_id) from feed_action where action = 'like' group by user_id order by count(post_id) desc limit 2")
-            return cursor.fetchone()
+from airflow.models import Variable
 
 with DAG(
-    'hw_10_e-tsuranov-7',
+    'hw_11_e-tsuranov-7',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -29,6 +20,6 @@ with DAG(
     tags=['tsuranov'],
 ) as dag:
     
-    t1 = PythonOperator(task_id='PythonOperator', python_callable=postgres_connect)
+    t1 = PythonOperator(task_id='PythonOperator', python_callable=lambda: print(Variable.get("is_startml")))
     
     t1
