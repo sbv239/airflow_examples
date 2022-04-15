@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta #6
+from datetime import datetime, timedelta #8
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
@@ -20,14 +20,8 @@ with DAG(
     tags=['tsuranov'],
 ) as dag:
     
-    def push(ti):
-        ti.xcom_push(key='sample_xcom_key', value='xcom test')
+    t1 = PythonOperator(task_id='PythonOperator_t1', python_callable=lambda ti: ti.xcom_push(key='sample_xcom_key', value='xcom test') )
     
-    t1 = PythonOperator(task_id='PythonOperator_t1', python_callable=push)
-    
-    def pull_print(ti):
-        print(ti.xcom_pull(key='sample_xcom_key', test_ids='PythonOperator_t1'))
-    
-    t2 = PythonOperator(task_id='PythonOperator_t2', python_callable=pull_print)
+    t2 = PythonOperator(task_id='PythonOperator_t2', python_callable=lambda ti: ti.xcom_pull(key='sample_xcom_key', task_ids='PythonOperator_t1'))
     
     t1 >> t2
