@@ -6,7 +6,7 @@ from airflow.operators.python_operator import PythonOperator
 
 
 with DAG(
-        'hw_2_a.kosharov',
+        'hw_6_a.kosharov',
         # Параметры по умолчанию для тасок
         default_args={
             'depends_on_past': False,
@@ -33,7 +33,7 @@ with DAG(
 ) as dag:
     
     
-    def print_ts_run_id(ts, run_id, **kwargs):
+    def print_ts_run_id(ts=ts, run_id=run_id, **kwargs):
         print(f"task number is: {kwargs.get('task_number', None)}")
         print(f"ts - {ts}")
         print(f"run_id - {run_id}")
