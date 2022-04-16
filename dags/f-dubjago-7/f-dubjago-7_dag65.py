@@ -19,7 +19,7 @@ default_args= {
 }
 
 with DAG(
-        'f-dubjago-7_dag1',
+        'f-dubjago-7_dag65',
         default_args=default_args,
         schedule_interval=timedelta(days=1),
         start_date=datetime(2022, 4, 10),
