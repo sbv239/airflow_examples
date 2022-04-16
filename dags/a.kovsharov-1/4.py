@@ -27,7 +27,7 @@ with DAG(
     # https://airflow.apache.org/docs/apache-airflow/stable/dag-run.html
     catchup=False,
     # теги, способ помечать даги
-    tags=['HW_4', 'a.kovharov']
+    tags=['HW_4', 'a.kovsharov']
 ) as dag:
 
     templated_command = dedent(
