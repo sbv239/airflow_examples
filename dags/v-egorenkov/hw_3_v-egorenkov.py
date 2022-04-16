@@ -7,7 +7,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-    'a.burlakov-9_task_1',
+    'hw_3_v-egorenkov-2',
     # Параметры по умолчанию для тасок
     default_args={
         'depends_on_past': False,
