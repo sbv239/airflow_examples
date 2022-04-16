@@ -6,7 +6,7 @@ from airflow.operators.bash import BashOperator
 
 
 with DAG(
-        'hw_2_a.kosharov',
+        'hw_5_a.kosharov',
         # Параметры по умолчанию для тасок
         default_args={
             'depends_on_past': False,
@@ -29,7 +29,7 @@ with DAG(
     # https://airflow.apache.org/docs/apache-airflow/stable/dag-run.html
     catchup=False,
     # теги, способ помечать даги
-    tags=['example']
+    tags=['HW_5', 'a.kovsharov']
 ) as dag:
     
     
