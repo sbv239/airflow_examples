@@ -36,14 +36,8 @@ with DAG(
     for num in range(10):
         bash_task = BashOperator(
             task_id = f"print_{num}_in_terminal",
-            bash_command = "echo $NUMBER ",
+            bash_command = "echo $NUMBER",
             env={"NUMBER": num})
         
-        bash_task.doc_md = dedent(
-            f"""
-            ### Bash operator task
-            **Task number: {num}**.
-            This task use `BashOperator` with genereted __number__ of the task and print num as env variable
-            """)
     
     bash_task
