@@ -32,8 +32,8 @@ with DAG(
     tags=['HW_9', 'a.kovsharov']
 ) as dag:
 
-    def save_xcom_text(text):
-        return text
+    def save_xcom_text():
+        return 'Airflow tracks everything'
             
     def get_xcom_val(ti):
             res = ti.xcom_pull(key='return_value', task_ids='save_text_2_xcom')
@@ -42,8 +42,7 @@ with DAG(
             
     t1 = PythonOperator(
             task_id = 'save_text_2_xcom',
-            python_callable = save_xcom_text,
-            op_kwargs = {'text': 'Airflow tracks everything'}
+            python_callable = save_xcom_text
     )
         
     t2 = PythonOperator(
