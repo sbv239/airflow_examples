@@ -48,6 +48,8 @@ with DAG(
                     ORDER BY count DESC
                     LIMIT 1
                     """)
+                print(res)
+                print(type(res))
                 return res
             
     
