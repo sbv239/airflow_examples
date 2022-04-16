@@ -4,7 +4,7 @@ from airflow.operators.bash import BashOperator
 from textwrap import dedent
 
 with DAG(
-    'G-Ivanov-task2',
+    'G-Ivanov-task4',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
