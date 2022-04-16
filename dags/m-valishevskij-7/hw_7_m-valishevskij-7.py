@@ -31,7 +31,7 @@ with DAG(
         print(value)
 
     t1 = PythonOperator(
-        task_id='hw_7_m-valishevskij-7_2',
+        task_id='hw_7_m-valishevskij-7_1',
         python_callable=xcom_push
     )
 
