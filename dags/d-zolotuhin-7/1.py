@@ -19,8 +19,9 @@ with DAG(
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 4, 17),
     catchup=False,
-    tags=['example'],
+    tags=['task_01_d_zolotukhin'],
 ) as dag:
+
     t1 = BashOperator(
         task_id='Bash_pwd',
         bash_command='pwd',
@@ -32,7 +33,7 @@ with DAG(
 
     t2 = BashOperator(
         task_id='python_print',
-        bash_command=python_pr,
+        python_callable=python_pr,
     )
 
     t1 >> t2
