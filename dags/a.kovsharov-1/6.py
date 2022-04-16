@@ -32,8 +32,8 @@ with DAG(
     tags=['HW_6', 'a.kovsharov']
 ) as dag:
     
-    
-    def print_ts_run_id(ts=ts, run_id=run_id, **kwargs):
+        
+    def print_ts_run_id(ts, run_id, **kwargs):
         print(f"task number is: {kwargs.get('task_number', None)}")
         print(f"ts - {ts}")
         print(f"run_id - {run_id}")
@@ -42,6 +42,8 @@ with DAG(
         python_task = PythonOperator(
             task_id = f"python_task_{n}",
             python_callable=print_ts_run_id,
+            provide_context=True,    
+            dag=dag,
             op_kwargs = {"kwargs": {"task_number": n}}
         )
         
