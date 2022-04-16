@@ -26,17 +26,17 @@ with DAG(
     def xcom_pull_and_print(ti):
         value = ti.xcom_pull(
             key='sample_xcom_key',
-            task_ids='hw_1_m-valishevskij-7_1'
+            task_ids='hw_7_m-valishevskij-7_1'
         )
         print(value)
 
     t1 = PythonOperator(
-        task_id='hw_1_m-valishevskij-7_2',
+        task_id='hw_7_m-valishevskij-7_2',
         python_callable=xcom_push
     )
 
     t2 = PythonOperator(
-        task_id='hw_1_m-valishevskij-7_2',
+        task_id='hw_7_m-valishevskij-7_2',
         python_callable=xcom_pull_and_print
     )
 
