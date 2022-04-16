@@ -20,7 +20,9 @@ with DAG(
 ) as dag:
     def get_variable():
         from airflow.models import Variable
-        return 'startml_desc' if Variable.get("is_startml") else 'not_startml_desc'
+        if Variable.get("is_startml") == 'True':
+            return 'startml_desc'
+        return 'not_startml_desc'
 
 
     def is_startml():
