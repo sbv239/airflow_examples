@@ -33,7 +33,7 @@ with DAG(
     
     def get_var():
         from airflow.models import Variable
-        return Variable.get("is_startml")
+        print(Variable.get("is_startml"))
         
     t1 = PythonOperator(
         task_id = 'get_is_startml',
