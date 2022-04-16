@@ -39,7 +39,7 @@ with DAG(
         postgres = PostgresHook(postgres_conn_id="startml_feed")
         with postgres.get_conn() as conn:   # вернет тот же connection, что вернул бы psycopg2.connect(...)
             with conn.cursor(cursor_factory=RealDictCursor) as cursor:
-                res = cursor.execute(
+                cursor.execute(
                     """
                     SELECT user_id, COUNT(action) AS count
                     FROM feed_action
@@ -48,6 +48,7 @@ with DAG(
                     ORDER BY count DESC
                     LIMIT 1
                     """)
+                res = cursor.fetchone()
                 print(res)
                 print(type(res))
                 return res
