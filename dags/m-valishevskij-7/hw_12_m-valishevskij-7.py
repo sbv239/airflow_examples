@@ -3,7 +3,6 @@ from airflow.operators.python import PythonOperator, BranchPythonOperator
 from airflow.operators.dummy import DummyOperator
 from datetime import timedelta, datetime
 
-
 with DAG(
         'hw_12_m-valishevskij-7',
         default_args={
@@ -23,11 +22,14 @@ with DAG(
         from airflow.models import Variable
         return 'startml_desc' if Variable.get("is_startml") else 'not_startml_desc'
 
+
     def is_startml():
         print("StartML is a starter course for ambitious people")
 
+
     def not_startml():
         print("Not a startML course, sorry")
+
 
     t1 = DummyOperator(
         task_id='before_branching'
@@ -54,4 +56,3 @@ with DAG(
     )
 
     t1 >> t2 >> [t3, t4] >> t5
-
