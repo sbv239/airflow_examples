@@ -37,7 +37,7 @@ with DAG(
         bash_task = BashOperator(
             task_id = f"print_{num}_in_terminal",
             bash_command = "echo $NUMBER",
-            env={"NUMBER": num})
+            env={"NUMBER": str(num)})
         
     
     bash_task
