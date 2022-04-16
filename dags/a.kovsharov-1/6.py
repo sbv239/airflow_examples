@@ -1,7 +1,7 @@
 from datetime import timedelta, datetime
-from textwrap import dedent
+#from textwrap import dedent
 from airflow import DAG
-from airflow.operators.bash import BashOperator
+#from airflow.operators.bash import BashOperator
 from airflow.operators.python_operator import PythonOperator
 
 
@@ -33,7 +33,7 @@ with DAG(
 ) as dag:
     
         
-    def print_ts_run_id(ts, run_id, **kwargs):
+    def print_ts_run_id(ts, run_id, kwargs):
         print(f"task number is: {kwargs.get('task_number', None)}")
         print(f"ts - {ts}")
         print(f"run_id - {run_id}")
