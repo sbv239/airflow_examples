@@ -32,7 +32,7 @@ with DAG(
     tags=['HW_8', 'a.kovsharov']
 ) as dag:
 
-    def set_xcom_val(ti, **kwargs):
+    def set_xcom_val(ti, kwargs):
         for key, value in kwargs:
             ti.xcom_push(
                 key = key,
