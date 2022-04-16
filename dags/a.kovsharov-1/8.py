@@ -32,28 +32,25 @@ with DAG(
     tags=['HW_8', 'a.kovsharov']
 ) as dag:
 
-    def set_xcom_val(ti, kwargs):
-        for key, value in kwargs:
-            ti.xcom_push(
-                key = key,
-                value = value
+    def set_xcom_val(ti):
+        ti.xcom_push(
+                key = "sample_xcom_key",
+                value = "xcom test"
             )
             
-    def get_xcom_val(ti, *keys):
-            res = ti.xcom_pull(ti.xcom_pull(key=keys, task_ids='set_xcom_val'))
+    def get_xcom_val(ti):
+            res = ti.xcom_pull(key="sample_xcom_key", task_ids='set_xcom_val')
             print(res)
             
             
     t1 = PythonOperator(
             task_id = 'set_xcom_val',
             python_callable = set_xcom_val,
-            op_kwargs = {'kwargs': data}
     )
         
     t2 = PythonOperator(
             task_id = 'get_xcom_val',
-            python_callable = get_xcom_val,
-            op_kwargs = {'keys': data.keys()}
+            python_callable = get_xcom_val
     )
             
     t1 >> t2
