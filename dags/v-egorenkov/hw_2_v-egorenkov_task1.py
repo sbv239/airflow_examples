@@ -15,7 +15,7 @@ def print_context(ds=None, **kwargs):
 
 
 with DAG(
-        'tutorial',
+        'hw_3_v-egorenkov-3',
         # These args will get passed on to each operator
         # You can override them on a per-task basis during operator initialization
         default_args={
