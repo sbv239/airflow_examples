@@ -13,7 +13,7 @@ default_args={
 data = {"sample_xcom_key": "xcom test"}
 
 with DAG(
-        'hw_8_a.kosharov_XCom_DAG',
+        'hw_9_a.kosharov_XCom_DAG',
         # Параметры по умолчанию для тасок
         default_args=default_args,
     # Описание DAG (не тасок, а самого DAG)
@@ -29,7 +29,7 @@ with DAG(
     # https://airflow.apache.org/docs/apache-airflow/stable/dag-run.html
     catchup=False,
     # теги, способ помечать даги
-    tags=['HW_8', 'a.kovsharov']
+    tags=['HW_9', 'a.kovsharov']
 ) as dag:
 
     def save_xcom_text(text):
