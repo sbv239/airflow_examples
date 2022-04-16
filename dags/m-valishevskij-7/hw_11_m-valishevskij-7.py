@@ -21,7 +21,8 @@ with DAG(
     def get_variable():
         from airflow.models import Variable
 
-        return Variable.get("is_startml")
+        print(Variable.get("is_startml"))
+        return 'done'
 
     t1 = PythonOperator(
         task_id='hw_11_m-valishevskij-7_1',
