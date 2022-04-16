@@ -31,7 +31,7 @@ with DAG(
         print(ds)
         return None
 
-    t2 = BashOperator(
+    t2 = PythonOperator(
         task_id='python_print',
         python_callable=python_pr,
     )
