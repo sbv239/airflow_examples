@@ -45,3 +45,5 @@ with DAG(
             **Task number: {num}**.
             This task use `BashOperator` with genereted __number__ of the task and print num as env variable
             """)
+    
+    bash_task
