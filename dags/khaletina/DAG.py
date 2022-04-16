@@ -28,18 +28,17 @@ with DAG(
 ) as dag:
 
     t1 = BashOperator(
-        task_id='print_current_folder',  
-        bash_command='pwd',  
+        task_id='print_pwd',
+        bash_command='pwd',
     )
-    
-    # def print_context(ds, **kwargs):
-    # print(kwargs)
-    # print(ds)
-    # return 'Whatever you return gets printed in the logs'
+
+    def print_else(ds, **kwarg):
+        print(ds)
+        return None
 
     t2 = PythonOperator(
-    task_id='print_the_context',  # нужен task_id, как и всем операторам
-    python_callable=print_context,  # свойственен только для PythonOperator - передаем саму функцию
+        task_id='print_else',
+        python_callable=print_else,
     )
 
     t1 >> t2
