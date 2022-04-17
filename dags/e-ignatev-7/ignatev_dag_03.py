@@ -14,7 +14,7 @@ default_args = {
 }
 
 with DAG(
-    'ignatev_dag_02',
+    'ignatev_dag_03',
     default_args=default_args,
     start_date=datetime(2022, 4, 15),
     max_active_runs=1,
