@@ -48,6 +48,7 @@ with DAG(
        
     def select_next_task():
         is_startml = get_is_startml()
+        print(f"is_startml - {is_startml}")
         if is_startml == 'True':
             return "start_course"
         else:
