@@ -36,6 +36,7 @@ with DAG(
     t1.doc_md = '''
     ### t1 task documentation
 
+    This task fulfils the requirements for *task 03*, *lesson 13* in **StartML** course
     This group of tasks is created with `for` loop and `BashOperator`
     '''
 
@@ -52,5 +53,6 @@ with DAG(
     t2.doc_md = '''
     ### t2 task documentation
 
+    This task fulfils the requirements for *task 03*, *lesson 13* in **StartML** course
     This group of tasks is created with `for` loop and `PythonOperator`
     '''
