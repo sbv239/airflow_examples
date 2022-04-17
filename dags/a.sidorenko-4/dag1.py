@@ -8,6 +8,7 @@ from airflow import DAG
 # Будем иногда называть операторы тасками (tasks)
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
+
 with DAG(
     'tutorial',
     # Параметры по умолчанию для тасок
@@ -26,17 +27,17 @@ with DAG(
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
     },
     # # Описание DAG (не тасок, а самого DAG)
-    # description='A simple tutorial DAG',
+    description='HW 1 DAG',
     # # Как часто запускать DAG
-    # schedule_interval=timedelta(days=1),
+    schedule_interval=timedelta(days=1),
     # # С какой даты начать запускать DAG
     # # Каждый DAG "видит" свою "дату запуска"
     # # это когда он предположительно должен был
     # # запуститься. Не всегда совпадает с датой на вашем компьютере
-    # start_date=datetime(2022, 1, 1),
+    start_date=datetime(2022, 4, 17),
     # # Запустить за старые даты относительно сегодня
     # # https://airflow.apache.org/docs/apache-airflow/stable/dag-run.html
-    # catchup=False,
+    catchup=False,
     # # теги, способ помечать даги
     # tags=['example'],
 ) as dag:
@@ -48,10 +49,8 @@ with DAG(
 
 
     run_bash = BashOperator(
-        task_id='current working directory',
-        depends_on_past=False,  # переопределили настройку из DAG
-        bash_command='pwd',
-        retries=3,  # тоже переопределили retries (было 1)
+        task_id='current_working_directory',
+        bash_command='pwd'
     )
 
     run_python = PythonOperator(
