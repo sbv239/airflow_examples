@@ -10,7 +10,7 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 with DAG(
-    'hw_5_a-haletina-7',
+    'hw_6_a-haletina-7',
 
     default_args={
         'depends_on_past': False,
@@ -20,11 +20,11 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),
     },
-    description='hw_5_a-haletina-7',
+    description='hw_6_a-haletina-7',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 1, 1),
     catchup=False,
-    tags=['hw_5_a-haletina-7'],
+    tags=['hw_6_a-haletina-7'],
 ) as dag:
 
     def task_number(task_number, ts, run_id):
