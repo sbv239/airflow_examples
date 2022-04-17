@@ -13,7 +13,7 @@ default_args={
         }
 
 with DAG(
-        'hw_12_a.kosharov',
+        'hw_12_a.kovsharov',
         # Параметры по умолчанию для тасок
         default_args=default_args,
     # Описание DAG (не тасок, а самого DAG)
@@ -50,9 +50,9 @@ with DAG(
         is_startml = get_is_startml()
         print(f"is_startml - {is_startml}")
         if is_startml == 'True':
-            return "start_course"
+            return "startml_desc"
         else:
-            return "not_to_start_course"
+            return "not_startml_desc"
         
     
     start_op = DummyOperator(
@@ -65,12 +65,12 @@ with DAG(
     )
     
     start_course_op = PythonOperator(
-        task_id = "start_course",
+        task_id = "startml_desc",
         python_callable = print_start_course
     )
     
     not_start_course_op = PythonOperator(
-        task_id = "not_to_start_course",
+        task_id = "not_startml_desc",
         python_callable = print_not_start_course)
     
     end_op = DummyOperator(
