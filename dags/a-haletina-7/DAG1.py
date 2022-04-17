@@ -10,7 +10,7 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 with DAG(
-    'hw_2_a-haletina-7',
+    'hw_1_a-haletina-7',
 
     default_args={
         'depends_on_past': False,
@@ -20,28 +20,25 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),
     },
-    description='hw_2_a-haletina-7',
+    description='hw_1_a-haletina-7',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 1, 1),
     catchup=False,
-    tags=['hw_2_a-haletina-7'],
+    tags=['hw_1_a-haletina-7'],
 ) as dag:
 
-    for i in range(1, 11):
-        t1 = BashOperator(
-            task_id='echo' + str(i),
-            bash_command=f'echo {i}',
-        )
+    t1 = BashOperator(
+        task_id='print_pwd',
+        bash_command='pwd',
+    )
 
-    def print_number(task_number):
-        print(f'task number is: {task_number}')
+    def print_else(ds, **kwarg):
+        print(ds)
         return None
 
-    for i in range(11, 31):
-        t2 = PythonOperator(
-            task_id='task_number' + str(i),
-            python_callable=print_number,
-            op_kwargs={'task_number': i}
-        )
+    t2 = PythonOperator(
+        task_id='print_else',
+        python_callable=print_else,
+    )
 
     t1 >> t2
