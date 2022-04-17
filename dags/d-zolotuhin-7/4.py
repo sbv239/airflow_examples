@@ -5,7 +5,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python_operator import PythonOperator
 
 with DAG(
-    'hw_3_d-zolotuhin-7',
+    'hw_4_d-zolotuhin-7',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -14,11 +14,11 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),
     },
-    description='task_03_d_zolotukhin',
+    description='task_04_d_zolotukhin',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 4, 17),
     catchup=False,
-    tags=['task_03_d_zolotukhin'],
+    tags=['task_04_d_zolotukhin'],
 ) as dag:
 
     templated_command = dedent(
