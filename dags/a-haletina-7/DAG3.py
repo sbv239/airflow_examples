@@ -10,7 +10,7 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 with DAG(
-    'tutorial',
+    'hw_3_a-haletina-7',
 
     default_args={
         'depends_on_past': False,
@@ -20,11 +20,11 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),
     },
-    description='hw_2_khaletina',
+    description='hw_3_a-haletina-7',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 1, 1),
     catchup=False,
-    tags=['hw_2_khaletina'],
+    tags=['hw_3_a-haletina-7'],
 ) as dag:
 
     for i in range(1, 11):
@@ -43,5 +43,14 @@ with DAG(
             python_callable=print_number,
             op_kwargs={'task_number': i}
         )
+    t1 >> t2 
 
-    t1 >> t2
+    t1.doc_md = dedent(
+        """\
+    #### Task Documentation
+    You can document your task using the attributes `doc_md` (markdown),
+    `doc` (plain text), `doc_rst`, `doc_json`, `doc_yaml` which gets
+    rendered in *the UI's* Task **Instance Details page**.
+    """
+    )
+
