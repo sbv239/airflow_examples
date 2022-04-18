@@ -1,8 +1,7 @@
 from airflow.providers.postgres.operators.postgres import PostgresHook
 from datetime import datetime, timedelta
 from airflow import DAG
-
-from airflow.operators.bash import BashOperator
+from psycopg2.extras import RealDictCursor
 from airflow.operators.python import PythonOperator
 
 default_args = {
@@ -15,17 +14,9 @@ default_args = {
 }
 
 
-def pull_xcom(task_id, ti):
-  value = ti.xcom_pull(
-    key='return_value',
-    task_ids=task_id
-  )
-  print(f'{task_id}[return_value] = {value}')
-
-
 def user_top_like():
   postgres = PostgresHook(postgres_conn_id="startml_feed")
-  with postgres.get_conn() as conn:
+  with postgres.get_conn(cursor_factory = RealDictCursor) as conn:
     with conn.cursor() as cursor:
       cursor.execute("""                   
     SELECT user_id, COUNT(user_id) as c
@@ -46,15 +37,9 @@ with DAG(
         catchup=False,
         tags=['a-kalmykov'],
 ) as dag:
-  t1 = PythonOperator(
+  t= PythonOperator(
     task_id='get_user_top_like',
     python_callable=user_top_like,
   )
 
-  t2 = PythonOperator(
-      task_id='pull_data_from_xcom',
-      python_callable=pull_xcom,
-      op_kwargs={'task_id': 'get_user_top_like'}
-  )
-
-  t1 >> t2
+  t
