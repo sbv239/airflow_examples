@@ -17,7 +17,7 @@ default_args = {
 def user_top_like():
   postgres = PostgresHook(postgres_conn_id="startml_feed")
   with postgres.get_conn() as conn:
-    with conn.cursor() as cursor:
+    with conn.cursor(cursor_factory=RealDictCursor) as cursor:
       cursor.execute("""                   
     SELECT user_id, COUNT(user_id) as c
     FROM feed_action 
@@ -27,7 +27,7 @@ def user_top_like():
       """)
       result = cursor.fetchone()
     print(result)
-    return {'user_id': result[0], 'count': result[1]}
+    return result
 
 with DAG(
         dag_id='a-kalmykov-dag-10',
