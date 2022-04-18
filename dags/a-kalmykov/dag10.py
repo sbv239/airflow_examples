@@ -15,7 +15,7 @@ default_args = {
 
 
 def user_top_like():
-  postgres = PostgresHook(postgres_conn_id="startml_feed", cursor = 'realdictcursor')
+  postgres = PostgresHook(postgres_conn_id="startml_feed")
   with postgres.get_conn() as conn:
     with conn.cursor() as cursor:
       cursor.execute("""                   
@@ -26,7 +26,8 @@ def user_top_like():
     ORDER BY c DESC LIMIT 1
       """)
       result = cursor.fetchone()
-    return result
+    print(result)
+    return {'user_id': result[0], 'count': result[1]}
 
 with DAG(
         dag_id='a-kalmykov-dag-10',
