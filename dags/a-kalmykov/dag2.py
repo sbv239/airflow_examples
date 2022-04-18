@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 from textwrap import dedent
 from airflow import DAG
-
+import os
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
@@ -29,12 +29,15 @@ with DAG(
         tags=['a-kalmykov'],
 ) as dag:
     tasks = []
+
     for idx in range(30):
         if idx < 20:
+            os.environ['NUMBER'] = f'{idx}'
             task = BashOperator(
                 task_id=f'bash_echo_{idx}',
                 bash_command=f'echo $NUMBER',
-                env={"NUMBER": f'{{{{ {idx} }}}}'},
+                # env={"NUMBER": f'{{{{ {idx} }}}}'},
+                env=os.environ.copy()
             )
         else:
             task = PythonOperator(
