@@ -15,8 +15,8 @@ default_args = {
 
 
 def user_top_like():
-  postgres = PostgresHook(postgres_conn_id="startml_feed")
-  with postgres.get_conn(cursor_factory = RealDictCursor) as conn:
+  postgres = PostgresHook(postgres_conn_id="startml_feed", cursor_factory = RealDictCursor)
+  with postgres.get_conn() as conn:
     with conn.cursor() as cursor:
       cursor.execute("""                   
     SELECT user_id, COUNT(user_id) as c
