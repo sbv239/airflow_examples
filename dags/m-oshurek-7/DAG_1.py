@@ -34,7 +34,7 @@ with DAG(
 
     t1 = BashOperator(
         task_id='print_pdw',
-        bash_command='pdw',
+        bash_command='pdw ',
     )
 
     def print_context(ds, **kwargs):
