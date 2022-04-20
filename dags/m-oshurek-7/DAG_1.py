@@ -1,7 +1,7 @@
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python_operator import PythonOperator
-from datetime import timedelta
+from datetime import timedelta, datetime
 
 
 with DAG(
@@ -29,12 +29,12 @@ with DAG(
     # https://airflow.apache.org/docs/apache-airflow/stable/dag-run.html
     catchup=False,
     # теги, способ помечать даги
-    tags=['example_1'],
+    tags=['example_1_oshurek'],
 ) as dag:
 
-    task_1 = BashOperator(
+    t1 = BashOperator(
         task_id='print_pdw',
-        bash_command='pdw'
+        bash_command='pdw',
     )
 
     def print_context(ds, **kwargs):
@@ -47,7 +47,7 @@ with DAG(
         print(ds)
         return 'Возвращаем просто строку'
 
-    task_2 = PythonOperator(
+    t2 = PythonOperator(
         task_id='logit_date',
         python_callable=print_context
     )
