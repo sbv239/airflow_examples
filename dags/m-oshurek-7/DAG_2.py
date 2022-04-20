@@ -40,7 +40,7 @@ with DAG(
                 task_id = 'task_bash_' + str(i),
                 bash_command = f'echo {i}',
                 )
-            task_bash
+            
         else:
             task_py = PythonOperator(
                 task_id = 'print_task_number_' + str(i),
@@ -48,5 +48,5 @@ with DAG(
                 op_kwargs = {'task_number': i},
                 )
             task_bash >> task_py
-
+    task_bash
     
