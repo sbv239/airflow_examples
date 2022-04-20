@@ -19,7 +19,7 @@ with DAG(
     description='Задание1. Напишите DAG, который будет содержать BashOperator и PythonOperator.'
                 ' В функции PythonOperator примите аргумент ds и распечатайте его.',
     # Как часто запускать DAG
-    schedule_interval=timedelta(days=10),
+    schedule_interval=timedelta(days=1),
     # С какой даты начать запускать DAG
     # Каждый DAG "видит" свою "дату запуска"
     # это когда он предположительно должен был
@@ -33,8 +33,8 @@ with DAG(
 ) as dag:
 
     t1 = BashOperator(
-        task_id='print_pdw',
-        bash_command='pdw ',
+        task_id = 'print_pdw',
+        bash_command = 'pwd',
     )
 
     def print_context(ds, **kwargs):
