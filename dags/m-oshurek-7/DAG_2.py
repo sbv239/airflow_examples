@@ -34,19 +34,18 @@ with DAG(
     def print_i(task_number):
         return f'task number is: {task_number}'
     
-    for i in range(30):
-        if i < 11:
-            task_bash = BashOperator(
-                task_id = 'task_bash_' + str(i),
-                bash_command = f'echo {i}',
-                )
+    for i in range(10):
+        task_bash = BashOperator(
+            task_id = 'task_bash_' + str(i),
+            bash_command = f'echo {i}',
+            )
             
-        else:
-            task_py = PythonOperator(
-                task_id = 'print_task_number_' + str(i),
-                python_callable = print_i,
-                op_kwargs = {'task_number': i},
-                )
-            task_bash >> task_py
-    task_bash
+    for i in range(20):
+        task_py = PythonOperator(
+            task_id = 'print_task_number_' + str(i),
+            python_callable = print_i,
+            op_kwargs = {'task_number': i},
+            )
+            
+    task_bash >> task_py
     
