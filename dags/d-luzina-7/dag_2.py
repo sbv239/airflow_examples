@@ -33,7 +33,7 @@ with DAG(
     def print_num(task_number):
         print(f"task number is: {task_number}")
 
-    for i in range(10,30):
+    for i in range(10,31):
         t2 = PythonOperator(
             task_id = 'python_' + str(i),
             python_callable = print_num,
