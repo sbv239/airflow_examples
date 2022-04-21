@@ -6,7 +6,7 @@ from datetime import timedelta, datetime
 
 with DAG(
     # имя дага, которое отразиться на сервере airflow
-    'DAG_2_oshurek',
+    'DAG_6_oshurek',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -29,7 +29,7 @@ with DAG(
     # https://airflow.apache.org/docs/apache-airflow/stable/dag-run.html
     catchup=False,
     # теги, способ помечать даги
-    tags=['example_2_oshurek'],
+    tags=['example_6_oshurek'],
 ) as dag:
     
     def print_i(ts, run_id, task_number, **kwargs):
