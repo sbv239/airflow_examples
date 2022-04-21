@@ -2,7 +2,7 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python_operator import PythonOperator
 from datetime import timedelta, datetime
-from textwrap import dedent
+
 
 
 with DAG(
@@ -32,7 +32,11 @@ with DAG(
     # теги, способ помечать даги
     tags=['example_2_oshurek'],
 ) as dag:
-    
+    dag.doc_md = '''
+    ### ignatev_dag_02 documentation
+
+    Это есть документация для `дага` *DAG_3*, *lesson 13* in **StartML** course'''
+
     def print_i(task_number):
         return f'task number is: {task_number}'
     
@@ -41,13 +45,7 @@ with DAG(
             task_id = 'task_bash_' + str(i),
             bash_command = f'echo {i}',
             )
-    task_bash.doc_md = dedent(
-        '''\
-        # Абзац через решетку
-        **полужирный**
-        _курсив_
-        'code'
-        ''')
+    
             
     for i in range(20):
         task_py = PythonOperator(
@@ -55,16 +53,18 @@ with DAG(
             python_callable = print_i,
             op_kwargs = {'task_number': i},
             )
-    dag.doc_md = __doc__
-    dag.doc_md = ''' # Абзац через решетку **полужирный** _курсив_ 'code'  '''
-    templated_command = dedent(
-        '''
-    {% for i in range(5) %}
-        echo "{{ ds }}"
-        echo "{{ macros.ds_add(ds, 7)}}"
-    {% endfor %}
-        ''')
-    
+    task_bash.doc_md = '''
+    ### task_bash documentation
+
+    Это докуменция для task_bash *task 03*, *lesson 13* in **StartML** course
+    This group of tasks is created with `for` loop and `BashOperator`
+    '''
+    task_py.doc_md = '''
+    ### task_py documentation
+
+    Это документация для task_py *task 03*, *lesson 13* in **StartML** course
+    This group of tasks is created with `for` loop and `PythonOperator`
+    '''   
             
     task_bash >> task_py
     
