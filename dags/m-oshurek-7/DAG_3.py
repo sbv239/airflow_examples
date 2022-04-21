@@ -7,7 +7,7 @@ from datetime import timedelta, datetime
 
 with DAG(
     # имя дага, которое отразиться на сервере airflow
-    'DAG_2_oshurek',
+    'DAG_3_oshurek',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -30,7 +30,7 @@ with DAG(
     # https://airflow.apache.org/docs/apache-airflow/stable/dag-run.html
     catchup=False,
     # теги, способ помечать даги
-    tags=['example_2_oshurek'],
+    tags=['example_3_oshurek'],
 ) as dag:
     dag.doc_md = '''
     ### ignatev_dag_02 documentation
