@@ -34,7 +34,7 @@ with DAG(
 
     t1 = PythonOperator(
         task_id='print_variable',  
-        python_callable=get_var
+        python_callable = get_var
     )
     
     t1
