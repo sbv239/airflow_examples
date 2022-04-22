@@ -32,12 +32,12 @@ with DAG(
 
     for idx in range(30):
         if idx < 20:
-            os.environ['NUMBER'] = f'{idx}'
+            # os.environ['NUMBER'] = f'{idx}'
             task = BashOperator(
                 task_id=f'bash_echo_{idx}',
-                bash_command=f'echo $NUMBER',
-                # env={"NUMBER": f'{{{{ {idx} }}}}'},
-                env=os.environ.copy()
+                # bash_command=f'echo $NUMBER',
+                env={"NUMBER": f'{{{{ {idx} }}}}'},
+                # env=os.environ.copy()
             )
         else:
             task = PythonOperator(
