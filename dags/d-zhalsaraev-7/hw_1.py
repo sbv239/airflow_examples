@@ -9,7 +9,7 @@ def print_ds(ds):
 
 
 with DAG(
-    'hw_1',
+    'hw_1_d-zhalsaraev-7',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
