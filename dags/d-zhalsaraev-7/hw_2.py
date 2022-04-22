@@ -21,13 +21,14 @@ with DAG(
     description='HW 2',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 4, 22),
-    catchup=False
+    catchup=False,
+    tags=['zhalsaraev']
 ) as dag:
     for i in range(30):
         if i < 10:
             task = BashOperator(
                 task_id=f't_bash{i}',
-                bash_command=f'echo{i}'
+                bash_command=f'echo {i}'
             )
         else:
             task = PythonOperator(
