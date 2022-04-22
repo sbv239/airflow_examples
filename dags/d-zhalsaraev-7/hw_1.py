@@ -25,7 +25,7 @@ with DAG(
 ) as dag:
     t1 = PythonOperator(
         task_id='print_ds',
-        python_callable=print_ds(ds)
+        python_callable=print_ds
     )
 
     t2 = BashOperator(
