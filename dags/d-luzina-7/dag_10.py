@@ -37,7 +37,7 @@ with DAG(
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 4, 17),
     catchup=False,
-    tags=['dag_9_d-luzina-7'],
+    tags=['dag_10_d-luzina-7'],
 ) as dag:
     
     t1 = PythonOperator(
