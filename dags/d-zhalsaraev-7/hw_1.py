@@ -21,7 +21,8 @@ with DAG(
     description='HW 1',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 4, 22),
-    catchup=False
+    catchup=False,
+    tags=['zhalsaraev']
 ) as dag:
     t1 = PythonOperator(
         task_id='print_ds',
