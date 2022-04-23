@@ -1,6 +1,5 @@
 from airflow import DAG
 from airflow.operators.bash import BashOperator
-from airflow.operators.python import PythonOperator
 from datetime import datetime, timedelta
 
 
@@ -9,7 +8,7 @@ def print_task(task_number):
 
 
 with DAG(
-    'hw_2_d-zhalsaraev-7',
+    'hw_5_d-zhalsaraev-7',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -18,7 +17,7 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
     },
-    description='HW 2',
+    description='HW 5',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 4, 22),
     catchup=False,
