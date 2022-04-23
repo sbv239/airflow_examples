@@ -34,7 +34,7 @@ with DAG(
     )
 
     task = BashOperator(
-        task_id='',
+        task_id='template_task',
         bash_command=templated_command
     )
 
