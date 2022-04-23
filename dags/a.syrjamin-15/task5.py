@@ -43,7 +43,9 @@ with DAG(
     for i in range(10):
         t1 = BashOperator(
             task_id=f'buya_{i}',
-            bash_command=f"echo {i}")
+            bash_command="echo $NUMBER",
+            env={"NUMBER": i},
+        )
 
     for i in range(20):
         t2 = PythonOperator(

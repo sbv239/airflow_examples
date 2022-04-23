@@ -21,7 +21,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-    'blabla_2',
+    'blabla_6',
 
     default_args={
         'depends_on_past': False,
@@ -37,19 +37,24 @@ with DAG(
     catchup=False,
     tags=['example'],
 ) as dag:
-    def print_context(random_base, **kwargs):
-        print(f'task number is: {random_base}')
+    def print_context(ts, run_id, **kwargs):
+        lg = kwargs["task_number"]
+        print(ts)
+        print(run_id)
+        return print(lg)
 
     for i in range(10):
         t1 = BashOperator(
-            task_id=f'buya_{i}',
-            bash_command=f"echo {i}")
+            task_id=f'buya_huya_{i}',
+            bash_command="echo $NUMBER",
+            env={"NUMBER": i},
+        )
 
     for i in range(20):
         t2 = PythonOperator(
-            task_id='print_' + str(i),
+            task_id='print_buya' + str(i),
             python_callable=print_context,
-            op_kwargs={'random_base': i},
+            op_kwargs={"lg": i},
             )
 
     t1 >> t2
