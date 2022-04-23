@@ -11,11 +11,11 @@ def push_var(ti):
 
 
 def pull_var(ti):
-    print(ti.xcom_pull('sample_xcom_key'))
+    print(ti.xcom_pull('sample_xcom_key', 't_pull'))
 
 
 with DAG(
-    'hw_7_d-zhalsaraev-7',
+    'hw_8_d-zhalsaraev-7',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -24,7 +24,7 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
     },
-    description='HW 7',
+    description='HW 8',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 4, 22),
     catchup=False,
