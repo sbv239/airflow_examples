@@ -1,4 +1,20 @@
+"""\
+    #### Krasivya documentation
+    **Krasotolya** (markdown),
+    `doc` (plain text), _doc 55 55 55 rst_, `from datetime import datetime, timedelta`, ***doc_json***, `doc_yaml` which gets
+    rendered in the UI's Task Instance Details page.
+    #абзац сукка
 
+    #ужас
+
+    ![img](http://montcs.bloomu.edu/~bobmon/Semesters/2012-01/491/import%20soul.png)
+    Mark *italic text* with one asterisk, **bold text** with two.
+    For ``monospaced text``, use two "backquotes" instead
+    ```text
+    _БУУУя_
+    # Тут могла быть функция
+
+    """
 from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.operators.bash import BashOperator
