@@ -11,7 +11,7 @@ def push_var(ti):
 
 
 def pull_var(ti):
-    print(ti.xcom_pull(key='sample_xcom_key', task_ids='t_pull'))
+    print(ti.xcom_pull(key='sample_xcom_key', task_ids='t_push'))
 
 
 with DAG(
