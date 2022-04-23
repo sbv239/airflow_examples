@@ -8,7 +8,7 @@ def return_str(ti):
 
 
 def print_return_str(ti):
-    print(ti.xcom_pull(task_ids='t_return'))
+    print(ti.xcom_pull(key='return_value'))
 
 
 with DAG(
