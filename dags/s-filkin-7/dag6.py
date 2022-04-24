@@ -7,8 +7,8 @@ from airflow.operators.python import PythonOperator
 
 def python_task(task_number, ts, run_id):
     print(f"task number is: {task_number}")
-    print(ts)
-    print(run_id)
+    print(f"ts: {ts}")
+    print(f"run_id: {run_id}")
     return 'ok'
 
 with DAG(
@@ -29,7 +29,7 @@ with DAG(
         t1 = BashOperator(
             task_id='bash_' + str(i), 
             bash_command=f"echo $NUMBER", 
-            env={'NUMBER': i}
+            env={'NUMBER': str(i)}
         )
 
     for i in range(10, 30):
