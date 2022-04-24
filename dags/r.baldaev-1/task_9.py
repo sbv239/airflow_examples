@@ -14,6 +14,7 @@ def set_xcom(ti):
 
 def print_xcom(ti):
     xcom_sample = ti.xcom_pull(
+        key='return_value',
         task_ids='task_1_return_xcom',
     )
     print(xcom_sample)
