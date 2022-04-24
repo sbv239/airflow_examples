@@ -34,7 +34,7 @@ with DAG(
     # # Каждый DAG "видит" свою "дату запуска"
     # # это когда он предположительно должен был
     # # запуститься. Не всегда совпадает с датой на вашем компьютере
-    start_date=datetime(2022, 4, 24),
+    start_date=datetime(2022, 4, 23),
     # # Запустить за старые даты относительно сегодня
     # # https://airflow.apache.org/docs/apache-airflow/stable/dag-run.html
     catchup=False,
@@ -44,21 +44,22 @@ with DAG(
 
 
 
-    def print_task(**kwargs):
-        print(task_num)
+    def print_task(ds, **kwargs):
+        task_number = kwargs['task_num']
+        print(f"task number is: {task_number}")
     
-    for task_number in range(30):
+    for task_number in range(10):
 
-        if task_number < 20:
-            run_bash = BashOperator(
-                task_id=f'run_bash_{task_number}',
-                bash_command=f'echo {task_number}'
-            )
-        else:
-            run_python = PythonOperator(
-                task_id=f'run_python_{task_number}',
-                python_callable=print_task,
-                op_kwargs={'task_num':task_number}
-            )
+        run_bash = BashOperator(
+            task_id=f'run_bash_{task_number}',
+            bash_command=f'echo {task_number}'
+        )
+    for task_number in range(20):
+        run_python = PythonOperator(
+            task_id=f'run_python_{task_number}',
+            op_kwargs={'task_num':task_number},
+            python_callable=print_task,
+            
+        )
 
     run_bash >> run_python
