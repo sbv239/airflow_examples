@@ -15,7 +15,7 @@ def print_task_number(task_number):
 
 
 with DAG(
-    'task_2_r_baldaev',
+    'task_3_r_baldaev',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
