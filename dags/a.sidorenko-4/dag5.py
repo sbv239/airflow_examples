@@ -47,7 +47,7 @@ with DAG(
         run_bash = BashOperator(
             task_id=f'run_bash_number_{task_number}',
             bash_command=f'echo $NUMBER',
-            env={"NUMBER": task_number}
+            env={"NUMBER": str(task_number)}
         )
 
     run_bash
