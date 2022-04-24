@@ -15,7 +15,7 @@ def print_ds(ds):
 
 
 with DAG(
-    'task_1',
+    'task_1_r_baldaev',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
