@@ -10,7 +10,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-    'hw_1_a.sidorenko-4',
+    'hw_3_a.sidorenko-4',
     # Параметры по умолчанию для тасок
     default_args={
         # Если прошлые запуски упали, надо ли ждать их успеха
@@ -27,14 +27,14 @@ with DAG(
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
     },
     # # Описание DAG (не тасок, а самого DAG)
-    description='HW 1 DAG',
+    description='a.sidorov HW 3 DAG',
     # # Как часто запускать DAG
     schedule_interval=timedelta(days=1),
     # # С какой даты начать запускать DAG
     # # Каждый DAG "видит" свою "дату запуска"
     # # это когда он предположительно должен был
     # # запуститься. Не всегда совпадает с датой на вашем компьютере
-    start_date=datetime(2022, 4, 17),
+    start_date=datetime(2022, 4, 23),
     # # Запустить за старые даты относительно сегодня
     # # https://airflow.apache.org/docs/apache-airflow/stable/dag-run.html
     catchup=False,
@@ -44,18 +44,30 @@ with DAG(
 
 
 
-    def print_date(ds, **kwargs):
-        print(ds)
+    def print_task(ds, **kwargs):
+        task_number = kwargs['task_num']
+        print(f"task number is: {task_number}")
+    
+    for task_number in range(10):
 
-
-    run_bash = BashOperator(
-        task_id='current_working_directory',
-        bash_command='pwd'
-    )
-
-    run_python = PythonOperator(
-        task_id='print_date',  # id, будет отображаться в интерфейсе
-        python_callable=print_date
-    )
-
+        run_bash = BashOperator(
+            task_id=f'run_bash_{task_number}',
+            bash_command=f'echo {task_number}'
+        )
+        run_bash.doc_md = dedent("""\
+        #### Running bash commands
+        **Start** *script* `echo {i}`
+        """)
+    for task_number in range(20):
+        run_python = PythonOperator(
+            task_id=f'run_python_{task_number}',
+            op_kwargs={'task_num':task_number},
+            python_callable=print_task,
+            
+        )
+        run_python.doc_md = dedent("""\
+        #### Running bash commands
+        **Start** *python func* `print_task(**op_kwargs)`
+        """)
+    
     run_bash >> run_python
