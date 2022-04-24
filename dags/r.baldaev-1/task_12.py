@@ -14,8 +14,8 @@ from airflow.operators.python import (
 
 
 def branching() -> str:
-    flag = bool(Variable.get('is_startml'))
-    if flag:
+    flag = Variable.get('is_startml')
+    if flag == 'True':
         return 'startml_desc'
     return 'not_startml_desc'
 
@@ -29,38 +29,38 @@ def not_startml_desc():
 
 
 with DAG(
-    'task_12_r_baldaev',
-    default_args={
-        'depends_on_past': False,
-        'email': ['airflow@example.com'],
-        'email_on_failure': False,
-        'email_on_retry': False,
-        'retries': 1,
-        'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
-    },
-    description='Task 12 - branching',
-    schedule_interval=timedelta(days=1),
-    start_date=datetime(2022, 1, 1),
-    catchup=False,
-    tags=['r.baldaev-1'],
+        'task_12_r_baldaev',
+        default_args={
+            'depends_on_past': False,
+            'email': ['airflow@example.com'],
+            'email_on_failure': False,
+            'email_on_retry': False,
+            'retries': 1,
+            'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
+        },
+        description='Task 12 - branching',
+        schedule_interval=timedelta(days=1),
+        start_date=datetime(2022, 1, 1),
+        catchup=False,
+        tags=['r.baldaev-1'],
 ) as dag:
-        task1 = DummyOperator(
-            task_id='before_branching',
-        )
-        task2 = BranchPythonOperator(
-            task_id='determine_course',
-            python_callable=branching,
-        )
-        task3 = PythonOperator(
-            task_id='startml_desc',
-            python_callable=startml_desc,
-        )
-        task4 = PythonOperator(
-            task_id='not_startml_desc',
-            python_callable=not_startml_desc,
-        )
-        task5 = DummyOperator(
-            task_id='after branching',
-        )
+    task1 = DummyOperator(
+        task_id='before_branching',
+    )
+    task2 = BranchPythonOperator(
+        task_id='determine_course',
+        python_callable=branching,
+    )
+    task3 = PythonOperator(
+        task_id='startml_desc',
+        python_callable=startml_desc,
+    )
+    task4 = PythonOperator(
+        task_id='not_startml_desc',
+        python_callable=not_startml_desc,
+    )
+    task5 = DummyOperator(
+        task_id='after branching',
+    )
 
-        task1 >> task2 >> [task3, task4] >> task5
+    task1 >> task2 >> [task3, task4] >> task5
