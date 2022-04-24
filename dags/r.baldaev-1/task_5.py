@@ -1,6 +1,7 @@
 """
 Test documentation
 """
+import os
 from datetime import datetime, timedelta
 from textwrap import dedent
 
@@ -32,6 +33,7 @@ with DAG(
 ) as dag:
     curr_task = None
     for i in range(10):
+        os.putenv('NUMBER', str(i))
         task = BashOperator(
             task_id=f'echo_task_{i}',
             bash_command=f'echo $NUMBER',
