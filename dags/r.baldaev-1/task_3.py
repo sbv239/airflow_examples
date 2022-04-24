@@ -36,6 +36,14 @@ with DAG(
             task_id=f'echo_task_{i}',
             bash_command=f'echo {i}',
         )
+        task.doc_md = dedent(
+            f"""
+                # Task {i} Documentation
+                **This task print own number:**
+                `echo {i}`
+                *by echo bash command*
+            """
+        )
         if curr_task:
             curr_task >> task
         curr_task = task
@@ -44,6 +52,15 @@ with DAG(
             task_id=f'print_task_{i}',
             python_callable=print_task_number,
             op_kwargs={'task_number': i},
+        )
+        task.doc_md = dedent(
+            f"""
+                # Task {i} Documentation
+                **This task print own number:**
+                `def print_task_number(task_number):`
+                    `print(f"task number is: {i}")`
+                *by python print command*
+            """
         )
         curr_task >> task
         curr_task = task
