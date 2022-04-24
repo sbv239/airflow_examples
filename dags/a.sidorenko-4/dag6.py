@@ -45,7 +45,7 @@ with DAG(
 
 
     def print_task(ts, run_id, **kwargs):
-        task_number = kwargs['task_num']
+        task_number = kwargs['task_number']
         print(f'{ts}')
         print(f'{run_id}')
         print(f"task number is: {task_number}")
