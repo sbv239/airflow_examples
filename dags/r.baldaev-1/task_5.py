@@ -36,7 +36,7 @@ with DAG(
         os.putenv('NUMBER', str(i))
         task = BashOperator(
             task_id=f'echo_task_{i}',
-            bash_command=f'echo $NUMBER',
+            bash_command=f'NUMBER={i} & echo $NUMBER',
         )
         if curr_task:
             curr_task >> task
