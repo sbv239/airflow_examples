@@ -60,7 +60,7 @@ with DAG(
         python_callable=not_startml_desc,
     )
     task5 = DummyOperator(
-        task_id='after branching',
+        task_id='after_branching',
     )
 
     task1 >> task2 >> [task3, task4] >> task5
