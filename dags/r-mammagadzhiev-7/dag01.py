@@ -10,7 +10,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-    'tutorial',
+    'r-mammagadzhiev-7dag',
     # Параметры по умоsлчанию для тасок
     default_args={
         # Если прошлые запуски упали, надо ли ждать их успеха
