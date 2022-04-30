@@ -1,11 +1,11 @@
 from airflow import DAG
 from airflow.operators.python import PythonOperator
-from airflow.models import variable
+from airflow.models import Variable
 from datetime import datetime, timedelta
 
 
 def print_var():
-    print(variable.get('is_startml'))
+    print(Variable.get('is_startml'))
 
 
 with DAG(
