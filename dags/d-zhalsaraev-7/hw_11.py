@@ -9,7 +9,7 @@ def print_var():
 
 
 with DAG(
-    'hw_10_d-zhalsaraev-7',
+    'hw_11_d-zhalsaraev-7',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -18,7 +18,7 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
     },
-    description='HW 10',
+    description='HW 11',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 4, 22),
     catchup=False,
