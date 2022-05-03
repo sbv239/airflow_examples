@@ -20,14 +20,15 @@ with DAG(
     tags=['hw_1'],
 ) as dag:
         t1 = BashOperator(
-                task_id='show current folder',
+                task_id='show_current_folder',
                 bash_command='pwd'
         )
 
 def print_context(ds, **kwargs):
         print(ds)
 
-run_this = PythonOperator(
+t2 = PythonOperator(
         task_id='print_the_context',
         python_callable=print_context
 )
+t1 >> t2
