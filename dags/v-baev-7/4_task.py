@@ -19,16 +19,18 @@ with DAG(
     catchup=False,
     tags=['hw_4'],
 ) as dag:
+        templated_command = dedent(
+                """
+            {% for i in range(5) %}
+                echo "{{ts}}"
+                {% endfor %}
+                echo "{{run_id}}"    
+            """
+        )
         task_bash = BashOperator(
-        task_id='temlated',
+        task_id='temlated_print',
+        depends_on_past=False
         bash_command=temlated_command
         )
 
-templated_command = dedent(
-        """
-    {% for i in range(5) %}
-        echo "{{ts}}"
-        {% endfor %}
-        echo "{{run_id}}"    
-    """
-    )
+task_bash
