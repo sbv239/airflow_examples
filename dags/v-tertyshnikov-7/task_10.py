@@ -27,7 +27,7 @@ with DAG(
     def query():
         postgres = PostgresHook(postgres_conn_id="startml_feed")
         with postgres.get_conn() as conn:   # вернет тот же connection, что вернул бы psycopg2.connect(...)
-            with conn.cursor(cursor_factory=RealDictCursor) as cursor:
+            with conn.cursor() as cursor:
                 cursor.execute(
                     """
                     SELECT user_id, COUNT(action) as count
