@@ -26,16 +26,16 @@ with DAG(
         )
 
 
-def print_context(task_n: int, ts, run_id, **kwargs):
-        print(f'task number is: {task_n}')
+def print_context(task_num, ts, run_id):
+        print(f'task number is: {task_num}')
         print(ts)
         print(run_id)
 
 
 for task_n in range(20):
         task_p = PythonOperator(
-                task_id='task_number_' + str(i),
+                task_id='task_number' + str(i),
                 python_callable=print_context,
-                op_kwargs={'task_number': task_n},
+                op_kwargs={'task_number': i},
         )
 task_b >> task_p
