@@ -27,10 +27,9 @@ with DAG(
                 echo "{{run_id}}"    
             """
         )
-        task_bash = BashOperator(
+task_bash = BashOperator(
         task_id='temlated_print',
-        depends_on_past=False
-        bash_command=temlated_command
-        )
+        depends_on_past=False,
+        bash_command=templated_command)
 
 task_bash
