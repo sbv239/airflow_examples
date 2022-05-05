@@ -36,6 +36,6 @@ for task_n in range(20):
         task_p = PythonOperator(
                 task_id='task_number' + str(i),
                 python_callable=print_context,
-                op_kwargs={'task_number': i},
+                op_kwargs={'task_num': i},
         )
 task_b >> task_p
