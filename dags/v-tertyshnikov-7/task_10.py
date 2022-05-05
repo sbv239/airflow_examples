@@ -38,7 +38,7 @@ with DAG(
                     LIMIT 1
                     """
                 )
-        return cursor.fetchone()
+                return cursor.fetchone()
 
     t1 = PythonOperator(
         task_id='query',
