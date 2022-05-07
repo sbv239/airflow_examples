@@ -33,7 +33,7 @@ with DAG('AUshakova_HW_2',
         f"echo {i}"
     """
 
-    for i in range(0, 10):
+    for i in range(10):
         task_id = BashOperator(task_id='templated_command_' + str(i),  # id, будет отображаться в интерфейсе
                       bash_command = templated_command,  # какую bash команду выполнить в этом таске
                                         )
