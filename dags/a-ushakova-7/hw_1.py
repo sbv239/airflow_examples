@@ -32,8 +32,6 @@ with DAG('AUshakova_HW_1',
                                         )
 
     def print_context(ds):
-    """Пример PythonOperator"""
-    # В ds Airflow за нас подставит текущую логическую дату - строку в формате YYYY-MM-DD
         print(ds)
 
     t2 = PythonOperator(
