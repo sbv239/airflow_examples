@@ -32,7 +32,7 @@ with DAG(
     def print_task_number(ts, run_id, **kwargs):
         print(ts)
         print(run_id)
-        print('task number is', str(task_number))
+        print('task number is', str(kwargs['task_number']))
 
     for i_ in range(30):
         if i_ < 10:
