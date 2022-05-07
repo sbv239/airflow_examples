@@ -18,7 +18,6 @@ with DAG(
     start_date=datetime(2022, 1, 1),
     catchup=False,
 ) as dag:
-
     def print_context(task_number, ts, run_id, **kwargs):
         print(f"task number is: {task_number}")
         print(ts)
