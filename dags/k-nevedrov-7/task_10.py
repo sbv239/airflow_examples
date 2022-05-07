@@ -20,6 +20,7 @@ with DAG(
     start_date=datetime(2022, 1, 1),
     catchup=False
 ) as dag:
+
     def find_user(**kwargs):
         postgres = PostgresHook(postgres_conn_id="startml_feed")
         with postgres.get_conn() as conn:
