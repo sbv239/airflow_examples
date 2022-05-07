@@ -13,7 +13,7 @@ import json
 # Будем иногда называть операторы тасками (tasks)
 from airflow.operators.bash import BashOperator
 with DAG(
-    'hw1_i-malashenko-7',
+    'hw_1_i-malashenko-7',
     # Параметры по умолчанию для тасок
     default_args={
         'depends_on_past': False,
