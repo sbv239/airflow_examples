@@ -31,5 +31,3 @@ with DAG(
         )
         for i in range(20)
     ]
-
-    b_t >> p_t
