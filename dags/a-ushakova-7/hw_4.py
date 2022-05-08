@@ -5,7 +5,7 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python_operator import PythonOperator
 
-with DAG('AUshakova_HW_2',
+with DAG('AUshakova_HW_4',
 # Параметры по умолчанию для тасок
     default_args={
         # Если прошлые запуски упали, надо ли ждать их успеха
@@ -26,7 +26,7 @@ with DAG('AUshakova_HW_2',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 5, 6),
     catchup=False,
-    tags=['hw_2'], ) as dag:
+    tags=['hw_4'], ) as dag:
 
     templated_command = dedent(
         """
@@ -36,7 +36,7 @@ with DAG('AUshakova_HW_2',
     {% endfor %}
     """
 
-    task_id = BashOperator(task_id='ran_id_' + str(i),  # id, будет отображаться в интерфейсе
+    task_id = BashOperator(task_id='ran_id',  # id, будет отображаться в интерфейсе
                                bash_command = templated_command,  # какую bash команду выполнить в этом таске
                                 )
     task_id
