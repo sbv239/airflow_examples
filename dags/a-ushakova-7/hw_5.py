@@ -31,6 +31,6 @@ with DAG('AUshakova_HW_5',
     for i in range(10):
         task_id = BashOperator(task_id = 'env_' + str(i),  # id, будет отображаться в интерфейсе
                                bash_command = "echo $NUMBER",  # какую bash команду выполнить в этом таске
-                               env = {"NUMBER" : i}, )
+                               env = {"NUMBER" : str(i)}, )
         task_id
     
