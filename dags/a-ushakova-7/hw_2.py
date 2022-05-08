@@ -35,7 +35,7 @@ with DAG('AUshakova_HW_2',
         task_id
 
     def print_number(task_number):
-        print("task number is: {number}".format(task_number))
+        print("task number is: {0}".format(task_number))
 
     for i in range(20):
     # Каждый таск будет спать некое количество секунд
