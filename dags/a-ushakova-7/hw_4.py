@@ -34,7 +34,7 @@ with DAG('AUshakova_HW_4',
         echo "{{ ts }}"
         echo "{{ task_id }}"
     {% endfor %}
-    """
+    """)
 
     t1 = BashOperator(task_id='templated',  # id, будет отображаться в интерфейсе
                         depends_on_past = False,
