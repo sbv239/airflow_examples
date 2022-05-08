@@ -32,7 +32,7 @@ with DAG('AUshakova_HW_4',
         """
     {% for i in range(5) %}
         echo "{{ ts }}"
-        echo "{{ task_id }}"
+        echo "{{ run_id }}"
     {% endfor %}
     """)
 
