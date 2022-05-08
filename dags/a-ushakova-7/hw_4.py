@@ -22,7 +22,7 @@ with DAG('AUshakova_HW_4',
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
         },
             # Описание DAG (не тасок, а самого DAG)
-    description='2 homework',
+    description='4 homework',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 5, 6),
     catchup=False,
@@ -36,9 +36,10 @@ with DAG('AUshakova_HW_4',
     {% endfor %}
     """
 
-    task_id = BashOperator(task_id='ran_id',  # id, будет отображаться в интерфейсе
-                               bash_command = templated_command,  # какую bash команду выполнить в этом таске
+    t1 = BashOperator(task_id='templated',  # id, будет отображаться в интерфейсе
+                        depends_on_past = False,
+                        bash_command = templated_command,  # какую bash команду выполнить в этом таске
                                 )
-    task_id
+    t1
 
     
