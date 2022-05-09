@@ -14,10 +14,11 @@ with DAG(
             'retry_delay': timedelta(minutes=5),
         },
 
-        description='HW 1 DAG',
+        description='hw_1_b-boguslavskij',
         schedule_interval=timedelta(days=1),
         start_date=datetime(2022, 4, 17),
         catchup=False,
+        tags=['b-b']
 
 ) as dag:
     def print_date(ds, **kwargs):
@@ -35,4 +36,3 @@ with DAG(
     )
 
     run_bash >> run_python
-
