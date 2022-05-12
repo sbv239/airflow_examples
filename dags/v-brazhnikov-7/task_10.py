@@ -38,7 +38,7 @@ with DAG(
                 return cursor.fetchone()
 
     PythonOperator(
-        task_id="max_likes",
+        task_id="max_like",
         python_callable=get_max_likes_user,
         dag=dag,
     )
