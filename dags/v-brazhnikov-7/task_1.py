@@ -23,5 +23,9 @@ with DAG(
     def print_ds(ds, **kwargs):
         print(ds)
 
-    PythonOperator(task_id="ds_printer", python_callable=print_ds, dag=dag)
-    BashOperator(task_id="pwd_printer", bash_command="pwd ", dag=dag)
+    python_task = PythonOperator(
+        task_id="ds_printer", python_callable=print_ds, dag=dag
+    )
+    bash_task = BashOperator(task_id="pwd_printer", bash_command="pwd ", dag=dag)
+
+    bash_task >> python_task
