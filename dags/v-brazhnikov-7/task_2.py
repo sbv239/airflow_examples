@@ -20,12 +20,16 @@ with DAG(
     catchup=False,
 ) as dag:
 
-    def print_ds(ds, **kwargs):
-        print(ds)
+    for i in range(10):
+        BashOperator(task_id="pwd_printer", bash_command=f"echo {i}", dag=dag)
 
-    python_task = PythonOperator(
-        task_id="ds_printer", python_callable=print_ds, dag=dag
-    )
-    bash_task = BashOperator(task_id="pwd_printer", bash_command="pwd", dag=dag)
+    def print_ds(ds, task_number, **kwargs):
+        print(f"task number is: {task_number}")
 
-    bash_task >> python_task
+    for i in range(11, 30):
+        PythonOperator(
+            task_id="ds_printer",
+            python_callable=print_ds,
+            op_kwargs={"task_number": i},
+            dag=dag,
+        )
