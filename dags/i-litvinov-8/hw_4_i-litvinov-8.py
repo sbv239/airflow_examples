@@ -32,5 +32,7 @@ with DAG(
     t = BashOperator(
         task_id='templated_task_for_task_4',
         depends_on_past=False,
-        bash_command=templated_command
+        bash_command=templated_command,
+        dag=dag,
+
     )
