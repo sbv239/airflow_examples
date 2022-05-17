@@ -3,9 +3,10 @@ from textwrap import dedent
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python_operator import PythonOperator
+from airflow.models import Variable
 
 with DAG(
-    'task_01',
+    'hw_4_e-demidov',
     default_args={
         'depends_on_past': False,
         'email': ['yevgeniy.demidov@gmail.com'],
@@ -14,24 +15,24 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),
     },
-    description='Lesson_11_task_1',
+    description='hw_4_e-demidov',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 5, 16),
     catchup=False,
     tags=['e-demidov'],
 ) as dag:
-    bash_task = BashOperator(
-        task_id='p',
-        bash_command='pwd',
-    )
     
-    def print_ds(ds, **kwarg):
-        print(ds)
-        return 'Любое другое сообщение'
-
-    py_task = PythonOperator(
-        task_id='print_ds',
-        python_callable=print_ds,
+    templated_command = dedent(
+        """
+    {% for i in range(5) %}
+        echo "{{ ts }}"
+        echo "{{ run_id }}"
+    {% endfor %}
+    """
+    )  
+    t3 = BashOperator(
+        task_id='templated',
+        depends_on_past=False,
+        bash_command=templated_command,
     )
-
-    bash_task >> py_task
+    t3
