@@ -34,16 +34,14 @@ with DAG(
     )
 
 
-    def print_context(ds, **kwargs):
+    def get_ds(ds, **kwargs):
         print(ds)
         return "Start time is returned!"
 
 
     t2 = PythonOperator(
         task_id='get ds',
-        depends_on_past=False,  # переопределили настройку из DAG
-        bash_command='sleep 5',
-        retries=3,  # тоже переопределили retries (было 1)
+        python_callable=get_ds,
     )
     t1.doc_md = dedent(
         """\
