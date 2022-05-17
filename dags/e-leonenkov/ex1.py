@@ -11,7 +11,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-    'First DAG',
+    'First_DAG',
 
     default_args={
         'depends_on_past': False,
