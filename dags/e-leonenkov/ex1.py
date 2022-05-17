@@ -40,7 +40,7 @@ with DAG(
 
 
     t2 = PythonOperator(
-        task_id='get ds',
+        task_id='get_ds',
         python_callable=get_ds,
     )
     t1.doc_md = dedent(
