@@ -1,7 +1,14 @@
+'''
+# Task 2 Documentation
+
+В прошлом примере все задачи в `DAG` были объявлены **явно**.
+Однако это не единственный способ задать DAG: можно использовать всю силу цикла *for* для объявления задач.
+'''
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python_operator import PythonOperator
 from datetime import date, timedelta, datetime
+from textwrap import dedent
 
 
 def task_id_print(task_number):
@@ -38,3 +45,13 @@ with DAG(
                     python_callable=task_id_print,
                     op_kwargs={'task_number': i}
             )
+        t.doc_md = dedent(
+            """
+            # Task Documentation
+            
+            `This` **is** *task*
+            """
+        )
+
+    dag.doc_md = __doc__
+
