@@ -35,7 +35,7 @@ with DAG(
 
     for i in range(11, 31):
         t2 = PythonOperator(
-            task_id='bash_operator',
+            task_id='bash_operator' + str(i),
             python_callable=task_number,
             op_kwargs={'task_number': i}
         )
