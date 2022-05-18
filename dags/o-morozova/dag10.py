@@ -39,9 +39,10 @@ with DAG(
                                             GROUP BY 1
                                             ORDER BY 2 DESC
                                             LIMIT 1
-                                               """)
-                                f = cursor.fetchall()
-                                res = {'user_id': f['user_id'], 'count': f['count']}
+                                               """
+                                )
+                                f = cursor.fetchone()
+                                res = {'user_id': f[0], 'count': f[1]}
                 return res
 
 
