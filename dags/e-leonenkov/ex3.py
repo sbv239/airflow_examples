@@ -1,13 +1,14 @@
 """
-Dynamic Tasks
+Dynamic Tasks with docs
 """
 from datetime import datetime, timedelta
+from textwrap import dedent
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-    'hw_2_e-leonenkov',
+    'hw_3_e-leonenkov',
 
     default_args={
         'depends_on_past': False,
@@ -17,11 +18,11 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),
     },
-    description='The DAG with dynamic tasks',
+    description='The DAG with dynamic tasks and docs',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 1, 1),
     catchup=False,
-    tags=['ex2'],
+    tags=['ex3'],
 ) as dag:
     dag.doc_md = __doc__
 
@@ -43,8 +44,20 @@ with DAG(
             op_kwargs={'task_number': i}
             )
 
+    t1.doc_md = dedent(
+        """\
+    #Dynamic _BushOperator_ tasks
+    **Bush** tasks get name `i` in cycle
+    """
+    )
+
+    t1.doc_md = dedent(
+        """\
+    #Dynamic _PythonOperator_ tasks
+    **Python** tasks get name `task_number = i` in cycle
+    """
+    )
+
+
 
     t1 >> t2
-
-
-
