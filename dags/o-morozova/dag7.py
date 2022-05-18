@@ -36,7 +36,7 @@ with DAG(
         for i in range(10):
                 t_bash = BashOperator(
                         task_id="echo_" + str(i),
-                        bash_command='f"echo ' + str(i) + '"',
+                        bash_command='echo ' + str(i),
                         dag=dag,  # говорим, что таска принадлежит дагу из переменной dag
                         env={"DATA_INTERVAL_START": date},
                 )
