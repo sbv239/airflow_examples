@@ -1,57 +1,46 @@
-from textwrap import dedent
-from airflow import DAG
 from datetime import datetime, timedelta
+from textwrap import dedent
+
+# Для объявления DAG нужно импортировать класс из airflow
+from airflow import DAG
+
+# Операторы - это кирпичики DAG, они являются звеньями в графе
+# Будем иногда называть операторы тасками (tasks)
 from airflow.operators.bash import BashOperator
 from airflow.operators.python_operator import PythonOperator
-
-
 with DAG(
-    'v-nazarov-14.step2',
+    'step2 v-nazarov',
     # Параметры по умолчанию для тасок
     default_args={
-        # Если прошлые запуски упали, надо ли ждать их успеха
         'depends_on_past': False,
-        # Кому писать при провале
         'email': ['airflow@example.com'],
-        # А писать ли вообще при провале?
         'email_on_failure': False,
-        # Писать ли при автоматическом перезапуске по провалу
         'email_on_retry': False,
-        # Сколько раз пытаться запустить, далее помечать как failed
         'retries': 1,
-        # Сколько ждать между перезапусками
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
     },
     # Описание DAG (не тасок, а самого DAG)
-    description='A simple tutorial DAG',
-        # Как часто запускать DAG
-        schedule_interval=timedelta(days=1),
-        # С какой даты начать запускать DAG
-        # Каждый DAG "видит" свою "дату запуска"
-        # это когда он предположительно должен был
-        # запуститься. Не всегда совпадает с датой на вашем компьютере
-        start_date=datetime(2022, 5, 18),
-        # Запустить за старые даты относительно сегодня
-        # https://airflow.apache.org/docs/apache-airflow/stable/dag-run.html
-        catchup=False,
-        # теги, способ помечать даги
-        tags=['v-nazarov-14'],
+    description='step2',
+    schedule_interval=timedelta(days=1),
+    start_date=datetime(2022, 1, 1),
+    catchup=False,
+    tags=['v-nazarov'],
 ) as dag:
+    def my_print_function(ds):
+        print(f'task number is: {ds}')
+        return 0
 
-        for i in range(10):
-                t1 = BashOperator(
-                        task_id='range' + str(i), # в id можно делать все, что разрешают строки в python
-                        bash_command=f"echo {i}", # какую bash команду выполнить в этом таске
-                )
+    for i in range(10):
+        taskx = BashOperator(
+            task_id='loop_bash_' + str(i),
+            depends_on_past=False,
+            bash_command=f"echo {i}",
+        )
+        # tloop0 >> taskx
 
-        def my_print_function(ds):
-                print(f'task number is: {ds}')
-
-        for i in range(20):
-
-                t2 = PythonOperator(
-                        task_id='loop' + str(i),
-                        python_callable=my_print_function
-                )
-
-        t1 >> t2
+    for i in range(20):
+        taskp = PythonOperator(
+            task_id='my_loop_py_'+ str(i),  # в id можно делать все, что разрешают строки в python
+            python_callable=my_print_function,
+            op_kwargs={'ds': str(i)},
+        )
