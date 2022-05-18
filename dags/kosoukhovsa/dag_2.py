@@ -13,8 +13,8 @@ default_args={
     'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
 }
 
-def print_date(**kwargs):
-    print(f"Логическая дата:{kwargs['ds']}")
+def print_date(ds, **kwargs):
+    print(f"Логическая дата:{ds}")
 
 with DAG (
     'task_2',
