@@ -33,17 +33,19 @@ with DAG(
                 with postgres.get_conn() as conn:
                         with conn.cursor(cursor_factory=RealDictCursor) as cursor:
                                 cursor.execute(
-                                        """SELECT f.user_id, count(f.action) as count
-                                             FROM "feed_action" f
-                                            WHERE f.action = 'like'
-                                            GROUP BY 1
+                                        """SELECT user_id, count(action) as count
+                                             FROM "feed_action" 
+                                            WHERE action = 'like'
+                                            GROUP BY user_id
                                             ORDER BY 2 DESC
                                             LIMIT 1
-                                               """
+                                        """
                                 )
                                 f = cursor.fetchone()
-                                res = {'user_id': f[0][1], 'count': f[1][1]}
+                                print(f[0])
+                                print(f[0][1])
                                 print(res)
+                                res = {'user_id': f[0][1], 'count': f[1][1]}
                 return res
 
 
