@@ -42,9 +42,8 @@ with DAG(
                                                """
                                 )
                                 f = cursor.fetchone()
-                                print(type(f))
-                                print(f)
-                                res = {'user_id': f[0], 'count': f[1]}
+                                res = {'user_id': f[0][1], 'count': f[1][1]}
+                                print(res)
                 return res
 
 
