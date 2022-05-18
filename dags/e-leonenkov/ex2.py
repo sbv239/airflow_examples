@@ -2,7 +2,6 @@
 Dynamic Tasks
 """
 from datetime import datetime, timedelta
-#from textwrap import dedent
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
@@ -37,24 +36,11 @@ with DAG(
                 bash_command=f'echo {i}',
             )
 
-        t2 = PythonOperator(
+        else:
+            t2 = PythonOperator(
             task_id=f'python_task_{i}',
             python_callable=print_task_num,
             op_kwargs={'task_number': i}
-        )
-
-        # t1.doc_md = dedent(
-        #     """\
-        # #### Task 1 Documentation
-        # Print the current directory
-        # """
-        # )
-        #
-        # t2.doc_md = dedent(
-        #     """\
-        # #### Task 2 Documentation
-        # Get `ds` and print text
-        # """
-        # )
+            )
 
         t1 >> t2
