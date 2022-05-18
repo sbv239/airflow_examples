@@ -1,5 +1,12 @@
 """
-Test documentation
+ Test documentation
+ `code 2`
+ `Monospace`
+ # bold text 2
+ **bold text 2**
+ ## italicized text 2
+ *italicized text 2*
+ _italicized text 2_
 """
 from datetime import datetime, timedelta
 from textwrap import dedent
@@ -38,6 +45,8 @@ with DAG(
                 else:
                         t >> t_bash
                         t = t_bash
+
+        dag.doc_md = __doc__
 
         def print_str(task_number):
                 print("task number is:", task_number)

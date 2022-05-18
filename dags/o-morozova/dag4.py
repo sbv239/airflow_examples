@@ -10,7 +10,7 @@ from airflow.operators.python_operator import PythonOperator
 from airflow.operators.bash import BashOperator
 
 with DAG(
-    'HW1',
+    'HW3',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -19,16 +19,24 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
     },
-    description='HW1 DAG',
+    description='HW3 DAG',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 1, 1),
     catchup=False,
     tags=['hw1'],
 ) as dag:
         date = "{{ ds }}"
+        templated_command = dedent(
+                """
+            {% for i in range(5) %}
+                echo "{{ ts }}"
+                echo "{{ run_id }}"
+            {% endfor %}
+            """
+        )
         t1 = BashOperator(
-                task_id="pwd",
-                bash_command="pwd",
+                task_id="templated_command",
+                bash_command=templated_command,
                 dag=dag,  # говорим, что таска принадлежит дагу из переменной dag
                 env={"DATA_INTERVAL_START": date},
         )
@@ -41,14 +49,3 @@ with DAG(
             *Task Instance Details page.*
             """)
 
-        def print_date(ds):
-                print(ds)
-
-        t2 = PythonOperator(
-                task_id='print_date',
-                python_callable=print_date,
-                op_kwargs={'ds': date},
-        )
-
-
-        t1 >> t2
