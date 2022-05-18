@@ -26,21 +26,21 @@ with DAG(
     catchup=False,
     tags=['v-nazarov'],
 ) as dag:
-    def my_print_function(ds):
-        print(f'task number is: {ds}')
-        return 0
+
 
     for i in range(10):
-        taskx = BashOperator(
+        t1 = BashOperator(
             task_id='loop_bash_' + str(i),
-            depends_on_past=False,
             bash_command=f"echo {i}",
         )
-        # tloop0 >> taskx
 
+    def task_number(task_number):
+        print(f"task number is: {task_number}")
     for i in range(20):
-        taskp = PythonOperator(
-            task_id='my_loop_py_'+ str(i),  # в id можно делать все, что разрешают строки в python
-            python_callable=my_print_function,
-            op_kwargs={'ds': str(i)},
+        t2 = PythonOperator(
+            task_id='my_loop_py_' + str(i),  # в id можно делать все, что разрешают строки в python
+            python_callable=task_number,
+            op_kwargs={'task_number': i},
         )
+
+    t1 >> t2
