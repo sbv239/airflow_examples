@@ -9,7 +9,7 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python_operator import PythonOperator
 with DAG(
-    'step2 v-nazarov',
+    'step2_v-nazarov',
     # Параметры по умолчанию для тасок
     default_args={
         'depends_on_past': False,
