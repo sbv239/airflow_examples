@@ -7,7 +7,7 @@ from airflow.operators.python_operator import PythonOperator
 # Будем иногда называть операторы тасками (tasks)
 from airflow.operators.bash import BashOperator
 with DAG(
-    'task1',
+    'a-malahov_task1',
         # Параметры по умолчанию для тасок
         default_args={
             # Если прошлые запуски упали, надо ли ждать их успеха
@@ -24,7 +24,7 @@ with DAG(
             'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
         },
         # Описание DAG (не тасок, а самого DAG)
-        description='task 1',
+        description='a-malahov task 1',
         # Как часто запускать DAG
         schedule_interval=timedelta(days=1),
         # С какой даты начать запускать DAG
