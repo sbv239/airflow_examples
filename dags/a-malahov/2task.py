@@ -22,18 +22,18 @@ with DAG(
 
     for i in range(10):
         bach_op = BashOperator(
-            task_id='echo' + str(i),  # id, будет отображаться в интерфейсе
+            task_id='echo_' + str(i),  # id, будет отображаться в интерфейсе
             bash_command=f"echo {i}" , # какую bash команду выполнить в этом таске
         )
 
-    def print_number(number):
-        print(f"task number is: {number}")
+    def print_number(task_number):
+        print(f"task number is: {task_number}")
 
-    for i in range(10, 30):
+    for i in range(10,30):
         pyhton_op = PythonOperator(
-            task_id='print_the_number',  # нужен task_id, как и всем операторам
+            task_id='print_the_number_' + str(i),  # нужен task_id, как и всем операторам
             python_callable=print_number,  # свойственен только для PythonOperator - передаем саму функцию
-            op_kwargs={'number': i},
+            op_kwargs={'task_number': i},
         )
 
     # А вот так в Airflow указывается последовательность задач
