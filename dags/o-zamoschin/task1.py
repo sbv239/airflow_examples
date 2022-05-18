@@ -23,7 +23,7 @@ default_args={
 }
 
 with DAG(
-    'task_1',
+    'hw_1_o-zamoschin',
     default_args=default_args,
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 1, 1),
