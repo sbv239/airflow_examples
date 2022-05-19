@@ -18,7 +18,7 @@ def print_task_number(ts, run_id, **kwargs):
     print("run_id: " + run_id)
 
 with DAG(
-    's-kosouhov_task_6',
+    'lesson11_s-kosouhov_task_6',
     default_args=default_args,
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 5, 10),
