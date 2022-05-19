@@ -13,12 +13,12 @@ default_args={
 }
 
 def print_task_number(ts, run_id, **kwargs):
-    print("task number is:" + kwargs["task_number"])
-    print("ts: " + ts)
-    print("run_id: " + run_id)
+    print("task number is:" + str(kwargs["task_number"]))
+    print("ts: " + str(ts))
+    print("run_id: " + str(run_id))
 
 with DAG(
-    'lesson11_s-kosouhov_task_6',
+    'lesson11_s-kosouhov_task_6_v2',
     default_args=default_args,
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 5, 10),
