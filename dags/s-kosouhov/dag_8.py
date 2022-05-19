@@ -12,13 +12,22 @@ default_args={
     'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
 }
 
-def print_task_number(ts, run_id, **kwargs):
-    print("task number is:" + kwargs["task_number"])
-    print("ts: " + ts)
-    print("run_id: " + run_id)
+def put_xcom(ti):
+    ti.xcom_push(
+        key='sample_xcom_key',
+        value='xcom test'
+    )
+
+def pull_n_print_xcom(ti):
+    past_xcom = ti.xcom_pull(
+        key='sample_xcom_key',
+        task_ids='python_task_push'
+    )
+    print(past_xcom)
+
 
 with DAG(
-    'lesson11_s-kosouhov_task_6',
+    'lesson11_s-kosouhov_task_8',
     default_args=default_args,
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 5, 10),
@@ -26,11 +35,15 @@ with DAG(
     tags=['example_2'],
 ) as dag:
 
-    for i in range(5):        
-        task = PythonOperator(
-            task_id = f"python_task_{i}",
-            python_callable=print_task_number,
-            op_kwargs = {'task_number': i}
-        )
-        task
+    task_1 = PythonOperator(
+        task_id = f"python_task_push",
+        python_callable=put_xcom,
+    )
+
+    task_2 = PythonOperator(
+        task_id = f"python_task_pull",
+        python_callable=pull_n_print_xcom,
+    )
+
+    task_1 >> task_2
     
