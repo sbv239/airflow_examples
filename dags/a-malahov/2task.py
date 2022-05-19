@@ -20,11 +20,13 @@ with DAG(
         catchup=False,
         tags=['malahov'],
 ) as dag:
+    sp_bach = []
     for i in range(10):
         bach_op = BashOperator(
             task_id='echo_' + str(i),  # id, будет отображаться в интерфейсе
             bash_command=f"echo {i}",  # какую bash команду выполнить в этом таске
         )
+        sp_bach.append(bach_op)
 
     def print_number(task_number):
         print(f"task number is: {task_number}")
@@ -38,4 +40,6 @@ with DAG(
         )
 
     # А вот так в Airflow указывается последовательность задач
+    for i in range(len(sp_bach)-1):
+        sp_bach[i] >> sp_bach[i+1]
     bach_op >> pyhton_op
