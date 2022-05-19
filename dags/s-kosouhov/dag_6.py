@@ -26,17 +26,10 @@ with DAG(
     tags=['example_2'],
 ) as dag:
 
-    for i in range(30):
-        if i < 10:
-            task = BashOperator(
-                task_id = f"bash_task_{i}",
-                bash_command = f"echo {i}"
-            )
-        else:
-            task = PythonOperator(
-                task_id = f"python_task_{i}",
-                python_callable=print_task_number,
-                op_kwargs = {'task_number': i}
-            )
-
+    for i in range(5):        
+        task = PythonOperator(
+            task_id = f"python_task_{i}",
+            python_callable=print_task_number,
+            op_kwargs = {'task_number': i}
+        )
         task
