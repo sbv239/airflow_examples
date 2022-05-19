@@ -17,7 +17,7 @@ from airflow.operators.python_operator import PythonOperator
 from airflow.operators.bash import BashOperator
 
 with DAG(
-    'o-morozova 6',
+    'o-morozova_6',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -26,11 +26,11 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
     },
-    description='o-morozova 6',
+    description='o-morozova_6',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 1, 1),
     catchup=False,
-    tags=['o-morozova 6'],
+    tags=['o-morozova_6'],
 ) as dag:
         date = "{{ ds }}"
         for i in range(10):

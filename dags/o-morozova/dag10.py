@@ -12,45 +12,42 @@ import psycopg2
 from psycopg2.extras import RealDictCursor
 
 with DAG(
-    '10_omorozova',
-    default_args={
-        'depends_on_past': False,
-        'email': ['airflow@example.com'],
-        'email_on_failure': False,
-        'email_on_retry': False,
-        'retries': 1,
-        'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
-    },
-    description='10_omorozova',
-    schedule_interval=timedelta(days=1),
-    start_date=datetime(2022, 1, 1),
-    catchup=False,
-    tags=['10_omorozova'],
+        '10_omorozova',
+        default_args={
+            'depends_on_past': False,
+            'email': ['airflow@example.com'],
+            'email_on_failure': False,
+            'email_on_retry': False,
+            'retries': 1,
+            'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
+        },
+        description='10_omorozova',
+        schedule_interval=timedelta(days=1),
+        start_date=datetime(2022, 1, 1),
+        catchup=False,
+        tags=['10_omorozova'],
 ) as dag:
-        date = "{{ ds }}"
-        def user_max_likes():
-                postgres = PostgresHook(postgres_conn_id="startml_feed")
-                with postgres.get_conn() as conn:
-                        with conn.cursor(cursor_factory=RealDictCursor) as cursor:
-                                cursor.execute(
-                                        """SELECT user_id, count(action) as count
+    date = "{{ ds }}"
+
+
+    def user_max_likes():
+        postgres = PostgresHook(postgres_conn_id="startml_feed")
+        with postgres.get_conn() as conn:
+            with conn.cursor(cursor_factory=RealDictCursor) as cursor:
+                cursor.execute(
+                    """SELECT user_id, count(action) as count
                                              FROM "feed_action" 
                                             WHERE action = 'like'
                                             GROUP BY user_id
                                             ORDER BY 2 DESC
                                             LIMIT 1
                                         """
-                                )
-                                f = cursor.fetchone()
-                                print(f[0])
-                                print(f[0][1])
-                                print(res)
-                                res = {'user_id': f[0][1], 'count': f[1][1]}
-                return res
+                )
+                res = cursor.fetchone()
+        return res
 
 
-        t1 = PythonOperator(
-                task_id='user_max_likes',
-                python_callable=user_max_likes,
-        )
-
+    t1 = PythonOperator(
+        task_id='user_max_likes',
+        python_callable=user_max_likes,
+    )
