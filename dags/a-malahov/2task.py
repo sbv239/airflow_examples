@@ -3,8 +3,9 @@ from textwrap import dedent
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
 from airflow.operators.bash import BashOperator
+
 with DAG(
-    'a-malahov_task2',
+        'a-malahov_task2',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
@@ -19,17 +20,19 @@ with DAG(
         catchup=False,
         tags=['malahov'],
 ) as dag:
-
+    sp_bach = []
     for i in range(10):
         bach_op = BashOperator(
             task_id='echo_' + str(i),  # id, будет отображаться в интерфейсе
-            bash_command=f"echo {i}" , # какую bash команду выполнить в этом таске
+            bash_command=f"echo {i}",  # какую bash команду выполнить в этом таске
         )
+        sp_bach.append(bach_op)
 
     def print_number(task_number):
         print(f"task number is: {task_number}")
 
-    for i in range(10,30):
+
+    for i in range(10, 30):
         pyhton_op = PythonOperator(
             task_id='print_the_number_' + str(i),  # нужен task_id, как и всем операторам
             python_callable=print_number,  # свойственен только для PythonOperator - передаем саму функцию
@@ -37,4 +40,6 @@ with DAG(
         )
 
     # А вот так в Airflow указывается последовательность задач
+    for i in range(len(sp_bach)-1):
+        sp_bach[i] >> sp_bach[i+1]
     bach_op >> pyhton_op
