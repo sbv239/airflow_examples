@@ -34,12 +34,26 @@ with DAG(
             task_id='echo_' + str(i),
             bash_command=f'echo {i}',
         )
-    
+        
+        t1.doc_md = dedent(
+            """
+            # Task Documentation
+            This **task** prints *bash* command `echo` and the task number 
+            """
+        )
+
     for i in range(20):
         t2 = PythonOperator(
             task_id='print_task_' + str(i),
             python_callable=print_task,
             op_kwargs={'task_number': i}
+        )
+
+        t2.doc_md = dedent(
+            """
+            # Task Documentation
+            This **task** uses *python* function `print_task` which prints the task number 
+            """
         )
     
     t1 >> t2
