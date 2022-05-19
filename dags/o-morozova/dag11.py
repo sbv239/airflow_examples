@@ -7,7 +7,11 @@ from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
 
 
-from airflow.models import Variable
+def print_is_startml():
+    from airflow.models import Variable
+    is_startml = Variable.get("is_startml")
+    print(is_startml)
+    return is_startml
 
 with DAG(
         '11_omorozova',
@@ -26,15 +30,8 @@ with DAG(
         tags=['11_omorozova'],
 ) as dag:
     date = "{{ ds }}"
-    is_startml = Variable.get("is_startml")
-
-    def print_is_startml(is_startml):
-        print(is_startml)
-        print(Variable.get("is_startml"))
-        return True
 
     t1 = PythonOperator(
         task_id='user_max_likes',
         python_callable=print_is_startml,
-        op_kwargs={'is_startml': is_startml},
     )
