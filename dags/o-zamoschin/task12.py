@@ -12,7 +12,7 @@ from airflow.models import Variable
 
 def choose_task():
     is_startml = Variable.get("is_startml")
-    if is_startml:
+    if is_startml == 'True':
         return "startml_desc"
     else:
         return "not_startml_desc"
@@ -62,3 +62,5 @@ with DAG(
     t5 = DummyOperator(
         task_id = 'after_branching',
     )
+
+    t1 >> t2 >> [t3, t4] >> t5
