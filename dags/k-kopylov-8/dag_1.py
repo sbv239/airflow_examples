@@ -28,7 +28,7 @@ with DAG('kkopylov_dag_1',
         print (ds)
     
     t2 = PythonOperator(
-        task_id = 'python t2
+        task_id = 'python t2',
         python_callable = print_ds
         )
 
