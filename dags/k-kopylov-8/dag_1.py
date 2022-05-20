@@ -21,14 +21,14 @@ with DAG('kkopylov_dag_1',
     catchup=False) as dag:
 
     t1 = BashOperator(
-        task_id = 'pwd command',
+        task_id = 'pwd_command',
         bash_command = 'pwd')
 
     def print_ds(ds):
         print (ds)
     
     t2 = PythonOperator(
-        task_id = 'python t2',
+        task_id = 'python_t2',
         python_callable = print_ds
         )
 
