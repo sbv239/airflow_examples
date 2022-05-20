@@ -35,7 +35,7 @@ with DAG('kkopylov_dag_2',
     for i in range(20):    
         t2 = PythonOperator(
             task_id = 't_2_python_'+str(i),
-            python_callable = print_ds,
+            python_callable = print_task_number,
             op_kwargs={'task_number': i}
             )
         t1 >> t2
