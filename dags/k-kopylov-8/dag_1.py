@@ -13,7 +13,7 @@ default_args={
     'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
 }
 
-with DAG('dag_1',
+with DAG('kkopylov_dag_1',
     default_args = default_args,
     description='A simple tutorial DAG',
     schedule_interval=timedelta(days=1),
