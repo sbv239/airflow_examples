@@ -34,7 +34,7 @@ with DAG(
             t1 = BashOperator(
                 task_id=f'echo_{i}',
                 bash_command='echo $NUMBER',
-                env={"NUMBER": i},
+                env={"NUMBER": str(i)},
             )
 
         else:
