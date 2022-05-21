@@ -31,12 +31,12 @@ with DAG(
     )
 
 
-def print_ds(ds, **kwargs):
+def print_ds(ds):
     print(ds)
 
 
 t2 = PythonOperator(
-    task_id='print ds',
+    task_id='print_ds',
     python_callable=print_ds
 )
 
