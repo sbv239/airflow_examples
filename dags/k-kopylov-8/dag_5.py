@@ -24,7 +24,7 @@ with DAG('kkopylov_dag_5',
         t1 = BashOperator(
             task_id = 't_1_echo_'+str(i),
             bash_command = f'echo $NUMBER',
-            env = {"NUMBER" : "i"})
+            env = {"NUMBER" : str(i)})
         t1.doc_md = dedent('''
         #### Big ass
         `t1` **documentation** with *italic* text
