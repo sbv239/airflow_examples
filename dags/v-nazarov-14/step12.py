@@ -24,7 +24,8 @@ with DAG(
 
     def tasks_ch():
         from airflow.models import Variable
-        if Variable.get("is_startml"):
+        is_startml = Variable.get("is_startml")
+        if is_startml == 'True':
             return "startml_desc"
         else:
             return "not_startml_desc"
@@ -37,11 +38,11 @@ with DAG(
 
 
     t1 = DummyOperator(
-        task_id='start'
+        task_id='before_branching'
     )
 
     t2 = BranchPythonOperator(
-        task_id='tasks_ch',
+        task_id='determine_course',
         python_callable=tasks_ch
     )
 
@@ -56,7 +57,7 @@ with DAG(
     )
 
     t5 = DummyOperator(
-        task_id='end',
+        task_id='after_branching',
         trigger_rule='none_failed_or_skipped'
     )
 
