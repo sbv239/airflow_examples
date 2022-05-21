@@ -24,14 +24,13 @@ with DAG(
         """
          {% for i in range(5) %}
             echo "{{ ts }}"
+            echo "{{ run_id }}"
          {% endfor %}
-         echo "{{ run_id }}"
         """
     )
 
     t1 = BashOperator(
         task_id='print_ts',
-        bash_command='templated_command',
+        bash_command=templated_command,
         dag=dag,
     )
-    t1
