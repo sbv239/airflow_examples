@@ -26,24 +26,20 @@ with DAG(
 
     for i in range(10):
         t0 = BashOperator(
+            env={'NUMBER': i},
             task_id=f'cycle_{i}',
-            bash_command=f"echo {i}",
+            bash_command="echo $NUMBER"
         )
         if i == 0:
             t1 = t0
         else:
             t1 >> t0
             t1 = t0
-    t0.doc_md = dedent(
-        """\
-        В документации обязательно должны быть элементы кода (заключены в кавычки `code`),
-        **полужирный** __текст__ и *текст* _курсивом_,
-         # а также абзац (объявляется через решетку)
-        """
-    )
 
-    def print_tasks(task_number):
+    def print_tasks(task_number, ts, run_id):
         print(f'task number is: {task_number}')
+        print(ts)
+        print(run_id)
 
 
     for j in range(10, 20):
