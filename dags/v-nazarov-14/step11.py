@@ -4,7 +4,7 @@ from airflow.operators.python_operator import PythonOperator
 from airflow import DAG
 
 with DAG(
-        'step10nazarov',
+        'step11nazarov',
         # Параметры по умолчанию для тасок
         default_args={
             'depends_on_past': False,
@@ -15,11 +15,11 @@ with DAG(
             'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
         },
         # Описание DAG (не тасок, а самого DAG)
-        description='step10',
+        description='step11',
         schedule_interval=timedelta(days=1),
         start_date=datetime(2022, 1, 1),
         catchup=False,
-        tags=['nazarov10'],
+        tags=['nazarov11'],
 ) as dag:
 
     def get_variable():
