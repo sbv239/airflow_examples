@@ -1,5 +1,7 @@
 from datetime import datetime, timedelta
 from airflow.operators.python_operator import PythonOperator
+from airflow.providers.postgres.operators.postgres import PostgresHook
+from psycopg2.extras import RealDictCursor
 
 # Для объявления DAG нужно импортировать класс из airflow
 from airflow import DAG
@@ -24,8 +26,6 @@ with DAG(
 ) as dag:
 
     def connect():
-        from airflow.providers.postgres.operators.postgres import PostgresHook
-
         postgres = PostgresHook(postgres_conn_id='startml_feed')
         with postgres.get_conn() as conn:  # вернет тот же connection, что вернул бы psycopg2.connect(...)
             with conn.cursor(cursor_factory=RealDictCursor) as cursor:
@@ -41,9 +41,7 @@ with DAG(
                     LIMIT 1
                     """
                 )
-                f = cursor.fetchone()
-                return f
-
+                return cursor.fetchone()
 
     t1 = PythonOperator(
         task_id='connect',
