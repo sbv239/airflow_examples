@@ -13,41 +13,28 @@ default_args={
     'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
 }
 
-with DAG('kkopylov_dag_2',
+with DAG('kkopylov_dag_4',
     default_args = default_args,
     description='A simple tutorial DAG',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2021, 1, 1),
     catchup=False) as dag:
 
-    for i in range(10):
+
+    ts = '{{ts}}'
+    run_id = '{{run_id}}'
+    
+    for i in range(5):
         t1 = BashOperator(
-            task_id = 't_1_echo_the_'+str(i),
-            bash_command = f'echo {i}')
+            task_id = 't_1_echo_ts_run_id' + str(i),
+            bash_command = f'echo {ts};echo {run_id}')
         t1.doc_md = dedent('''
-        #### Big ass
+        #### Doc for t1
         `t1` **documentation** with *italic* text
         ''')
         t1
 
-    def print_ds(ds):
-        print (ds)
 
-    def print_task_number(task_number):
-        print(f"task number is: {task_number}")
-
-    for i in range(20):    
-        t2 = PythonOperator(
-            task_id = 't_2_python_'+str(i),
-            python_callable = print_task_number,
-            op_kwargs={'task_number': i}
-            )
-        t2.doc_md = dedent(
-            '''
-        #### Big ass
-        `t2` **documentation** with *italic* text
-        ''')
-        t1 >> t2
 
          
          
