@@ -1,10 +1,5 @@
-"""
-В документации обязательно должны быть элементы кода (заключены в кавычки `code`)
-`code`
-**bold text**
-*italicized text*
-# а также абзац (объявляется через решетку)
-"""
+
+
 
 from datetime import datetime, timedelta
 from textwrap import dedent
@@ -30,7 +25,6 @@ with DAG(
         catchup=False,
         tags=['v-mashir-8'],
 ) as dag:
-    dag.doc_md = __doc__
 
     for i in range(10):
         t0 = BashOperator(
@@ -42,6 +36,13 @@ with DAG(
         else:
             t1 >> t0
             t1 = t0
+    t0.doc_md = dedent(
+        """\
+        В документации обязательно должны быть элементы кода (заключены в кавычки `code`),
+        **полужирный** __текст__ и *текст* _курсивом_,
+         # а также абзац (объявляется через решетку)
+        """
+    )
 
 
     def print_tasks(task_number):
