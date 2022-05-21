@@ -31,7 +31,7 @@ with DAG('kkopylov_dag_9',
         
 
     t1 = PythonOperator(
-        task_id = "t1_xcom_push_hiddeen",
+        task_id = "t1_xcom_push_hidden",
         python_callable = xcom_push_hidden)
     t2 = PythonOperator(
         task_id = "t2_xcom_pull",
