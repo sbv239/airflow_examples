@@ -48,7 +48,7 @@ with DAG(
         print(f'task number is: {task_number}')
 
 
-    for j in range(20):
+    for j in range(10, 20):
         t2 = PythonOperator(
         task_id=f'cycle_{j}',
         python_callable=print_tasks,
