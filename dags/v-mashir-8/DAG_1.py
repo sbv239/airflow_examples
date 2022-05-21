@@ -16,11 +16,11 @@ with DAG(
             'retries': 1,
             'retry_delay': timedelta(minutes=5)
         },
-    description='first task',
-    shedule_interval=timedelta(days=1),
-    start_date=datetime(22, 1, 1),
-    catchup-False,
-    tags=['v-mashir-8'],
+        description='first task',
+        shedule_interval=timedelta(days=1),
+        start_date=datetime(22, 1, 1),
+        catchup=False,
+        tags=['v-mashir-8'],
 ) as dag:
     date = '{{ ds }}'
     t1 = BashOperator(
