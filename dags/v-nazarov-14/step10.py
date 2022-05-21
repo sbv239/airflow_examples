@@ -33,7 +33,7 @@ with DAG(
                     """
                     SELECT 
                         user_id, 
-                        count(action) as count_likes
+                        count(action) as count
                     FROM "feed_action" 
                     WHERE action = 'like'
                     GROUP BY user_id
