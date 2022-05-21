@@ -18,7 +18,7 @@ with DAG(
         }
 ) as dag:
     t1 = BashOperator(
-        task_id='show directory',
+        task_id='show_directory',
         bash_command='pwd'
     )
 
