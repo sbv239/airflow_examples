@@ -42,7 +42,7 @@ for j in range(10, 30):
     t2 = PythonOperator(
         task_id=f'cycle_{j}',
         python_callable=print_tasks,
-        op_kwargs={'task_number': j},
+        op_kwargs={'task_number': 'j'}
     )
     if j == 0:
         t1 = t0
