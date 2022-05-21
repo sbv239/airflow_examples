@@ -28,6 +28,7 @@ with DAG('kkopylov_dag_8',
     def xcom_pull(ti):
         from_xcom = ti.xcom_pull(key = "sample_xcom_key",
                                  task_ids = 't1_xcom_push')
+        print(from_xcom)
         
 
     t1 = PythonOperator(
