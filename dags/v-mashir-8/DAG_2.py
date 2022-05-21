@@ -10,7 +10,7 @@ with DAG(
         'dag2mashir',
         default_args={
             'depends_on_past': False,
-            'email': ['mashir_v_p@mail.ru'],
+            'email': ['airflow@example.ru'],
             'email_on_failure': False,
             'email_on_retry': False,
             'retries': 1,
@@ -24,8 +24,8 @@ with DAG(
 ) as dag:
     for i in range(10):
         t0 = BashOperator(
-            task_id='10_cycles',
-            bash_command=f"echo {i}"
+            task_id=f'cycle_{i}',
+            bash_command=f"echo {i}",
         )
         if i == 0:
             t1 = t0
@@ -40,9 +40,9 @@ def print_tasks(task_number, **kwargs):
 
 for j in range(10, 30):
     t2 = PythonOperator(
-        task_id='other_20_cycles',
+        task_id=f'cycle_{j}',
         print_callable=print_tasks,
-        op_kwargs={'task_number': j}
+        op_kwargs={'task_number': j},
     )
     if j == 0:
         t1 = t0
