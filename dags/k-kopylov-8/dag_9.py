@@ -27,7 +27,7 @@ with DAG('kkopylov_dag_9',
 
     def xcom_pull_output(ti):
         from_xcom = ti.xcom_pull(key = "return_value",
-                                 task_ids = 't1_xcom_push')
+                                 task_ids = 't1_xcom_push_hidden')
         print(from_xcom)
         
 
