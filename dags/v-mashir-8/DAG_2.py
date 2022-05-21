@@ -41,7 +41,8 @@ def print_tasks(task_number, **kwargs):
 for j in range(10, 30):
     t2 = PythonOperator(
         task_id='other_20_cycles',
-        print_callable=print_tasks
+        print_callable=print_tasks,
+        op_kwargs={'task_number': j}
     )
     if j == 0:
         t1 = t0
