@@ -4,7 +4,7 @@ from airflow.operators.python import PythonOperator
 from datetime import timedelta, datetime
 
 def print_ds(ds):
-    print('print ds')
+    print('print_ds')
     print(ds)
 
 '''
@@ -49,7 +49,7 @@ with DAG(
     )
 
     task2 = PythonOperator(
-        task_id = 'print ds',
+        task_id = 'print_ds',
         python_callable = print_ds,
     )
 
