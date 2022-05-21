@@ -9,21 +9,6 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python_operator import PythonOperator
 
-
-def get_testing_increase(ti):
-    ti.xcom_push(
-        key='sample_xcom_key',
-        value='xcom test'
-        )
-
-
-def analyze_testing_increases(ti):
-     testing_increases = ti.xcom_pull(
-        key='sample_xcom_key',
-        task_ids='get_testing_increase_data'
-        )
-        print(testing_increases)
-
 with DAG(
         'step8nazarov',
         # Параметры по умолчанию для тасок
@@ -43,13 +28,27 @@ with DAG(
         tags=['nazarov8'],
 ) as dag:
 
+    def x_push(ti):
+        ti.xcom_push(
+            key='sample_xcom_key',
+            value='xcom test'
+        )
+
+
+    def x_pull(ti):
+        testing_increases = ti.xcom_pull(
+            key='sample_xcom_key',
+            task_ids='x_push'
+        )
+        print(testing_increases)
+
     t1 = PythonOperator(
-        task_id='xcom_nazarov',
-        python_callable=get_testing_increase,
+        task_id='x_push',
+        python_callable=x_push,
     )
     t2 = PythonOperator(
-        task_id='get_testing_increase_data',
-        python_callable=analyze_testing_increases,
+        task_id='x_pull',
+        python_callable=x_pull,
     )
 
     t1 >> t2
