@@ -18,13 +18,16 @@ with DAG(
         },
     description='first task',
     shedule_interval=timedelta(days=1),
-    start_date=datetime(22, 5, 21),
+    start_date=datetime(22, 1, 1),
     catchup-False,
     tags=['v-mashir-8'],
 ) as dag:
+    date = '{{ ds }}'
     t1 = BashOperator(
         task_id='show_directory',
-        bash_command='pwd'
+        bash_command='pwd',
+        dag=dag,
+        env={"DATA_INTERVAL_START": date},
     )
 
 
