@@ -30,7 +30,7 @@ with DAG(
         catchup=False,
         tags=['v-mashir-8'],
 ) as dag:
-
+    dag.doc_md = __doc__
 
     for i in range(10):
         t0 = BashOperator(
