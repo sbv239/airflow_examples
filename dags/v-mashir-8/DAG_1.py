@@ -17,7 +17,7 @@ with DAG(
             'retry_delay': timedelta(minutes=5)
         },
         description='first task',
-        shedule_interval=timedelta(days=1),
+        schedule_interval=timedelta(days=1),
         start_date=datetime(22, 1, 1),
         catchup=False,
         tags=['v-mashir-8'],
