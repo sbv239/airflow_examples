@@ -15,7 +15,12 @@ with DAG(
             'email_on_retry': False,
             'retries': 1,
             'retry_delay': timedelta(minutes=5)
-        }
+        },
+    description='first task',
+    shedule_interval=timedelta(days=1),
+    start_date=datetime(22, 5, 21),
+    cathcup-False,
+    tags=['v-mashir-8'],
 ) as dag:
     t1 = BashOperator(
         task_id='show_directory',
