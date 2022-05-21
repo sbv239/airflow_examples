@@ -1,3 +1,11 @@
+"""
+В документации обязательно должны быть элементы кода (заключены в кавычки `code`)
+`code`
+**bold text**
+*italicized text*
+# а также абзац (объявляется через решетку)
+"""
+
 from datetime import datetime, timedelta
 from textwrap import dedent
 
@@ -22,6 +30,8 @@ with DAG(
         catchup=False,
         tags=['v-mashir-8'],
 ) as dag:
+
+
     for i in range(10):
         t0 = BashOperator(
             task_id=f'cycle_{i}',
@@ -38,7 +48,7 @@ with DAG(
         print(f'task number is: {task_number}')
 
 
-    for j in range(10, 30):
+    for j in range(20):
         t2 = PythonOperator(
         task_id=f'cycle_{j}',
         python_callable=print_tasks,
