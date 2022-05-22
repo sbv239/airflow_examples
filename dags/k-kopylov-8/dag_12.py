@@ -43,14 +43,14 @@ with DAG('kkopylov_dag_12',
         task_id="startml_desc",
         python_callable=print_sml
     )
-    t3 = PythonOperator(
+    t4 = PythonOperator(
         task_id="not_startml_desc",
         python_callable=print_not_sml
     )
-    t4 = DummyOperator(
+    t5 = DummyOperator(
         task_id="after_branching"
     )
-    t1>>[t2,t3]>>t4
+    t1>>t2>>[t3,t4]>>t5
 
          
          
