@@ -48,7 +48,8 @@ with DAG('kkopylov_dag_12',
         python_callable=print_not_sml
     )
     t5 = DummyOperator(
-        task_id="after_branching"
+        task_id="after_branching",
+        trigger_rule="one_success"
     )
     t1>>t2>>[t3,t4]>>t5
 
