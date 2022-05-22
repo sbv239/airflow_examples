@@ -26,7 +26,7 @@ with DAG('kkopylov_dag_9',
          return "Airflow tracks everything"
 
     def xcom_pull_output(ti):
-        from_xcom = ti.xcom_pull(task_ids = 't1_xcom_push_hidden')
+        from_xcom = ti.xcom_pull(key = 'return_value', task_ids = 't1_xcom_push_hidden')
         print(from_xcom)
         
 
