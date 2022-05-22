@@ -32,7 +32,7 @@ with DAG('kkopylov_dag_12',
         print("StartML is a starter course for ambitious people")
     def print_not_sml():
         print("Not a startML course, sorry")
-    t1 = PythonOperator(
+    t1 = DummyOperator(
         task_id="before_branching",
         )
     t2 = BranchPythonOperator(
