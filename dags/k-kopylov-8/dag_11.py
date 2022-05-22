@@ -1,7 +1,7 @@
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 from datetime import timedelta, datetime
-from airflow.models import Varieable
+from airflow.models import Variable
 
 default_args = {
     'depends_on_past': False,
@@ -22,7 +22,7 @@ with DAG('kkopylov_dag_11',
     catchup=False) as dag:
 
     def get_var():
-        return Varieable.get("is_startml")
+        return Variable.get("is_startml")
 
     t1: PythonOperator = PythonOperator(
         task_id = "t1_airflow_var_request",
