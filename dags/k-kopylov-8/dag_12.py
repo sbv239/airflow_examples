@@ -24,7 +24,7 @@ with DAG('kkopylov_dag_12',
 
     def choose_task():
         var = Variable.get("is_startml")
-        if var:
+        if var == "True":
             return "startml_desc"
         else:
             return "not_startml_desc"
