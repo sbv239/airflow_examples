@@ -22,6 +22,8 @@ with DAG('kkopylov_dag_11',
     catchup=False) as dag:
 
     def get_var():
+        var = Variable.get("is_startml")
+        print(var)
         return Variable.get("is_startml")
 
     t1: PythonOperator = PythonOperator(
