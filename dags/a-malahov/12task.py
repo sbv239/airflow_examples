@@ -57,4 +57,5 @@ with DAG(
         task_id='after_branching',
     )
 
+
     before_branching >> branching >> [start_ml, not_start_ml] >> after_branching
