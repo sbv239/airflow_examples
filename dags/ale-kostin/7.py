@@ -12,7 +12,7 @@ def print_fnc(ts, run_id, **kwargs):
 
 
 with DAG(
-        'tutorial',
+        'ale-kostin',
         default_args={
             # Если прошлые запуски упали, надо ли ждать их успеха
             'depends_on_past': False,
