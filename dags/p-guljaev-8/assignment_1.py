@@ -3,10 +3,11 @@ from textwrap import dedent
 
 from airflow import DAG
 
-from airflow.operators.bash import BashOperator, PythonOperator
+from airflow.operators.bash import BashOperator
+from airflow.operators.python import PythonOperator
 
 with DAG(
-        'assignment_1',
+        'gul_assignment_1',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
