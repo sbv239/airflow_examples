@@ -17,6 +17,10 @@ with DAG(
             'retry_delay': timedelta(minutes=5)
         },
         description='Assignment 1 DAG',
+        schedule_interval=timedelta(days=1),
+        start_date=datetime(2022, 5, 26),
+        catchup=False,
+        tags=['gul_dag_1']
 ) as dag:
     t1 = BashOperator(
         task_id='execute_pwd',
