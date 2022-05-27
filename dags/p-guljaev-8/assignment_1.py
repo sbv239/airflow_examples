@@ -19,18 +19,18 @@ with DAG(
         description='Assignment 1 DAG',
 ) as dag:
     t1 = BashOperator(
-        task_id='Execute pwd',
+        task_id='execute_pwd',
         bash_command='pwd'
     )
 
 
     def print_logical_date(ds):
         print(ds)
-        print('Success')
+        print('The first DAG assignment has been done successfully')
         return "If you see this the task was successful"
 
 
     t2 = PythonOperator(
-        task_id='Get logical date',
-        python_callable = print_logical_date
+        task_id='print_logical_date',
+        python_callable=print_logical_date
     )
