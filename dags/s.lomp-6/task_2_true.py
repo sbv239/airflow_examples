@@ -41,13 +41,13 @@ with DAG(
     for i in range(10):
         # Каждый таск будет спать некое количество секунд
         task_bash = BashOperator(
-            task_id='rand_tsk' ,  # в id можно делать все, что разрешают строки в python
+            task_id=f"task {i} slompba" ,  # в id можно делать все, что разрешают строки в python
             bash_command=f"echo {i}"  # какую bash команду выполнить в этом таске
         )
 
     for i in range(20):
         task_py = PythonOperator(
-        task_id = 'print_the_context',  # нужен task_id, как и всем операторам
+        task_id = f"task {i} slomppy",  # нужен task_id, как и всем операторам
         python_callable = print_context,  # свойственен только для PythonOperator - передаем саму функцию
         # передаем в аргумент с названием random_base значение float(i) / 10
         op_kwargs={'task_number': str},
