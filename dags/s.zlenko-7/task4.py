@@ -30,8 +30,8 @@ with DAG(
     templated_command = dedent(
     """
     {% for i in range(5) %}
-        echo '{{ ts }}'
-        echo '{{ run_id }}
+        echo "{{ ts }}"
+        echo "{{ run_id }}"
     {% endfor %}
     """
     )
