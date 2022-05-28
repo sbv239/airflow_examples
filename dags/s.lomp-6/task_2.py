@@ -1,11 +1,10 @@
 from airflow import DAG
 from datetime import datetime, timedelta
 
+
+
 from airflow.operators.bash import BashOperator
 from airflow.operators.python_operator import PythonOperator
-
-
-
 
 
 def print_context(ds, **kwargs):
@@ -18,9 +17,6 @@ def print_context(ds, **kwargs):
     print(ds)
     print(kwargs)
     return 'Whatever you return gets printed in the logs'
-
-
-
 
 
 with DAG(
