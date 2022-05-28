@@ -23,7 +23,7 @@ def print_context(ds, **kwargs):
 
 
 with DAG(
-    'task_2',
+    'slomp_task_1',
     # Параметры по умолчанию для тасок
     default_args={
         'depends_on_past': False,
