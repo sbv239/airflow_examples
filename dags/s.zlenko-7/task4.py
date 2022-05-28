@@ -41,4 +41,6 @@ with DAG(
         bash_command=templated_command
     )
 
+    t1
+
 
