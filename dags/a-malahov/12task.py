@@ -55,7 +55,8 @@ with DAG(
 
     after_branching = DummyOperator(
         task_id='after_branching',
-        trigger_rule='one_success' ,
+        trigger_rule='one_success',
+        dag=dag ,
     )
     # # Запускается, когда все предыдущие задачи завершены
     # all_done = DummyOperator(task_id='all_done', trigger_rule='all_done', dag=dag)
