@@ -53,7 +53,7 @@ with DAG(
         task_id='before_branching',
     )
 
-    after_branching = DummyOperator(
+    after_branching = PythonOperator(
         task_id='after_branching',
         python_callable=lambda: print('after_branching') ,
     )
