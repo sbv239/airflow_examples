@@ -57,6 +57,7 @@ with DAG(
         task_id='after_branching',
         python_callable=lambda: print('after_branching') ,
     )
+    #проверка lambda
 
 
     before_branching >> branching >> [start_ml, not_start_ml] >> after_branching
