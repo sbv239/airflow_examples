@@ -19,7 +19,7 @@ with DAG('gladkaja_hw_6_2',
          catchup=False) \
         as dag:
 
-    def print_task_info(task_number, ts, run_id, **kwargs):
+    def print_task_info(task_number, ts, run_id):
         print(f"task number is: {task_number}")
         print(f"current date is: {ts}")
         print(f"run_id is: {run_id}")
