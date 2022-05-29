@@ -19,14 +19,14 @@ with DAG('gladkaja_hw_6',
          catchup=False) \
         as dag:
 
-    def print_task_info(task_number, ts, run_id):       #передала именные аргументы
+    def print_task_info(task_number, ts, run_id):
         print(f"task number is: {task_number}")
         print(f"current date is: {ts}")
         print(f"run_id is: {run_id}")
 
     for i in range(20):
         t1 = PythonOperator(
-            task_id=f't1_task_6_iter{i}',
+            task_id=f't1_iter_task_number {i}',
             python_callable=print_task_info,
             op_kwargs={'task_number': i
                        }
