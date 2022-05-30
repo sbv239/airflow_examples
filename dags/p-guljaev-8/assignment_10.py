@@ -41,7 +41,7 @@ with DAG(
                     LIMIT(1)
                     """
                 )
-                result = cursor.fetchall()
+                return cursor.fetchall()
 
 
     p1 = PythonOperator(
