@@ -21,7 +21,8 @@ with DAG('gladkaja_hw_5',
          description='A simple tutorial DAG',
          schedule_interval=timedelta(days=1),
          start_date=datetime(2021, 1, 1),
-         catchup=False) \
+         catchup=False,
+         tags=['gladkaja']) \
         as dag:
 
     for i in range(10):
