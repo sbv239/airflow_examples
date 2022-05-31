@@ -18,7 +18,9 @@ with DAG('gladkaja_hw_2',
          description='A simple tutorial DAG',
          schedule_interval=timedelta(days=1),
          start_date=datetime(2021, 1, 1),
-         catchup=False) as dag:
+         catchup=False,
+         tags=['gladkaja']
+         ) as dag:
     for i in range(10):
         t1 = BashOperator(
             task_id='t_1_echo_the_' + str(i),
