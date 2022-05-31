@@ -18,7 +18,8 @@ with DAG('gladkaja_hw_12',
          description='A simple tutorial DAG_12',
          schedule_interval=timedelta(days=1),
          start_date=datetime(2021, 1, 1),
-         catchup=False
+         catchup=False,
+         tags=['gladkaja']
          ) as dag:
     
     def choose_task():
