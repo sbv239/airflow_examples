@@ -16,7 +16,8 @@ with DAG('gladkaya_hw_9',
          description='A simple tutorial DAG№9',
          schedule_interval=timedelta(days=1),
          start_date=datetime(2021, 1, 1),
-         catchup=False
+         catchup=False,
+         tags=['gladkaja']
          ) as dag:
 
     def return_something():
