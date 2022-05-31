@@ -18,7 +18,9 @@ with DAG('gladkaja_hw_6_cor',
     description='A simple tutorial DAG',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2021, 1, 1),
-    catchup=False) as dag:
+    catchup=False,
+    tags=['gladkaja']
+    ) as dag:
 
     def print_task_number(task_number, ts, run_id):
         print(f"task number is: {task_number}")
