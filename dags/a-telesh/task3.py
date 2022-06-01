@@ -3,7 +3,7 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
-with DAG('HW_2_a-telesh',
+with DAG('HW_3_a-telesh',
          default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -13,7 +13,7 @@ with DAG('HW_2_a-telesh',
         'retry_delay': timedelta(minutes=5),
 
     },
-    description='HW_2_a-telesh',
+    description='HW_3_a-telesh',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 4, 3),
     catchup=False,
