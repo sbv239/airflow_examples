@@ -4,7 +4,7 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python_operator import PythonOperator
 
-with DAG('HW 2 a-telesh',
+with DAG('HW_2_a-telesh',
          default_args={
              # if Failed waiting or no
              'depends_on_past': False,
