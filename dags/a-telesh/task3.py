@@ -15,11 +15,9 @@ with DAG('HW_3_a-telesh',
     },
     description='HW_3_a-telesh',
     schedule_interval=timedelta(days=1),
-    start_date=datetime(2022, 4, 3),
+    start_date=datetime(2022, 5, 6),
     catchup=False,
-    tags=['At']
-
-,
+    tags=['At'],
 ) as dag:
 
     for i in range(10):
