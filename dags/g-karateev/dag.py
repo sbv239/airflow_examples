@@ -4,7 +4,7 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
-def print_ds(ds):
+def printds(ds):
     print(ds)
 
 with DAG(
@@ -17,7 +17,7 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
     },
-    desctiption = 'A simple DAG for task 1',
+    description = 'A simple DAG for task 1',
     schedule_interval = timedelta(days=1),
     start_date = datetime(2022, 5, 5),
     catchup = False,
@@ -28,8 +28,8 @@ with DAG(
         bash_command = 'pwd'
     )
     t2 = PythonOperator(
-        task_id = 'print ds',
-        python_callable = print_ds
+        task_id = 'print_ds',
+        python_callable = printds
     )
 
     t1 >> t2
