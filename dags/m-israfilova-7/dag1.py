@@ -15,8 +15,8 @@ with DAG(
 	description='Just for practice',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 1, 1),
-    catchup=False
-) as dag:
+    catchup=False,
+    tags=[ 'masha' ]) as dag:
 	t1 = BashOperator(
         task_id='print_pwd', 
         bash_command='pwd',  
