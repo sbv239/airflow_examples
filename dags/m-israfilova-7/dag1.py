@@ -1,8 +1,18 @@
+
 from datetime import datetime, timedelta
 from textwrap import dedent
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python_operator import PythonOperator
+
+doc_md = """
+#Абзац
+####Абзац2
+`code`
+`x + 2`
+*cursive text*
+**bold* text*
+"""
 
 with DAG(
     'myseconddag',
@@ -37,18 +47,18 @@ with DAG(
 
     for i in range(10):
         bashtask = BashOperator(
-            task_id='task' + str(i),  
+            task_id='bashtask' + str(i),  
             bash_command = f"echo {i}",
         )
 
-    def numberofthetask(number):
-        print (f'task number is: {number}')
+    def numberofthetask(task_number):
+        print (f'task number is: {task_number}')
 
     for i in range(10, 30):
         task = PythonOperator(
             task_id='task' + str(i),  
             python_callable=numberofthetask,
-            op_kwargs={'number': int(i)},
+            op_kwargs={'task_number': int(i)},
         )
 
 # t1 >> t2 
