@@ -40,10 +40,10 @@ with DAG(
 
     for i in range(5):
         task = PythonOperator(
-            task_id='sleep_for_' + str(i),  
-            python_callable=my_sleeping_function,
+            task_id='print nuber of the task' + str(i),  
+            python_callable=numberofthetask,
             op_kwargs={'number': int(i)},
         )
 
-t1 >> t2 
+# t1 >> t2 
 
