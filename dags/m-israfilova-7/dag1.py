@@ -21,19 +21,29 @@ with DAG(
     tags=[ 'masha' ],
 ) as dag:
 
-    t1 = BashOperator(
-        task_id='print_pwd', 
-        bash_command='pwd'  
-    )
+    # t1 = BashOperator(
+    #     task_id='print_pwd', 
+    #     bash_command='pwd'  
+    # )
 
-    def print_ds(ds, **kwargs):
-        print(ds)
-        return ds
+    # def print_ds(ds, **kwargs):
+    #     print(ds)
+    #     return ds
         
-    t2 = PythonOperator(
-        task_id='print_ds',  
-        python_callable=print_ds
-    ) 
+    # t2 = PythonOperator(
+    #     task_id='print_ds',  
+    #     python_callable=print_ds
+    # ) 
+
+    def numberofthetask(number):
+        print f'task number is: {number}'
+
+    for i in range(5):
+        task = PythonOperator(
+            task_id='sleep_for_' + str(i),  
+            python_callable=my_sleeping_function,
+            op_kwargs={'number': int(i)},
+        )
 
 t1 >> t2 
 
