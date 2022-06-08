@@ -35,10 +35,16 @@ with DAG(
     #     python_callable=print_ds
     # ) 
 
+    for i in range(10):
+        bashtask = BashOperator(
+            task_id='task' + str(i),  
+            bash_command = f"echo {i}",
+        )
+
     def numberofthetask(number):
         print (f'task number is: {number}')
 
-    for i in range(5):
+    for i in range(10, 30):
         task = PythonOperator(
             task_id='task' + str(i),  
             python_callable=numberofthetask,
