@@ -2,9 +2,11 @@ from datetime import datetime, timedelta
 from textwrap import dedent
 from airflow import DAG
 from airflow.operators.bash import BashOperator
+
 def print_ds(ds):
         print(ds)
-        return ds 
+        return ds
+
 with DAG(
     'myfirstdag',
     default_args={
@@ -19,7 +21,8 @@ with DAG(
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 1, 1),
     catchup=False,
-    tags=[ 'masha' ]) as dag:
+    tags=[ 'masha' ],
+) as dag:
 
 	t1 = BashOperator(
         task_id='print_pwd', 
