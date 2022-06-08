@@ -3,7 +3,7 @@ from textwrap import dedent
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 
-def print_ds(ds):
+def print_ds(ds, **kwargs):
         print(ds)
         return ds
 
