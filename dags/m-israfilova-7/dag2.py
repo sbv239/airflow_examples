@@ -22,5 +22,5 @@ with DAG(
 ) as dag:
 	bashtask = BashOperator(
         task_id='loopbash',  
-        bash_command = " printf {{ts}} ",
+        bash_command = "echo {{ts}} {1,5} ",
     )
