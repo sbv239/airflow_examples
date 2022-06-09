@@ -24,7 +24,7 @@ with DAG(
         ti.xcom_push(key="sample_xcom_key", value="xcom test")
 
     def pulldata(ti):
-        ti.xcom_pull(key='ample_xcom_key')
+        print(ti.xcom_pull(key='ample_xcom_key'))
 
     taskpush = PythonOperator(
         task_id = 'pushing',
@@ -34,3 +34,4 @@ with DAG(
         task_id = 'pulling',
         python_callable=pulldata,
         )
+    taskpush >> taskpull
