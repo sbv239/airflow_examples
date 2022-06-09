@@ -20,10 +20,10 @@ with DAG(
     catchup=False,
     tags=[ 'masha' ],
 ) as dag:
-    def pushdata(state, ti):
+    def pushdata(ti):
         ti.xcom_push(key="sample_xcom_key", value="xcom test")
 
-    def pulldata(state, ti):
+    def pulldata(ti):
         ti.xcom_pull(key='ample_xcom_key')
 
     taskpush = PythonOperator(
