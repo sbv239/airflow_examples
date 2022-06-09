@@ -20,7 +20,8 @@ with DAG(
     catchup=False,
     tags=[ 'masha' ],
 ) as dag:
+
 	bashtask = BashOperator(
         task_id='loopbash',  
-        bash_command = "echo {{ts}} {1,5} ",
+        bash_command = "echo {{ts}} {{run_id}} {1,5} ",
     )
