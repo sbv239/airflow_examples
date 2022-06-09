@@ -5,11 +5,22 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python_operator import PythonOperator
 
-doc_md = """
+doc_md = 
+"""
 #Абзац
-####Абзац2
-`code`
-`x + 2`
+`t1 = BashOperator(
+        task_id='print_pwd', 
+        bash_command='pwd'  
+    )
+
+    def print_ds(ds, **kwargs):
+        print(ds)
+        return ds
+        
+    t2 = PythonOperator(
+        task_id='print_ds',  
+        python_callable=print_ds
+    ) `
 *cursive text*
 **bold* text*
 """
@@ -31,19 +42,7 @@ with DAG(
     tags=[ 'masha' ],
 ) as dag:
 
-    # t1 = BashOperator(
-    #     task_id='print_pwd', 
-    #     bash_command='pwd'  
-    # )
-
-    # def print_ds(ds, **kwargs):
-    #     print(ds)
-    #     return ds
-        
-    # t2 = PythonOperator(
-    #     task_id='print_ds',  
-    #     python_callable=print_ds
-    # ) 
+    
 
     for i in range(10):
         bashtask = BashOperator(
