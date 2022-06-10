@@ -6,7 +6,7 @@ from airflow.operators.python_operator import PythonOperator
 from airflow.providers.postgres.operators.postgres import PostgresHook
 
 with DAG(
-    'myseconddag',
+    'sqldag',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -34,8 +34,3 @@ with DAG(
             task_id='task',  
             python_callable=getdata,
         )
-
-
-
-
-
