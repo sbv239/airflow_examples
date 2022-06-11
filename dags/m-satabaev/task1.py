@@ -1,11 +1,10 @@
 from airflow import DAG
 from datetime import timedelta, datetime
-from textwrap import dedent
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-        'my_first_task',
+        'murad_satabaev_first_task',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
@@ -14,7 +13,7 @@ with DAG(
             'retries': 1,
             'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
         },
-        description='my_first_DAG',
+        description='murad_satabaev_first_dag',
         schedule_interval=timedelta(days=1),
         start_date=datetime(2022, 6, 10),
         catchup=False,
@@ -27,7 +26,7 @@ with DAG(
 
     def print_date_ds(ds):
         print(ds)
-        print("this is my first dag and task, this one is done in python operator")
+        print("this is murad_satabaev dag and task, this one is done in python operator")
 
     t2 = PythonOperator(
         task_id='print_ds',
