@@ -27,13 +27,14 @@ with DAG(
             bash_command=f'echo {i}'
         )
 
-    def all_tasks(cycle):
-        for i in cycle:
-            print(f'task number is: {i}')
+    def all_tasks(i):
+        print(f'task number is: {i}')
 
-    t2 = PythonOperator(
-        task_id='print_task_numbers_from_cycle',
-        python_callable=all_tasks,
-        op_kwargs={'cycle': range(20)}
-    )
+
+    for k in range(20):
+        t2 = PythonOperator(
+            task_id='print_task_numbers_from_cycle',
+            python_callable=all_tasks,
+            op_kwargs={'i': k}
+        )
     t1 >> t2
