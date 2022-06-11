@@ -2,6 +2,7 @@ from airflow import DAG
 from datetime import timedelta, datetime
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
+from textwrap import dedent
 
 with DAG(
         'murad_satabaev_first_task',
@@ -19,17 +20,20 @@ with DAG(
         catchup=False,
         tags=['murad_tag'],
 ) as dag:
-    t1 = BashOperator(
-        task_id='show_directory_in_bash_operator',
-        bash_command='pwd'
-    )
 
-    def print_date_ds(ds):
-        print(ds)
-        print("this is murad_satabaev dag and task, this one is done in python operator")
+    for i in range(10):
+        t1 = BashOperator(
+            task_id='print i from 0 to 9',
+            bash_command=f'echo {i}'
+        )
+
+    def all_tasks(cycle):
+        for i in cycle:
+            print(f'task number is: {i}')
 
     t2 = PythonOperator(
-        task_id='print_ds',
-        python_callable=print_date_ds,
+        task_id='print task numbers from cycle',
+        python_callable=all_tasks,
+        op_kwargs={'cycle': range(20)}
     )
     t1 >> t2
