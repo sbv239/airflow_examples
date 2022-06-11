@@ -23,7 +23,7 @@ with DAG(
 
     for i in range(10):
         t1 = BashOperator(
-            task_id='print_i_from_0_to_9',
+            task_id=f'print_{i}',
             bash_command=f'echo {i}'
         )
 
