@@ -33,7 +33,7 @@ with DAG(
 
     for k in range(20):
         t2 = PythonOperator(
-            task_id='print_task_numbers_from_cycle',
+            task_id='print_task_{k}',
             python_callable=all_tasks,
             op_kwargs={'i': k}
         )
