@@ -30,7 +30,7 @@ with DAG(
         t1.doc_md = dedent(
             """\
         # Task Documentation
-        10 echos   
+        **10** *echos* `f'echo {i}'` and etc   
            """
         )
 
@@ -46,7 +46,7 @@ with DAG(
         t2.doc_md = dedent(
             """\
         # Task Documentation
-        20 numbers   
+        **20** *numbers* `"task number is: {task_number}"` and etc  
            """
         )
 
