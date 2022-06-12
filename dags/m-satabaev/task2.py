@@ -20,21 +20,21 @@ with DAG(
         catchup=False,
         tags=['murad_tag'],
 ) as dag:
-
+    t1 = dict()
     for i in range(10):
-        t1 = BashOperator(
+        t1[i] = BashOperator(
             task_id=f'print_{i}',
             bash_command=f'echo {i}'
         )
 
-    def all_tasks(i):
-        print(f'task number is: {i}')
+    def all_tasks(task_number):
+        print(f'task number is: {task_number}')
 
-
+    t2 = dict()
     for k in range(20):
-        t2 = PythonOperator(
+        t2[k] = PythonOperator(
             task_id=f'print_task_{k}',
             python_callable=all_tasks,
-            op_kwargs={'i': k}
+            op_kwargs={'task': i}
         )
-    t1 >> t2
+    t1.keys() >> t2.keys()
