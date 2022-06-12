@@ -20,14 +20,15 @@ with DAG(
         catchup=False,
         tags=['murad_tag'],
 ) as dag:
+
     def push_xcom():
         return 'Airflow tracks everything'
 
     def pull_xcom(ti):
-        ti.xcom_pull(
+        return (ti.xcom_pull(
             key='return_value',
-            task_ids='pull_xcom',
-        )
+            task_ids='pull_xcom'
+        ))
 
 
     t1 = PythonOperator(
