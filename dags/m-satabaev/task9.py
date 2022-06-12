@@ -23,11 +23,11 @@ with DAG(
     def push_xcom():
         return 'Airflow tracks everything'
 
-    # def pull_xcom(ti):
-    #     ti.xcom_pull(
-    #         key='return_value',
-    #         task_ids='pull_xcom',
-    #     )
+    def pull_xcom(ti):
+        ti.xcom_pull(
+            key='return_value',
+            task_ids='pull_xcom',
+        )
 
 
     t1 = PythonOperator(
@@ -35,9 +35,9 @@ with DAG(
         python_callable=push_xcom,
     )
 
-    # t2 = PythonOperator(
-    #     task_id='pull_xcom',
-    #     python_callable=pull_xcom,
-    # )
+    t2 = PythonOperator(
+        task_id='pull_xcom',
+        python_callable=pull_xcom,
+    )
 
-    t1
+    t1 >> t2
