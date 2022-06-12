@@ -4,7 +4,7 @@ from textwrap import dedent
 from airflow import DAG
 
 from airflow.operators.bash import BashOperator
-from airflow.python_operators import PythonOperator
+from airflow.operators.python_operator import PythonOperator
 
 with DAG(
     'first_dag_kislitsyn',
