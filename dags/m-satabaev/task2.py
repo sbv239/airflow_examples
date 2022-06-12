@@ -37,4 +37,4 @@ with DAG(
             python_callable=all_tasks,
             op_kwargs={'task': i}
         )
-    t1.keys() >> t2.keys()
+    t1 >> t2
