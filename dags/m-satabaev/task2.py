@@ -14,7 +14,7 @@ with DAG(
             'retries': 1,
             'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
         },
-        description='murad_satabaev_first_dag',
+        description='murad_satabaev_second_dag',
         schedule_interval=timedelta(days=1),
         start_date=datetime(2022, 6, 10),
         catchup=False,
@@ -27,14 +27,13 @@ with DAG(
             bash_command=f'echo {i}'
         )
 
-    def all_tasks(i):
-        print(f'task number is: {i}')
-
+    def all_tasks(task_number):
+        print(f'task number is: {task_number}')
 
     for k in range(20):
         t2 = PythonOperator(
             task_id=f'print_task_{k}',
             python_callable=all_tasks,
-            op_kwargs={'i': k}
+            op_kwargs={'task': k}
         )
     t1 >> t2
