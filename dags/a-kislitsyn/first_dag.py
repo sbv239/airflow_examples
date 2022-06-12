@@ -7,7 +7,7 @@ from airflow.operators.bash import BashOperator
 from airflow.python_operators import PythonOperator
 
 with DAG(
-    'first_dag',
+    'first_dag_kislitsyn',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -17,10 +17,11 @@ with DAG(
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
     },
     description = 'DAG, который будет содержать BashOperator и PythonOperator. В функции PythonOperator примите аргумент ds и распечатайте его. '
-                  'Можете распечатать дополнительно любое другое сообщение. В BashOperator выполните команду pwd'
+                  'Можете распечатать дополнительно любое другое сообщение. В BashOperator выполните команду pwd',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 6, 11),
-    catchup=False
+    catchup=False,
+    tags=['kislitsyn-1'],
 ) as dag:
     def print_arg_ds(ds, **kwargs):
         print(ds)
