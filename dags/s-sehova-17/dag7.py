@@ -23,13 +23,6 @@ with DAG(
     catchup=False,
     tags=['example'],
 ) as dag:
-    for i in range(10):
-        t71 = BashOperator(
-            task_id=f"t3_bash_{i}",
-            bash_command="echo $NUMBER",
-            env={"NUMBER": i},
-        )
-    
     def print_context(task_number, ts, run_id):
         print(f"task number is: {task_number}")
         print(ts)
@@ -41,12 +34,5 @@ with DAG(
             python_callable=print_context,
             op_kwargs = "task number is: i"
         )
-        
-t71.doc_md = dedent(
-            f"""\
-            #### Python operator doc
-            **Example task** * python_command * = `task_number({i})`
-            """
-        )
 
-t71>>t72
+t72
