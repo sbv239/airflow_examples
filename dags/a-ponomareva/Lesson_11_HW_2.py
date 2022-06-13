@@ -17,13 +17,13 @@ default_args = {
 }
 
 with DAG(
-    'DAG HW_2',
+    'DAG_HW_2_ponomareva',
     default_args=default_args,
     description='tasks for HW_2',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 6, 10),
     catchup=False,
-    tags=['tag HW_2']
+    tags=['tag_HW_2']
 ) as dag:
     t1 = BashOperator(
         task_id='HW_2_Bash',
