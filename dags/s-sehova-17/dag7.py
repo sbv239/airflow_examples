@@ -7,7 +7,7 @@ from textwrap import dedent
 
 
 with DAG(
-    's-sehova-17',
+    's-sehova-17-1',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
