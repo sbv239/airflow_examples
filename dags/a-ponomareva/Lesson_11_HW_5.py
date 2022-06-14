@@ -27,7 +27,7 @@ with DAG(
     catchup=False,
     tags=['ponomareva']
 ) as dag:
-    
+
     templated_command = dedent(
     '''
     {% for i in range(5) %}
@@ -40,3 +40,5 @@ with DAG(
         task_id='HW_5_Bash',
         bash_command=templated_command,
     )
+
+    t1
