@@ -5,12 +5,9 @@ from datetime import datetime, timedelta
 from textwrap import dedent
 
 """
-Создайте новый DAG и объявите в нем 30 задач. Первые 10 задач сделайте типа BashOperator и выполните в них произвольную команду, 
-так или иначе использующую переменную цикла (например, можете указать f"echo {i}").
-
-Оставшиеся 20 задач должны быть PythonOperator, при этом функция должна задействовать переменную из цикла. 
-Вы можете добиться этого, если передадите переменную через op_kwargs и примете ее на стороне функции. 
-Функция должна печатать "task number is: {task_number}", где task_number - номер задания из цикла. 
+Добавьте в PythonOperator из второго задания kwargs 
+и передайте в этот kwargs task_number со значением переменной цикла. 
+Также добавьте прием аргумента ts и run_id в функции, указанной в PythonOperator, и распечатайте эти значения. 
 """
 default_args={
     'depends_on_past': False,
@@ -21,8 +18,8 @@ default_args={
     'retry_delay': timedelta(minutes=5),
 }
 
-def print_task_num(task_number):
-    print(f'task number is: {task_number}')
+def print_task_num(task_number, ts, run_id):
+    print(f'task number is: {task_number}', ts, run_id)
 
 with DAG(
     'DAG_HW_3_4_ponomareva',
@@ -47,5 +44,3 @@ with DAG(
             with *python* func in cycle
             """
         )
-
-    t1 >> t2
