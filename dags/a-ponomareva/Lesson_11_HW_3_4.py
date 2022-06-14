@@ -2,6 +2,8 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python_operator import PythonOperator
 from datetime import datetime, timedelta
+from textwrap import dedent
+
 """
 Создайте новый DAG и объявите в нем 30 задач. Первые 10 задач сделайте типа BashOperator и выполните в них произвольную команду, 
 так или иначе использующую переменную цикла (например, можете указать f"echo {i}").
@@ -32,18 +34,32 @@ with DAG(
     tags=['tag_HW_3'],
 ) as dag:
 
-    for step in range(10):
+    for step in range(1, 11):
         task_bash = BashOperator(
             task_id='print_command_' + str(step),
-            bash_command=f'echo{step}',
-            dag=dag
+            bash_command=f'echo{step}'
+        )
+        task_bash.doc_md = dedent(
+            """\
+            ### `BashOperator`
+            Printing **number** of commands from _1_ to _11_
+            with *echo* command in cycle
+            """
         )
 
-    for i in range(20):
+    for i in range(1, 21):
         task_python = PythonOperator(
             task_id='print_task_num_' + str(i),
             python_callable=print_task_num,
             op_kwargs={'task_number': i}
         )
+        task_python.doc_md = dedent(
+            """\
+            ### `PythonOperator`
+            Printing **number** of commands from _1_ to _20_
+            with *python* func in cycle
+            """
+        )
+    dag.doc_md = __doc__
 
     task_bash >> task_python
