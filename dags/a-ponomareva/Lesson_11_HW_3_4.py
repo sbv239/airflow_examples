@@ -29,37 +29,37 @@ with DAG(
     default_args=default_args,
     description='DAG for HW_3_4',
     schedule_interval=timedelta(days=1),
-    start_date=datetime(2022, 6, 1),
+    start_date=datetime(2022, 1, 1),
     catchup=False,
     tags=['ponomareva'],
 ) as dag:
 
-    for i in range(1, 11):
-        task_bash = BashOperator(
+    for i in range(10):
+        t1 = BashOperator(
             task_id='print_command_' + str(i),
-            bash_command=f'echo{i}')
+            bash_command=f'echo{i}',
+        )
 
-        task_bash.doc_md = dedent(
+        t1.doc_md = dedent(
             """\
             ### `BashOperator`
-            Printing **number** of commands from _1_ to _11_
+            Printing **number** of _10_ commands
             with *echo* command in cycle
             """
         )
 
-    for i in range(1, 21):
-        task_python = PythonOperator(
+    for i in range(20):
+        t2 = PythonOperator(
             task_id='print_task_num_' + str(i),
             python_callable=print_task_num,
-            op_kwargs={'task_number': i}
+            op_kwargs={'task_number': i},
         )
-        task_python.doc_md = dedent(
+        t2.doc_md = dedent(
             """\
             ### `PythonOperator`
-            Printing **number** of commands from _1_ to _20_
+            Printing **number** of c_20_ commands
             with *python* func in cycle
             """
         )
-    dag.doc_md = __doc__
 
-    task_bash >> task_python
+    t1 >> t2
