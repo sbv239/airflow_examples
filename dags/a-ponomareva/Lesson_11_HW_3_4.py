@@ -25,20 +25,20 @@ def print_task_num(task_number):
     print(f'task number is: {task_number}')
 
 with DAG(
-    'DAG_HW_3_ponomareva',
+    'DAG_HW_3_4_ponomareva',
     default_args=default_args,
-    description='tasks for HW_3',
+    description='DAG for HW_3_4',
     schedule_interval=timedelta(days=1),
-    start_date=datetime(2022, 6, 10),
+    start_date=datetime(2022, 6, 1),
     catchup=False,
-    tags=['tag_HW_3'],
+    tags=['ponomareva'],
 ) as dag:
 
-    for step in range(1, 11):
+    for i in range(1, 11):
         task_bash = BashOperator(
-            task_id='print_command_' + str(step),
-            bash_command=f'echo{step}'
-        )
+            task_id='print_command_' + str(i),
+            bash_command=f'echo{i}')
+
         task_bash.doc_md = dedent(
             """\
             ### `BashOperator`
