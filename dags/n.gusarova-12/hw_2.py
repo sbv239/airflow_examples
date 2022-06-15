@@ -4,7 +4,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-    'lesson2',
+    'step_2_n_gusarova',
     
     default_args={
         'depends_on_past': False,        
@@ -16,14 +16,14 @@ with DAG(
     },
     
     
-    description='Lesson 2',
+    description='Step 2',
     schedule_interval=timedelta(days=1),
     
     start_date=datetime(2022, 1, 1),
     
     catchup=False,
     
-    tags=['les2'],
+    tags=['step2'],
 ) as dag:
     t1 = BashOperator(
     task_id='print_date',  
