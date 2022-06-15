@@ -23,7 +23,7 @@ with DAG(
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 6, 10),
     catchup=False,
-    tags=['tag_HW_2']
+    tags=['ponomareva']
 ) as dag:
     t1 = BashOperator(
         task_id='HW_2_Bash',

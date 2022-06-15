@@ -20,9 +20,9 @@ def print_task_num(task_number):
     print(f'task number is: {task_number}')
 
 with DAG(
-    'DAG_HW_3_4_ponomareva',
+    'DAG_HW_6_ponomareva',
     default_args=default_args,
-    description='DAG for HW_3_4',
+    description='DAG for HW_6',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 1, 1),
     catchup=False,

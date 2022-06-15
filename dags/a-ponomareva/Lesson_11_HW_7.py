@@ -9,7 +9,7 @@ from textwrap import dedent
 и передайте в этот kwargs task_number со значением переменной цикла. 
 Также добавьте прием аргумента ts и run_id в функции, указанной в PythonOperator, и распечатайте эти значения. 
 """
-default_args={
+default_args = {
     'depends_on_past': False,
     'email': ['airflow@example.com'],
     'email_on_failure': False,
@@ -18,13 +18,15 @@ default_args={
     'retry_delay': timedelta(minutes=5),
 }
 
+
 def print_task_num(task_number, ts, run_id):
     print(f'task number is: {task_number}', ts, run_id)
 
+
 with DAG(
-    'DAG_HW_3_4_ponomareva',
+    'DAG_HW_7_ponomareva',
     default_args=default_args,
-    description='DAG for HW_3_4',
+    description='DAG for HW_7',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 1, 1),
     catchup=False,
