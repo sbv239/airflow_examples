@@ -17,8 +17,8 @@ from datetime import datetime, timedelta
 
 def choosing_task():
     from airflow.models import Variable
-    is_startml = bool(Variable.get('is_startml'))
-    if is_startml: return 'startml_desc'
+    is_startml = Variable.get('is_startml')
+    if is_startml=='True': return 'startml_desc'
     else: return 'not_startml_desc'
 
 
