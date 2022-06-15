@@ -14,7 +14,7 @@ with DAG(
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
     },
     description='Exercise No.1',
-    start_date=datetime('2022-06-16')
+    start_date=datetime(2022,6,16)
 ) as dag:
 
     def print_ds(ds):
