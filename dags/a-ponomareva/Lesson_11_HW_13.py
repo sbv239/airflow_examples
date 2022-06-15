@@ -16,6 +16,7 @@ from datetime import datetime, timedelta
 
 
 def choosing_task():
+    from airflow.models import Variable
     is_startml = bool(Variable.get('is_startml'))
     if is_startml: return 'startml_desc'
     else: return 'not_startml_desc'
@@ -59,10 +60,10 @@ with DAG(
         python_callable=task2,
     )
     t0 = DummyOperator(
-        task_id='t0',
+        task_id='start',
     )
     t_end = DummyOperator(
-        task_id = 't_end',
+        task_id = 'finish',
     )
 
-    t0 >> branch_task >> t_end
+    t0 >> branch_task >> [t1, t2] >> t_end
