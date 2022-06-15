@@ -16,8 +16,6 @@ default_args={
     'retry_delay': timedelta(minutes=5),
 }
 
-def print_task_num(task_number):
-    print(f'task number is: {task_number}')
 
 with DAG(
     'DAG_HW_6_ponomareva',
@@ -32,7 +30,7 @@ with DAG(
     for i in range(10):
         t1 = BashOperator(
             task_id='print_command_' + str(i),
-            env={'NUMBER': i},
+            env={'NUMBER': str(i)},
             bash_command=f'echo $NUMBER'
         )
 
