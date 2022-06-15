@@ -34,6 +34,19 @@ with DAG(
     tags=['ponomareva'],
 ) as dag:
 
+    for i in range(10):
+        t1 = BashOperator(
+            task_id='print_command_' + str(i),
+            bash_command='echo {i}',
+        )
+
+        t1.doc_md = dedent(
+            """\
+            ### `BashOperator`
+            Printing **number** of _10_ commands
+            with *echo* command in cycle
+            """
+        )
     for i in range(20):
         t2 = PythonOperator(
             task_id='print_task_num_' + str(i),
