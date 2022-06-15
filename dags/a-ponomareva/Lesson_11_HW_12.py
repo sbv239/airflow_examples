@@ -21,9 +21,9 @@ default_args = {
 }
 
 with DAG(
-    'DAG_HW_10_ponomareva',
+    'DAG_HW_12_ponomareva',
     default_args=default_args,
-    description='DAG for HW_10',
+    description='DAG for HW_12',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 6, 1),
     catchup=False,
