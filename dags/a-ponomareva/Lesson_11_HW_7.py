@@ -1,14 +1,15 @@
+"""
+Добавьте в PythonOperator из второго задания kwargs
+и передайте в этот kwargs task_number со значением переменной цикла.
+Также добавьте прием аргумента ts и run_id в функции, указанной в PythonOperator, и распечатайте эти значения.
+"""
+
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python_operator import PythonOperator
 from datetime import datetime, timedelta
 from textwrap import dedent
 
-"""
-Добавьте в PythonOperator из второго задания kwargs 
-и передайте в этот kwargs task_number со значением переменной цикла. 
-Также добавьте прием аргумента ts и run_id в функции, указанной в PythonOperator, и распечатайте эти значения. 
-"""
 default_args = {
     'depends_on_past': False,
     'email': ['airflow@example.com'],

@@ -1,13 +1,15 @@
+'''
+Напишите DAG, состоящий из одного PythonOperator. Этот оператор должен, используя подключение с conn_id="startml_feed",
+найти пользователя, который поставил больше всего лайков,
+и вернуть словарь {'user_id': <идентификатор>, 'count': <количество лайков>}.
+'''
+
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
 from datetime import datetime, timedelta
 
 from airflow.providers.postgres.operators.postgres import PostgresHook
-'''
-Напишите DAG, состоящий из одного PythonOperator. Этот оператор должен, используя подключение с conn_id="startml_feed", 
-найти пользователя, который поставил больше всего лайков, 
-и вернуть словарь {'user_id': <идентификатор>, 'count': <количество лайков>}.
-'''
+
 
 
 def get_sql_query():

@@ -1,17 +1,19 @@
+"""
+Создайте новый DAG и объявите в нем 30 задач. Первые 10 задач сделайте типа BashOperator и выполните в них произвольную команду,
+так или иначе использующую переменную цикла (например, можете указать f"echo {i}").
+
+Оставшиеся 20 задач должны быть PythonOperator, при этом функция должна задействовать переменную из цикла.
+Вы можете добиться этого, если передадите переменную через op_kwargs и примете ее на стороне функции.
+Функция должна печатать "task number is: {task_number}", где task_number - номер задания из цикла.
+"""
+
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python_operator import PythonOperator
 from datetime import datetime, timedelta
 from textwrap import dedent
 
-"""
-Создайте новый DAG и объявите в нем 30 задач. Первые 10 задач сделайте типа BashOperator и выполните в них произвольную команду, 
-так или иначе использующую переменную цикла (например, можете указать f"echo {i}").
 
-Оставшиеся 20 задач должны быть PythonOperator, при этом функция должна задействовать переменную из цикла. 
-Вы можете добиться этого, если передадите переменную через op_kwargs и примете ее на стороне функции. 
-Функция должна печатать "task number is: {task_number}", где task_number - номер задания из цикла. 
-"""
 default_args={
     'depends_on_past': False,
     'email': ['airflow@example.com'],

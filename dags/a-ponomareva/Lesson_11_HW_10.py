@@ -1,12 +1,14 @@
+'''
+Создайте новый DAG, содержащий два PythonOperator. Первый оператор должен вызвать функцию,
+возвращающую строку "Airflow tracks everything" (без примерения XCom).
+Второй оператор должен получить эту строку через XCom.
+'''
+
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
 from datetime import datetime, timedelta
 
-'''
-Создайте новый DAG, содержащий два PythonOperator. Первый оператор должен вызвать функцию, 
-возвращающую строку "Airflow tracks everything" (без примерения XCom).
-Второй оператор должен получить эту строку через XCom. 
-'''
+
 
 def push_data():
     return "Airflow tracks everything"

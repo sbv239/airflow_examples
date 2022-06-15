@@ -1,13 +1,15 @@
-from airflow import DAG
-from airflow.operators.python_operator import PythonOperator
-from datetime import datetime, timedelta
-
 """
-Сделайте новый DAG, содержащий два Python оператора. 
+Сделайте новый DAG, содержащий два Python оператора.
 Первый PythonOperator должен класть в XCom значение "xcom test" по ключу "sample_xcom_key".
 Второй PythonOperator должен доставать это значение и печатать его. Настройте правильно последовательность операторов.
 Посмотрите внимательно, какие аргументы мы принимали в функции, когда работали с XCom.
 """
+
+from airflow import DAG
+from airflow.operators.python_operator import PythonOperator
+from datetime import datetime, timedelta
+
+
 
 
 def push_data(ti):
