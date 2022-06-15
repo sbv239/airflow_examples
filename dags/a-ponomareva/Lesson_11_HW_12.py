@@ -1,12 +1,14 @@
+"""
+Напишите DAG, состоящий из одного PythonOperator. Этот оператор должен печатать значение Variable с названием is_startml.
+"""
+
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
 from airflow.models import Variable
 
 from datetime import datetime, timedelta
 
-"""
-Напишите DAG, состоящий из одного PythonOperator. Этот оператор должен печатать значение Variable с названием is_startml.
-"""
+
 def print_var():
     is_startml = Variable.get('is_startml')
     print(is_startml)
