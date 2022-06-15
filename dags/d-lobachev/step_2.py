@@ -16,7 +16,7 @@ with DAG(
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
     },
     description = 'First DAG from step 2 of HW Lesson 11',
-    shedule_interval = timedelta(days=1),
+    schedule_interval = timedelta(days=1),
     start_date=datetime(2022, 2, 10),
     catchup = False,
     tags = ['first'],
@@ -34,7 +34,7 @@ with DAG(
 
     t2 = PythonOperator(
         task_id = 'print_ds',
-        python_collable = print_ds,
+        python_callable = print_ds,
     )
 
     t1 >> t2
