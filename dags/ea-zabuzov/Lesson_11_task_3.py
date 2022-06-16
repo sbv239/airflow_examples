@@ -14,18 +14,18 @@ with DAG(
             'retries': 1,
             'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
         },
-        description='My first training DAG',
+        description='My second training DAG',
         start_date=datetime(2022, 6, 15),
         schedule_interval=timedelta(days=1),
         catchup=False,
         tags=['e.zabuzov']
 ) as dag:
-    def print_task_number(task_number):
+    def print_task_number(task_number, **kwargs):
         print(f'task number is: {task_number}')
 
 
     for i in range(20):
-        if i <= 10:
+        if i < 10:
             t_bash = BashOperator(
                 task_id=f'BashOperator_{i}',
                 bash_command=f'echo {i}'
