@@ -20,8 +20,8 @@ with DAG(
         catchup=False,
         tags=['e.zabuzov']
 ) as dag:
-    def print_task_number(op_kwargs, **kwargs):
-        print(f'task number is: {op_kwargs}')
+    def print_task_number(task_number):
+        print(f'task number is: {task_number}')
 
 
     for i in range(20):
@@ -33,7 +33,7 @@ with DAG(
         t_py = PythonOperator(
                 task_id=f'PythonOperator_{i}',
                 python_callable=print_task_number,
-                op_kwargs={'task number': i}
+                op_kwargs={'task_number': i}
         )
 
     t_bash >> t_py
