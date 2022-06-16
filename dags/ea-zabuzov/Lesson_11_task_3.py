@@ -18,7 +18,7 @@ with DAG(
         start_date=datetime(2022, 6, 15),
         schedule_interval=timedelta(days=1),
         catchup=False,
-        tags=['e.zabuzov']
+        tags=['e.zabuzov', 'step_3']
 ) as dag:
     def print_task_number(task_number, **kwargs):
         print(f'task number is: {task_number}')
