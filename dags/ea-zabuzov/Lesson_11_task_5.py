@@ -20,14 +20,16 @@ with DAG(
         catchup=False,
         tags=['e.zabuzov', 'step_5']
 ) as dag:
+
     templated_command = dedent(
         '''
         {% for i in range (5) %}
             echo "{{ ts }}"
-            echo "{{ run_id }}"
         {% endfor %}
+        echo "{{ run_id }}"
         '''
     )
+
     t1 = BashOperator(
         task_id='ts_run_id_printing',
         bash_command=templated_command
