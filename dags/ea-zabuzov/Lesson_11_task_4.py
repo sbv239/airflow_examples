@@ -18,7 +18,7 @@ with DAG(
         start_date=datetime(2022, 6, 15),
         schedule_interval=timedelta(days=1),
         catchup=False,
-        tags=['e.zabuzov', 'step_3']
+        tags=['e.zabuzov', 'step_4']
 ) as dag:
     dag.doc_md = '''
     # Lesson 11 step 4 DAG
