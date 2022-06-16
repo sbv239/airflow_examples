@@ -35,3 +35,4 @@ with DAG(
                 python_callable=print_task_number,
                 op_kwargs={'task_number': i}
         )
+    t_bash >> t_py
