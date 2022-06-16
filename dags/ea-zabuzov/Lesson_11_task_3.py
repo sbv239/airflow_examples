@@ -18,7 +18,7 @@ with DAG(
         start_date=datetime(2022, 6, 15),
         schedule_interval=timedelta(days=1),
         catchup=False,
-        tags=['e.zabuzov']
+        tags=['e.zabuzov', 'step_3']
 ) as dag:
     def print_task_number(task_number, **kwargs):
         print(f'task number is: {task_number}')
@@ -35,5 +35,4 @@ with DAG(
                 python_callable=print_task_number,
                 op_kwargs={'task_number': i}
         )
-
-    t_bash >> t_py
+        # t_bash >> t_py
