@@ -30,5 +30,5 @@ with DAG(
         t_py = PythonOperator(
                 task_id=f'PythonOperator_{i}',
                 python_callable=print_task_number,
-                kwargs={'task_number': i}
+                op_kwargs={'task_number': i}
         )
