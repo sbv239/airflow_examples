@@ -31,3 +31,4 @@ with DAG(
             bash_command=f"echo $NUMBER",
             env={'NUMBER': str(i)}
         )
+
