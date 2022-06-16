@@ -20,6 +20,9 @@ with DAG(
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
     },
     description='My first training DAG',
+    start_date=datetime(2022, 6, 15),
+    schedule_interval=timedelta(days=1),
+    catchup=False,
     tags=['e.zabuzov']
 ) as dag:
     t1 = BashOperator(
