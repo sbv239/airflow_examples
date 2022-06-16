@@ -25,6 +25,7 @@ with DAG(
         {% for i in range (5) %}
             echo "{{ ts }}"
             echo "{{ run_id }}"
+        {% endfor %}
         '''
     )
     t1 = BashOperator(
