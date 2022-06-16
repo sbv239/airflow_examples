@@ -5,7 +5,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-        'Lesson_11_step_2',
+        'Lesson_11_step_6',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
@@ -31,3 +31,4 @@ with DAG(
             bash_command=f"echo $NUMBER",
             env={'NUMBER': str(i)}
         )
+
