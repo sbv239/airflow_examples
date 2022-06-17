@@ -1,9 +1,9 @@
 from datetime import datetime, timedelta
 from datetime import datetime, timedelta
-
+from airflow.operators.dummy import DummyOperator
 from airflow import DAG
 from airflow.models import Variable
-from airflow.operators.empty import EmptyOperator
+# from airflow.operators.empty import EmptyOperator
 from airflow.operators.python import BranchPythonOperator, PythonOperator
 
 
@@ -43,7 +43,7 @@ with DAG(
         catchup=False,
         tags=['e.zabuzov', 'step_13']
 ) as dag:
-    before_branching = EmptyOperator(
+    before_branching = DummyOperator(
         task_id='Before branching', )
 
     chosing_branch = BranchPythonOperator(
@@ -58,5 +58,5 @@ with DAG(
         task_id='not_startml_desc',
         python_callable=negative_task)
 
-    after_branching = EmptyOperator(
-        task_id='After branching', )
+    after_branching = DummyOperator(
+        task_id='After branching')
