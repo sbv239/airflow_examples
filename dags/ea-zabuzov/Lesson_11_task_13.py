@@ -44,7 +44,7 @@ with DAG(
         tags=['e.zabuzov', 'step_13']
 ) as dag:
     before_branching = DummyOperator(
-        task_id='Before branching', )
+        task_id='Before_branching', )
 
     chosing_branch = BranchPythonOperator(
         task_id='chose_branch',
@@ -59,4 +59,4 @@ with DAG(
         python_callable=negative_task)
 
     after_branching = DummyOperator(
-        task_id='After branching')
+        task_id='After_branching')
