@@ -60,3 +60,5 @@ with DAG(
 
     after_branching = DummyOperator(
         task_id='After_branching')
+
+    before_branching >> chosing_branch >> [t1, t2] >> after_branching
