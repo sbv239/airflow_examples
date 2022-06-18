@@ -12,7 +12,7 @@ def print_number(task_number, ts, run_id, **kwargs):
 
 
 with DAG(
-        'second_task',
+        '7_m_parshkov',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
