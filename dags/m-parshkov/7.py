@@ -12,7 +12,7 @@ def print_number(task_number, ts, run_id, **kwargs):
 
 
 with DAG(
-        'second_task',
+        '7_m_parshkov',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
@@ -21,10 +21,10 @@ with DAG(
             'retries': 1,
             'retry_delay': timedelta(minutes=5)
         },
-        description='my second task',
-        schedule_interval=timedelta(days=1),
-        start_date=datetime(2022, 6, 14),
-        catchup=False
+        description='my_7_m_parshkov',
+        schedule_interval=timedelta(hours=1),
+        start_date=datetime(2022, 6, 17),
+        catchup=True
 ) as dag:
       for i in range(20):
         t2 = PythonOperator(
