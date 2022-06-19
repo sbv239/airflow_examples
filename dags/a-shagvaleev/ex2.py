@@ -1,11 +1,10 @@
 from datetime import datetime, timedelta
-# from textwrap import dedent
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python_operator import PythonOperator
 
 with DAG(
-    'ex2',
+    'a-shagvaleev_ex2',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -16,20 +15,24 @@ with DAG(
     },
     start_date=datetime(2022, 6, 19),
 ) as dag:
-    t1 = BashOperator(
-        task_id = "simple_bash_task",
-        bash_command = 'pwd'
-    )
+
+    for i in range(10):
+        t1 = BashOperator(
+            task_id = "bash_task_"+str(i),
+            bash_command = f"echo {i}"
+        )
 
 
-    def ds_func(ds):
+    def ds_func(task_number):
         """Simple example for PythonOperator"""
-        print(ds)
-        return "There simple text"
 
-    t2 = PythonOperator(
-        task_id = "simple_python_task",
-        python_callable = ds_func
-    )
+        return f"task number is: {task_number}"
+
+    for i in range(20):
+        t2 = PythonOperator(
+            task_id = "python_task_"+str(i),
+            python_callable = ds_func,
+            op_kwargs = {"task_number": i}
+        )
 
     t1 >> t2
