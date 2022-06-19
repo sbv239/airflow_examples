@@ -20,7 +20,8 @@ with DAG(
     for i in range(10):
         t1 = BashOperator(
             task_id = "bash_task_"+str(i),
-            bash_command = f"echo {i}"
+            bash_command = "echo $NUMBER",
+            env = {"NUMBER": i}
         )
         t1.doc_md = dedent(
             """
@@ -35,16 +36,16 @@ with DAG(
         )
 
 
-    def ds_func(task_number):
+    def ds_func(task_number, ts, run_id):
         """Simple example for PythonOperator"""
-
+        print(ts, run_id)
         return f"task number is: {task_number}"
 
     for i in range(20):
         t2 = PythonOperator(
             task_id = "python_task_"+str(i),
             python_callable = ds_func,
-            op_kwargs = {"task_number": i}
+            op_kwargs = {"task_number": i},
         )
         t2.doc_md = dedent(
             """
