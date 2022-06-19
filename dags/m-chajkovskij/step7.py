@@ -6,7 +6,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-    "task_11.2",
+    "m-chajkovskij_11.7",
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -15,16 +15,21 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes =5),
     },
-    description='m-chajkovskij_11.2',
+    description='task_11.7',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 6, 1),
     catchup=False,
     tags=['homework']
 )as dag:
-    def print_ds(ds, **kwargs):
-        print(ds)
-        print('This message should appear in the airflow log!')
-    t1 = BashOperator(task_id='bash_11.2', bash_command='pwd',)
-    t2 = PythonOperator(task_id='python_11.2', python_callable=print_ds,)
 
-    t1 >> t2
+    def print_number(task_number, ts, run_id):
+        print(f"task number is: {task_number}")
+        print(f"ts: {ts}")
+        print(f"run_id: {run_id}")
+
+    for i in range(20):
+        task = PythonOperator(task_id=f'python_task_{i}', python_callable=print_number, op_kwargs={'task_number': i})
+        task.doc_md = """
+        ## Python task documentation in the form of *markdown*. 
+        The **task** is created using `PythonOperator` from the module *airflow*
+        """
