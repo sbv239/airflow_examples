@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+from textwrap import dedent
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python_operator import PythonOperator
@@ -21,6 +22,17 @@ with DAG(
             task_id = "bash_task_"+str(i),
             bash_command = f"echo {i}"
         )
+        t1.doc_md = dedent(
+            """
+            # абзац для bash
+            
+            _текст курсивом_
+            *ещё один текст курсивом*
+            **полужирный текст**
+            __ещё полужирный текст__
+            `x = 5`
+            """
+        )
 
 
     def ds_func(task_number):
@@ -33,6 +45,17 @@ with DAG(
             task_id = "python_task_"+str(i),
             python_callable = ds_func,
             op_kwargs = {"task_number": i}
+        )
+        t2.doc_md = dedent(
+            """
+            # абзац для python
+    
+            _текст курсивом_
+            *ещё один текст курсивом*
+            **полужирный текст**
+            __ещё полужирный текст__
+            `x = 5`
+            """
         )
 
     t1 >> t2
