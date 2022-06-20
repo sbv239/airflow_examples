@@ -11,7 +11,7 @@ from airflow import DAG
 # Будем иногда называть операторы тасками (tasks)
 from airflow.operators.bash import BashOperator
 with DAG(
-    'zubanovbstut',
+    'zubanovtest_2',
     # Параметры по умолчанию для тасок
     default_args={
         # Если прошлые запуски упали, надо ли ждать их успеха
@@ -45,7 +45,7 @@ with DAG(
 
     # t1, t2, t3 - это операторы (они формируют таски, а таски формируют даг)
     t1 = BashOperator(
-        task_id='print_date',  # id, будет отображаться в интерфейсе
+        task_id='pwd',  # id, будет отображаться в интерфейсе
         bash_command='date',  # какую bash команду выполнить в этом таске
     )
 
