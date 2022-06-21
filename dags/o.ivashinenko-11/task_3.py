@@ -43,8 +43,8 @@ with DAG(
             bash_command = f"echo {i}"
         )
 
-    def print_task_id(i):
-        return print(f'task number is: {i}')
+    def print_task_id(task_number):
+        return print(f'task number is: {task_number}')
 
     for i in range(20):
         # Каждый таск будет спать некое количество секунд
@@ -53,7 +53,7 @@ with DAG(
             task_id='task_python_' + str(i),
             python_callable=print_task_id,
             # передаем в аргумент с названием random_base значение float(i) / 10
-            op_kwargs={'i': i},
+            op_kwargs={'task_number': i},
         )
 
     task_bash >> task_python
