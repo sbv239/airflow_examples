@@ -1,29 +1,25 @@
 from airflow import DAG
-from airflow.operators.bash import BashOperator
 from airflow.operators.python_operator import PythonOperator
 
 from datetime import datetime, timedelta
-from textwrap import dedent
 
 def get_conn():
-    from airflow.hooks.base import BaseHook
-    import psycopg2
+    from airflow.providers.postgres.operators.postgres import PostgresHook
 
-    creds = BaseHook.get_connection(postgres_conn_id="startml_feed")
-    with psycopg2.connect(
-        f"postgresql://{creds.login}:{creds.password}"
-        f"@{creds.host}:{creds.port}/{creds.schema}"
-    ) as conn:
-    with conn.cursor() as cursor:
-        cursor.execute(
-            """"
-                select user_id, count(*)
-                from feed_action
-                order by count(*) desc
-                limit 1
-            """"
-        )
-        return cursor.fetchall()
+    postgres = PostgresHook(postgres_conn_id="startml_feed")
+    with postgres.get_conn() as conn:   # вернет тот же connection, что вернул бы psycopg2.connect(...)
+        with conn.cursor() as cursor:
+            cursor.execute(
+                """
+                    select user_id,count(*) from feed_action
+                    where action = 'like'
+                    group by user_id
+                    order by count(*) desc
+                    limit 1
+                    
+                """
+            )
+            return cursor.fetchall()
 
 
 with DAG(
@@ -44,7 +40,7 @@ with DAG(
     tags=['task11'],
 ) as dag:
     t1 = PythonOperator(
-        task_id = connection,
+        task_id = 'connection',
         python_callable = get_conn,
         )
 t1
