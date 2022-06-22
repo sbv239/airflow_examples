@@ -5,6 +5,7 @@ from datetime import timedelta, datetime
 
 with DAG(
 default_args={
+    'm-kravtsova-9_2'
     'depends_on_past': False,
     'email': ['airflow@example.com'],
     'email_on_failure': False,
