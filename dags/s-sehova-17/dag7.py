@@ -23,16 +23,18 @@ with DAG(
     catchup=False,
     tags=['example'],
 ) as dag:
-    def print_context(task_number, ts, run_id):
-        print(f"task number is: {task_number}")
+    
+    def get_task_number(task_number, ts, run_id):
+        print(f'task number: {task_number}')
         print(ts)
         print(run_id)
-        
-    for i in range(20):    
-        t72 = PythonOperator(
-            task_id=f"t3_pt_{i}",
-            python_callable=print_context,
-            op_kwargs = "task number is: i"
-        )
 
-t72
+
+    for i in range(20):
+        t1 = PythonOperator(
+            task_id='task_number' + str(i),
+            python_callable=get_task_number,
+            op_kwargs={'task_number': i, }
+        )
+        
+t1
