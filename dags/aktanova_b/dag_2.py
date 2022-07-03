@@ -47,7 +47,9 @@ with DAG(
     t1.doc_md = dedent(
     """\
     # Task Documentation
-    
+    ###`This is code`
+    ###*This is italic*
+    ###**This is bold**
     """
     )
 
