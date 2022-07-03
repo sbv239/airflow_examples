@@ -17,6 +17,7 @@ with DAG(
         schedule_interval=timedelta(days=1),
         start_date=datetime(2022, 1, 1),
         catchup=False,
+        tags=['b-aktanova'],
 ) as dag:
     def print_task_number(ts, run_id, task_number):
         print(f"task number is: {task_number}")
