@@ -1,5 +1,5 @@
 from airflow import DAG
-from airflow.operator.bash import BashOperator
+from airflow.operators.bash import BashOperator
 from airflow.operators.python_operator import PythonOperator
 from datetime import timedelta
 
@@ -13,7 +13,8 @@ default_args={
     'email_on_retry': False,
     'retries': 1,
     'retry_delay': timedelta(minutes=5)
-}
+},
+tags=['MaximovS']
 ) as dag:
     t1 = BashOperator(
         task_id='print_directory',
