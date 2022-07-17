@@ -8,7 +8,7 @@ def print_context(ds):
     return 'Print date'
 
 with DAG(
-    'tutorial',
+    'n-ubozhenko-10-lesson-11-step-2',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
