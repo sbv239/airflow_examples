@@ -23,7 +23,7 @@ with DAG(
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 7, 17),
     catchup=False,
-    tags=['example'],
+    tags=['example', 'n-tugushev-10'],
 ) as dag:
     t1 = BashOperator(
         task_id='print_airflow_execute_directory',
