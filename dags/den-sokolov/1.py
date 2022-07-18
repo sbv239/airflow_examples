@@ -21,7 +21,9 @@ with DAG(
         'retries': 1,
         # Сколько ждать между перезапусками
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
-    }
+    },
+    start_date=datetime(2022, 7, 17), 
+    catchup=False
 ) as dag:
 
     t1 = BashOperator(
