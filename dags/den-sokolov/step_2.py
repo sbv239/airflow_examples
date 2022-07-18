@@ -29,7 +29,7 @@ with DAG(
         bash_command='pwd',
     )
 
-    def print_date(ds):
+    def print_date(ds, **kwargs):
         print(ds)
     
     t2 = PythonOperator(
