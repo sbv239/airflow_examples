@@ -19,7 +19,7 @@ with DAG(
         description='First task',
         start_date=datetime(2022, 7, 17),
         catchup=False,
-        tags=['first_task'],
+        tags=['a.platov'],
     ) as dag:
         
     def print_data(ts, run_id, **kwargs):
