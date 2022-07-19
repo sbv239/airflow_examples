@@ -26,13 +26,13 @@ with DAG(
         print(ts)
         print(run_id)
 
-    for task_number in range(10):
-        t_bash = BashOperator(
-                    task_id='run_bush_op_'+str(task_number),  # id, будет отображаться в интерфейсе
-                bash_command='echo $NUMBER',
-                env={"NUMBER": str(task_number)},
-                dag=dag,
-            )
+    #for task_number in range(10):
+    #    t_bash = BashOperator(
+    #                task_id='run_bush_op_'+str(task_number),  # id, будет отображаться в интерфейсе
+    #            bash_command='echo $NUMBER',
+    #            env={"NUMBER": str(task_number)},
+    #            dag=dag,
+    #        )
         
     for task_number in range(20):
         t_python = PythonOperator(
@@ -40,4 +40,4 @@ with DAG(
                 op_kwargs={"task_number": task_number, 'ts': "{{ ts }}", 'run_id': "{{ run_id }}"},
                 python_callable=print_data,
             )
-    t_bash >> t_python
+    t_python
