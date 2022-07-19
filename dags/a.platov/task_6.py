@@ -23,10 +23,8 @@ with DAG(
     ) as dag:
         
     def print_data(ts, run_id, **kwargs):
-        task_number = kwarg["task_number"]
-        print(f'{ts}')
-        print(f'{run_id}')
-        print(f'task number: {task_number}')
+        print(ts)
+        print(run_id)
 
     for task_number in range(10):
         t_bash = BashOperator(
@@ -39,7 +37,7 @@ with DAG(
     for task_number in range(20):
         t_python = PythonOperator(
                 task_id='run_python_op_'+str(task_number),
-                op_kwargs={"task_number", task_number},
+                op_kwargs={"task_number": task_number},
                 python_callable=print_data,
             )
     t_bash >> t_python
