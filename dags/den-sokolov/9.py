@@ -2,6 +2,7 @@ from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 
+
 with DAG(
     'den_sokolov_step_10',
     # Параметры по умолчанию для тасок
