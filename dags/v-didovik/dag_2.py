@@ -6,7 +6,7 @@ from airflow.operatros.bach import PythonOperator
 
 
 with DAG(
-    'homework',
+    'hw_02_v-didovik',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
