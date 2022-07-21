@@ -15,7 +15,7 @@ from airflow.operators.python import PythonOperator
 
 
 with DAG(
-    'hw_3_v-didovik',
+    'hw_4_v-didovik',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -24,11 +24,11 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),
     },
-    description='hw_3_v-didovik',
+    description='hw_4_v-didovik',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 1, 1),
     catchup=False,
-    tags=['hw_3_v-didovik'],
+    tags=['hw_4_v-didovik'],
 ) as dag:
 
     dag.doc_md = __doc__
