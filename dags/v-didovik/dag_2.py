@@ -2,11 +2,11 @@ from datetime import datetime, timedelta
 
 from airflow import DAG
 from airflow.operators.bash import BashOperator
-from airflow.operatros.bach import PythonOperator
+from airflow.operators.python import PythonOperator
 
 
 with DAG(
-    'hw_02_v-didovik',
+    'hw_2_v-didovik',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -19,7 +19,7 @@ with DAG(
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 1, 1),
     catchup=False,
-    tags=['hw_02_v-didovik'],
+    tags=['hw_2_v-didovik'],
 ) as dag:
 
     t1 = BashOperator(
