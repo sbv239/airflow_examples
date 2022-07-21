@@ -6,7 +6,7 @@ from airflow.operators.python import PythonOperator
 
 
 with DAG(
-    'hw_2_v-didovik',
+    'hw_3_v-didovik',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -15,26 +15,28 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),
     },
-    description='hw_2_v-didovik',
+    description='hw_3_v-didovik',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 1, 1),
     catchup=False,
-    tags=['hw_2_v-didovik'],
+    tags=['hw_3_v-didovik'],
 ) as dag:
 
-    t1 = BashOperator(
-        task_id='print_date',
-        bash_command='pwd',
-    )
+    for i in range(10):
+        t1 = BashOperator(
+            task_id='bash_operator_' + str(i),
+            bash_command=f"echo {i}",
+        )
 
-    def print_ds(ds, **kwargs):
-        print(ds)
-        return 'Done'
+    def print_task_number(task_number):
+        print("task number is:", task_number)
 
-    t2 = PythonOperator(
-        task_id='print_the_ds',
-        python_callable=print_ds,
-    )
+    for i in range(20):
+        t2 = PythonOperator(
+            task_id='print_str_' + str(j),
+            python_callable=print_task_number,
+            op_kwargs={'task_number': i},
+        )
 
 
     t1 >> t2
