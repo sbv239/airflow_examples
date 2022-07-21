@@ -9,7 +9,7 @@ Print task numbers `from 10 to 30` using __PythonOperator__
 from datetime import datetime, timedelta
 from textwrap import dedent
 
-from airflow import DAG,
+from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
@@ -45,6 +45,10 @@ with DAG(
       Print in console number of iteration
     # Iteration range
       Iteration range is fixed from 0 to 10 (excluded last one). 
+    **bold**
+    __semi-bold__
+    _italic_
+    `code`
     """)
 
     def print_task_number(task_number):
