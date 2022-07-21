@@ -19,6 +19,7 @@ with DAG(
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 1, 1),
     catchup=False,
+    tags=['hw_02_v-didovik'],
 ) as dag:
 
     t1 = BashOperator(
