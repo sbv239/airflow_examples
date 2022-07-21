@@ -1,6 +1,15 @@
-from datetime import datetime, timedelta
+"""
+Print iterator `from 0 to 10` using **BashOperator**
+Print task numbers `from 10 to 30` using __PythonOperator__
 
-from airflow import DAG
+`doc_md` (markdown),`doc` (_plain text_), `doc_rst`, `doc_json`
+"""
+
+
+from datetime import datetime, timedelta
+from textwrap import dedent
+
+from airflow import DAG,
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
@@ -22,11 +31,21 @@ with DAG(
     tags=['hw_3_v-didovik'],
 ) as dag:
 
+    dag.doc_md = __doc__
+
     for i in range(10):
         t1 = BashOperator(
             task_id='bash_operator_' + str(i),
             bash_command=f"echo {i}",
         )
+
+    t1.doc_md = dedent(
+        """
+    # Function
+      Print in console number of iteration
+    # Iteration range
+      Iteration range is fixed from 0 to 10 (excluded last one). 
+    """)
 
     def print_task_number(task_number):
         print("task number is:", task_number)
