@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 
 from airflow import DAG
 from airflow.operators.bash import BashOperator
-from airflow.operators.bach import PythonOperator
+from airflow.operators.python import PythonOperator
 
 
 with DAG(
