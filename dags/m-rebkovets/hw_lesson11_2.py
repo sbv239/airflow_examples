@@ -1,7 +1,8 @@
 from datetime import timedelta, datetime
 from airflow import DAG
 
-from airflow.operators.bash import BashOperator, PythonOperator
+from airflow.operators.bash import BashOperator
+from airflow.operators.python_operator import PythonOperator
 
 
 def print_context(ds, **kwargs):
