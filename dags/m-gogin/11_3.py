@@ -1,5 +1,4 @@
 from textwrap import dedent
-
 from airflow import DAG
 from datetime import timedelta, datetime
 from airflow.operators.bash import BashOperator
