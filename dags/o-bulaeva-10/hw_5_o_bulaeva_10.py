@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.operators.bash import BashOperator
+from textwrap import dedent
 
 with DAG('hw_5_o_bulaeva_10',
         default_args={
