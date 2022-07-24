@@ -16,14 +16,14 @@ with DAG(
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 1, 1),
     catchup=False,
-    tags=['second_dag'],
+    tags=['e-poltorakova'],
 
 ) as dag:
 
     def print_number_task(ts, run_id, task_number, **kwargs):
-        print(ts)
-        print(run_id)
-        print(task_number)
+        print(f'print ts:{ts}')
+        print(f'print run_id:{run_id}')
+        print(f'task number:{task_number}')
                 
     for i in range(20):
         task = PythonOperator(

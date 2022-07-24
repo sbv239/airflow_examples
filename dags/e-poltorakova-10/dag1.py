@@ -26,7 +26,7 @@ with DAG(
     # Запустить за старые даты относительно сегодня
     catchup=False,
     # теги, способ помечать даги
-    tags=['first_dag'],
+    tags=['e-poltorakova'],
 ) as dag:
 
     t1 = BashOperator(
