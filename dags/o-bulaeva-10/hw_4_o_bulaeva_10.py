@@ -26,7 +26,7 @@ with DAG('hw_4_o_bulaeva_10',
     	task_id = "bash_task_number_" + str(i),
     	bash_command = f"echo {i}"
     	)
-        bash_task.doc_md = dedent(
+    bash_task.doc_md = dedent(
         """\
     #### Bash Task Documentation
     *Execute* **bash** command `echo`
@@ -39,7 +39,7 @@ with DAG('hw_4_o_bulaeva_10',
         python_callable=task_number_printer,
         op_kwargs={'task_number': i}
         )
-        python_task.doc_md = dedent(
+    python_task.doc_md = dedent(
         """\
     #### Python Task Documentation
     *Print* task number with **python function** `print("")`
