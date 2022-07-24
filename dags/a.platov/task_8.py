@@ -16,7 +16,7 @@ def pull_value(ti):
     print(value)
 
 with DAG(
-    'HW_9_a.platov',
+    'HW_10_a.platov',
     default_args = {
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -25,7 +25,7 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),         
         },
-        description='Home Work N9 (XCom)',
+        description='Home Work N10 (XCom with key = return_value)',
         start_date=datetime(2022, 7, 24),
         catchup=False,
         tags=['a.platov'],
