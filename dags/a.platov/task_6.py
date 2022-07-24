@@ -16,19 +16,19 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
         },
-        description='First task',
+        description='Home Work N7',
         start_date=datetime(2022, 7, 24),
         catchup=False,
         tags=['a.platov'],
     ) as dag:
         
+        date = "{{ ds }}"
+
         def print_date(task_number, ts, run_id):
             print(ts)
             print(run_id)
             print('task number: ', task_number)
     
-        date = "{{ ds }}"
-
         def task_bash(task_number: int, date):
             return  BashOperator(
                     task_id='run_bush_op_'+str(task_number),                 
@@ -44,4 +44,15 @@ with DAG(
                                'rub_id': "{{ run_id }}"},
                     python_callable=func,
                     )
-        task_bash(0, date) >> task_bash(1, date)
+        task = 0 
+        for i in range(30):
+            if i == 0:
+                task = task_bash(i, date)
+            elif i < 10:
+                new_task = task_bash(i, date)
+                task >> new_task
+                task = new_task
+            else:
+                new_task = task_python(i, print_date)
+                task >> new_task
+                task = new_task
