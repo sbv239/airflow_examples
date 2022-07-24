@@ -9,7 +9,7 @@ def x_com_push(ti):
         value="xcom test"
     )
 
-def x_com_pull(state, ti):
+def x_com_pull(ti):
 
     v = ti.xcom_pull(
         key='sample_xcom_key',
