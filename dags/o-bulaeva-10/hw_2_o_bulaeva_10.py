@@ -7,7 +7,7 @@ def print_context(ds, **kwargs):
     print(ds)
     print('Is it really working?')
 
-with DAG('hw_2_o_bulaeva_10'.
+with DAG('hw_2_o_bulaeva_10',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
