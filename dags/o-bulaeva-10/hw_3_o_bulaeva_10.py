@@ -20,15 +20,16 @@ with DAG('hw_3_o_bulaeva_10',
         start_date = datetime(2022, 7, 24),
         catchup = False) as dag:
 
-    for i in range(30):
-    	if i < 10:
-    	    task = BashOperator(
+    for i in range(10):
+    	bash_task = BashOperator(
     	task_id = "bash_task_number_" + str(i),
-    	bash_command = f"echo {i}",
+    	bash_command = f"echo {i}"
     	)
-        else:
-            task = PythonOperator(
+
+    for i in range(20):
+        python_task = PythonOperator(
         task_id='python_task_number_' + str(i),  
         python_callable=task_number_printer,
-        op_kwargs={'task_number': i},
+        op_kwargs={'task_number': i}
         )
+    bash_task << python_task
