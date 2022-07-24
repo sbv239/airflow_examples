@@ -4,7 +4,7 @@ from textwrap import dedent
 from datetime import datetime, timedelta
 
 with DAG(
-    'hm_3_e-poltorakova',
+    'hm_5_e-poltorakova',
     default_args={
     'depends_on_past': False,
     'email': ['airflow@example.com'],
