@@ -30,7 +30,7 @@ with DAG(
 
     def t_bash(task_number: int, date):
         return  BashOperator(
-                task_id='run_bush_op_'+str(task_number),  # id, будет отображаться в интерфейсе
+                task_id='run_bush_op_'+str(task_number),                 
                 bash_command='echo $NUMBER',
                 env={"NUMBER": str(task_number), "DATA START": date},
                 dag=dag,)
@@ -44,15 +44,10 @@ with DAG(
                 python_callable=func,
             )
 
-    for task_number in range(30):
+    for task_number in range(10):
         if task_manager == 0:
             t = t_bash(task_number, date)
-        if task_manager < 10:
-            new_task = t_bash(task_number, date)
-            t >> new_task
-            t = new_task
-        else:
-            new_task = t_python(task_number, print_date)
-            t >> new_task
-            t = new_task
+        new_task = t_bash(task_number, date)
+        t >> new_task
+        t = new_task
 
