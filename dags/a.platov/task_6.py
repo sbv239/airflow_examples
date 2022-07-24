@@ -22,20 +22,21 @@ with DAG(
         tags=['a.platov'],
     ) as dag:
         
-    def print_date(ts, run_id, task_number):
-        print(ts, run_id)
-        print(f'task number: {task_number}')
+    def print_date(task_number, ts, run_id):
+        print(ts)
+        print(run_id)
+        print('task number: ', task_number)
     
     date = "{{ ds }}"
 
-    def t_bash(task_number: int, date):
+    def task_bash(task_number: int, date):
         return  BashOperator(
                 task_id='run_bush_op_'+str(task_number),                 
                 bash_command='echo $NUMBER',
                 env={"NUMBER": str(task_number), "DATA START": date},
                 dag=dag,)
 
-    def t_python(task_number: int, func):
+    def task_python(task_number: int, func):
         return PythonOperator(
                 task_id='run_python_op_'+str(task_number),
                 op_kwargs={"task_number": task_number,
@@ -43,7 +44,8 @@ with DAG(
                            'rub_id': "{{ run_id }}"},
                 python_callable=func,
             )
-
+    
+    t = 0
     for task_number in range(10):
         if task_manager == 0:
             t = t_bash(task_number, date)
