@@ -19,7 +19,7 @@ with DAG(
         start_date=datetime(2022, 7, 23),
 ) as dag:
 
-    def print_context(ts, run_id, **kwargs):
+    def print_context(ts, run_id, task_number):
         print(f"task number is: {task_number}")
         print(ts)
         print(run_id)
