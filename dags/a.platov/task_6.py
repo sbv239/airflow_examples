@@ -44,4 +44,4 @@ with DAG(
                                'rub_id': "{{ run_id }}"},
                     python_callable=func,
                     )
-        t_bash(task_number, date) >> t_bash(task_number, date)
+        task_bash(0, date) >> task_bash(1, date)
