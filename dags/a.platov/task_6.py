@@ -44,12 +44,4 @@ with DAG(
                            'rub_id': "{{ run_id }}"},
                 python_callable=func,
             )
-    
-    t = 0
-    for task_number in range(10):
-        if task_manager == 0:
-            t = t_bash(task_number, date)
-        new_task = t_bash(task_number, date)
-        t >> new_task
-        t = new_task
-
+    t_bash(task_number, date)
