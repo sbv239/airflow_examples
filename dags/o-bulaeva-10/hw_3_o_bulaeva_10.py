@@ -22,8 +22,8 @@ with DAG('hw_3_o_bulaeva_10',
 
     for i in range(30):
     	if i < 10:
-    		task = BashOperator(
-    	task_id = f"bash_task_number{i}",
+    	    task = BashOperator(
+    	task_id = "bash_task_number_" + str(i),
     	bash_command = f"echo {i}",
     	)
         else:
@@ -31,4 +31,4 @@ with DAG('hw_3_o_bulaeva_10',
         task_id='python_task_number_' + str(i),  
         python_callable=task_number_printer,
         op_kwargs={'task_number': i},
-    )
+        )
