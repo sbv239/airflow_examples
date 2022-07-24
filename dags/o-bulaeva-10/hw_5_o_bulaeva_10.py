@@ -23,7 +23,7 @@ with DAG('hw_5_o_bulaeva_10',
         echo "{{ ts }}"
         echo "{{ run_id}}"
     {% endfor %}
-    """
+    """)
 
     bash_task = BashOperator(
     	task_id = "templated_task",
