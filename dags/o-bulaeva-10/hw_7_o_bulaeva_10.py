@@ -25,7 +25,5 @@ with DAG('hw_7_o_bulaeva_10',
         python_task = PythonOperator(
         task_id='python_task_number_' + str(i),  
         python_callable=task_number_printer,
-        op_kwargs={'task_number': i,
-        'ts': {{ts}},
-        'run_id': {{run_id}}}
+        op_kwargs={'task_number': i}
         )
