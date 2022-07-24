@@ -22,7 +22,7 @@ with DAG(
         tags=['a.platov'],
     ) as dag:
         
-    def print_date(ts, run_id, **kwargs):
+    def print_date(ts, run_id, task_number):
         print(ts, run_id)
         print(f'task number: {task_number}')
     
