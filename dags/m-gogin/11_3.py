@@ -1,50 +1,54 @@
-from textwrap import dedent
+from datetime import datetime, timedelta
+
 from airflow import DAG
-from datetime import timedelta, datetime
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 
+def print_i(task_number):
+    print(f'task number is: {task_number}')
+    return f'printed {task_number}'
+
+
 with DAG(
-    'hw_3_m-gogin',
-    default_args={
+    'aloshkarev_task_2',
+    default_args = {
         'depends_on_past': False,
         'email': ['airflow@example.com'],
         'email_on_failure': False,
         'email_on_retry': False,
         'retries': 1,
-        'retry_delay': timedelta(minutes=5),
+        'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
     },
-    description='11_3',
     schedule_interval=timedelta(days=1),
-    start_date=datetime(2022, 7, 20),
+    start_date=datetime(2022, 4, 12),
     catchup=False,
-    tags=['example'],
 ) as dag:
+    for i in range(30):
+        if i < 10:
+            t1 = BashOperator(
+                task_id=f'echo_{i}',
+                bash_command=f'echo {i}'
+            )
 
-    templaned_comand = dedent(
-        """
-    {% for i in range(10) %}
-        f"echo {i}"
-    {% endfor %}
-    """
-    )
-    t1 = BashOperator(
-        task_id='print',
-        bash_command=templaned_comand,
-    )
+            task.doc_md = """
+                # BashOperator task documentation
+                Running command `echo {i}`
+                *i* is **task** number
+            """
 
-    def gen_func(task_number):
-        return print(f"task number is: {task_number}")
+        else:
+            t2 = PythonOperator(
+                task_id=f'print_task_{i}',
+                python_callable=print_i,
+                op_kwargs={'task_number': i}
+            )
 
-    for i in range(20):
-        t2 = PythonOperator(
-            task_id='print2',
-            python_callable=gen_func(2),
-            op_kwargs={'task_number': 3},
-        )
-    t1 >> t2
+            task.doc_md = """
+                # PythonOperator task documentation
+                Running command `print('task number is: {task_number}')`
+                *task_number* is **task** number
+            """
 
 
-
-
+        t1 >> t2
