@@ -1,13 +1,10 @@
 from datetime import datetime, timedelta
-from textwrap import dedent
 from airflow import DAG
-from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
-from datetime import datetime, timedelta
 
 
 with DAG(
-        'hw_7_m-gogin',
+        'hw_8_m-gogin',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
@@ -17,23 +14,36 @@ with DAG(
             'retry_delay': timedelta(minutes=5),
 
         },
-        description='hw_7_m-gogin',
+        description='hw_8_m-gogin',
         schedule_interval=timedelta(days=1),
         start_date=datetime(2022, 7, 24),
         catchup=False,
         tags=['hw_6'],
 ) as dag:
 
-    def get_task_number(task_number, ts, run_id):
-        print(f"task number is: {task_number}")
-        print(ts)
-        print(run_id)
-
-    for i in range(30):
-        t1 = PythonOperator(
-            task_id='task_number' + str(i),
-            python_callable=get_task_number,
-            op_kwargs={'task_number': i}
+    def add_key(x):
+        x.xcom_push(
+            key="sample_xcom_key",
+            value="xcom test"
         )
 
-    t1
+    def print_key(x):
+        x.xcom_print = x.xcom_pull(
+            key='sample_xcom_key',
+            task_id='push_xcom'
+        )
+        print(x.xcom_print)
+
+
+    t1 = PythonOperator(
+        task_id="add_key",
+        python_callable=add_key
+    )
+
+    t2 = PythonOperator(
+        task_id="print_key",
+        python_callable=print_key
+    )
+
+    t1 >> t2
+
