@@ -15,11 +15,11 @@ with DAG(
             'retry_delay': timedelta(minutes=5),
 
         },
-        description='dm-kuznetsov_hw_3',
+        description='hw_3_m-gogin',
         schedule_interval=timedelta(days=1),
         start_date=datetime(2022, 4, 3),
         catchup=False,
-        tags=['task_1'],
+        tags=['hw_3'],
 ) as dag:
     for i in range(10):
         t1 = BashOperator(
@@ -28,13 +28,13 @@ with DAG(
         )
 
 
-    def task_number(task_number):
+    def get_task_number(task_number):
         print(f"task number is: {task_number}")
 
     for i in range(20):
         t2 = PythonOperator(
-            task_id = f'task_number_{i}',
-            python_callable=task_number(),
+            task_id='task_number'+str(i),
+            python_callable=get_task_number,
             op_kwargs={'task_number': i}
         )
 
