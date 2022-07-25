@@ -40,7 +40,7 @@ with DAG(
     for i in range(20):
         t2 = PythonOperator(
             task_id='print2',
-            python_callable=gen_func(),
+            python_callable=gen_func(2),
             op_kwargs={'task_number': 3},
         )
     t1 >> t2
