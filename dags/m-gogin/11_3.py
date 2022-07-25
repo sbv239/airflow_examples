@@ -5,8 +5,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-        'dm-kuznetsov_hw_3',
-        # Параметры по умолчанию для тасок
+        'hw_3_m-gogin',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
@@ -35,7 +34,7 @@ with DAG(
     for i in range(20):
         t2 = PythonOperator(
             task_id = f'task_number_{i}',
-            python_callable=task_number,
+            python_callable=task_number(),
             op_kwargs={'task_number': i}
         )
 
