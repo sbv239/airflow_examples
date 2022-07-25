@@ -26,7 +26,12 @@ with DAG(
             task_id=f'echo_{i}',
             bash_command=f'echo {i}',
         )
-
+        t1.doc_md = dedent(
+            """
+            # Task Documentation
+            Первые **10 задач** типа *Bash*
+            """
+        )
 
     def get_task_number(task_number):
         print(f"task number is: {task_number}")
@@ -36,11 +41,13 @@ with DAG(
             task_id='task_number'+str(i),
             python_callable=get_task_number,
             op_kwargs={'task_number': i}
+        )
+        t2.doc_md = dedent(
         """\
         # Task Documentation
-        # Оставшиеся **20 задач** типа *PythonOperator*,  
+        Оставшиеся **20 задач** типа *PythonOperator*,  
         функция задействует переменную из цикла.  
-        # Этого добились, передавая переменную через `op_kwargs`   
+        Этого добились, передавая переменную через `op_kwargs`   
         и принимая ее на стороне функции. 
         Функция печатает `"task number is: {task_number}"`,
         где task_number - номер задания из цикла.
