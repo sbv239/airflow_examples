@@ -3,7 +3,6 @@ from textwrap import dedent
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
-import os
 
 
 with DAG(
@@ -19,7 +18,7 @@ with DAG(
         },
         description='hw_6_m-gogin',
         schedule_interval=timedelta(days=1),
-        start_date=datetime(2022, 4, 3),
+        start_date=datetime(2022, 7, 24),
         catchup=False,
         tags=['hw_6'],
 ) as dag:
