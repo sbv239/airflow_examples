@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 from airflow.models import Variable
 
 with DAG(
-    'hm_12_e-poltorakova',
+    'hm_13_e-poltorakova',
     default_args={
     'depends_on_past': False,
     'email': ['airflow@example.com'],
