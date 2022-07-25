@@ -10,7 +10,7 @@ def print_n(ts, run_id, **kwargs):
     print(run_id)
 
 with DAG(
-        'step_2_mishura',
+        'step_7_mishura',
 
         default_args={
             'depends_on_past': False,
@@ -21,7 +21,7 @@ with DAG(
             'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
         },
 
-        description='step_2',
+        description='step_7',
         schedule_interval=timedelta(days=1),
         start_date=datetime(2022, 7, 20),
         catchup=False,
@@ -30,8 +30,8 @@ with DAG(
     for i in range(30):
         if i < (10):
             task = BashOperator(
-                task_id=f'create_{i}_file',
-                bash_command=f'echo "ahahaha" > {i}.txt'
+                task_id=f'{i} task',
+                bash_command=f'echo {i}'
             )
 
         else:
