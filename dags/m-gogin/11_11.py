@@ -1,6 +1,7 @@
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
 from airflow.providers.postgres.operators.postgres import PostgresHook
+from datetime import timedelta, datetime
 
 
 def sql_conn():
