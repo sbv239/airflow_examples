@@ -59,6 +59,6 @@ with DAG(
         task_id='11_13cl'
     )
 
-
+    t1 >> t2 >> [t3, t4] >> t5
 
 
