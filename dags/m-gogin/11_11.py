@@ -17,7 +17,7 @@ def sql_conn():
                     limit 1
                 """
             )
-        return cursor.fetchall()
+            return cursor.fetchall()
 
 
 with DAG(
