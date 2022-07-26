@@ -5,7 +5,7 @@ from datetime import timedelta, datetime
 
 
 def sql_conn():
-    postgres = PostgresHook(postgres_conn_id="conn_mg")
+    postgres = PostgresHook(postgres_conn_id="startml_feed")
     with postgres.get_conn() as conn:
         with conn.cursor() as cursor:
             cursor.execute(
