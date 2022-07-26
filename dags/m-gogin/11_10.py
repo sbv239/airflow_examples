@@ -4,7 +4,7 @@ from airflow.operators.python import PythonOperator
 
 
 with DAG(
-        'hw_8_m-gogin',
+        'hw_10_m-gogin',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
@@ -14,36 +14,30 @@ with DAG(
             'retry_delay': timedelta(minutes=5),
 
         },
-        description='hw_8_m-gogin',
+        description='hw_10_m-gogin',
         schedule_interval=timedelta(days=1),
-        start_date=datetime(2022, 7, 24),
+        start_date=datetime(2022, 7, 25),
         catchup=False,
-        tags=['hw_6'],
+        tags=['hw_9'],
 ) as dag:
 
-    def add_key(x):
-        x.xcom_push(
-            key="sample_xcom_key",
-            value="xcom test"
-        )
+    def airflow_tracks():
+        return "Airflow tracks everything"
 
-    def print_key(x):
-        x.xcom_print = x.xcom_pull(
-            key='sample_xcom_key',
-            task_id='push_xcom'
+    def pull_xcom_test(ti):
+        xcom_test = ti.xcom_pull(
+            key='return_value',
+            task_ids='push_xcom'
         )
-        print(x.xcom_print)
-
+        print(xcom_test)
 
     t1 = PythonOperator(
-        task_id="add_key",
-        python_callable=add_key
+        task_id='push_xcom',
+        python_callable=airflow_tracks
     )
-
     t2 = PythonOperator(
-        task_id="print_key",
-        python_callable=print_key
+        task_id='pull_xcom',
+        python_callable=pull_xcom_test,
     )
 
     t1 >> t2
-
