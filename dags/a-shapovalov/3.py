@@ -20,23 +20,19 @@ with DAG(
     tags=['hw_3_a-shapovalov']
 ) as dag:
 
-    tasks_bash = []
     for i in range(1, 11):
-        t = BashOperator(
+        bash = BashOperator(
                 task_id=f'bash_command_{i}',
                 bash_command=f'echo {i}')
-        tasks_bash.append(t)
 
     def print_task_number(task_number):
         print(f'task number is: {task_number}')
 
-    tasks_python = []
     for i in range(11, 31):
-        t = PythonOperator(
+        python = PythonOperator(
                 task_id=f'python_command_{i}',
                 python_callable=print_task_number,
                 op_kwargs={'task_number': i}
         )
-        tasks_python.append(t)
-
-    tasks_bash >> tasks_python
+        
+    bash >> python
