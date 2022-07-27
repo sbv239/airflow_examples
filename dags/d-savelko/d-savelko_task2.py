@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+from textwrap import dedent
 
 from airflow import DAG
 from airflow.operators.bash import BashOperator
@@ -6,7 +7,7 @@ from airflow.operators.python import PythonOperator
 
 
 with DAG(
-    'd-savelko_task1',
+    'd-savelko_task2',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -22,20 +23,20 @@ with DAG(
     tags=['example'],
 ) as dag:
 
-    t1 = BashOperator(
-        task_id='print_date',
-        bash_command='pwd',
-    )
+    for i in range(10):
+        task = BashOperator(
+            task_id=f'task_bash_{i}',
+            bash_command=dedent(f"echo {i}")
+        )
+        task >> task
 
-    def print_context(ds, **kwargs):
-        print(kwargs)
-        print(ds)
-        return 'Whatever you return gets printed in the logs'
-
-
-    t2 = PythonOperator(
-        task_id='print_the_context',
-        python_callable=print_context,
-    )
-
-    t1 >> t2
+    def task_number_is(task_number):
+        return f"task number is: {task_number}"
+    
+    for task_number in range(20):
+        task = PythonOperator(
+            task_id=f'python_oper_{task_number}',
+            python_callable=task_number_is,
+            op_kwargs={'task_number':task_number}
+        )
+        task >> task
