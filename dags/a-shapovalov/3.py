@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+from textwrap import dedent
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
@@ -24,6 +25,19 @@ with DAG(
         bash = BashOperator(
                 task_id=f'bash_command_{i}',
                 bash_command=f'echo {i}')
+
+    bash.doc_md = dedent(
+        """
+        Documentation
+        # Heading 1
+        ## Heading 2
+        ### Heading 3
+        __bold text__
+        **also bold text**
+        _italic text_
+        *also italic text*
+        `some random code line`
+        """)
 
     def print_task_number(task_number):
         print(f'task number is: {task_number}')
