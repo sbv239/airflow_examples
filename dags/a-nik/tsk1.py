@@ -41,7 +41,6 @@ with DAG(
         bash_command="pwd",
     )
 
-
     def print_context(ds, **kwargs):
         print(kwargs)
         print(ds)
