@@ -31,7 +31,7 @@ default_args = {
 }
 
 with DAG(
-    'hw_9_o_bulaeva_10',
+    'hw_13_o_bulaeva_10',
     start_date=datetime(2022, 7, 29),
     max_active_runs=2,
     schedule_interval=timedelta(minutes=30),
