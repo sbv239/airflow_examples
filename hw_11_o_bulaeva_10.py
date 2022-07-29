@@ -5,7 +5,7 @@ from airflow.hooks.base import BaseHook
 import psycopg2
 
 
-def find_user(conn_id):
+def find_user_cnt(conn_id):
 	creds = BaseHook.get_connection(conn_id)
     with psycopg2.connect(
   f"postgresql://{creds.login}:{creds.password}"
@@ -45,6 +45,6 @@ with DAG(
 ) as dag:
     t1 = PythonOperator(
         task_id = 'find_user',
-        python_callable=find_user,
+        python_callable=find_user_cnt,
         op_kwargs={'conn_id': "startml_feed"}
     )
