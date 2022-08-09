@@ -44,9 +44,11 @@ with DAG(
         task_id='print_dir',
         bash_command='pwd'
     )
-    def print_date(ds):
+    def print_date(ds,**kwargs):
+        print(kwargs)
         print(ds)
     t2 = PythonOperator(
-        task_id='Print date'
+        task_id='print_ds',
         python_callable= print_date
     )
+    t1>>t2
