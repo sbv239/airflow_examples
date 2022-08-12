@@ -5,7 +5,7 @@ from textwrap import dedent
 from airflow import DAG
 
 with DAG(
-    'tutorial',
+    'hw_2_de-jakovlev',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
