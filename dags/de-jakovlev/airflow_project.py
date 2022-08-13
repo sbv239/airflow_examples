@@ -6,20 +6,21 @@ from textwrap import dedent
 from airflow import DAG
 
 
-def print_context(ds, **kwargs):
+def print_context(i):
     """Пример PythonOperator"""
     # Через синтаксис **kwargs можно получить словарь
     # с настройками Airflow. Значения оттуда могут пригодиться.
     # Пока нам не нужно
     # В ds Airflow за нас подставит текущую логическую дату - строку в формате YYYY-MM-DD
-    print(ds)
+    print(f'task number is {i}')
     return 'Whatever you return gets printed in the logs'
 
 
 
 
+
 with DAG(
-    'hw_2_de-jakovlev',
+    'hw_3_de-jakovlev',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -34,10 +35,27 @@ with DAG(
     catchup=False,
     tags=['example'],
 ) as dag:
-    t1 = BashOperator(
-        task_id='print_date',
-        bash_command='pwd'
+    templated_command = dedent(
+        """
+    {% for i in range(5) %}
+        echo "{{ ds }}"
+        echo "{i}"
+        echo "{{ macros.ds_add(ds, 7)}}"
+    {% endfor %}
+        """
     )
+    for i in range(10):
+        t1 = BashOperator(
+            task_id=f'print_{i}',
+            bash_command=templated_command,
+        )
+    for i in range(20):
+        t2 = PythonOperator(
+            task_id=f'print_the_data_{i}',
+            python_callable=print_context,
+            op_kwargs={'i': i},
+        )
+    
     """
     t3 = BashOperator(
         task_id='sleep',
@@ -46,10 +64,7 @@ with DAG(
         retries=3,
     )
     """
-    t2 = PythonOperator(
-        task_id='print_the_context',
-        python_callable=print_context,
-    )
+
     t1.doc_md = dedent (
         """
         Example
