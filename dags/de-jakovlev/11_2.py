@@ -4,6 +4,24 @@ from textwrap import dedent
 
 from airflow import DAG
 
+
+def print_context(ds, **kwargs):
+    """Пример PythonOperator"""
+    # Через синтаксис **kwargs можно получить словарь
+    # с настройками Airflow. Значения оттуда могут пригодиться.
+    # Пока нам не нужно
+    print(kwargs)
+    # В ds Airflow за нас подставит текущую логическую дату - строку в формате YYYY-MM-DD
+    print(ds)
+    return 'Whatever you return gets printed in the logs'
+
+
+run_this = PythonOperator(
+    task_id='print_the_context',  # нужен task_id, как и всем операторам
+    python_callable=print_context,  # свойственен только для PythonOperator - передаем саму функцию
+)
+
+
 with DAG(
     'hw_2_de-jakovlev',
     default_args={
@@ -30,12 +48,19 @@ with DAG(
         bash_command='sleep 5',
         retries=3,
     )
+    run_this = PythonOperator(
+        task_id='print_the_context',
+        python_callable=print_context,
+    )
     t1.doc_md = dedent (
         """
         Example
         """
     )
     t1 >> t2
+
+
+
 
 
 
