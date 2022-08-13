@@ -6,13 +6,13 @@ from textwrap import dedent
 from airflow import DAG
 
 
-def print_context(i):
+def print_context(task_number):
     """Пример PythonOperator"""
     # Через синтаксис **kwargs можно получить словарь
     # с настройками Airflow. Значения оттуда могут пригодиться.
     # Пока нам не нужно
     # В ds Airflow за нас подставит текущую логическую дату - строку в формате YYYY-MM-DD
-    print(f'task number is {i}')
+    print(f'task number is {task_number}')
     return 'Whatever you return gets printed in the logs'
 
 
@@ -47,7 +47,7 @@ with DAG(
     for i in range(10):
         t1 = BashOperator(
             task_id=f'print_{i}',
-            bash_command=templated_command,
+            bash_command=f"echo {i}",
         )
     for i in range(20):
         t2 = PythonOperator(
