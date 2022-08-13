@@ -1,18 +1,19 @@
 from datetime import timedelta, datetime
 from airflow.operators.bash import BashOperator
+from airflow.operators.python import PythonOperator
 from textwrap import dedent
 
 from airflow import DAG
 
 
-def print_context(ds, **kwargs):
+def print_context(**kwargs):
     """Пример PythonOperator"""
     # Через синтаксис **kwargs можно получить словарь
     # с настройками Airflow. Значения оттуда могут пригодиться.
     # Пока нам не нужно
     print(kwargs)
     # В ds Airflow за нас подставит текущую логическую дату - строку в формате YYYY-MM-DD
-    print(ds)
+    print(kwargs['ds'])
     return 'Whatever you return gets printed in the logs'
 
 
