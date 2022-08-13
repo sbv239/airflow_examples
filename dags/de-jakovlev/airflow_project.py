@@ -18,7 +18,6 @@ def print_context(task_number):
 
 
 
-
 with DAG(
     'hw_3_de-jakovlev',
     default_args={
@@ -49,28 +48,32 @@ with DAG(
             task_id=f'print_{i}',
             bash_command=f"echo {i}",
         )
+        t1.doc_md = dedent(
+            """
+            #this
+            # and that
+            ###what is this
+            #### HELLO
+            **what**
+            test do*cumentat*ion
+            `task_id=f'print_{i}'`
+            """
+        )
     for i in range(20):
         t2 = PythonOperator(
             task_id=f'print_the_data_{i}',
             python_callable=print_context,
             op_kwargs={'task_number': i},
         )
-    
-    """
-    t3 = BashOperator(
-        task_id='sleep',
-        depends_on_past=False,
-        bash_command='sleep 5',
-        retries=3,
-    )
-    """
+        t2.doc_md = dedent(
+            """
+            #this
+            # and that
+            **test** documentat*ion*
+            `task_id=f'print_the_data_{i}'` 
+            """
+        )
 
-    t1.doc_md = dedent (
-        """
-        Example
-        """
-    )
-    t1 >> t2
 
 
 
