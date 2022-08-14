@@ -18,7 +18,7 @@ default_args = {
 }
 
 with DAG(
-    'hw_9_de-jakovlev',
+    'hw_10_de-jakovlev',
     start_date=datetime(2021, 1, 1),
     max_active_runs=2,
     schedule_interval=timedelta(minutes=30),
@@ -27,11 +27,11 @@ with DAG(
 ) as dag:
     
     def push_func(ti):
-        ti.xcom_push(key="sample_xcom_key", value="xcom test")
+        return "Airflow tracks everything"
 
 
     def pull_func(ti):
-        info = ti.xcom_pull(key='sample_xcom_key', task_ids='x_com_push')
+        info = ti.xcom_pull(key='return_value', task_ids='x_com_push')
         print(info)
 
     p1 = PythonOperator(
