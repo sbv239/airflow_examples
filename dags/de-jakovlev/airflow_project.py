@@ -47,7 +47,7 @@ with DAG(
         t1 = BashOperator(
             task_id=f'print_{i}',
             bash_command=templated_command,
-            env={"NUMBER": i}
+            env={"NUMBER": f'{i}'}
         )
     for i in range(20):
         t2 = PythonOperator(
