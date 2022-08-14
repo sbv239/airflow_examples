@@ -39,7 +39,7 @@ with DAG(
     templated_command = dedent(
         """
     {% for i in range(5) %}
-        echo $NUMBER"
+        echo $NUMBER
     {% endfor %}
         """
     )
