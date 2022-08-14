@@ -44,19 +44,11 @@ def print_context(ts, run_id, **kwargs):
 
 with DAG(
     'hw_8_de-jakovlev',
-    default_args={
-        'depends_on_past': False,
-        'email': ['airflow@example.com'],
-        'email_on_failure': False,
-        'email_on_retry': False,
-        'retries': 1,
-        'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
-    },
-    description='A simple tutorial DAG',
-    schedule_interval=timedelta(days=1),
-    start_date=datetime(2022, 1, 1),
-    catchup=False,
-    tags=['example'],
+    start_date=datetime(2021, 1, 1),
+    max_active_runs=2,
+    schedule_interval=timedelta(minutes=30),
+    default_args=default_args,
+    catchup=False
 ) as dag:
     templated_command = dedent(
         """
