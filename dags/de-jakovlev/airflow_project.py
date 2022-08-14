@@ -41,9 +41,6 @@ def print_context(ts, run_id, **kwargs):
     print(f'task number is {kwargs["task_number"]}')
     return 'Whatever you return gets printed in the logs'
 
-def get_testing_increase(state, ti):
-    res = requests.get()
-
 
 with DAG(
     'hw_8_de-jakovlev',
