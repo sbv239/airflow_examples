@@ -42,6 +42,28 @@ with DAG(
     {% endfor %}
         """
     )
+    templated_command = dedent(
+        """
+    {% for i in range(5) %}
+        echo "{{ ds }}"
+        echo "{i}"
+        echo $NUMBER
+        echo "{{ macros.ds_add(ds, 7)}}"
+    {% endfor %}
+        """
+    )
+    for i in range(10):
+        t1 = BashOperator(
+            task_id=f'print_{i}',
+            bash_command=templated_command,
+            env={"NUMBER": i}
+        )
+    for i in range(20):
+        t2 = PythonOperator(
+            task_id=f'print_the_data_{i}',
+            python_callable=print_context,
+            op_kwargs={'task_number': i},
+        )
 
     t1 = BashOperator(
         task_id=f'print_variables',
