@@ -18,7 +18,7 @@ default_args = {
 }
 
 with DAG(
-    'hw_8_de-jakovlev',
+    'hw_9_de-jakovlev',
     start_date=datetime(2021, 1, 1),
     max_active_runs=2,
     schedule_interval=timedelta(minutes=30),
