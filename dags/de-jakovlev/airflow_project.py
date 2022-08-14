@@ -19,7 +19,7 @@ def print_context(task_number):
 
 
 with DAG(
-    'hw_5_de-jakovlev',
+    'hw_6_de-jakovlev',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -37,18 +37,7 @@ with DAG(
     templated_command = dedent(
         """
     {% for i in range(5) %}
-        echo "{{ ts }}"
-        echo "{{run_id}}"
-    {% endfor %}
-        """
-    )
-    templated_command = dedent(
-        """
-    {% for i in range(5) %}
-        echo "{{ ds }}"
-        echo "{i}"
-        echo $NUMBER
-        echo "{{ macros.ds_add(ds, 7)}}"
+        echo $NUMBER"
     {% endfor %}
         """
     )
