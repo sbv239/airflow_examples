@@ -6,20 +6,22 @@ from textwrap import dedent
 from airflow import DAG
 
 
-def print_context(task_number):
+def print_context(ts, run_id, **kwargs):
     """Пример PythonOperator"""
     # Через синтаксис **kwargs можно получить словарь
     # с настройками Airflow. Значения оттуда могут пригодиться.
     # Пока нам не нужно
     # В ds Airflow за нас подставит текущую логическую дату - строку в формате YYYY-MM-DD
-    print(f'task number is {task_number}')
+    print(ts)
+    print(run_id)
+    print(f'task number is {kwargs["task_number"]}')
     return 'Whatever you return gets printed in the logs'
 
 
 
 
 with DAG(
-    'hw_6_de-jakovlev',
+    'hw_7_de-jakovlev',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
