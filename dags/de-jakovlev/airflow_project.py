@@ -25,7 +25,7 @@ def get_bd_data():
                 """
             )
             results = cursor.fetchone()
-            return results
+            return {'user_id': results[0], 'count': results[1]}
 
 
 default_args = {
@@ -38,7 +38,7 @@ default_args = {
 }
 
 with DAG(
-    'hw_10_de-jakovlev',
+    'hw_11_de-jakovlev',
     start_date=datetime(2021, 1, 1),
     max_active_runs=2,
     schedule_interval=timedelta(minutes=30),
