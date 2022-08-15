@@ -24,7 +24,7 @@ def get_bd_data():
                 LIMIT 1
                 """
             )
-            results = cursor.fetchall()
+            results = cursor.fetchone()
             return results
 
 
