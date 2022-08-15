@@ -9,23 +9,8 @@ from airflow import DAG
 from airflow.providers.postgres.operators.postgres import PostgresHook
 
 
-def get_bd_data():
-    postgres = PostgresHook(postgres_conn_id="startml_feed")
-    with postgres.get_conn() as conn:  # вернет тот же connection, что вернул бы psycopg2.connect(...)
-        with conn.cursor(cursor_factory=RealDictCursor) as cursor:
-            cursor.execute(
-                """
-                SELECT user_id, count(action)
-                FROM feed_action
-                WHERE action = 'like'
-                GROUP BY user_id
-                ORDER BY count(action) DESC  
-                LIMIT 1 
-                """
-            )
-            results = cursor.fetchone()
-            return results
-            #return {'user_id': results[0], 'count': results[1]}
+def get_variable():
+    print(Variable.get("is_startml"))
 
 
 default_args = {
@@ -38,7 +23,7 @@ default_args = {
 }
 
 with DAG(
-    'hw_11_de-jakovlev',
+    'hw_12_de-jakovlev',
     start_date=datetime(2021, 1, 1),
     max_active_runs=2,
     schedule_interval=timedelta(minutes=30),
@@ -47,8 +32,8 @@ with DAG(
 ) as dag:
 
     p1 = PythonOperator(
-        task_id='database',
-        python_callable=get_bd_data,
+        task_id='variable',
+        python_callable=get_variable,
     )
 
 
