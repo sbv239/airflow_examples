@@ -4,7 +4,7 @@ from airflow.operators.python import PythonOperator
 from textwrap import dedent
 from airflow.models import Variable
 from airflow.hooks.base_hook import BaseHook
-
+from psycopg2.extras import RealDictCursor
 from airflow import DAG
 from airflow.providers.postgres.operators.postgres import PostgresHook
 
@@ -12,20 +12,20 @@ from airflow.providers.postgres.operators.postgres import PostgresHook
 def get_bd_data():
     postgres = PostgresHook(postgres_conn_id="startml_feed")
     with postgres.get_conn() as conn:  # вернет тот же connection, что вернул бы psycopg2.connect(...)
-        with conn.cursor() as cursor:
+        with conn.cursor(cursor_factory=RealDictCursor) as cursor:
             cursor.execute(
                 """
-                SELECT "user".id, COUNT(feed_action.action) as likes FROM "user"
-                INNER JOIN feed_action
-                ON "user".id = feed_action.user_id
+                SELECT user_id, count(action)
+                FROM feed_action
                 WHERE action = 'like'
-                GROUP BY "user".id
-                ORDER BY likes DESC
-                LIMIT 1
+                GROUP BY user_id
+                ORDER BY count(action) DESC  
+                LIMIT 1 
                 """
             )
             results = cursor.fetchone()
-            return {'user_id': results[0], 'count': results[1]}
+            return results
+            #return {'user_id': results[0], 'count': results[1]}
 
 
 default_args = {
