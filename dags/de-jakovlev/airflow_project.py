@@ -54,11 +54,11 @@ with DAG(
     )
     p2 = PythonOperator(
         task_id="not_startml_desc",
-        python_callable=print_startml
+        python_callable=dont_print_startml
     )
     p3 = PythonOperator(
         task_id="startml_desc",
-        python_callable=dont_print_startml
+        python_callable=print_startml
     )
 
     dummy_end = DummyOperator(
