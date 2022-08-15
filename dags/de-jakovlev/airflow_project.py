@@ -6,6 +6,26 @@ from airflow.models import Variable
 from airflow.hooks.base_hook import BaseHook
 
 from airflow import DAG
+from airflow.providers.postgres.operators.postgres import PostgresHook
+
+
+def get_bd_data():
+    postgres = PostgresHook(postgres_conn_id="startml_feed")
+    with postgres.get_conn() as conn:  # вернет тот же connection, что вернул бы psycopg2.connect(...)
+        with conn.cursor() as cursor:
+            cursor.execute(
+                """
+                SELECT "user".id, COUNT(feed_action.action) as likes FROM "user"
+                INNER JOIN feed_action
+                ON "user".id = feed_action.user_id
+                WHERE action = 'like'
+                GROUP BY "user".id
+                ORDER BY likes DESC
+                LIMIT 1
+                """
+            )
+            results = cursor.fetchall()
+            return results
 
 
 default_args = {
@@ -25,25 +45,12 @@ with DAG(
     default_args=default_args,
     catchup=False
 ) as dag:
-    
-    def push_func(ti):
-        return "Airflow tracks everything"
-
-
-    def pull_func(ti):
-        info = ti.xcom_pull(key='return_value', task_ids='x_com_push')
-        print(info)
 
     p1 = PythonOperator(
-        task_id='x_com_push',
-        python_callable=push_func,
+        task_id='database',
+        python_callable=get_bd_data,
     )
 
-    p2 = PythonOperator(
-        task_id='x_com_pull',
-        python_callable=pull_func,
-    )
-    p1 >> p2
 
 
 
