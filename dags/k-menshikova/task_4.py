@@ -27,7 +27,7 @@ with DAG(
          {% endfor %}
         """
     )
-
+    
     t1 = BashOperator(
         task_id='print_ts',
         bash_command=templated_command,
