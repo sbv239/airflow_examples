@@ -8,7 +8,7 @@ from airflow.operators.python import PythonOperator
 
 
 with DAG(
-    'hw_simple_dag_loop',
+    'hw_2_k-menshikova',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -17,11 +17,11 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5), 
     },
-    description='A simple tutorial DAG',
+    description='task 2',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 1, 1),
     catchup=False,
-    tags=['example'],
+    tags=['k-menshikova_2'],
 ) as dag:
 
     t1 = DummyOperator(task_id='start_dag')
