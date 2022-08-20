@@ -40,6 +40,7 @@ with DAG(
         print(f'task number is: {task_number}')
 
 
+
     for i in range(30):
         if i <= 10:
             t1 = BashOperator(
@@ -47,6 +48,7 @@ with DAG(
                 bash_command=f"echo {i}"
             )
         if i > 10:
+
             t2 = PythonOperator(
                 task_id='python_operators_' + str(i),
                 python_callable=task_number,
