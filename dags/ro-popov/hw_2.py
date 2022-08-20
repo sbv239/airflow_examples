@@ -31,12 +31,12 @@ with DAG(
     # Каждый DAG "видит" свою "дату запуска"
     # это когда он предположительно должен был
     # запуститься. Не всегда совпадает с датой на вашем компьютере
-    start_date=datetime(2022, 1, 1),
+    start_date=datetime(2022, 8, 19),
     # Запустить за старые даты относительно сегодня
     # https://airflow.apache.org/docs/apache-airflow/stable/dag-run.html
     catchup=False,
     # теги, способ помечать даги
-    tags=['example'],
+    tags=['rom_hw_2'],
 ) as dag:
 
 
@@ -48,8 +48,6 @@ with DAG(
         # print(kwargs)
         # В ds Airflow за нас подставит текущую логическую дату - строку в формате YYYY-MM-DD
         print(ds)
-        return ds
-
 
 
      t2 = PythonOperator(
