@@ -50,7 +50,7 @@ with DAG(
         print(ds)
 
 
-     t2 = PythonOperator(
+    t2 = PythonOperator(
         task_id='print_the_context',  # нужен task_id, как и всем операторам
         python_callable=print_context,  # свойственен только для PythonOperator - передаем саму функцию
     )
