@@ -21,13 +21,12 @@ with DAG \
             catchup=False,
             tags=["task_6"]
         ) as dag:
-    for task in range(10):
-        os.environ['NUMBER'] = str(task)
-        if task <= 10:
-            bash_task = BashOperator(
-                task_id = "BO_task_" + str(task),
-                bash_command = "echo $NUMBER"
-            )
+    for i in range(10):
+        os.environ['NUMBER'] = str(i)
+        bash_task = BashOperator(
+            task_id = "BO_task_" + str(i),
+            bash_command = "echo $NUMBER"
+        )
 
 
 
