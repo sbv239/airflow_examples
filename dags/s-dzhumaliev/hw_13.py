@@ -34,8 +34,7 @@ with DAG(
 ) as dag:
     branching_task = BranchPythonOperator(
         task_id='branching',
-        python_callable=branching,
-        trigger_rule=TriggerRule.ONE_SUCCESS
+        python_callable=branching
     )
     t2 = PythonOperator(
         task_id='startml_desc',
@@ -52,6 +51,4 @@ with DAG(
         task_id='after_branching',
     )
 
-    dummy_start_task >> branching_task
-    t2 >> dummy_end_task
-    t3 >> dummy_end_task
+    dummy_start_task >> branching_task >> [t2, t3] >> dummy_end_task
