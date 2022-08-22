@@ -22,7 +22,7 @@ with DAG(
 	default_args=default_args,
 	description='task_2_first_DAG',
 	schedule_interval=timedelta(days=1),
-	start_date=datetime(2022, 8, 22),
+	start_date=datetime(2022, 1, 1),
 	catchup=False,
 	tags=['rag'],
 ) as dag:
