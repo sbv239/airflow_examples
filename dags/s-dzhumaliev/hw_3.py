@@ -20,14 +20,24 @@ with DAG(
     start_date=datetime(2022, 1, 1),
 ) as dag:
     for i in range(10):
-        BashOperator(
+        t = BashOperator(
             task_id=f"echo_{i}",
             bash_command=f"echo {i}",
         )
 
+        t.doc_md = f"""
+            # Bash №{i}
+            **Documentation** for `BashOperator` *echo_{i}*.
+        """
+
     for i in range(20):
-        PythonOperator(
+        t = PythonOperator(
             task_id=f'print_task_number_{i}',
             op_kwargs={'task_number': i},
             python_callable=print_task_number
         )
+
+        t.doc_md = f"""
+            # Python №{i}
+            **Documentation** for `PythonOperator` *print_task_number*.
+        """
