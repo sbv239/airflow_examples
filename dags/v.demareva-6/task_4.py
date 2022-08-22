@@ -6,7 +6,7 @@ from textwrap import dedent
 
 with DAG \
             (
-            "task_3_v_demareva",
+            "task_4_v_demareva",
             default_args={
                 'depends_on_past': False,
                 'email': ['airflow@example.com'],
@@ -15,11 +15,11 @@ with DAG \
                 'retries': 1,
                 'retry_delay': timedelta(minutes=5),
             },
-            description="DAG for task #3",
+            description="DAG for task #4",
             schedule_interval=timedelta(days=1),
             start_date=datetime(2022, 8, 21),
             catchup=False,
-            tags=["task_3"]
+            tags=["task_4"]
         ) as dag:
     def print_task_num(task_number):
         print (f"task number is: {task_number}")
