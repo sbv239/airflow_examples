@@ -49,6 +49,7 @@ with DAG(
     )
     dummy_end_task = DummyOperator(
         task_id='after_branching',
+        trigger_rule=TriggerRule.ONE_SUCCESS
     )
 
     dummy_start_task >> branching_task >> [t2, t3] >> dummy_end_task
