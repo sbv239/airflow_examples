@@ -2,7 +2,7 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
-with DAG('tutorial_dag_2'
+with DAG('jijaken_dag_2'
         ,default_args={
     'depends_on_past': False,
     'email': ['airflow@example.com'],
