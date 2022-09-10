@@ -11,10 +11,14 @@ with DAG('tutorial_dag_2'
     'retries': 1,
     'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
 }) as dag:
+    def context_print(ds):
+        print(ds)
+        return ds
+
     t1 = BashOperator(task_id='pwd_bash',
                       bash_command= 'pwd')\
     t2 = PythonOperator(task_id='print_python',
-                        python_callable='print(ds)')
+                        python_callable=context_print)
 
 
     t1 >> t2
