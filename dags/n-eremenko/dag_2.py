@@ -1,16 +1,25 @@
+from datetime import timedelta, datetime
+
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
-with DAG('jijaken_dag_2'
-        ,default_args={
+default_args={
     'depends_on_past': False,
     'email': ['airflow@example.com'],
     'email_on_failure': False,
     'email_on_retry': False,
     'retries': 1,
-    'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
-}) as dag:
+    'retry_delay': timedelta(minutes=5)  # timedelta из пакета datetime
+}
+with DAG('hw_2_n-eremenko',
+         default_args = default_args,
+         description ='hw_2_jijaken',
+         chedule=timedelta(days=1),
+         start_date = datetime(2022,09, 09),
+         catchup = False,
+         tags=['hw_2_n-eremenko']) as dag:
+
     def context_print(ds):
         print(ds)
         return ds
