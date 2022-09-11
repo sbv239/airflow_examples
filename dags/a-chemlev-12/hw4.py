@@ -9,7 +9,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-        'chemelson_hw3',
+        'chemelson_hw4',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
@@ -18,11 +18,11 @@ with DAG(
             'retries': 1,
             'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
         },
-        description='chemelson_hw3',
+        description='chemelson_hw4',
         schedule_interval=timedelta(days=1),
         start_date=datetime(2022, 9, 11),
         catchup=False,
-        tags=['chemelson_hw3']
+        tags=['chemelson_hw4']
 ) as dag:
     def print_task_number(num):
         print(f'task number is: {num}')
