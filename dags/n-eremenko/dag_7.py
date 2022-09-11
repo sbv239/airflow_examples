@@ -19,7 +19,7 @@ with DAG('hw_2_n-eremenko',
          schedule_interval=timedelta(days=1),
          start_date = datetime(2022,9, 9),
          catchup = False,
-         tags=['hw_2_n-eremenko']) as dag:
+         tags=['hw_7_n-eremenko']) as dag:
 
     def print_for_20(ts,run_id,task_number):
         print(f'task number is: {task_number}')
