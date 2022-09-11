@@ -12,13 +12,13 @@ default_args={
     'retries': 1,
     'retry_delay': timedelta(minutes=5)  # timedelta из пакета datetime
 }
-with DAG('hw_2_n-eremenko',
+with DAG('hw_9_n-eremenko',
          default_args = default_args,
-         description ='hw_2_',
+         description ='hw_9_',
          schedule_interval=timedelta(days=1),
          start_date = datetime(2022,9, 9),
          catchup = False,
-         tags=['hw_2_n-eremenko']) as dag:
+         tags=['hw_9_n-eremenko']) as dag:
 
     def take_xcom(ti):
         ti.xcom_push(key="sample_xcom_key",
