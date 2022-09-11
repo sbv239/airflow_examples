@@ -18,7 +18,7 @@ with DAG(
         start_date=datetime(2022, 9, 11),
         catchup=False,
         tags=['chemelson_hw2']
-):
+) as dag:
     t1 = BashOperator(
         task_id='print_pwd',
         bash_command='pwd'
