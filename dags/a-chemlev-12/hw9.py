@@ -2,23 +2,6 @@ from datetime import timedelta, datetime
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 
-state = 'wa'
-
-def set_xcom_value(state, ti):
-    ti.xcom_push(
-        key="sample_xcom_key",
-        value="xcom test"
-    )
-
-
-def get_and_pring_xcom_value(state, ti):
-    value = ti.xcom_pull(
-        key="sample_xcom_key",
-        task_ids=f'set_xcom_value_{state}'
-    )
-    print(value)
-
-
 with DAG(
         'chemelson_hw9',
         default_args={
@@ -35,15 +18,29 @@ with DAG(
         catchup=False,
         tags=['chemelson_hw9']
 ) as dag:
-    opr_set_xcom_value = PythonOperator(
-        task_id=f'set_xcom_value_{state}',
-        python_callable=set_xcom_value,
-        op_kwargs={'state': state}
-    )
-    opr_get_and_pring_xcom_value = PythonOperator(
-        task_id='get_and_pring_xcom_value',
-        python_callable=get_and_pring_xcom_value,
-        op_kwargs={'state': state}
+    def push_xcom_func(ti):
+        ti.xcom_push(
+            key='sample_xcom_key',
+            value='xcom test'
+        )
+
+
+    def pull_xcom_func(ti):
+        value_read = ti.xcom_pull(
+            key='sample_xcom_key',
+            task_ids='push_xcom'
+        )
+        print(value_read)
+
+
+    t1 = PythonOperator(
+        task_id='push_xcom',
+        python_callable=push_xcom_func,
     )
 
-    opr_set_xcom_value >> opr_get_and_pring_xcom_value
+    t2 = PythonOperator(
+        task_id='pull_xcom',
+        python_callable=pull_xcom_func,
+    )
+
+    t1 >> t2
