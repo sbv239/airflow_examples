@@ -9,7 +9,7 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 with DAG(
-    'hw3_pgonin',
+    'hw4_pgonin',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -55,7 +55,7 @@ with DAG(
             op_kwargs={'task_number': i},
         )
         task
-        
+
         task.doc_md = dedent(
         """
         

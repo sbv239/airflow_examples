@@ -9,7 +9,7 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 with DAG(
-    'hw9_pgonin',
+    'hw10_pgonin',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -26,22 +26,19 @@ with DAG(
 ) as dag:
 
 
-    def xcom_push(ti):
-        ti.xcom_push(
-                key='sample_xcom_key',
-                value='xcom test'
-            )
+    def write():
+        return 'Airflow tracks everything'
 
     def xcom_pull(ti):
         res = ti.xcom_pull(
-                key='sample_xcom_key',
-                task_ids='push'
+                key='return_value',
+                task_ids='write'
             )
         print(res)
 
     t1 = PythonOperator(
-        task_id='push',  
-        python_callable=xcom_push
+        task_id='write',  
+        python_callable=write
     )
     
     t2 = PythonOperator(
