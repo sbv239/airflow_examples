@@ -12,7 +12,8 @@ with DAG(
             'email_on_retry': False,
             'retries': 1,
             'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
-        }
+        },
+        tags=['chemelson_hw2']
 ):
     t1 = BashOperator(
         task_id='print_pwd',
