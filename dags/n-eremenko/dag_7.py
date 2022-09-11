@@ -13,7 +13,7 @@ default_args={
     'retries': 1,
     'retry_delay': timedelta(minutes=5)  # timedelta из пакета datetime
 }
-with DAG('hw_2_n-eremenko',
+with DAG('hw_7_n-eremenko',
          default_args = default_args,
          description ='hw_2_',
          schedule_interval=timedelta(days=1),
