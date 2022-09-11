@@ -35,8 +35,7 @@ with DAG(
             python_task = PythonOperator(
                 task_id=f'task_number_{i}',
                 python_callable=print_context,
-                op_kwargs={'task_number': i},
-                task_number=i
+                op_kwargs={'task_number': i}
             )
 
     bash_task >> python_task
