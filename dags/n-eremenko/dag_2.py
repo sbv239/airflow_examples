@@ -14,9 +14,9 @@ default_args={
 }
 with DAG('hw_2_n-eremenko',
          default_args = default_args,
-         description ='hw_2_jijaken',
-         chedule=timedelta(days=1),
-         start_date = datetime(2022,09, 09),
+         description ='hw_2_',
+         schedule_interval=timedelta(days=1),
+         start_date = datetime(2022,9, 9),
          catchup = False,
          tags=['hw_2_n-eremenko']) as dag:
 
@@ -25,9 +25,6 @@ with DAG('hw_2_n-eremenko',
         return ds
 
     t1 = BashOperator(task_id='pwd_bash',
-                      bash_command= 'pwd')\
+                      bash_command= 'pwd')
     t2 = PythonOperator(task_id='print_python',
                         python_callable=context_print)
-
-
-    t1 >> t2
