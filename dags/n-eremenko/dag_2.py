@@ -27,4 +27,6 @@ with DAG('hw_2_n-eremenko',
     t1 = BashOperator(task_id='pwd_bash',
                       bash_command= 'pwd')
     t2 = PythonOperator(task_id='print_python',
+    
                         python_callable=context_print)
+
