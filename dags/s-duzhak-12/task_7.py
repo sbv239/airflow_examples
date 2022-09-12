@@ -31,6 +31,7 @@ with DAG(
         env={'NUMBER': str(1)},
         dag=dag
     )
+    tag_point = task1
     for i in range(2, 11):
         task = BashOperator(
             task_id=f'bash_{str(i)}',
@@ -43,7 +44,8 @@ with DAG(
         **Жирный**
         `code`
         """)
-        task1 >> task
+        tag_point >> task
+        tag_point = task
 
     for i in range(11, 31):
         task = PythonOperator(
@@ -57,5 +59,6 @@ with DAG(
              **Жирный**
              `code`
              """)
-        task1 >> task
+        tag_point >> task
+        tag_point = task
 
