@@ -9,7 +9,7 @@ def print_ds(ds):
 
 
 with DAG(
-        'task_2',
+        's-duzhak-2-task_2',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
@@ -26,7 +26,8 @@ with DAG(
 ) as dag:
     t1 = BashOperator(
         task_id='print_pwd',
-        bash_command='pwd'
+        bash_command='pwd',
+        dag=dag
     )
 
     t2 = PythonOperator(

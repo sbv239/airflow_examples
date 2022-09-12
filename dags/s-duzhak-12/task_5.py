@@ -6,7 +6,7 @@ from textwrap import dedent
 
 
 with DAG(
-        'task_2',
+        's-duzhak-2-task_5',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
@@ -35,7 +35,8 @@ with DAG(
 
     task1 = BashOperator(
         task_id='bash_templated',
-        bash_command=templated_command
+        bash_command=templated_command,
+        dag=dag
     )
 
 

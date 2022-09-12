@@ -6,7 +6,7 @@ from textwrap import dedent
 
 
 with DAG(
-        'task_2',
+        's-duzhak-2-task_6',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
