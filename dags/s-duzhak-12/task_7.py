@@ -21,6 +21,7 @@ with DAG(
         catchup=False,
         tags=['example'],
 ) as dag:
+    "Task_7 s-duzhak-12"
     def print_task_num(ts, run_id, **kwargs):
         print(f"task number is: {kwargs['task_number']}")
         print(ts, run_id)
