@@ -27,14 +27,14 @@ with DAG(
 
     task1 = BashOperator(
         task_id='bash_1',
-        bash_command='echo 1',
+        bash_command='echo 1 ',
         env={'NUMBER': 1},
         dag=dag
     )
     for i in range(2, 11):
         task = BashOperator(
             task_id=f'bash_{i}',
-            bash_command=f'echo $NUMBER',
+            bash_command=f'echo $NUMBER ',
             env={'NUMBER': i}
         )
         task.doc_md = dedent("""
