@@ -23,7 +23,8 @@ with DAG(
 ) as dag:
     def print_task_num(ts, run_id, **kwargs):
         print(f"task number is: {kwargs['task_number']}")
-        print(ts, run_id)
+        print(ts, 'TS')
+        print(run_id, 'run_id')
 
     task1 = BashOperator(
         task_id='bash_1',
