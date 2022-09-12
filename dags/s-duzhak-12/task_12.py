@@ -6,7 +6,7 @@ from airflow.models import Variable
 
 
 with DAG(
-        's-duzhak-2-task_11',
+        's-duzhak-2-task_12',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
