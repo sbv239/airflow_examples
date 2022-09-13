@@ -3,6 +3,7 @@ from textwrap import dedent
 
 from airflow import DAG
 from airflow.operators.bash import BashOperator
+from airflow.operators.python import PythonOperator
 
 def print_ds(ds, **kwargs):
     """Print ds"""
@@ -34,7 +35,7 @@ with DAG(
     )
 
     t2 = PythonOperator(
-        task_id='print ds function',  # нужен task_id, как и всем операторам
+        task_id='print_ds',  # нужен task_id, как и всем операторам
         python_callable=print_ds,  # свойственен только для PythonOperator - передаем саму функцию
     )
     
