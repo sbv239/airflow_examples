@@ -12,7 +12,7 @@ def print_ds(ds, **kwargs):
     return 'Print kwargs and ds'
 
 with DAG(
-    'tutorial',
+    'hw_2_p-tarabanov',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
