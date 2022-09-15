@@ -6,16 +6,19 @@ from airflow.operators.python_operator import PythonOperator
 
 
 with DAG(
-    'first_dag',
+    'hw_8_a-savelev-12',
     default_args={
-    'depends_on_past': False,
-    'email': ['airflow@example.com'],
-    'email_on_failure': False,
-    'email_on_retry': False,
-    'retries': 1,
-    'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
+        'depends_on_past': False,
+        'email': ['airflow@example.com'],
+        'email_on_failure': False,
+        'email_on_retry': False,
+        'retries': 1,
+        'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
     },
-    start_date=datetime(2022, 9, 13)
+    start_date=datetime(2022, 9, 15),
+    tags=['a-savelev-12'],
+    schedule_interval=timedelta(days=1),
+    catchup=False
 ) as dag:
     def task_num(ts, run_id, **kwargs):
         task_number = kwargs['task_number']
