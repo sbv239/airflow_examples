@@ -13,7 +13,9 @@ with DAG(
             'email_on_retry': False,
             'retries': 1,
             'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
-        }
+        },
+        start_date=datetime(2022, 1, 1),
+        tags=['hw_2_d-grigorev']
 ) as dag:
     t1 = BashOperator(
         task_id='pwd_print',
