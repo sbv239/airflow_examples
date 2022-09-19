@@ -23,6 +23,7 @@ with DAG(
             bash_command=f'echo {i}',
             dag=dag
         )
+        t1.set_upstream(t1)
 
 
     def print_ds(ds, **kwargs):
