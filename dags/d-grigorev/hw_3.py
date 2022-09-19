@@ -17,13 +17,14 @@ with DAG(
         start_date=datetime(2022, 1, 1),
         tags=['hw_3_d-grigorev']
 ) as dag:
+    tasks = []
     for i in range(10):
-        t1 = BashOperator(
+        t = BashOperator(
             task_id=f'task_{i}',
             bash_command=f'echo {i}',
             dag=dag
         )
-        t1.set_upstream(t1)
+        tasks.append(t)
 
 
     def print_ds(ds, **kwargs):
@@ -37,4 +38,9 @@ with DAG(
             python_callable=print_ds
     )
 
-t1 >> t2
+    tasks.append(t2)
+
+t1 = tasks[0]
+for t in tasks[1:]:
+    t1 >> t
+    t1 = t
