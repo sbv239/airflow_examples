@@ -38,3 +38,10 @@ with DAG(
             python_callable=python_func,
             op_kwargs={'task_number': i},
         )
+
+    task.doc_md = dedent(
+        """\
+        # Task documentation
+        **This** is *generic* documentation for this `task`     
+        """
+    )
