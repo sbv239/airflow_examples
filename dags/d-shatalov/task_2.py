@@ -5,7 +5,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-        'tutorial',
+        'task_2_d-shatalov',
         default_args={
             'depands_on_past': False,
             'email': ['airflow@example.com'],
@@ -18,6 +18,7 @@ with DAG(
         schedule_interval=timedelta(days=1),
         start_date=datetime(2022, 9, 21),  # логическая дата
         catchup=False,
+        tags=['d-shatalov']
 ) as dag:
 
     t1 = BashOperator(
