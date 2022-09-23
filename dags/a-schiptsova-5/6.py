@@ -14,7 +14,7 @@ def print_task(ts, run_id, **kwargs):
 	
 
 with DAG(
-    'a-schiptsova-5-hw-6',
+    'a-schiptsova-5-hw-6c',
     default_args = {
         'depends_on_past': False,
 		'email': ['airflow@example.com'],
@@ -26,7 +26,7 @@ with DAG(
     schedule_interval = timedelta(days = 1),
     start_date = datetime(2022, 1, 1),
     catchup = False,
-    tags = ['hw-6'],
+    tags = ['hw-6c'],
 ) as dag:
 
 	t1 = DummyOperator(task_id = "start_point")
