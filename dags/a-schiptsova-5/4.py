@@ -25,32 +25,15 @@ with DAG(
     tags = ['hw-3'],
 ) as dag:
 
-	t1 = DummyOperator(task_id = "start_point")
-	t2 = DummyOperator(task_id = "mid_point")
-	t3 = DummyOperator(task_id = "end_point")
-	
+	print_template = dedent(
+        """
+    {% for i in range(6) %}
+        echo "{{ ts }}"
+        echo "{{ run_id }}"
+    {% endfor %}
+    """)
 
-	for i in range(30):
-		if i < 10:
-			t = BashOperator(
-				task_id = 'task_' + str(i + 1),
-				bash_command = f'echo {i}',
-				dag = dag)
-			t.doc_md = dedent(
-				"""
-				### **Task** {i} doc
-				`echo` task number
-				""")
-			t2 << t << t1
-			
-		else:
-			t = PythonOperator(
-				task_id = 'task_' + str(i + 1),
-				python_callable = print_task,
-				op_kwargs={'task_number': i})
-			t.doc_md = dedent(
-				"""
-				### Task {i} doc
-				Print task number
-				""")
-			t3 << t << t2
+	t = BashOperator(
+		task_id = 'Jinja_example',
+		bash_command = print_template,
+		dag = dag)
