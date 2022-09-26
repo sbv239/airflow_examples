@@ -29,7 +29,7 @@ with DAG(
     def print_data(ti):
         data = ti.xcom_pull(
             key="sample_xcom_key",
-            tasks_ids="get_data",
+            task_ids="get_data",
         )
         print(data)
 
