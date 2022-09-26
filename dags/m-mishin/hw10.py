@@ -28,4 +28,14 @@ with DAG(
             key='return_value',
             task_ids='xcom_push')
 
+    t1 = PythonOperator(
+        task_id='xcom_push',
+        python_callable=xcom_push
+    )
 
+    t2 = PythonOperator(
+        task_id='xcom_pull',
+        python_callable=xcom_pull
+    )
+
+    t1 >> t2
