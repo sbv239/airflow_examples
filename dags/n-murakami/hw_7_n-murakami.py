@@ -14,7 +14,7 @@ def print_iter(task_number,ts, run_id, **kwargs):
     return 'task number is: {task_number}'
 
 with DAG(
-    'task_7',
+    'hw_7_n-murakami',
     default_args={
         'depends_on_past': False,
         'retries': 3,
@@ -23,7 +23,7 @@ with DAG(
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 1, 1),
     catchup=False,
-    tags=['task_7'],
+    tags=['hw_7_n-murakami'],
 ) as dag:
     for i in range(30):
         if i<10:
