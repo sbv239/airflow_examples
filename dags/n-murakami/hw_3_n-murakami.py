@@ -9,7 +9,7 @@ from airflow.operators.python_operator import PythonOperator
 
 def print_iter(task_number, **kwargs):
     print(kwargs)
-    return 'task number is: {task_number}'
+    return f'task number is: {task_number}'
 
 with DAG(
     'hw_3_n-murakami',
