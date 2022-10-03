@@ -6,7 +6,6 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python_operator import PythonOperator
 
-
 def push_value(ti):
     # в ti уходит task_instance, его передает Airflow под таким названием
     # когда вызывает функцию в ходе PythonOperator
