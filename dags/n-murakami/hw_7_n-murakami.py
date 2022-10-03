@@ -11,7 +11,7 @@ def print_iter(task_number,ts, run_id, **kwargs):
     print(kwargs)
     print(ts)
     print(run_id)
-    return 'task number is: {task_number}'
+    return f'task number is: {task_number}'
 
 with DAG(
     'hw_7_n-murakami',
