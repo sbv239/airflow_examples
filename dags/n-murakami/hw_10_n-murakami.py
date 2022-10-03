@@ -17,7 +17,6 @@ def pull_value(ti):
     )
     print(result)
 
-
 with DAG(
     'hw_10_n-murakami',
     default_args={
