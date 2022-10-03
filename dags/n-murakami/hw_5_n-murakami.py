@@ -9,7 +9,7 @@ from airflow.operators.python_operator import PythonOperator
 
 
 with DAG(
-    'task_5',
+    'hw_5_n-murakami',
     default_args={
         'depends_on_past': False,
         'retries': 3,
@@ -18,7 +18,7 @@ with DAG(
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 1, 1),
     catchup=False,
-    tags=['task_5'],
+    tags=['hw_5_n-murakami'],
 ) as dag:
     temlated_command=dedent("""
     {% for i in range(5) %}
