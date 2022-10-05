@@ -4,7 +4,7 @@ from airflow.operators.python import BranchPythonOperator
 from airflow.operators.dummy import DummyOperator
 from datetime import datetime, timedelta
 
-def choose_path(your_var):
+def choose_path():
     from airflow.models import Variable
     if Variable.get("is_startml")=="True":
         return "startml_desc"
