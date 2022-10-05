@@ -6,15 +6,15 @@ def get_connection():
   from airflow.providers.postgres.operators.postgres import PostgresHook
   postgres = PostgresHook(postgres_conn_id="startml_feed")
   query = """
-                      SELECT
-                      user_id,
-                      COUNT(*) as count
-                      FROM feed_action 
-                      WHERE action='like'
-                      GROUP BY user_id
-                      ORDER BY COUNT(*) DESC
-                      LIMIT 1
-                  """
+    SELECT
+    user_id,
+    COUNT(*) as count
+    FROM feed_action 
+    WHERE action='like'
+    GROUP BY user_id
+    ORDER BY COUNT(*) DESC
+    LIMIT 1
+    """
   with postgres.get_conn() as conn:
     with conn.cursor() as cursor:
       cursor.execute(query)
