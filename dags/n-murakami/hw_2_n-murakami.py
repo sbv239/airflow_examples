@@ -13,7 +13,7 @@ def print_date(ds, **kwargs):
     return 'Whatever you return gets printed in the logs'
 
 with DAG(
-    'hw_2_murakami-n',
+    'hw_2_n-murakami',
     default_args={
         'depends_on_past': False,
         'retries': 3,
@@ -22,7 +22,7 @@ with DAG(
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 1, 1),
     catchup=False,
-    tags=['hw_2_murakami-n'],
+    tags=['hw_2_n-murakami'],
 ) as dag:
 
     t1 = BashOperator(

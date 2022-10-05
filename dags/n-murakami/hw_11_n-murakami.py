@@ -5,6 +5,7 @@ from datetime import datetime, timedelta
 def get_connection():
   from airflow.providers.postgres.operators.postgres import PostgresHook
   postgres = PostgresHook(postgres_conn_id="startml_feed")
+  
   query = """
     SELECT
     user_id,
