@@ -24,4 +24,3 @@ with DAG(
     python_callable=get_var
   )
 
-
