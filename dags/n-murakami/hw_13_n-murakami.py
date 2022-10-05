@@ -16,7 +16,6 @@ def print_if_true():
 def print_if_false():
     return "Not a startML course, sorry"
 
-
 with DAG(
         'hw_13_n-murakami',
         default_args={
