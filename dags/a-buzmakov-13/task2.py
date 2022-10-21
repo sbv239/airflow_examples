@@ -14,22 +14,22 @@ with DAG(
     'retries': 1,
     'retry_delay': timedelta(minutes=5),
     },
-    description='A simple tutorial DAG',
+    description='a-buzmakov-13_DAG_task2',
     schedule_interval=timedelta(days=1),
-    start_date=datetime(2021, 1, 1),
+    start_date=datetime(2022, 10, 20),
     catchup=False,
-    tags=['example'],
-    )
-    as dag:
+    tags=['task_2'],
+) as dag:
     a1=BashOperator(
         task_id='num2',
         bash_command='pwd')
-    def print_lol(ds,**kwargs):
+    def print_lol(ds):
         print(ds)
         return 'lol'
     a2=PythonOperator(
-        task_id='print_ret'
-        python_callable=print_lol)
+        task_id='print_lol',
+        python_callable=print_lol,
+        )
     a1 >> a2
         
     
