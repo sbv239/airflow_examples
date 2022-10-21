@@ -22,7 +22,7 @@ start_date=datetime(2022, 1, 1),
 
 catchup=False,
 # теги, способ помечать даги
-tags=['example'],
+tags=['rm_romanov'],
 ) as dag:
 
     t1 = BashOperator(
