@@ -31,4 +31,4 @@ with DAG(
             task_id='task_number'+str(i),
             python_callable=get_task_number,
             op_kwargs={'task_number':i})
-a1 >> a2
+a1>>a2
