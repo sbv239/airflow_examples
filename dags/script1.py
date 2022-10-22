@@ -1,6 +1,6 @@
 from airflow.operators.bash import BashOperator
-from airflow.operators.python import PythonOperator
 from datetime import timedelta,datetime
+from airflow import DAG
 def get_ds(ds):
     print(ds)
 with DAG("firsttask",default_args={
