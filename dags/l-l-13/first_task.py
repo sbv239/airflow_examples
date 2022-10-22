@@ -9,14 +9,14 @@ def printi(ds):
 
 
 with DAG(
-    'First task',
+    'First_task',
     default_args={
-        'depends_on_past':False,
-        'email':['norgello.lenia@yandex.ru'],
-        'email_on_failure':True,
-        'email_on_retry':True,
-        'retries':3,
-        'retry_delay':timedelta(minutes=3)
+        'depends_on_past': False,
+        'email': ['airflow@example.com'],
+        'email_on_failure': False,
+        'email_on_retry': False,
+        'retries': 1,
+        'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
     },
     description='first task in lesson №11',
     schedule_interval=timedelta(days=3650),
@@ -24,11 +24,11 @@ with DAG(
     catchup=False
 ) as dag:
     m1=BashOperator(
-        task_id='command pwd',
+        task_id='command_pwd',
         bash_command='pwd',
 )
 
     m2=PythonOperator(
-        task_id='logical date',
+        task_id='logical_date',
         python_callable=printi)
 m1>>m2
