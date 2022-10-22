@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta
-from textwrap import dedent
+
 from airflow import DAG
 
 from airflow.operators.python import PythonOperator
