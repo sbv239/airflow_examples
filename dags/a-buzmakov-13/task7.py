@@ -5,7 +5,7 @@ from airflow import DAG
 from airflow.operators.python import PythonOperator
 
 with DAG(
-    'a-buzmakov-13_task_3',
+    'a-buzmakov-13_task_7',
     default_args={
     'depends_on_past': False,
     'email': ['airflow@example.com'],
@@ -14,11 +14,11 @@ with DAG(
     'retries': 1,
     'retry_delay': timedelta(minutes=5),
     },
-    description='a-buzmakov-13_DAG_task3',
+    description='a-buzmakov-13_DAG_task7',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 10, 20),
     catchup=False,
-    tags=['task_3'],
+    tags=['task_7'],
 ) as dag:
     def get_task_number(ts,run_id,**kwargs):
         print(ts)
