@@ -27,8 +27,6 @@ with DAG(
         tags=['task_3'],
 ) as dag:
     for i in range(30):
-        task_1 = ''
-        task_2 = ''
         if i < 10:
             task_1 = BashOperator(
                 task_id=f"echo_task_number_{i}",
