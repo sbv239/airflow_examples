@@ -4,6 +4,11 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 
+def print_task_number(task_number):
+    print(f"task number is: {task_number}")
+    return "task number printed"
+
+
 with DAG(
         's_pletnev_task_3',
         default_args={
@@ -20,21 +25,17 @@ with DAG(
         catchup=False,
         tags=['task_3'],
 ) as dag:
-    def print_task_number(**kwargs):
-        print(f"task number is: {kwargs['task_number']}")
-        return "task number printed"
-
-
     for i in range(30):
-        task_1 = BashOperator(
-            task_id="echo_task_number",
-            bash_command=f"echo {i}"
-        )
-        if i >= 10:
+        if i < 10:
+            task_1 = BashOperator(
+                task_id=f"echo_task_number_{i}",
+                bash_command=f"echo {i}"
+            )
+        else:
             task_2 = PythonOperator(
-                task_id='print_task_numbe: ' + str(i),  # в id можно делать все, что разрешают строки в python
+                task_id='print_task_number_' + str(i),
                 python_callable=print_task_number,
                 op_kwargs={'task_number': i},
             )
 
-            task_1 >> task_2
+        # task_1 >> task_2
