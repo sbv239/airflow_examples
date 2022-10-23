@@ -9,7 +9,7 @@ def printi(ds):
 
 
 with DAG(
-    'First_task',
+    'norgello-1',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
