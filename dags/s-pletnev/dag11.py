@@ -25,7 +25,7 @@ def get_user():
 
 
 with DAG(
-        's_pletnev_task_11',
+        's_pletnev_task_11_1',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
