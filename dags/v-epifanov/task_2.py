@@ -17,7 +17,7 @@ def print_date(ds, **kwargs):
     print(f"Дата: {ds}")
 
 with DAG (
-    'task_2',
+    'task_2_v-epifanov',
     default_args=default_args,
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 10, 22),
