@@ -29,6 +29,6 @@ with DAG(
 )
 
     m2=PythonOperator(
-        task_id='logic_date',
+        task_id='logical_date',
         python_callable=printi)
 m1>>m2
