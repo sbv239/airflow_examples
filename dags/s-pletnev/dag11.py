@@ -13,17 +13,15 @@ def get_user():
     ) as conn:
         with conn.cursor() as cursor:
             cursor.execute("""
-                SELECT user_id, COUNT(action)
+                SELECT user_id, COUNT(*)
                 FROM "feed_action" 
                 WHERE action = 'like'
                 GROUP BY user_id
-                ORDER BY COUNT(action) DESC
+                ORDER BY COUNT(*) DESC
                 LIMIT 1
-            """ % id)
+            """)
 
-            result = cursor.fetchone()
-
-    return {'user_id': result[0], 'count': result[1]}
+        return cursor.fetchone()
 
 
 with DAG(
