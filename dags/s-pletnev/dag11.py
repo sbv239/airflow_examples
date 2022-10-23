@@ -2,6 +2,7 @@ from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 from airflow.hooks.base import BaseHook
+from psycopg2.extras import RealDictCursor
 import psycopg2
 
 
@@ -9,7 +10,8 @@ def get_user():
     creds = BaseHook.get_connection("startml_feed")
     with psycopg2.connect(
             f"postgresql://{creds.login}:{creds.password}"
-            f"@{creds.host}:{creds.port}/{creds.schema}"
+            f"@{creds.host}:{creds.port}/{creds.schema}",
+            cursor_factory=RealDictCursor
     ) as conn:
         with conn.cursor() as cursor:
             cursor.execute("""
@@ -21,7 +23,7 @@ def get_user():
                 LIMIT 1
             """)
 
-        return cursor.fetchone()
+            return cursor.fetchone()
 
 
 with DAG(
