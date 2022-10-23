@@ -5,7 +5,7 @@ from airflow.operators.python import PythonOperator
 
 
 with DAG(
-        's-pletnev_task_2',
+        's_pletnev_task_2',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
@@ -26,9 +26,10 @@ with DAG(
     )
 
 
-    def print_ds(ds, **kwargs):
+    def print_ds(ds):
         print(ds)
         print("ds printed")
+        return "Print_ds done"
 
     task_2 = PythonOperator(
         task_id="print_ds",
