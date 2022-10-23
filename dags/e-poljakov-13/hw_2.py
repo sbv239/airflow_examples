@@ -4,8 +4,8 @@ from airflow.operators.python import PythonOperator
 from datetime import timedelta, datetime
 # Создаем DAG. DAG - это инструкция, как выполнять процесс обработки оператора (таска)
 with DAG(
-    # название
-'hw_2_e-poljakov-13',
+'hw_2_e-poljakov-13', # название DAG
+# Параметры по умолчанию для тасок
 default_args={
     # Если прошлые запуски упали, надо ли ждать их успеха
     'depends_on_past': False,
@@ -19,11 +19,14 @@ default_args={
     'retries': 1,
     # Сколько ждать между перезапусками
     'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
-},  description='hw_2',
-    schedule_interval=timedelta(days=1),
-    start_date=datetime(2022, 1, 1),
-    catchup=False,
-    tags=['hw_2_e-poljakov-13'],
+},  description='hw_2',  # Описание DAG (не тасок, а самого DAG)
+    schedule_interval=timedelta(days=1),  # Как часто запускать DAG
+    start_date=datetime(2022, 1, 1), # С какой даты начать запускать DAG. Каждый DAG "видит" свою "дату запуска"
+    # это когда он предположительно должен был
+    # запуститься. Не всегда совпадает с датой на вашем компьютере
+    catchup=False,  # Запустить за старые даты относительно сегодня,
+    # https://airflow.apache.org/docs/apache-airflow/stable/dag-run.html
+    tags=['hw_2_e-poljakov-13'],  # теги, способ помечать даги
 ) as dag:   # Операторы - это кирпичики DAG, они являются звеньями в графе. В них прописывается команды на исполнение
     t1 = BashOperator(
         task_id="show_pwd",
