@@ -5,13 +5,15 @@ from airflow.operators.python import PythonOperator
 from textwrap import dedent
 
 
-def print_task_number(task_number):
+def print_task_number(ts, run_id, task_number):
+    print(f"ts is: {ts}")
+    print(f"run_is: {run_id}")
     print(f"task number is: {task_number}")
-    return "task number printed"
+    return "parameters printed"
 
 
 with DAG(
-        's_pletnev_task_3_3',
+        's_pletnev_task_7',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
