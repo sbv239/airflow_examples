@@ -38,4 +38,4 @@ with DAG(
                 op_kwargs={'task_number': i},
             )
 
-        # task_1 >> task_2
+        task_1 >> task_2
