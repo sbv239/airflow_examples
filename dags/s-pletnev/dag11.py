@@ -13,21 +13,19 @@ def get_user():
     ) as conn:
         with conn.cursor() as cursor:
             cursor.execute("""
-                SELECT user_id, COUNT(action)
+                SELECT user_id, COUNT(*)
                 FROM "feed_action" 
                 WHERE action = 'like'
                 GROUP BY user_id
-                ORDER BY COUNT(action) DESC
+                ORDER BY COUNT(*) DESC
                 LIMIT 1
-            """ % id)
+            """)
 
-            result = cursor.fetchone()
-
-    return {'user_id': result[0], 'count': result[1]}
+        return cursor.fetchone()
 
 
 with DAG(
-        's_pletnev_task_11',
+        's_pletnev_task_11_1',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
