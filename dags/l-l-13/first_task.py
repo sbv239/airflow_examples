@@ -24,7 +24,7 @@ with DAG(
     catchup=False
 ) as dag:
     m1=BashOperator(
-        task_id='command_pwd',
+        task_id='comm_pwd',
         bash_command='pwd',
 )
 
