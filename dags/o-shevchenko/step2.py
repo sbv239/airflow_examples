@@ -6,7 +6,7 @@ from airflow.operators.python import PythonOperator
 
 
 with DAG(
-    'hw_simple_dag',
+    'hw_step2_o-schevchenko',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -17,9 +17,9 @@ with DAG(
     },
     description='A simple tutorial DAG',
     schedule_interval=timedelta(days=1),
-    start_date=datetime(2022, 1, 1),
+    start_date=datetime(2022, 10, 26),
     catchup=False,
-    tags=['example'],
+    tags=['step2'],
 ) as dag:
 
     t1 = BashOperator(
