@@ -19,32 +19,32 @@ default_args={
     'retries': 1,
     # Сколько ждать между перезапусками
     'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
-},  description='hw_2',  # Описание DAG (не тасок, а самого DAG)
+},  description='hw_3',  # Описание DAG (не тасок, а самого DAG)
     schedule_interval=timedelta(days=1),  # Как часто запускать DAG
     start_date=datetime(2022, 1, 1), # С какой даты начать запускать DAG. Каждый DAG "видит" свою "дату запуска"
     # это когда он предположительно должен был
     # запуститься. Не всегда совпадает с датой на вашем компьютере
     catchup=False,  # Запустить за старые даты относительно сегодня,
     # https://airflow.apache.org/docs/apache-airflow/stable/dag-run.html
-    tags=['hw_2_e-poljakov-13'],  # теги, способ помечать даги
+    tags=['poljakov-13'],  # теги, способ помечать даги
 ) as dag:   # Операторы - это кирпичики DAG, они являются звеньями в графе. В них прописывается команды на исполнение
-    t1 = BashOperator(
-        task_id="show_pwd",
-        bash_command='pwd',  # какую bash команду выполнить в этом таске
+
+    for i in range(10):
+        t1 = BashOperator(
+            task_id=f"generator of ten tasks by BashOperator # {i}",
+            bash_command= f"echo {i}",  # какую bash команду выполнить в этом таске
     )
 
-    def print_context(ds, **kwargs):
+    def print_namber_of_task(**kwargs):
         """Пример PythonOperator"""
     # Через синтаксис **kwargs можно получить словарь
     # с настройками Airflow. Значения оттуда могут пригодиться.
     # Пока нам не нужно
-        #print(kwargs)
-    # В ds Airflow за нас подставит текущую логическую дату - строку в формате YYYY-MM-DD
-        print(ds)
+        for task_number in range(20):
+            t2 = PythonOperator(
+                task_id=f"generator of ten tasks by PythonOperator # {task_number}",
+                python_callable=print_namber_of_task,
+                op_kwargs={f"task number is: {task_number}"},
 
-    t2 = PythonOperator(
-        task_id='print_ds',  # нужен task_id, как и всем операторам
-        python_callable=print_context,  # свойственен только для PythonOperator - передаем саму функцию
     )
-    t1 >> t2
-
+        t1 >> t2
