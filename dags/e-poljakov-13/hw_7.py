@@ -5,7 +5,7 @@ from datetime import timedelta, datetime
 from airflow.operators.dummy import DummyOperator
 # Создаем DAG. DAG - это инструкция, как выполнять процесс обработки оператора (таска)
 with DAG(
-'hw_7_e-poljakov-13', # название DAG
+'hw_7_v2_e-poljakov-13', # название DAG
 # Параметры по умолчанию для тасок
 default_args={
     # Если прошлые запуски упали, надо ли ждать их успеха
