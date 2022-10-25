@@ -5,7 +5,7 @@ from datetime import timedelta, datetime
 from airflow.operators.dummy import DummyOperator
 # Создаем DAG. DAG - это инструкция, как выполнять процесс обработки оператора (таска)
 with DAG(
-'hw_3_e-poljakov-13', # название DAG
+'hw_7_e-poljakov-13', # название DAG
 # Параметры по умолчанию для тасок
 default_args={
     # Если прошлые запуски упали, надо ли ждать их успеха
@@ -34,7 +34,7 @@ default_args={
     # функция печати
     def print_number_of_task(ts, run_id, **kwargs):
         """Пример PythonOperator"""
-        print(f"task number is: {kwargs.get('task_number')}")  # получаем значение из аргумента op_kwargs, методом get
+        kwargs.get('task_number')  # получаем значение из аргумента op_kwargs, методом get
         print(ts)
         print(run_id)
         return "Everything is good"
