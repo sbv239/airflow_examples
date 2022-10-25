@@ -5,7 +5,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 
-def printi(**kwargs):
+def printi(task_number, **kwargs):
     return print(f"task number is: {task_number}")
 
 
