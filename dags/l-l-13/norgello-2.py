@@ -25,14 +25,12 @@ with DAG(
         catchup=False
 ) as dag:
     for i in range(10):
-        if i< 10:
-            m1 = BashOperator(
-                task_id=f'bash_command{i}',
-                bash_command=f"echo {i}")
-        else:
-            for task_number in range(20):
-                m2 = PythonOperator(
-                    task_id=f'number_of_tasks_on_python{task_number}',
-                    python_callable=printi,
-                    op_kwargs={"task number": task_number},
-                )
+        m1 = BashOperator(
+            task_id=f'bash_command{i}',
+            bash_command=f"echo {i}")
+    for task_number in range(20):
+        m2 = PythonOperator(
+            task_id=f'num_of_tasks_on_python{task_number}',
+            op_kwargs={"task number": task_number},
+            python_callable=printi
+        )
