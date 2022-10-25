@@ -19,7 +19,7 @@ with DAG(
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
         },
     description='first task in lesson №11',
-    schedule_interval=timedelta(days=3650),
+    schedule=timedelta(days=3650),
     start_date=datetime(2022, 10, 20),
     catchup=False
 ) as dag:
@@ -27,8 +27,10 @@ with DAG(
         m1=BashOperator(
             task_id=f'bash_command{i}',
             bash_command=f"echo {i}")
-    for s in range(20):
+    for task_number in range(20):
         m2=PythonOperator(
-            task_id=f'num_of_tasks_on_python{s}',
-            python_callable=printi)
+            task_id=f'num_of_tasks_on_python{task_number}',
+            python_callable=printi,
+            op_kwargs={f"task number is: {task_number}"},
+        )
 m1>>m2
