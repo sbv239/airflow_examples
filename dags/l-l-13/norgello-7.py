@@ -20,7 +20,7 @@ with DAG(
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
     },
     description='first task in lesson №11',
-    schedule_interval=timedelta(days=3650),
+    schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 10, 20),
     catchup=True
 ) as dag:
