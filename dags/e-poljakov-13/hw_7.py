@@ -35,8 +35,8 @@ default_args={
     def print_number_of_task(ts, run_id, **kwargs):
         """Пример PythonOperator"""
         kwargs.get('task_number')  # получаем значение из аргумента op_kwargs, методом get
-        print(ts)
-        print(run_id)
+        print(f'print_ts_{ts}')
+        print(f'print_run_id_{run_id}')
         return "Everything is good"
     for i in range(5):
         python_task = PythonOperator(
