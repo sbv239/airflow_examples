@@ -5,8 +5,8 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 
-def printi(task_number, **kwargs):
-    return print(f"task number is: {task_number}")
+def printi(**kwargs):
+    return print(f"task number is: {kwargs.get('task_number')}")
 
 
 with DAG(
@@ -31,6 +31,6 @@ with DAG(
     for task_number in range(20):
         m2 = PythonOperator(
             task_id=f'number_of_tasks_on_python{task_number}',
-            op_kwargs={"task number": task_number},
-            python_callable=printi
+            python_callable=printi,
+            op_kwargs = {"task number": task_number}
         )
