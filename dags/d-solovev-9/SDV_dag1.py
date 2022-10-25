@@ -9,7 +9,7 @@ from airflow import DAG
 
 # Операторы - это кирпичики DAG, они являются звеньями в графе
 # Будем иногда называть операторы тасками (tasks)
-from airflow.operators.bash import BashOperator
+from airflow.operators.bash import BashOperator, PythonOperator
 with DAG(
     'hw_11_2_d-solovev-9',
     # Параметры по умолчанию для тасок
