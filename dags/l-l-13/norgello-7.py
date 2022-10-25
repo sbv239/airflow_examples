@@ -10,19 +10,19 @@ def printi(ts, run_id, **kwargs):
 
 
 with DAG(
-        'norgello-7',
-        default_args={
-            'depends_on_past': False,
-            'email': ['airflow@example.com'],
-            'email_on_failure': False,
-            'email_on_retry': False,
-            'retries': 1,
-            'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
-        },
-        description='first task in lesson №11',
-        schedule_interval=timedelta(days=3650),
-        start_date=datetime(2022, 10, 20),
-        catchup=False
+    'norgello-7',
+    default_args={
+        'depends_on_past': False,
+        'email': ['airflow@example.com'],
+        'email_on_failure': False,
+        'email_on_retry': False,
+        'retries': 1,
+        'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
+    },
+    description='first task in lesson №11',
+    schedule_interval=timedelta(days=3650),
+    start_date=datetime(2022, 10, 20),
+    catchup=True
 ) as dag:
     for task_number in range(20):
         m2 = PythonOperator(
