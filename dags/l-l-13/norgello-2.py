@@ -8,11 +8,6 @@ from airflow.operators.python import PythonOperator
 def printi(task_number, **kwargs):
     return print(f"task number is: {task_number}")
 
-temp=dedent("""
-    {% for i in range(10)%}
-    echo "{{i}}"
-    {% endfor %}
-    """)
 with DAG(
     'norgello-2',
     default_args={
@@ -28,11 +23,12 @@ with DAG(
     start_date=datetime(2022, 10, 20),
     catchup=False
 ) as dag:
-    m1=BashOperator(
-        task_id='bash_command',
-        bash_command=temp)
+    for i in range(10):
+        m1=BashOperator(
+            task_id=f'bash_command{i}',
+            bash_command=f"echo {i}")
     for s in range(20):
         m2=PythonOperator(
             task_id=f'num_of_tasks_on_python{s}',
             python_callable=printi)
-m1>>[...]
+m1>>m2
