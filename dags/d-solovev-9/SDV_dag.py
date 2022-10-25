@@ -97,11 +97,39 @@ with DAG(
         # В ds Airflow за нас подставит текущую логическую дату - строку в формате YYYY-MM-DD
         print(ds)
         return 'Whatever you return gets printed in the logs'
+    
+        
+    def print_task_number(task_number):
+        """ PythonOperator - печать номера таска"""
+        print(f"task number is: {task_number}")
+        return 'Whatever you return gets printed in the logs'
 
     python_get_ds = PythonOperator(
         task_id='print_the_context',  # нужен task_id, как и всем операторам
         python_callable=print_context,  # свойственен только для PythonOperator - передаем саму функцию
     )
+    
+    # Генерируем таски в цикле - так тоже можно
+    for i in range(30):
+        # Каждый таск будет спать некое количество секунд
+        if i <= 10 :
+            task = BashOperator(
+                    task_id='echo_bash',
+                    depends_on_past=False,
+                    bash_command=f'echo {i}',
+  
+            )
+        else:
+            task = PythonOperator(
+                task_id='print_task_number',  # в id можно делать все, что разрешают строки в python
+                python_callable=print_task_number,
+                # передаем в аргумент с названием random_base значение float(i) / 10
+                op_kwargs={'task_number': i},
+            )
+
+        # настраиваем зависимости между задачами
+        # run_this - это некий таск, объявленный ранее (в этом примере не объявлен)
+        python_get_ds >> task
 
     # А вот так в Airflow указывается последовательность задач
     get_pwd >> python_get_ds
