@@ -9,7 +9,8 @@ from airflow import DAG
 
 # Операторы - это кирпичики DAG, они являются звеньями в графе
 # Будем иногда называть операторы тасками (tasks)
-from airflow.operators.bash import BashOperator, PythonOperator
+from airflow.operators.bash import BashOperator
+from airflow.operators.python import PythonOperator
 with DAG(
     'hw_11_2_d-solovev-9',
     # Параметры по умолчанию для тасок
@@ -28,7 +29,7 @@ with DAG(
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
     },
     # Описание DAG (не тасок, а самого DAG)
-    description='SDV tag for task 11',
+    description='SDV dag for task 11',
     # Как часто запускать DAG
     schedule_interval=timedelta(days=1),
     # С какой даты начать запускать DAG
