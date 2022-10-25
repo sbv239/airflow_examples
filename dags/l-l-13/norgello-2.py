@@ -32,7 +32,7 @@ with DAG(
         else:
             for task_number in range(20):
                 m2 = PythonOperator(
-                    task_id=f'num_of_tasks_on_python{task_number}',
+                    task_id=f'number_of_tasks_on_python{task_number}',
                     python_callable=printi,
                     op_kwargs={"task number": task_number},
                 )
