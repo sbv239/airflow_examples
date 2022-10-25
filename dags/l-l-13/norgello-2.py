@@ -35,4 +35,4 @@ with DAG(
         m2=PythonOperator(
             task_id=f'number_of_tasks_on_python{s}',
             python_callable=printi)
-m1>>m2
+m1>>[...]
