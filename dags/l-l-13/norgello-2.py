@@ -29,7 +29,7 @@ with DAG(
     catchup=False
 ) as dag:
     m1=BashOperator(
-        task_id='int',
+        task_id='bash_command',
         bash_command=temp)
     for s in range(20):
         m2=PythonOperator(
