@@ -1,10 +1,12 @@
 from datetime import timedelta, datetime
+from textwrap import dedent
+
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-        'hm_2_m-zaliskij',
+        'hw_5_m-zaliskij',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
@@ -18,19 +20,13 @@ with DAG(
 
 ) as dag:
     t1 = BashOperator(
-        task_id="test",
-        bash_command="pwd"
-    )
-
-
-    def print_context(ds, **kwargs):
-        print(kwargs)
-        print(ds)
-        return 'Whatever you return gets printed in the logs'
-
-
-    t2 = PythonOperator(
-        task_id='print_the_context',
-        python_callable=print_context, )
-
-    t1 >> t2
+            task_id="echo",
+            bash_command=dedent(
+                '''
+            {% for i in range(5) %}
+                echo "{{ts}}"
+                echo "{{run_id}}"
+            {% endfor %}
+            '''
+            )
+        )

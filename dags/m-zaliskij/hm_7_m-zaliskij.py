@@ -26,8 +26,10 @@ with DAG(
         )
 
 
-    def task_num(task_number):
+    def task_num(task_number, ts, run_id):
         print(f'task number is {task_number}')
+        print(ts)
+        print(run_id)
 
 
     for j in range(10, 30):
