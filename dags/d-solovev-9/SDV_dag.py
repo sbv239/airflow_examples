@@ -99,9 +99,10 @@ with DAG(
         return 'Whatever you return gets printed in the logs'
     
         
-    def print_task_number(task_number):
+    def print_task_number(**kwargs):
         """ PythonOperator - печать номера таска"""
-#         print(f"task number is: {task_number}")
+        print(f"task number is: {kwargs.get('task_number')}")
+#         t_num = kwargs.get('task_number')
         return print(f"task number is: {kwargs.get('task_number')}") # 'Whatever you return gets printed in the logs'
 
     python_get_ds = PythonOperator(
@@ -124,7 +125,8 @@ with DAG(
                 task_id='print_task_number'+ str(i),  # в id можно делать все, что разрешают строки в python
                 python_callable=print_task_number,
                 # передаем в аргумент с названием random_base значение float(i) / 10
-                op_kwargs={'task_number': i},
+                op_kwargs={'task_number': str(i)},
+
             )
 
         # настраиваем зависимости между задачами
