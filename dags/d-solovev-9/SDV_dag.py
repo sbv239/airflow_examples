@@ -101,8 +101,8 @@ with DAG(
         
     def print_task_number(task_number):
         """ PythonOperator - печать номера таска"""
-        print(f"task number is: {task_number}")
-        return 'Whatever you return gets printed in the logs'
+#         print(f"task number is: {task_number}")
+        return print(f"task number is: {kwargs.get('task_number')}") # 'Whatever you return gets printed in the logs'
 
     python_get_ds = PythonOperator(
         task_id='print_the_context',  # нужен task_id, как и всем операторам
