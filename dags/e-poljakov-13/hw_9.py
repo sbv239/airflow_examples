@@ -6,7 +6,7 @@ from datetime import timedelta, datetime
 def post_info_to_xcom(ti):
     """ Функция публиикации информации, где
     key= ключ, по которому в функции get мы будем запрашивать значения
-    value= значения, которые мы получим
+    value= значения, которые мы получим при запросе из xcom в логах
     """
     ti.xcom_push(
         key="sample_xcom_key",
@@ -18,16 +18,17 @@ def get_info_from_xcom(ti):
     """ Функция получения информации, где
     key= ключ из функции публикации
     task_ids = ids задачи, которую нужно будет указать task_id, после вызова функции в PythonOperator в
-    post_info_to_xcom в переменной post_info_xcom
+    post_info_to_xcom в переменной post_info_xcom или иной переменной публикации
     """
     get_info = ti.xcom_pull(
         key='sample_xcom_key',
-        task_ids="test_get_info_from_xcom"
+        task_ids="Get_info_from_xcom"
     )
-    print(get_info)
+    print(get_info)  # печать запроса в логах
+    return "Everything is good" # можем кинуть в логи строку, что понять, где конец логов
 # Создаем DAG. DAG - это инструкция, как выполнять процесс обработки оператора (таска)
 with DAG(
-'hw_9_e-poljakov-13', # название DAG
+'hw_9_v2_e-poljakov-13', # название DAG
 # Параметры по умолчанию для тасок
 default_args={
     # Если прошлые запуски упали, надо ли ждать их успеха
@@ -53,12 +54,13 @@ default_args={
 ) as dag:   # Операторы - это кирпичики DAG, они являются звеньями в графе. В них прописывается команды на исполнение
    # функция записи инфы в xcom
     post_info_xcom = PythonOperator(
-        task_id="test_get_info_from_xcom",  # ids из def get_info_from_xcom
+        task_id="Get_info_from_xcom",  # ids из def Get_info_from_xcom. Это делаеться для того, что xcom
+        # понимал из какой задачи брать инфу для публикации
         python_callable=post_info_to_xcom  # вызов def post_info_to_xcom - функция публикации
     )
    # функция получения инфы с xcom
     get_info_xcom = PythonOperator(
-        task_id="Get_task_1_from_xcom",  # просто ids
+        task_id="Look_info_from_task_Get_info_from_xcom",  # просто ids
         python_callable=get_info_from_xcom  # вызов def get_info_from_xcom
     )
 
