@@ -20,7 +20,7 @@ with DAG(
 
 ) as dag:
     t1 = BashOperator(
-            task_id=f"echo{i}",
+            task_id="echo",
             bash_command=dedent(
                 '''
             {% for i in range(5) %}
