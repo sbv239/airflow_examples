@@ -114,14 +114,14 @@ with DAG(
         # Каждый таск будет спать некое количество секунд
         if i <= 10 :
             task = BashOperator(
-                    task_id='echo_bash',
+                    task_id=f'echo_bash {i}',
                     depends_on_past=False,
                     bash_command=f'echo {i}',
   
             )
         else:
             task = PythonOperator(
-                task_id='print_task_number',  # в id можно делать все, что разрешают строки в python
+                task_id=f'print_task_number {i}',  # в id можно делать все, что разрешают строки в python
                 python_callable=print_task_number,
                 # передаем в аргумент с названием random_base значение float(i) / 10
                 op_kwargs={'task_number': i},
