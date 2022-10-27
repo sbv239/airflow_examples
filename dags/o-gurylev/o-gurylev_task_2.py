@@ -2,6 +2,7 @@ from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
+from datetime import timedelta
 
 with DAG(
         'o-gurylev_task_2',
@@ -12,10 +13,15 @@ with DAG(
             'email_on_retry': False,
             'retries': 1,
             'retry_delay': timedelta(minutes=5),
-        }
+            },
+            description='First DAG',
+            schedule_interval=timedelta(days=1),
+            start_date=datetime(2022, 1, 1),
+            catchup=False,
+            tags=['task2'],
 ) as dag:
     print_pwd = BashOperator(
-        task_id='print_pwd',
+        task_id='show_pwd',
         bash_command='pwd',
     )
 
@@ -28,7 +34,7 @@ with DAG(
 
     print_ds = PythonOperator(
         task_id='print_ds',
-        python_callable=print_date,
+        python_callable=print_context,
     )
 
     print_pwd >> print_ds
