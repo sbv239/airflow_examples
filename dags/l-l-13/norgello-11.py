@@ -26,7 +26,7 @@ def load():
           print(s)
     return s
 with DAG(
-    'norgello-10',
+    'norgello-11',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
