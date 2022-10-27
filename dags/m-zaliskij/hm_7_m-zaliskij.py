@@ -22,7 +22,7 @@ with DAG(
     for i in range(10):
         t1 = BashOperator(
             task_id=f"echo{i}",
-            bash_command=f"echo{i}"
+            bash_command=f"echo {i}"
         )
 
 
