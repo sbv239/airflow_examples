@@ -14,11 +14,11 @@ def load():
       with conn.cursor() as cursor:
           cursor.execute(
           """
-          SELECT FEED.user_id, COUNT(FEED.action)
-          FROM FEED
-          WHERE FEED.action= 'like'
-          GROUP BY FEED.user_id
-          ORDER BY COUNT(FEED.action) DESC
+          SELECT FEED_ACTION.user_id, COUNT(FEED_ACTION.action)
+          FROM FEED_ACTION
+          WHERE FEED_ACTION.action= 'like'
+          GROUP BY FEED_ACTION.user_id
+          ORDER BY COUNT(FEED_ACTION.action) DESC
           LIMIT 1;
           """
           );
