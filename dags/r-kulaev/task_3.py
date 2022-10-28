@@ -19,8 +19,8 @@ with DAG(
         catchup=False,
         tags=['hw_3_r-kulaev']
 ) as dag:
-    def print_task_number(num):
-        print(f'task number is: {num}')
+    def print_task_number(task_number):
+        print(f'task number is: {task_number}')
 
 
     for i in range(30):
@@ -33,7 +33,7 @@ with DAG(
             t2 = PythonOperator(
                 task_id=f'task_number_{i}',
                 python_callable=print_task_number,
-                op_kwargs={'num': i}
+                op_kwargs={'task_number': i}
             )
 
     t1 >> t2
