@@ -2,6 +2,7 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 from datetime import timedelta
+from datetime import datetime
 
 with DAG(
     'hw_2_j_ponomareva_01',
