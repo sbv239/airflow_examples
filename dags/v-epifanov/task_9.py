@@ -22,7 +22,7 @@ def to_xcom(ti):
 def from_xcom(ti):
     sample_xcom_value = ti.xcom_pull(
         key='sample_xcom_key',
-        task_ids='python_task_push'
+        task_ids='to_xcom'
     )
     print(sample_xcom_value)
 
