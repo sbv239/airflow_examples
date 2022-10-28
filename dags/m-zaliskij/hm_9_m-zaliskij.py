@@ -1,12 +1,22 @@
 from datetime import timedelta, datetime
-from textwrap import dedent
 
 from airflow import DAG
-from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
+
+def xcom_push():
+    return 'Airflow tracks everything'
+
+
+def xcom_pull(ti):
+    print(ti.xcom_pull(
+        key='return_value',
+        task_ids='xcom_push'
+    ))
+
+
 with DAG(
-        'hw_7_m-zaliskij',
+        'hw_9_m-zaliskij',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
@@ -19,27 +29,14 @@ with DAG(
         catchup=False
 
 ) as dag:
-    for i in range(10):
-        t1 = BashOperator(
-            task_id=f"echo{i}",
-            bash_command=f"echo {i}"
-        )
+    t1 = PythonOperator(
+        task_id='xcom_push',
+        python_callable=xcom_push
+    )
 
+    t2 = PythonOperator(
+        task_id='xcom_pull',
+        python_callable=xcom_pull
+    )
 
-    def task_num(task_number, ts, run_id):
-        print(f'task number is {task_number}')
-        print(ts)
-        print(run_id)
-
-
-    for j in range(10, 30):
-        t2 = PythonOperator(
-            task_id=f'task_num{j}',
-            python_callable=task_num,
-            op_kwargs={'task_number': j}
-        )
-
-    t1.doc_md = dedent('''
-    `t1`
-    # *strange* **bold**
-    ''')
+    t1 >> t2
