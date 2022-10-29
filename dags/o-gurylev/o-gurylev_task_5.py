@@ -21,6 +21,7 @@ with DAG(
         catchup=False,
         tags=['o-gurylev_task_5']
 ) as dag:
+
     templated_command = dedent(
         """
     {% for i in range(5) %}
