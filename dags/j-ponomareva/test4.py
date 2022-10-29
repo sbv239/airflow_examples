@@ -11,7 +11,7 @@ def print_task_number(task_number):
     return "task number printed"
 
 with DAG(
-    'hw_3_j_ponomareva_01',
+    'hw_4_j_ponomareva_01',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
