@@ -7,13 +7,13 @@ from datetime import datetime
 def testing_jp_push(ti):
     ti.xcom_push(
         key="sample_xcom_key"
-        value="xcom test"
+        value=xcom test
     )
 
 def testing_jp_pull(ti):
     ti.xcom_pull(
         key="sample_xcom_key"
-        task_ids = "xcom test"
+        task_ids = 'jp_push01'
     )
 
 with DAG(
