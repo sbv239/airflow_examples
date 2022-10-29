@@ -23,6 +23,7 @@ with DAG(
         tags=['o-gurylev_task_7']
 ) as dag:
     def task(task_number, ts, run_id):
+
         print(ts)
         print(run_id)
         print(f"task number is: {task_number}")
