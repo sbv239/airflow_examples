@@ -19,7 +19,7 @@ with DAG(
         schedule_interval=timedelta(days=1),
         start_date=datetime(2022, 1, 1),
         catchup=False,
-        tags=['t_2_d_otkaljuk'],
+        tags=['t_2_d_otkal'],
 ) as dag:
         
         t_1 = BashOperator(
