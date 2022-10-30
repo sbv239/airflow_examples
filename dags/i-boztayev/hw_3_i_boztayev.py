@@ -25,7 +25,7 @@ with DAG(
 
     for i in range(10):
         t1 = BashOperator(
-            task_id='cicle_for',  # id, будет отображаться в интерфейсе
+            task_id=f'bash_command{i}',
             bash_command=f'echo{i}' # какую bash команду выполнить в этом таске
         )
 
