@@ -6,7 +6,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 with DAG(
     'hw_2',
-    # Параметры по умолчанию для тасок
+
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -25,7 +25,7 @@ with DAG(
 
     # t1, t2 - это операторы (они формируют таски, а таски формируют даг)
     t1 = BashOperator(
-        task_id='path print',  # id, будет отображаться в интерфейсе
+        task_id='path_print',  # id, будет отображаться в интерфейсе
         bash_command='pwd' # какую bash команду выполнить в этом таске
     )
 
