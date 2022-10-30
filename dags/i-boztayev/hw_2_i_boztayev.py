@@ -18,7 +18,7 @@ with DAG(
         'email_on_retry': False,
         'retries': 1,
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
-    }
+    },
     # Описание DAG (не тасок, а самого DAG)
     description='Lesson 11, homework 2',
     # Как часто запускать DAG
