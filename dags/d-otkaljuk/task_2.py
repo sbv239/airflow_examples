@@ -1,7 +1,7 @@
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
-from datetime import timedelta
+from datetime import timedelta, datetime
 # Создаем DAG. DAG - это инструкция, как выполнять процесс обработки оператора (таска)
 with DAG(
     # название
