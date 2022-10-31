@@ -24,11 +24,9 @@ with DAG(
         tags=['o-gurylev_task_7']
 ) as dag:
     def task(task_number, ts, run_id):
-
         print(f"run_id is:-> {ts}")
         print(f"run_id is:-> {run_id}")
         print(f"task number is: {task_number}")
-
     for i in range(30):
         if i < 10:
             task_bash = BashOperator(
