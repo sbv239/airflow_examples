@@ -44,6 +44,9 @@ with DAG(
                 #### Bash Operator
                 It is used to execute bash command `echo {i}`
                 The variable **i** changes its values *from 0 to 9*
+                #### Bash Operator
+                It is used to execute bash command `echo {i}`
+                The variable __i__ changes its values _from 0 to 9_
                 
                 """
             )
@@ -53,6 +56,9 @@ with DAG(
                 #### Print Operator
                 There is a print of the type `print_task_number_{i}` 
                 The variable **i** changes its values *from 0 to 19*
+                #### Print Operator
+                There is a print of the type `print_task_number_{i}` 
+                The variable __i__ changes its values _from 0 to 19_
                 
                 """
             )
