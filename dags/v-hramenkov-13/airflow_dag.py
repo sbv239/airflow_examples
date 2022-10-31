@@ -9,33 +9,37 @@ def print_context(ds, **kwargs):
 
         return 'Whatever you return gets printed in the logs'
 
+def print_task_number(task_number):
+    print(f"task number is: {task_number}")
+    return "task number printed"
 
 with DAG(
-    'hw_2_v-hramenkov-13',
-default_args={
-    'depends_on_past': False,
-    'email': ['airflow@example.com'],
-    'email_on_failure': False,
-    'email_on_retry': False,
-    'retries': 1,
-    'retry_delay': timedelta(minutes=1),
-    'description':'напишите любое описание',
-    'schedule_interval':timedelta(days=1),
-    'start_date':datetime(2022, 1, 1),
-    'catchup':False,
-    'tags':['любой тэг, чтобы искать свой даг на airflow'],
+    'hw_3_v-hramenkov-13',
+    default_args={
+        'depends_on_past': False,
+        'email': ['airflow@example.com'],
+        'email_on_failure': False,
+        'email_on_retry': False,
+        'retries': 1,
+        'retry_delay': timedelta(minutes=1),
+        'description':'напишите любое описание',
+        'schedule_interval':timedelta(days=22),
+        'start_date':datetime(2022, 10, 28),
+        'catchup':False,
+        'tags':['любой тэг, чтобы искать свой даг на airflow'],
 }) as dag:
-
-    t1 = BashOperator(
-        task_id = 'id_1',
-        bash_command = 'pwd'
-    )
-
     
+    for i in range(30):
+        if i < 10:
+            task_1 = BashOperator(
+                task_id=f"echo_task_number {i}",
+                bash_command=f"echo {i}"
+            )
+        else:
+            task_2 = PythonOperator(
+                task_id='print_task_number: ' + str(i),
+                python_callable=print_task_number,
+                op_kwargs={'task_number': i},
+            )
 
-    t2 = PythonOperator(
-        task_id = 'id_2',
-        python_callable = print_context
-    )
-
-    t1 >> t2
+task_1 >> task_2
