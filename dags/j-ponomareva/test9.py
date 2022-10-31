@@ -32,7 +32,6 @@ with DAG(
     catchup=False,
     tags=['j_pon_09'],
 ) as dag:
-
     t1 = PythonOperator(
         task_id = 'jp_push01'.,
         python_callable=testing_jp_push,
@@ -41,5 +40,4 @@ with DAG(
         task_id = 'jp_pull01',
         python_callable=testing_jp_pull,
     )
-
     t1 >> t2
