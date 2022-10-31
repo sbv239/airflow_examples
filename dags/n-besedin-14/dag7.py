@@ -21,7 +21,7 @@ with DAG(
     for i in range(10):
         t1 = BashOperator(
             task_id=f'task_number_is_{i}',
-            bash_command=f'print({i})')
+            bash_command=f'echo {i}')
 
 
     def print_task_number(task_number, ts, run_id):
