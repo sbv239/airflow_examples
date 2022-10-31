@@ -3,6 +3,8 @@ from airflow.operators.python_operator import PythonOperator
 from airflow import DAG
 from datetime import timedelta,datetime
 
+from textwrap import dedent
+
 def print_context(ds, **kwargs):
         print(ds)
         print(kwargs)
@@ -29,17 +31,13 @@ with DAG(
         'tags':['любой тэг, чтобы искать свой даг на airflow'],
 }) as dag:
     
-    for i in range(30):
-        if i < 10:
-            task_1 = BashOperator(
-                task_id=f"echo_task_number_{i}",
-                bash_command=f"echo {i}"
-            )
-        else:
-            task_2 = PythonOperator(
-                task_id='print_task_number_' + str(i),
-                python_callable=print_task_number,
-                op_kwargs={'task_number': i},
-            )
+    for i in range(5):
+        task_1 = BashOperator(
+            task_id=f"echo_task_number_{i}",
+            bash_command="echo {{run_id}}, {{ts}}"
+        )
 
-task_1 >> task_2
+
+   
+
+task_1
