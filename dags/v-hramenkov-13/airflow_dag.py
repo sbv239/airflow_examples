@@ -11,7 +11,7 @@ def print_context(ds, **kwargs):
 
 def print_task_number(task_number):
     print(f"task number is: {task_number}")
-    return "task number printed"
+    return "task number printedq"
 
 with DAG(
     'hw_3_v-hramenkov-13',
