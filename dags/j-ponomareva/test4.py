@@ -52,7 +52,7 @@ with DAG(
             )
 
             t2.doc_md = dedent(
-                """\
+                """
                 #### Print Operator
                 There is a print of the type `print_task_number_{i}` 
                 The variable **i** changes its values *from 0 to 19*
