@@ -57,9 +57,8 @@ with DAG(
                 There is a print of the type `print(i)` 
                 The variable **i** changes its values *from 0 to 19*
                 ### Print Operator
-                There is a print of the type `print_task_number_{i}` 
+                There is a print of the type `print()` 
                 The variable __i__ changes its values _from 0 to 19_
-                
                 """
             )
 
