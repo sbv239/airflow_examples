@@ -6,6 +6,7 @@ from airflow.operators.python import PythonOperator
 from textwrap import dedent
 import os
 
+
 with DAG(
         'o-gurylev_task_7',
         default_args={
