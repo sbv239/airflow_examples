@@ -42,7 +42,7 @@ with DAG(
             t1.doc_md = dedent(
                 """\
                 #### Bash Operator
-                It is used to execute bash command `echo {i}`
+                It is used to execute chance command `if i < 10:`
                 The variable **i** changes its values *from 0 to 9*
                 #### Bash Operator
                 It is used to execute bash command `echo {i}`
@@ -56,7 +56,7 @@ with DAG(
                 #### Print Operator
                 There is a print of the type `print(i)` 
                 The variable **i** changes its values *from 0 to 19*
-                #### Print Operator
+                ### Print Operator
                 There is a print of the type `print_task_number_{i}` 
                 The variable __i__ changes its values _from 0 to 19_
                 
