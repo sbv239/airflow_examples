@@ -35,7 +35,6 @@ with DAG(
                 bash_command=f"echo {i}",
             )
         else:
-
             task_python = PythonOperator(
                 task_id='python_task_' + str(i),
                 python_callable=task,
