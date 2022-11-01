@@ -7,7 +7,7 @@ from datetime import datetime
 def testing_jp_push(ti):
     ti.xcom_push(
         key="sample_xcom_key",
-        value=xcom test
+        value="xcom test"
     )
 
 def testing_jp_pull(ti):
@@ -15,7 +15,7 @@ def testing_jp_pull(ti):
         key="sample_xcom_key",
         task_ids = 'jp_push01'
     )
-    print(xcom test)
+    print(testing_jp_push)
 
 default_args = {
     'depends_on_past': False,
