@@ -49,7 +49,7 @@ with DAG(
             env = {"NUMBER": i}
         )
     taskBash.doc_md = dedent(
-        """\
+        """
     #### Task Documentation
     You **can** document your *task* using the attributes `doc_md` (markdown),
     `doc` (plain text), `doc_rst`, `doc_json`, `doc_yaml` which gets
