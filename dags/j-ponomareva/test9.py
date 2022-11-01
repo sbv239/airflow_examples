@@ -17,17 +17,18 @@ def testing_jp_pull(ti):
     )
     print(testing_jp_push)
 
-default_args = {
-    'depends_on_past': False,
-    'email': ['airflow@example.com'],
-    'email_on_failure': False,
-    'email_on_retry': False,
-    'retries': 1,
-    'retry_delay': timedelta(minutes=5),
-}
+
 
 with DAG(
     'hw_9_j_ponomareva_01',
+    default_args = {
+        'depends_on_past': False,
+        'email': ['airflow@example.com'],
+        'email_on_failure': False,
+        'email_on_retry': False,
+        'retries': 1,
+        'retry_delay': timedelta(minutes=5),
+    },
     description='A simple tutorial DAG_jp9',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 1, 1),
