@@ -1,11 +1,10 @@
 from airflow import DAG
 from airflow.operators.bash import BashOperator
-from airflow.operators.python import PythonOperator
 from datetime import datetime, timedelta
 from textwrap import dedent
 with DAG(
     # Название
-    'I_nikolaev_task_3',
+    'I_nikolaev_task_5',
     # Параметры по умолчанию для тасок
     default_args={
         # Если прошлые запуски упали, надо ли ждать их успеха
@@ -36,34 +35,15 @@ with DAG(
     # теги, способ помечать даги
     tags=['example'],
 ) as dag:
-    def get_num(ts, run_id, **kwargs):
-        print(ts)
-        print(run_id)
-        print(f"task number is: {task_number}")
-
-    # Генерируем таски в цикле - так тоже можно
-    for i in range(10):
-        taskBash = BashOperator(
-            task_id='command_Bash_' + str(i),  # в id можно делать все, что разрешают строки в python
-            bash_command = "echo $NUMBER",
-            env = {"NUMBER": i}
-        )
-    taskBash.doc_md = dedent(
-        """\
-    #### Task Documentation
-    You **can** document your *task* using the attributes `doc_md` (markdown),
-    `doc` (plain text), `doc_rst`, `doc_json`, `doc_yaml` which gets
-    # rendered in the UI's Task Instance Details page.
-    ![img](http://montcs.bloomu.edu/~bobmon/Semesters/2012-01/491/import%20soul.png)
-
+    templated_command = dedent(
+        """
+    {% for i in range(5) %}
+        echo "{{ ts }}"
+        echo "{{run_id}}"
+    {% endfor %}
     """
     )
-    for i in range(20):
-        taskPython = PythonOperator(
-            task_id='com_Python_' + str(i),  # в id можно делать все, что разрешают строки в python
-            python_callable=get_num,
-            # передаем в аргумент с названием random_base значение float(i) / 10
-            op_kwargs={'task_number': i},
-        )
-        # настраиваем зависимости между задачами
-    taskBash >> taskPython
+    task = BashOperator(
+        task_id='templated',
+        bash_command=templated_command
+    )
