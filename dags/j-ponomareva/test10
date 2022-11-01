@@ -16,7 +16,7 @@ def testing_jp_pull(ti):
         key="return_value",
         task_ids = 'jp_push01'
     )
-    print(value)
+    print(return_value)
 
 
 with DAG(
