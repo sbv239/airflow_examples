@@ -24,20 +24,19 @@ description='Py and Bush operation',
 schedule_interval=timedelta(days=1),
 start_date=datetime(2022, 10, 29),
 catchup=False,
-tags=['hw_3_d_otkaljuk'],
+tags=['hw_4_d_otkaljuk'],
 ) as dag:
-    for i in range(30):
-        if i < 10:
-            t_1 = BashOperator(
-                task_id=f"echo_task_number{i}",
-                bash_command=f"echo {i}"
-            )
-        else:
-            t_2 = PythonOperator(
-                task_id='print_task_number_' + str(i),
-                python_callable=print_task_number,
-                op_kwargs={'task_number':i},
-            )
+    for i in range(10):
+        t_1 = BashOperator(
+            task_id=f"echo_task_number{i}",
+            bash_command=f"echo {i}"
+        )
+    for i in range(20):
+        t_2 = PythonOperator(
+            task_id='print_task_number_' + str(i),
+            python_callable=print_task_number,
+            op_kwargs={'task_number':i},
+        )
     t_1 >> t_2
 
 t_1.doc_md = dedent(
