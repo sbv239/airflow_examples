@@ -4,7 +4,7 @@ from airflow.operators.python import PythonOperator
 from datetime import datetime, timedelta
 with DAG(
     # Название
-    'I-nikolaev task 2',
+    'I_nikolaev_task_2',
     # Параметры по умолчанию для тасок
     default_args={
         # Если прошлые запуски упали, надо ли ждать их успеха
