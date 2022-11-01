@@ -39,7 +39,7 @@ with DAG(
     def get_num(ts, run_id, **kwargs):
         print(ts)
         print(run_id)
-        print(f"task number is: {task_number}")
+        print(f"task number is: {kwargs['task_number']}")
 
     # Генерируем таски в цикле - так тоже можно
     for i in range(10):
