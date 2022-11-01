@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 from textwrap import dedent
 with DAG(
     # Название
-    'i_Nikolaev_task_3',
+    'i_Nikolaev_task_9',
     # Параметры по умолчанию для тасок
     default_args={
         # Если прошлые запуски упали, надо ли ждать их успеха
@@ -36,34 +36,27 @@ with DAG(
     # теги, способ помечать даги
     tags=['example'],
 ) as dag:
-    def get_num(ts, run_id, **kwargs):
-        print(ts)
-        print(run_id)
-        print(f"task number is: {kwargs['task_number']}")
+        def push_xcom(ti):
+                ti.xcom_push(
+                        key='sample_xcom_key',
+                        value='xcom test'
+                )
+        def pull_xcom(ti):
+                res = ti.xcom_pull(
+                        key='sample_xcom_key',
+                        task_ids='The_first_task'
+                )
+                print(res)
 
-    # Генерируем таски в цикле - так тоже можно
-    for i in range(10):
-        taskBash = BashOperator(
-            task_id='command_Bash_' + str(i),  # в id можно делать все, что разрешают строки в python
-            bash_command = "echo $NUMBER",
-            env = {"NUMBER": str(i)}
+        task1 = PythonOperator(
+                task_id='The_first_task',  # в id можно делать все, что разрешают строки в python
+                python_callable=push_xcom,
         )
-    taskBash.doc_md = dedent(
-        """
-    #### Task Documentation
-    You **can** document your *task* using the attributes `doc_md` (markdown),
-    `doc` (plain text), `doc_rst`, `doc_json`, `doc_yaml` which gets
-    # rendered in the UI's Task Instance Details page.
-    ![img](http://montcs.bloomu.edu/~bobmon/Semesters/2012-01/491/import%20soul.png)
+        task2 = PythonOperator(
+                task_id='The_second_task',  # в id можно делать все, что разрешают строки в python
+                python_callable=pull_xcom,
+        )
+        task1 >> task2
 
-    """
-    )
-    for i in range(20):
-        taskPython = PythonOperator(
-            task_id='com_Python_' + str(i),  # в id можно делать все, что разрешают строки в python
-            python_callable=get_num,
-            # передаем в аргумент с названием random_base значение float(i) / 10
-            op_kwargs={'task_number': i},
-        )
-        # настраиваем зависимости между задачами
-    taskBash >> taskPython
+
+
