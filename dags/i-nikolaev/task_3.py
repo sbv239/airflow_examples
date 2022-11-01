@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 from textwrap import dedent
 with DAG(
     # Название
-    'I_nikolaev_task_3',
+    'i_Nikolaev_task_3',
     # Параметры по умолчанию для тасок
     default_args={
         # Если прошлые запуски упали, надо ли ждать их успеха
