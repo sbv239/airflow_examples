@@ -4,19 +4,14 @@ from datetime import timedelta
 from datetime import datetime
 
 
-def testing_jp_push(ti):
-    ti.xcom_push(
-        key="sample_xcom_key",
-        value="xcom test"
-    )
+def testing_jp_push():
     return "Airflow tracks everything"
 
 def testing_jp_pull(ti):
     ti.xcom_pull(
-        key="return_value",
         task_ids = 'jp_push01'
     )
-    print(return_value)
+    print(return value)
 
 
 with DAG(
@@ -36,11 +31,11 @@ with DAG(
     tags=['j_pon_10'],
 ) as dag:
     t1 = PythonOperator(
-        task_id = 'jp_push01',
+        task_id = 'jp_push10',
         python_callable=testing_jp_push
     )
     t2 = PythonOperator(
-        task_id = 'jp_pull01',
+        task_id = 'jp_pull10',
         python_callable=testing_jp_pull
     )
     t1 >> t2
