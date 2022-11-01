@@ -24,7 +24,7 @@ description='Py and Bush operation',
 schedule_interval=timedelta(days=1),
 start_date=datetime(2022, 10, 29),
 catchup=False,
-tags=['hw_3_d_otkaljuk'],
+tags=['hw_4_d_otkaljuk'],
 ) as dag:
     for i in range(30):
         if i < 10:
