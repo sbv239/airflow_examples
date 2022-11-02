@@ -1,41 +1,37 @@
-from datetime import datetime, timedelta
+from datetime import timedelta, datetime
+
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 
-def print_task_number(task_number):
-    print(f"task number is: {task_number}")
-    return "task number printed"
+def printi(task_number, **kwargs):
+        return print(f"task number is: {task_number}")
 
 
 with DAG(
-        'sibi_t3',
+        'sibir_3',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
             'email_on_failure': False,
             'email_on_retry': False,
             'retries': 1,
-            'retry_delay': timedelta(minutes=5),
+            'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
         },
-        description='task_3_dag',
-        schedule_interval=timedelta(days=1),
-        start_date=datetime(2022, 11, 1),
+        description='first task in lesson №11',
+        schedule_interval=timedelta(days=3650),
+        start_date=datetime(2022, 10, 20),
         catchup=False,
-        tags=['sibi'],
+        tags=['sibir_3'],
 ) as dag:
-    for i in range(30):
-        if i < 10:
-            task_1 = BashOperator(
-                task_id=f"echo_task_number {i}",
-                bash_command=f"echo {i}"
-            )
-        else:
-            task_2 = PythonOperator(
-                task_id='print_task_number: ' + str(i),
-                python_callable=print_task_number,
-                op_kwargs={'task_number': i},
-            )
-
-            task_1 >> task_2
+    for i in range(10):
+        m1 = BashOperator(
+            task_id=f'bash_command{i}',
+            bash_command=f"echo {i}")
+    for task_number in range(20):
+        m2 = PythonOperator(
+            task_id=f'num_of_tasks_on_python{task_number}',
+            op_kwargs={"task number": task_number},
+            python_callable=printi
+        )
