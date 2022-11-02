@@ -7,12 +7,12 @@ from datetime import datetime
 def testing_jp_push():
     return "Airflow tracks everything"
 
-def testing_jp_pull(ti):
+def testing_jp_pull(**kwargs):
     ti.xcom_pull(
         key="return_value",
         task_ids = 'jp_push01'
     )
-    print(value[key])
+    print(kwargs["return_value"])
 
 
 with DAG(
