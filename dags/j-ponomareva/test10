@@ -10,7 +10,7 @@ def testing_jp_push():
 def testing_jp_pull(ti):
     ti.xcom_pull(
         key="return_value",
-        task_ids = 'jp_push01'
+        task_ids = 'jp_pull01'
     )
     print(ti["return_value"])
 
@@ -25,7 +25,7 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),
     },
-    description='A simple tutorial DAG_jp9',
+    description='A simple tutorial DAG_jp10',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 1, 1),
     catchup=False,
