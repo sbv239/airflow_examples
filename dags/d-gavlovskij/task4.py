@@ -29,7 +29,14 @@ with DAG(
     # теги, способ помечать даги
     tags=['gavlique']
 ) as dag:
+    dag.doc_md = dedent(
+        """
+        # Task Documentation
 
+        Documenting *fucntions* of our **DAG**:
+        Got 2 funcs: `PythonOperator` and `BashOperator`
+        """
+    )
     def print_number(task_number):
         print(f'task number is: {task_number}')
 
@@ -46,8 +53,20 @@ with DAG(
                 python_callable=print_number,
                 dag=dag,
                 op_kwargs={'task_number': i}
+            )
+
+    t1.doc_md = dedent(
+        """
+        ### Bash Operator
+        There is a print of the type `print(i)` 
+        The variable **i** changes its values *from 0 to 19*
+         """
     )
 
-    t1 >> t2
-
-
+    t2.doc_md = dedent(
+        """
+        #### Print Operator
+        There is a print of the type `print(i)` 
+        The variable **i** changes its values *from 0 to 19*
+        """
+    )
