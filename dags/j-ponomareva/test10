@@ -4,15 +4,13 @@ from datetime import timedelta
 from datetime import datetime
 
 
-def testing_jp_push():
+def testing_jp_push(ti):
     return "Airflow tracks everything"
 
 def testing_jp_pull(ti):
-    ti.xcom_pull(
+    print(ti.xcom_pull(
         key="return_value",
-        task_ids = 'jp_pull01'
-    )
-    print(ti["return_value"])
+        task_ids="testing_jp_push"))
 
 
 with DAG(
