@@ -10,7 +10,6 @@ def print_task_number(task_number):
     print(f"task number is: {task_number}")
     return "task number printed"
 
-
 with DAG(
     'hw_4_j_ponomareva_01',
     default_args={
