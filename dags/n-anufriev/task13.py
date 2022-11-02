@@ -2,7 +2,7 @@ from airflow import DAG
 from airflow.models import Variable
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import BranchPythonOperator
-from airflow.operators.empty import EmptyOperator
+from airflow.operators.dummy import DummyOperator
 
 from datetime import datetime, timedelta
 
@@ -30,7 +30,7 @@ with DAG(
         tags=['hw_13_n-anufriev'],
 ) as dag:
 
-    before_branching = EmptyOperator(
+    before_branching = DummyOperator(
         task_id='before_branching',
     )
 
@@ -41,15 +41,15 @@ with DAG(
 
     task_1 = BashOperator(
         task_id='startml_desc',
-        bash_command="echo StartML is a starter course for ambitious people",
+        bash_command="StartML is a starter course for ambitious people",
     )
 
     task_2 = BashOperator(
         task_id='not_startml_desc',
-        bash_command="echo Not a startML course, sorry",
+        bash_command="Not a startML course, sorry",
     )
 
-    after_branching = EmptyOperator(
+    after_branching = DummyOperator(
         task_id='after_branching',
     )
 
