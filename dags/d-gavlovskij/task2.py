@@ -14,9 +14,22 @@ with DAG(
         'email_on_retry': False,
         'retries': 1,
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
-    }
+    },
+    description='somedag',
+    # Как часто запускать DAG
+    schedule_interval=timedelta(days=300),
+    # С какой даты начать запускать DAG
+    # Каждый DAG "видит" свою "дату запуска"
+    # это когда он предположительно должен был
+    # запуститься. Не всегда совпадает с датой на вашем компьютере
+    start_date=datetime(2022, 1, 1),
+    # Запустить за старые даты относительно сегодня
+    # https://airflow.apache.org/docs/apache-airflow/stable/dag-run.html
+    catchup=False,
+    # теги, способ помечать даги
     tags=['gavlique']
 ) as dag:
+
     def print_ds(ds):
         print(ds)
     
@@ -27,7 +40,7 @@ with DAG(
     )
 
     t2 = PythonOperator(
-        taskid='print_ds',
+        task_id='print_ds',
         python_callable=print_ds,
         dag=dag
     )
