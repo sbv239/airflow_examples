@@ -5,6 +5,10 @@ from airflow import DAG
 
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
+
+from airflow.providers.postgres.operators.postgres import PostgresHook
+from psycopg2.extras import RealDictCursor
+
 with DAG(
     'task9_d-gavlovskij',
     default_args={
@@ -29,22 +33,23 @@ with DAG(
     # теги, способ помечать даги
     tags=['gavlique']
 ) as dag:
-    def pushing():
-        return "Airflow tracks everything"
-
-    def pulling(return_value):
-        print(return_value.xcom_pull(task_ids='xcom_push'))
+    def get_top_liker():
+        postgres = PostgresHook(postgres_conn_id='startml_feed')
+        with postgres.get_conn() as conn:   # вернет тот же connection, что вернул бы psycopg2.connect(...)
+            with conn.cursor(cursor_factory=RealDictCursor) as cursor:
+                cursor.execute("""
+                    SELECT user_id, count(1) as count
+                    FROM "feed"
+                    WHERE lower(action)='like'
+                    GROUP BY user_id
+                    ORDER BY count(1) DESC
+                """)
+                print(cursor.fetchone())
 
     t1 = PythonOperator(
         task_id='xcom_push',
-        python_callable=pushing,
+        python_callable=get_top_liker,
         dag=dag,
     )
 
-    t2 = PythonOperator(
-        task_id='xcom_pull',
-        python_callable=pulling,
-        dag=dag
-    )
-
-    t1 >> t2
+    t1 
