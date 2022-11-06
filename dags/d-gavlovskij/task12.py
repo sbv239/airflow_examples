@@ -6,11 +6,10 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
-from airflow.providers.postgres.operators.postgres import PostgresHook
-from psycopg2.extras import RealDictCursor
+from airflow.models import Variable
 
 with DAG(
-    'task11_d-gavlovskij',
+    'task12_d-gavlovskij',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -52,4 +51,4 @@ with DAG(
         dag=dag,
     )
 
-    t1 
+    t1
