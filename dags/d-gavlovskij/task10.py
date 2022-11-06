@@ -29,17 +29,11 @@ with DAG(
     # теги, способ помечать даги
     tags=['gavlique']
 ) as dag:
-    def pushing(send_value):
-        send_value.xcom_push(
-            key='sample_xcom_key',
-            value='xcom test'
-        )
+    def pushing():
+        return "Airflow tracks everything"
 
     def pulling(return_value):
-        print(return_value.xcom_pull(
-            key='sample_xcom_key',
-            task_ids='xcom_pull'
-        ))
+        print(return_value.xcom_pull())
 
     t1 = PythonOperator(
         task_id='xcom_push',
