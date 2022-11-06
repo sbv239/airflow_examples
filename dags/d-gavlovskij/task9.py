@@ -38,7 +38,7 @@ with DAG(
     def pulling(return_value):
         print(return_value.xcom_pull(
             key='sample_xcom_key',
-            task_ids='xcom_pull'
+            task_ids='xcom_push'
         ))
 
     t1 = PythonOperator(
