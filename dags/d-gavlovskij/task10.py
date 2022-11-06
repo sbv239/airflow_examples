@@ -32,13 +32,13 @@ with DAG(
     def pushing():
         return "Airflow tracks everything"
 
-    def pulling(return_value):
-        print(return_value.xcom_pull(task_ids='xcom_push'))
+    def pulling(ti):  # переменная ti - task instance - уже вшита в оператор
+        print(ti.xcom_pull(task_ids='xcom_push'))
 
     t1 = PythonOperator(
         task_id='xcom_push',
         python_callable=pushing,
-        dag=dag,
+        dag=dag
     )
 
     t2 = PythonOperator(

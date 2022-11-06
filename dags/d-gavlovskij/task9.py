@@ -29,14 +29,14 @@ with DAG(
     # теги, способ помечать даги
     tags=['gavlique']
 ) as dag:
-    def pushing(send_value):
-        send_value.xcom_push(
+    def pushing(ti): #переменная ti - task instance - уже вшита в оператор
+        ti.xcom_push(
             key='sample_xcom_key',
             value='xcom test'
         )
 
-    def pulling(return_value):
-        print(return_value.xcom_pull(
+    def pulling(ti):
+        print(ti.xcom_pull(
             key='sample_xcom_key',
             task_ids='xcom_push'
         ))
@@ -44,7 +44,7 @@ with DAG(
     t1 = PythonOperator(
         task_id='xcom_push',
         python_callable=pushing,
-        dag=dag,
+        dag=dag
     )
 
     t2 = PythonOperator(
