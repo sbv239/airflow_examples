@@ -24,7 +24,7 @@ with DAG(
     start_date = datetime(2022,11,12),
     catchup=False,
     # теги, способ помечать даги
-    tags=['example'
+    tags=['dag_1_st']
 ) as dag:
 
 t1 = BashOperator(
