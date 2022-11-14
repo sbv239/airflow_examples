@@ -1,12 +1,12 @@
 """
 ### a simple tutorial dag for printing
 """
-from datetime import datetame, timedelta
+from datetime import datetime, timedelta
 from airflow import DAG
 from textwrap import dedent
 
-from airfpow.operation.bash import BashOperator
-from airflow .operators.python import PythonOperator
+from airflow.operators.bash import BashOperator
+from airflow.operators.python import PythonOperator
 
 default_args = {
     'depend_on_pas': False,
@@ -14,27 +14,26 @@ default_args = {
     'email_on_failure': False,
     'email_on_retry': False,
     'retries':1,
-    'retry_delay':1,
-    'retry_delay':timedelta(minuets=5),
+    'retry_delay':timedelta(minutes=5),
 }
 with DAG(
         'hw_2_h-bostandzhjan',
         default_args=default_args,
         description='A simple tutorial DAG',
         schedule_interval=timedelta(days=1),
-        start_date=datetima(2021,1,1),
-        cathup=False,
-        tag=['hristo']
-        ) as dag
+        start_date=datetime(2021,1,1),
+        catchup=False,
+        tags=['hristo']
+        ) as dag:
 
     for i in range(10):
         t1= BashOperator(
             task_id='t_1_echo_the'+str(i),
-            bash_comand=f'echo {i}')
+            bash_command=f'echo {i}')
         t1.dic_mc = dedent(
             """
             ### BashOperator
-            В **task_1** распечатаеться подрят 10 чисел
+            В **task_1** распечатаеться подрят *10* чисел
             при помощи команды 'echo {i}'
             """
             )

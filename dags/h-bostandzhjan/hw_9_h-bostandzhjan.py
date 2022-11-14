@@ -1,6 +1,4 @@
 from airflow import DAG
-
-from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 from datetime import timedelta, datetime
 
@@ -13,26 +11,29 @@ default_args = {
     'retry_delay': timedelta(minutes=5),
 }
 
-with DAG('hw_1_h-bostandzjan',
+with DAG('h-bostandzhjan',
          default_args=default_args,
-         description='A simple tutorial DAG',
+         description='A simple tutorial DAG№8',
          schedule_interval=timedelta(days=1),
          start_date=datetime(2021, 1, 1),
          catchup=False,
-         tags=['h-bostandzjan']
+         tags=['hristo']
          ) as dag:
-    t1 = BashOperator(
-        task_id='pwd_command',
-        bash_command='pwd')
+
+    def xcom_push(ti):
+        ti.xcom_push(key="sample_xcom_key", value="xcom test")
+
+    def xcom_pull(ti):
+        xcom = ti.xcom_pull(key="sample_xcom_key",
+                                 task_ids='t1_xcom_push')
+        print(xcom)
 
 
-    def print_ds(ds):
-        print(ds)
-
-
+    t1 = PythonOperator(
+        task_id="t1_xcom_push",
+        python_callable=xcom_push)
     t2 = PythonOperator(
-        task_id='python_t2',
-        python_callable=print_ds
-    )
+        task_id="t2_xcom_pull",
+        python_callable=xcom_pull)
 
     t1 >> t2
