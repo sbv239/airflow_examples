@@ -68,8 +68,9 @@ with DAG(
         return 'let it print in the log'
 
     run_this = PythonOperator(
-        task_id = 'python_operator_hw_2_s-ponomarenko' # Также указываем task id
-        python_collable=print_context, # свойственнен только для PythonOperator - передаем саму функцию
+        task_id='python_operator_hw_2_s-ponomarenko', # Также указываем task id
+        # свойственнен только для PythonOperator - передаем саму функцию
+        python_callable=print_context,
     )
 
     # А вот так в DAG указывается последовательность задач
