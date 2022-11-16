@@ -28,7 +28,7 @@ with DAG(
         if value < 11:
             bash_tasks = BashOperator(
                 task_id=f"echo_{value}",
-                bash_command=f"echo{value}"
+                bash_command=f"echo {value}"
             )
         else:
             python_tasks = PythonOperator(
