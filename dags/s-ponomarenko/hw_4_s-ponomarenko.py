@@ -11,7 +11,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-    'hw_3_s-ponomarenko',
+    'hw_4_s-ponomarenko',
     #Параметры по умолчанию для тасков
     default_args={
         # если прошлые запуски упали, надо ли ждать их успеха
@@ -28,7 +28,7 @@ with DAG(
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
     },
     # Описание DAG (не тасков, а самого DAG)
-    description = 'DAG for homework - step 3',
+    description = 'DAG for homework - step 4',
     # Как часто запускать DAG (days=1 - каждый день)
     schedule_interval = timedelta(days=1),
     # С какой даты начать запускать DAG.
