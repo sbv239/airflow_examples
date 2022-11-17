@@ -2,7 +2,7 @@ from textwrap import dedent
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
-from fatetime import timedelta, datetime
+from datetime import timedelta, datetime
 
 with DAG(
         "print ds and pwd",
