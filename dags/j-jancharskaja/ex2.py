@@ -14,7 +14,7 @@ with DAG(
     'email_on_retry': False,
     'retries': 1,
     'retry_delay': timedelta(minutes=5),
-}
+    }
     description = 'My first DAG',
     schedule_interval = timedelta(days=1),
     start_date = datetime(2022, 11, 11),
