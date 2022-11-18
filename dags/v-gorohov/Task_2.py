@@ -18,7 +18,7 @@ def print_ds(ds):
     print(ds)
 
 with DAG(
-    "task_2",
+    "hw_2_v-gorohov_cool_dag",
     default_args=default_args,
     schedule_interval=None
 ) as dag:
