@@ -6,6 +6,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 default_args={
+    'start_date': datetime.datetime(2022, 11, 18),
     'depends_on_past': False,
     'email': ['airflow@example.com'],
     'email_on_failure': False,
