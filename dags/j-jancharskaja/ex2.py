@@ -14,7 +14,7 @@ with DAG(
     'email_on_retry': False,
     'retries': 1,
     'retry_delay': timedelta(minutes=5),
-    }
+    },
     description = 'My first DAG',
     schedule_interval = timedelta(days=1),
     start_date = datetime(2022, 11, 11),
@@ -24,7 +24,7 @@ with DAG(
 
     t1 = BashOperator(
         task_id = 'pwd',
-        bash_command = 'pwd '
+        bash_command = 'pwd'
     )
 
     def print_context(ds, **kwargs):
