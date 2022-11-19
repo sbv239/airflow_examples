@@ -1,8 +1,10 @@
 from datetime import datetime, timedelta
+from psycopg2.extras import RealDictCursor
+import psycopg2
 
 from airflow import DAG
 from airflow.operators.python import PythonOperator
-from airflow.providers.postgres.operators.postgres import PostgresHook
+from airflow.hooks.base import BaseHook
 
 
 default_args={
@@ -16,8 +18,12 @@ default_args={
 }
 
 def get_user_with_most_likes():
-    postgres = PostgresHook(postgres_conn_id="startml_feed")
-    with postgres.get_conn(cursor="realdictcursor") as conn:   # вернет тот же connection, что вернул бы psycopg2.connect(...)
+    pcreds = BaseHook.get_connection(id соединения)
+    with psycopg2.connect(
+    f"postgresql://{creds.login}:{creds.password}"
+    f"@{creds.host}:{creds.port}/{creds.schema}",
+    cursor_factory=RealDictCursor
+    ) as conn:
         with conn.cursor() as cursor:
             cursor.execute("""SELECT user_id, COUNT(action) as count FROM "feed_action"
             WHERE "action"='like'
