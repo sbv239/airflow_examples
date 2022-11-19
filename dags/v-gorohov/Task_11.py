@@ -18,7 +18,7 @@ default_args={
 }
 
 def get_user_with_most_likes():
-    pcreds = BaseHook.get_connection("startml_feed")
+    creds = BaseHook.get_connection("startml_feed")
     with psycopg2.connect(
     f"postgresql://{creds.login}:{creds.password}"
     f"@{creds.host}:{creds.port}/{creds.schema}",
