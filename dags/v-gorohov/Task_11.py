@@ -28,11 +28,12 @@ def get_user_with_most_likes():
             cursor.execute("""SELECT user_id, COUNT(action) as count FROM "feed_action"
             WHERE "action"='like'
             GROUP BY user_id
-            ORDER BY user_id DESC
+            ORDER BY count DESC
             LIMIT 1
             """)
             result = cursor.fetchone()
-            print(result)
+            #result = dict(result)
+            #print(result)
             return result
 
 with DAG(
