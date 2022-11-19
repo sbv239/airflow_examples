@@ -17,9 +17,9 @@ default_args={
 
 def get_user_with_most_likes():
     postgres = PostgresHook(postgres_conn_id="startml_feed")
-    with postgres.get_conn() as conn:   # вернет тот же connection, что вернул бы psycopg2.connect(...)
+    with postgres.get_conn(cursor="realdictcursor") as conn:   # вернет тот же connection, что вернул бы psycopg2.connect(...)
         with conn.cursor() as cursor:
-            cursor.execute("""SELECT user_id, COUNT(action) FROM "feed_action"
+            cursor.execute("""SELECT user_id, COUNT(action) as count FROM "feed_action"
             WHERE "action"='like'
             GROUP BY user_id
             ORDER BY user_id DESC
