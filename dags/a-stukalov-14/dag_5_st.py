@@ -5,7 +5,7 @@ from airflow.operators.python import PythonOperator
 from textwrap import dedent
 
 with DAG(
-    'dag_2_st',
+    'dag_6_stukalov',
 
     default_args={
         'owner': 'airflow',
