@@ -32,7 +32,7 @@ def not_start_ml_print():
 
 
 with DAG(
-        dag_id="task13_v-saharov-20",
+        dag_id="task12_v-saharov-20",
         default_args=default_args,
         schedule_interval=timedelta(days=1),
         start_date=datetime(2022, 1, 1),
@@ -43,6 +43,3 @@ with DAG(
     start_ml_desc = PythonOperator(task_id="start_ml_desc", python_callable=start_ml_print)
     not_start_ml_desc = PythonOperator(task_id="not_start_ml_desc", python_callable=not_start_ml_print)
     after_branching = DummyOperator(task_id="after_branching")
-    
-    before_branching >> determine_course >> [start_ml_desc, not_start_ml_desc] >> after_branching
-
