@@ -30,10 +30,8 @@ def extract_user_postgres():
             order by count(action) desc
             LIMIT 1
             """)
-        results = cursor.fetchone()
-        needed_values = {"user_id": results[0], "count": results[1]}
-        cursor.close()
-    conn.close()
+            results = cursor.fetchone()
+            needed_values = {"user_id": results[0], "count": results[1]}
     return needed_values
 
 
