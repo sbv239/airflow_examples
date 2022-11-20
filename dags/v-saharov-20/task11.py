@@ -36,7 +36,7 @@ def extract_user_postgres():
 
 
 with DAG(
-        dag_id="task11_v-saharov-20",
+        dag_id="task11_final_v-saharov-20",
         default_args=default_args,
         schedule_interval=timedelta(days=1),
         start_date=datetime(2022, 1, 1),
