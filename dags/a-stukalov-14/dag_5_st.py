@@ -29,11 +29,11 @@ with DAG(
     )  # поддерживается шаблонизация через Jinja
     # https://airflow.apache.org/docs/apache-airflow/stable/concepts/operators.html#concepts-jinja-templating
 
-    t3 = BashOperator(
+    t1 = BashOperator(
     task_id='templated',
     depends_on_past=False,
     bash_command=templated_command,
     )
 
-    t3
+    t1
 
