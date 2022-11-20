@@ -11,6 +11,15 @@ default_args = {
     'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
 }
 
+
+def return_ts(ts):
+    return ts
+
+
+def return_run_id(run_id):
+    return run_id
+
+
 with DAG(
         dag_id="task5_v-saharov-20",
         default_args=default_args,
@@ -18,15 +27,7 @@ with DAG(
         start_date=datetime(2022, 1, 1),
         catchup=False
 ) as dag:
-    sample_task = dedent("""
-    {% for i in range(5) %}
-    echo Для каждого "{{ i }}" в диапазоне от 0 до 5 не включительно распечатать значение "{{ ts }}" и затем распечатать значение "{{ run_id }}"
-
-    {% endfor %}
-    """)
-
-    bash_tasks = BashOperator(
-        task_id=f"print_5_values",
-        bash_command=sample_task
-    )
-
+    for value in range(0, 5):
+        bash_tasks = BashOperator(
+            task_id=f"task_{value}",
+            bash_command=f"Для каждого {value} в диапазоне от 0 до 5 не включительно распечатать значение {return_ts} и затем распечатать значение {return_run_id}")
