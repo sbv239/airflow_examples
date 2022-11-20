@@ -18,7 +18,7 @@ def print_line(task_number, ts, run_id):
 
 
 with DAG(
-        dag_id="task2_v-saharov-20",
+        dag_id="task7_v-saharov-20",
         default_args=default_args,
         schedule_interval=timedelta(days=1),
         start_date=datetime(2022, 1, 1),
