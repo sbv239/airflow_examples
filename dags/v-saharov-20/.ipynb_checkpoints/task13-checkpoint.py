@@ -43,6 +43,3 @@ with DAG(
     start_ml_desc = PythonOperator(task_id="start_ml_desc", python_callable=start_ml_print)
     not_start_ml_desc = PythonOperator(task_id="not_start_ml_desc", python_callable=not_start_ml_print)
     after_branching = DummyOperator(task_id="after_branching")
-    
-    before_branching >> determine_course >> [start_ml_desc, not_start_ml_desc] >> after_branching
-
