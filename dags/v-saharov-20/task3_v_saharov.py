@@ -29,7 +29,7 @@ with DAG(
         if value < 11:
             bash_tasks = BashOperator(
                 task_id=f"echo_{value}",
-                bash_command=f"echo{value}",
+                bash_command=f"echo {value}",
                 doc_md=dedent("""
                 this `code` is _used_ **in this text**
 
