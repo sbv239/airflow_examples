@@ -32,8 +32,6 @@ def extract_user_postgres():
             """)
         results = cursor.fetchone()
         needed_values = {"user_id": results[0], "count": results[1]}
-        cursor.close()
-    conn.close()
     return needed_values
 
 
