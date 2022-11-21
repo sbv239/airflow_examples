@@ -7,7 +7,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-    'o-chikin task 2',
+    'o-chikin_task_2',
     # Параметры по умолчанию для тасок
     default_args={
         'depends_on_past': False,
@@ -26,7 +26,7 @@ with DAG(
 ) as dag:
 
     t1 = BashOperator(
-        task_id='o-chikin task 2/1',  # id, будет отображаться в интерфейсе
+        task_id='o-chikin_task_2/1',  # id, будет отображаться в интерфейсе
         bash_command= pwd,  # какую bash команду выполнить в этом таске
     )
 
@@ -37,7 +37,7 @@ with DAG(
         return 'Whatever you return gets printed in the logs'
 
     t2 = PythonOperator(
-        task_id='o-chikin task 2/2',  # нужен task_id, как и всем операторам
+        task_id='o-chikin_task_2/2',  # нужен task_id, как и всем операторам
         python_callable=print_context,  # свойственен только для PythonOperator - передаем саму функцию
 )
 
