@@ -34,5 +34,3 @@ with DAG(
         task_id='i-hate-this-task',
         bash_command=templated_command,
     )
-
-t1 >> t2
