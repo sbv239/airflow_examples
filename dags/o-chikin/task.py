@@ -9,7 +9,7 @@ def print_ds_from_python(ds, **kwargs):
     return 'Function to print ds date is working OK'
 
 with DAG(
-    'o-chikin_task2',
+    'o-chikin_task3',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -18,21 +18,28 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
         },
-    description='task2_DAG',
+    description='task3_DAG',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 5, 16),
     catchup=False,
     tags=['Oleg_Chikin_DAG']
 ) as dag:
 
-    t1 = BashOperator(
-        task_id='print_bash_pwd',
-        bash_command='pwd',
-    )
+    for i in range(10):
+        t1 = BashOperator(
+            task_id='bash_operator' + str(i),
+            bash_command=f'echo {i}'
+        )
 
-    t2 = PythonOperator(
-        task_id='print_ds_date_from_python',
-        python_callable=print_ds_from_python,
-    )
+    def python_func(task_number):
+        print(f"task number is: {task_number}")
 
-    t1 >> t2
+
+    for i in range(20):
+        t2 = PythonOperator(
+            task_id='python_operator' + str(i),
+            python_callable=python_func,
+            op_kwargs={'task_number': i},
+        )
+
+    t1>>t2
