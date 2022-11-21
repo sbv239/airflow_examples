@@ -19,13 +19,14 @@ with DAG(
     start_date=datetime(2022, 11, 11),
     tags=['example'],
 ) as dag:
-    def print_(ts, run_id):
+    def print_(task_number, ts, run_id):
         print(ts)
         print(run_id)
-
+        return f"task number is: {task_number}"
 
     for i in range(20):
         t2 = PythonOperator(
             task_id=f'pitosha_{i}',
             python_callable=print_,
+            op_kwargs={'task_number': i}
         )
