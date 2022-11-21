@@ -16,7 +16,7 @@ with DAG(
         'email_on_retry': False,
         'retries': 1,
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
-    }
+    },
     # Описание DAG (не тасок, а самого DAG)
     description='A simple DAG',
     schedule_interval=timedelta(days=1),
