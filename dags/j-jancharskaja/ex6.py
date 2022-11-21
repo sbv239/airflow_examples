@@ -21,11 +21,12 @@ with DAG(
     tags = ['fifth']
 ) as dag:
 
-    tasks = dict()
-
     for i in range(10):
         task = BashOperator(
             task_id = 'command_' + str(i),
             bash_command = 'echo $NUMBER',
-            env = {'NUMBER': i}
+            env = {'NUMBER': str(i)}
         )
+
+
+        
