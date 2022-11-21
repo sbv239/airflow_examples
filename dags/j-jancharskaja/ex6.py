@@ -24,11 +24,8 @@ with DAG(
     tasks = dict()
 
     for i in range(10):
-        tasks[('t' + str(i))] = BashOperator(
+        task = BashOperator(
             task_id = 'command_' + str(i),
             bash_command = 'echo $NUMBER',
             env = {'NUMBER': i}
         )
-
-
-tasks['t0'] >> tasks['t1'] >> tasks['t2'] >> tasks['t3'] >> tasks['t4'] >> tasks['t5'] >> tasks['t6'] >> tasks['t7'] >> tasks['t8'] >> tasks['t9'] 
