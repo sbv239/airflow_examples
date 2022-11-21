@@ -26,7 +26,7 @@ with DAG(
 
     t1 = BashOperator(
         task_id='first_dws_run',
-        bash_command='dws',)
+        bash_command='pwd',)
     t2 = PythonOperator(
         task_id='first_ds_print',
         python_callable=print_,
