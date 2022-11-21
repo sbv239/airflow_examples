@@ -1,15 +1,14 @@
 from airflow import DAG
 from airflow.operators.bash import BashOperator
-from airflow.operators.python_operator import PythonOperator
 from datetime import date, timedelta, datetime
-
+from textwrap import dedent
 
 def print_ds_from_python(ds, **kwargs):
     print(ds)
     return 'Function to print ds date is working OK'
 
 with DAG(
-    'o-chikin_task3',
+    'o-chikin_task4',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -25,21 +24,18 @@ with DAG(
     tags=['Oleg_Chikin_DAG']
 ) as dag:
 
-    for i in range(10):
-        t1 = BashOperator(
-            task_id='bash_operator' + str(i),
-            bash_command=f'echo {i}'
-        )
+    templated_command = dedent(
+        """
+    {% for i in range(5) %}
+        echo "{{ ds }}"
+        echo "{{ macros.ds_add(ds, 7)}}"
+    {% endfor %}
+    """
+    )  # поддерживается шаблонизация через Jinja
+    # https://airflow.apache.org/docs/apache-airflow/stable/concepts/operators.html#concepts-jinja-templating
 
-    def python_func(task_number):
-        print(f"task number is: {task_number}")
-
-
-    for i in range(20):
-        t2 = PythonOperator(
-            task_id='python_operator' + str(i),
-            python_callable=python_func,
-            op_kwargs={'task_number': i},
-        )
-
-    t1>>t2
+    t3 = BashOperator(
+        task_id='templated',
+        depends_on_past=False,
+        bash_command=templated_command,
+    )
