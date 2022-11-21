@@ -8,7 +8,7 @@ def print_ds_from_python(ds, **kwargs):
     return 'Function to print ds date is working OK'
 
 with DAG(
-    'o-chikin_task4',
+    'o-chikin_task5',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
