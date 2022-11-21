@@ -19,8 +19,9 @@ with DAG(
     start_date=datetime(2022, 11, 11),
     tags=['example'],
 ) as dag:
-    def print_(**kwargs):
-        print(kwargs.get('ds'))
+    def print_(ds, **kwargs):
+        print(kwargs)
+        print(ds)
         return 'I have no idea how it works'
 
 
