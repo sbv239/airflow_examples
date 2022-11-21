@@ -30,7 +30,7 @@ with DAG(
         )
 
     def print_num(task_number):
-        print('task number is: {task_number}')
+        print(f'task number is: {task_number}')
 
     for i in range(10, 30):
         tasks[('t' + str(i))] = PythonOperator(
