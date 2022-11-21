@@ -24,7 +24,7 @@ with DAG(
     tasks = dict()
 
     def print_num(task_number, ts, run_id):
-        print('task number is: {task_number}')
+        print(f'task number is: {task_number}')
         print(ts, run_id)    
 
     for i in range(10, 30):
