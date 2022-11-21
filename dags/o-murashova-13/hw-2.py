@@ -6,7 +6,7 @@ from airflow.operators.python import PythonOperator
 
 
 with DAG(
-    'hw 2 o-murashova-13',
+    'hw_2_o-murashova-13',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -22,10 +22,10 @@ with DAG(
 
 
     t1 = BashOperator(
-        task_id='first dws run',
+        task_id='first_dws_run',
         bash_command='dws',)
     t2 = PythonOperator(
-        task_id='first ds print',
+        task_id='first_ds_print',
         python_callable=print_,
     )
 
