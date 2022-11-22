@@ -1,6 +1,8 @@
 """
 
 """
+
+
 from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.operators.bash import BashOperator
@@ -33,4 +35,6 @@ with DAG(
         task_id = 'python_1',
         python_callable = print_context,
     )
+
+  
     t1 >> t2
