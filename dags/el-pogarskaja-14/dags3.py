@@ -1,4 +1,5 @@
 from airflow import DAG
+from textwrap import dedent
 from datetime import datetime, timedelta
 from airflow.operators.bash import BashOperator 
 from airflow.operators.python import PythonOperator
@@ -24,6 +25,12 @@ with DAG(
                 task_id="num_" + str(i),
                 bash_command=f'echo {i}',
                 )
+    t1.doc_md=dedent(
+            """
+            Bash command `echo {i}` prints the number of the task.
+            #As command works in the cycle, it prints the number of the task *i* for **10 times**, each generation the nummber increases by 1.
+            """
+             )
     #2 команда в цикле и функция, которую на выполняет
     def task_numb(task_number):
         print(f'task number is: {number}')
@@ -33,4 +40,12 @@ with DAG(
                 python_callable=task_numb,
                 op_kwargs={'task_number': i},
                 )
+    t2.doc_md=dedent(
+            """
+            t2 calls the function `task_numb`, which was announced before.
+            #Function **task_number** prints phrase *task number is* and then the numver of the task, which it gets as an argument.
+            #t2 works in cycle and gives an argument to the callable function **task_numb** via *op_kwargs key* `op_kwargs={"task_number":i}`,
+            where i is the number of cycle generation.
+            """
+            )
     t1>>t2
