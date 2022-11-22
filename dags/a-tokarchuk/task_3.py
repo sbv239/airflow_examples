@@ -2,6 +2,8 @@
 
 """
 from datetime import datetime, timedelta
+from textwrap import dedent
+
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
@@ -39,5 +41,14 @@ with DAG(
             op_kwargs={'task_number' : i}
         )
 
+    t1.doc_md = dedent(
+    """\
+    # Task Documentation
+    ###`This is code`
+    ###*This is italic*
+    ###**This is bold**
+    """
+    ) 
+    
 
     t1 >> t2
