@@ -3,7 +3,7 @@ from airflow import DAG
 from airflow.operators.python import PythonOperator
 
 with DAG(
-        "hw_6_p-terentev-14",
+        "hw_7_p-terentev-14",
         default_args={
             "depends_on_past": False,
             "email": ["airflow@example.com"],
