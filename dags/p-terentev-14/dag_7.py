@@ -13,7 +13,7 @@ with DAG(
             "retry_delay": timedelta(minutes=5)
         },
         schedule_interval=timedelta(days=1),
-        start_date=datetime(2022, 12, 12),
+        start_date=datetime(2022, 11, 11),
         catchup=False,
         tags=['DAG_6']
 ) as dag:
