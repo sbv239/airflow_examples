@@ -5,13 +5,13 @@ from datetime import datetime, timedelta
 def get_info(ti):
     ti.xcom_push(
         key="sample_xcom_key",
-        value="xcom test"
+        value="xcom tes",
     )
 
 def print_info(ti):
     result = ti.xcom_pull(
         key="sample_xcom_key",
-        value="xcom test"
+        task_ids="get_info",
     )
     print(result)
 
