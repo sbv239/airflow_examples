@@ -15,7 +15,7 @@ with DAG(
         schedule_interval=timedelta(days=1),
         start_date=datetime(2022, 11, 11),
         catchup=False,
-        tags=['DAG_9']
+        tags=['DAG_10']
 ) as dag:
     def return_string():
         return "Airflow tracks everything"
