@@ -7,7 +7,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-    'hw_2',
+    'a-chernenko-30_DAG_hw3',
     # Параметры по умолчанию для тасок
     default_args={
     'depends_on_past': False,
@@ -18,7 +18,7 @@ with DAG(
     'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
     },
     # Описание DAG (не тасок, а самого DAG)
-    description='a-chernenko-30_DAG_hw2',
+    description='a-chernenko-30_DAG_hw3',
     # Как часто запускать DAG
     schedule_interval=timedelta(days=1),
     # С какой даты начать запускать DAG
@@ -30,28 +30,24 @@ with DAG(
     # https://airflow.apache.org/docs/apache-airflow/stable/dag-run.html
     catchup=False,
     # теги, способ помечать даги
-    tags=['hw_2'],
+    tags=['hw_3'],
 ) as dag:
 
-    # t1
-    
-    t1 = BashOperator(
-        task_id='hw_2',  # id, будет отображаться в интерфейсе
-        bash_command='pwd',  # какую bash команду выполнить в этом таске
-    )
 
+    def print_task_number(task_number):
+        print(f'task number is: {task_number}')
+        # t1
 
-    
-    def print_date(ds, **kwargs):
-        # В ds Airflow за нас подставит текущую логическую дату - строку в формате YYYY-MM-DD
-        print(ds)
-        return 'print_ds'
-
-    t2 = PythonOperator(
-        task_id='print_python',  # нужен task_id, как и всем операторам
-        python_callable=print_date,  # свойственен только для PythonOperator - передаем саму функцию
-        )
-    # А вот так в Airflow указывается последовательность задач
-    t1 >> t2
-    # будет выглядеть вот так
-    #   t1  -> t2
+    for i in range(30):
+        if i < 10:
+            bash_task = BashOperator(
+                task_id = f'a-chernenko-30_DAG_hw3_{i}', # id, будет отображаться в интерфейсе
+                bash_command = f'echo {i}',  # какую bash команду выполнить в этом таске
+                )
+        else:
+            python_task = PythonOperator(
+                task_id = f'print_python_task_{i}',
+                python_callable = print_task_number,
+                op_kwargs = {'task_number':i}
+            )
+    bash_task >> python_task
