@@ -34,20 +34,20 @@ with DAG(
 ) as dag:
 
 
-def print_task_number(task_number):
-    print(f'task number is: {task_number}')
-    # t1
-    
-for i in range(30):
-    if i < 10:
-        bash_task = BashOperator(
-            task_id = f'a-chernenko-30_DAG_hw3_{i}', # id, будет отображаться в интерфейсе
-            bash_command = f'echo {i}',  # какую bash команду выполнить в этом таске
+    def print_task_number(task_number):
+        print(f'task number is: {task_number}')
+        # t1
+
+    for i in range(30):
+        if i < 10:
+            bash_task = BashOperator(
+                task_id = f'a-chernenko-30_DAG_hw3_{i}', # id, будет отображаться в интерфейсе
+                bash_command = f'echo {i}',  # какую bash команду выполнить в этом таске
+                )
+        else:
+            python_task = PythonOperator(
+                task_id = f'print_python_task_{i}',
+                python_callable = print_task_number,
+                op_kwargs = {'task_number':i}
             )
-    else:
-        python_task = PythonOperator(
-            task_id = f'print_python_task_{i}',
-            python_callable = print_task_number,
-            op_kwargs = {'task_number':i}
-        )
-bash_task >> python_task
+    bash_task >> python_task
