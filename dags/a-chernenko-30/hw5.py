@@ -7,7 +7,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-    'a-chernenko-30_DAG_hw4',
+    'a-chernenko-30_DAG_hw5',
     # Параметры по умолчанию для тасок
     default_args={
     'depends_on_past': False,
@@ -18,7 +18,7 @@ with DAG(
     'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
     },
     # Описание DAG (не тасок, а самого DAG)
-    description='a-chernenko-30_DAG_hw4',
+    description='a-chernenko-30_DAG_hw5',
     # Как часто запускать DAG
     schedule_interval=timedelta(days=1),
     # С какой даты начать запускать DAG
@@ -30,32 +30,21 @@ with DAG(
     # https://airflow.apache.org/docs/apache-airflow/stable/dag-run.html
     catchup=False,
     # теги, способ помечать даги
-    tags=['hw_4'],
+    tags=['hw_5'],
 ) as dag:
-
-
-    def print_task_number(task_number):
-        print(f'task number is: {task_number}')
-        # t1
-
-    for i in range(30):
-        if i < 10:
-            bash_task = BashOperator(
-                task_id = f'a-chernenko-30_DAG_hw4_{i}', # id, будет отображаться в интерфейсе
-                bash_command = f'echo {i}',  # какую bash команду выполнить в этом таске
-                )
-        else:
-            python_task = PythonOperator(
-                task_id = f'print_python_task_{i}',
-                python_callable = print_task_number,
-                op_kwargs = {'task_number':i}
-            )
-            
-    bash_task.doc_md = dedent(
+    
+    
+    templated_command = dedent(
     """
-    Print `taks_id` in *bash* and **python**
-    # Chapter 1
+    {% for i in range(5) %}
+        echo "{{ ts }}"
+    {% endfor %}
+    echo "{{ run_id }}"
     """
-    )        
-            
-    bash_task >> python_task
+    )
+
+
+    t1 = BashOperator(
+        task_id = 'a-chernenko-30_DAG_hw5', # id, будет отображаться в интерфейсе
+        bash_command = templated_command # какую bash команду выполнить в этом таске
+    )
