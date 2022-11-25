@@ -34,7 +34,7 @@ with DAG(
 ) as dag:
 
 
-    def print_task_number(ts, run_id, **kwargs):
+    def print_task_number(ts, run_id, task_number):
         print(f'task number is: {task_number}')
         print(ts)
         print(run_id)
