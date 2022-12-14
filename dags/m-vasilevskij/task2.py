@@ -3,7 +3,8 @@ from airflow.operators.bash import BashOperator
 from datetime import datetime, timedelta
 
 
-def print_ds(ds):
+def print_ds(ds, **kwargs):
+    print(kwargs)
     print(ds)
     return 'ds printed'
 
@@ -29,7 +30,6 @@ with DAG(
     t2 = PythonOperator(
         task_id = 'print_ds',
         python_callable = print_ds
-
     )
 
     t1 >> t2
