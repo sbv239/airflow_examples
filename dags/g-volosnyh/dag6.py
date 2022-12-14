@@ -20,8 +20,8 @@ with DAG(
     catchup=False,
 ) as dag:
     def print_task_info(task_number, ts, run_id):
-        print(f"{ts}")
-        print(f"{run_id}")
+        print(f'ts is {ts}')
+        print(f'run_id is {run_id}')
         return 0
 
     for i in range(20):
