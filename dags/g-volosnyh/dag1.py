@@ -17,7 +17,7 @@ with DAG(
     },
     description='dag1',
     schedule_interval=timedelta(days=1),
-    start_date=datetime(2022, 12, 13),
+    start_date=datetime(2022, 1, 1),
     catchup=False,
 ) as dag:
 
