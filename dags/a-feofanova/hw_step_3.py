@@ -34,7 +34,7 @@ with DAG(
         t1 = BashOperator(
             task_id=f'bash_cycle_number_{task_number}',
             retries=4,
-            bash_command=f"echo{task_number}",
+            bash_command=f"echo {task_number}",
             )
 
     # Далее пишу PythonOperator
