@@ -17,11 +17,11 @@ def my_req():
                 FROM feed_action f
                 WHERE f.action = 'like'
                 GROUP BY f.user_id
-                ORDER BY COUNT(f.user_id)
+                ORDER BY COUNT(f.user_id) DESC
                 LIMIT 1
                 """
             )
-            result = cursor.fetchone()
+            result = cursor.fetchall()
             return result
 
 
@@ -33,7 +33,7 @@ with DAG(
         'email_on_failure': False,
         'email_on_retry': False,
         'retries': 1,
-        'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
+        'retry_delay': timedelta(minutes=5),
     },
     description='dag9',
     schedule_interval=timedelta(days=1),
