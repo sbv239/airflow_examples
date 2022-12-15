@@ -18,7 +18,7 @@ with DAG(
     schedule_interval = timedelta(days=1),
     start_date = datetime(2022,12,13),
     catchup = False,
-    tags = 'trying to make PythonOperator with kwargs',
+    tags = ['trying to make PythonOperator with kwargs'],
 ) as dag:
 
 # добавляю в функцию прием аргументов ts, run_id
