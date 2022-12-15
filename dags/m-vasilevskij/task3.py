@@ -24,7 +24,7 @@ with DAG(
 ) as dag:
 
     for i in range(30):
-        if i <= 10:
+        if i < 10:
             task = BashOperator(
                 task_id = f"task_{i}",
                 bash_command = f"echo {i}"
