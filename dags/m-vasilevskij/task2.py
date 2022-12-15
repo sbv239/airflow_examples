@@ -1,5 +1,6 @@
 from airflow import DAG
 from airflow.operators.bash import BashOperator
+from airflow.operators.python import PythonOperator
 from datetime import datetime, timedelta
 
 
@@ -10,7 +11,7 @@ def print_ds(ds, **kwargs):
 
 with DAG(
 
-    'task2',
+    'task2_m-vasilevskij',
 
     default_args={
     'depends_on_past': False,
@@ -31,6 +32,7 @@ with DAG(
         task_id = 'print_ds',
         python_callable = print_ds
     )
+
 
     t1 >> t2
 
