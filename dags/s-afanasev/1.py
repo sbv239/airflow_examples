@@ -1,4 +1,4 @@
-rom datetime import timedelta
+from datetime import timedelta
 from airflow import DAG
 
 from airflow.operators.bash import BashOperator
@@ -17,9 +17,9 @@ with DAG(
     },
     start_date=datetime(2022, 1, 1),
 ) as dag:
+
     def print_date(ds):
         print(ds)
-
 
     t1 = BashOperator(
         task_id='print dir',
