@@ -13,8 +13,7 @@ with DAG(
             'email_on_retry': False,
             'retries': 1,
             'retry_delay': timedelta(minutes=5),
-        },
-        start_date=datetime(2022, 1, 1),
+        }
 ) as dag:
     def print_task_number(ts, run_id, **kwargs):
         """Распечатать номер задачи"""
