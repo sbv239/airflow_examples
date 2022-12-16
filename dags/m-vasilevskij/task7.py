@@ -7,8 +7,8 @@ from textwrap import dedent
 
 def print_task(ts, run_id, **kwargs):
     print(f"task number is: {kwargs['task_number']}")
-    print(ts)
-    print(run_id)
+    print(f"ts parameter: {ts}")
+    print(f"run_id parameter': {run_id}")
 
 with DAG(
 
@@ -30,7 +30,7 @@ with DAG(
 
 ) as dag:
 
-    for i in range(1, 31):
+    for i in range(0, 30):
         if i < 10:
             task = BashOperator(
                 task_id = f"task_{i}",
