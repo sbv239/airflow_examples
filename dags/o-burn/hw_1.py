@@ -38,7 +38,7 @@ with DAG(
 
     def func_ds(ds, **kwargs):
         print (ds)
-        print (**kwargs)
+        print (kwargs)
         return 'just want to see wtf'
 
     t2 = PythonOperator(
