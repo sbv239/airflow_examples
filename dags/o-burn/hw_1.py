@@ -13,7 +13,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-    'tutorial',
+    'hw_11_1_allburn',
     # Параметры по умолчанию для тасок
     default_args={
         'depends_on_past': False,
@@ -30,18 +30,20 @@ with DAG(
     tags=['o-burn example'],
 ) as dag:
 
+    t1 = BashOperator(
+        task_id='show_pwd',
+        bash_command='pwd'
+    )
+
+
     def func_ds(ds, **kwargs):
         print (ds)
         print (**kwargs)
         return 'just want to see wtf'
 
-    t1 = PythonOperator(
+    t2 = PythonOperator(
         task_id = 'show_ds',
-        python_callable = func_ds)
-
-    t2 = BashOperator(
-        task_id='show_pwd',  # id, будет отображаться в интерфейсе
-        bash_command='pwd',  # какую bash команду выполнить в этом таске
+        python_callable = func_ds
     )
 
     t1 >> t2
