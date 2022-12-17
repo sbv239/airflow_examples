@@ -23,11 +23,11 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),
     },
-    description='HW_1',
+    description='HW_1_burn',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 1, 1),
     catchup=False,
-    tags=['example'],
+    tags=['o-burn example'],
 ) as dag:
 
     def func_ds(ds, **kwargs):
