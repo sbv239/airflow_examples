@@ -24,7 +24,7 @@ with DAG(
     },
     description='hw_1 DAG',
     schedule_interval=timedelta(days=1),
-    start_date=datetime(2022, 1, 1),
+    start_date=datetime(2022, 12, 17),
     catchup=False,
     tags=['hw_1'],
 ) as dag:
