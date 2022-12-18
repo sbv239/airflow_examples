@@ -5,13 +5,13 @@ Created on Sat Dec 17 20:55:13 2022
 
 @author: keyreeltian
 """
-
+from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python_operator import PythonOperator
 
 with DAG(
-    'k-tjan hw_1',
+    'k-tjan_hw_1',
     # Параметры по умолчанию для тасок
     
     default_args={
