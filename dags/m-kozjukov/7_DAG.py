@@ -6,7 +6,7 @@ from datetime import timedelta, datetime
 from textwrap import dedent
 
 with DAG(
-    '11_6_mishin',
+    '7_dag',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -15,11 +15,11 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
     },
-    description='hw 6',
+    description='7 dag',
     schedule_interval=timedelta(days=7),
     start_date=datetime(2022, 9, 21),
     catchup=False,
-    tags=['m-mishin']
+    tags=['7 dag']
 ) as dag:
 
     for i in range(10):
