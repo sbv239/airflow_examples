@@ -21,7 +21,7 @@ def x_pull(ti):
 
 
 with DAG(
-    'k-tjan_exercise_8',
+    'k-tjan_exercise_9',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -30,11 +30,11 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
     },
-    description='Exercise_8 DAG',
+    description='Exercise_9 DAG',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 12, 17),
     catchup=False,
-    tags=['exercise_8'],
+    tags=['exercise_9'],
 ) as dag:
 
     t1 = PythonOperator(
