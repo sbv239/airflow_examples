@@ -53,6 +53,7 @@ def get_connection():
                 GROUP BY user_id
                 '''
             )
+            print(cursor.fetchall())
             return cursor.fetchall()
 
 with DAG(
