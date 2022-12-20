@@ -11,6 +11,8 @@ from airflow.operators.python_operator import PythonOperator
 def test_connection():
     from airflow.providers.postgres.operators.postgres import PostgresHook
     
+    res = dict()
+    
     postgres = PostgresHook(postgres_conn_id="startml_feed")
     with postgres.get_conn() as conn:
       with conn.cursor() as cursor:
@@ -24,8 +26,9 @@ def test_connection():
         """)
         results = cursor.fetchone()
         print(f"this is results: {type(results)} {results[0]}")
-    # return {'user_id': <идентификатор>, 'count': <количество лайков>}
-
+    res = {'user_id': results[0], 'count': results[1]}
+    print(res)
+    return res
 
 with DAG(
     'k-tjan_exercise_10',
@@ -45,7 +48,7 @@ with DAG(
 ) as dag:
 
     t1 = PythonOperator(
-        task_id='task_push',
+        task_id='connect',
         python_callable=test_connection,
         )
 
