@@ -1,4 +1,7 @@
 from airflow.operators.bash import BashOperator
+from airflow.operators.python import PythonOperator
+from datetime import datetime, timedelta
+from airflow import DAG
 
 with DAG('task2', 
 
@@ -31,23 +34,23 @@ with DAG('task2',
     catchup=False,
     # теги, способ помечать даги
     tags=['example'],
-) as dag:
-    t1 = BashOperator(
-        task_id='print pwd',
-        bash_command='pwd',
-    )
-    def print_context(ds, **kwargs):
+    ) as dag:
+        t1 = BashOperator(
+            task_id='print_pwd',
+            bash_command='pwd',
+        )
+        def print_context(ds, **kwargs):
     
-        print(kwargs)
+            print(kwargs)
         # В ds Airflow за нас подставит текущую логическую дату - строку в формате YYYY-MM-DD
-        print(ds)
-        return 'Whatever you return gets printed in the logs'
+            print(ds)
+            return 'Whatever you return gets printed in the logs'
 
-    t2 = PythonOperator(
-        task_id='print_the_context',  # нужен task_id, как и всем операторам
-        python_callable=print_context,  # свойственен только для PythonOperator - передаем саму функцию
-    )
+        t2 = PythonOperator(
+            task_id='print_the_context',  # нужен task_id, как и всем операторам
+            python_callable=print_context,  # свойственен только для PythonOperator - передаем саму функцию
+        )
 
-    t1 >> t2
+        t1 >> t2
 
     
