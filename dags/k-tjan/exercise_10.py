@@ -23,7 +23,7 @@ def test_connection():
         LIMIT 1
         """)
         results = cursor.fetchone()
-        print(results)
+        print(f"this is results: {type(results)} {results[0]}")
     # return {'user_id': <идентификатор>, 'count': <количество лайков>}
 
 
