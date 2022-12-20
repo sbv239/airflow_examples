@@ -15,11 +15,11 @@ def test_connection():
     with postgres.get_conn() as conn:
       with conn.cursor() as cursor:
         cursor.execute("""
-        SELECT user_id, COUNT(action)
+        SELECT user_id, COUNT(action) count
         FROM feed_action
         WHERE action = 'like'
-        GROUP BY user_id
-        ORDER BY action DESC
+        GROUP BY user_id, action
+        ORDER BY count DESC
         LIMIT 1
         """)
         results = cursor.fetchone()
