@@ -14,7 +14,7 @@ def x_push(ti):
 
 def x_pull(ti):
     res = ti.xcom_pull(
-        key=return_value,
+        key="return_value",
         task_ids='task_push'
     )
     print(f"Pulled value is {res}")
