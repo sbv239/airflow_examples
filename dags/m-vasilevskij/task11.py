@@ -51,15 +51,13 @@ def get_connection():
                 SELECT user_id, COUNT(post_id) as "count"
                 FROM feed_action
                 GROUP BY user_id
-                ORDER BY COUNT(post_id) DESC
-                LIMIT 1;
                 '''
             )
             return cursor.fetchall()
 
 with DAG(
 
-    'hw7_m-vasilevskij',
+    'hw11_m-vasilevskij',
 
     default_args={
     'depends_on_past': False,
@@ -120,4 +118,8 @@ with DAG(
     # task2 >> task3
 
     # task >> task1
-    
+                #     SELECT user_id, COUNT(post_id) as "count"
+                # FROM feed_action
+                # GROUP BY user_id
+                # ORDER BY COUNT(post_id) DESC
+                # LIMIT 1
