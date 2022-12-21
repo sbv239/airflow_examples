@@ -37,4 +37,4 @@ with DAG(
         python_callable=print_ds
     )
 
-t1 >> t2
+    t1 >> t2
