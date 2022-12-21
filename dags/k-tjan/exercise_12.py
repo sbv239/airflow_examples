@@ -9,6 +9,7 @@ from airflow.operators.dummy import DummyOperator
 
 
 def determing_course():
+    from airflow.models import Variable
     is_startml = Variable.get("is_startml")
     if is_startml == 'True':
         return 'startml_desc'
