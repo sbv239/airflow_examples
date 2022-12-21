@@ -3,7 +3,7 @@ from airflow.operators.python import PythonOperator
 from datetime import datetime, timedelta
 from airflow import DAG
 
-with DAG('task2', 
+with DAG('task3', 
 
   # Параметры по умолчанию для тасок
     default_args={
@@ -35,22 +35,24 @@ with DAG('task2',
     # теги, способ помечать даги
     tags=['example'],
     ) as dag:
-        t1 = BashOperator(
-            task_id='print_pwd',
-            bash_command='pwd',
-        )
-        def print_context(ds, **kwargs):
+        def print_context(i, **kwargs):
     
-            print(kwargs)
-        # В ds Airflow за нас подставит текущую логическую дату - строку в формате YYYY-MM-DD
-            print(ds)
-            return 'Whatever you return gets printed in the logs'
+            print('Hello from {kw}'.format(kw=kwargs[i]))
+            # В ds Airflow за нас подставит текущую логическую дату - строку в формате YYYY-MM-DD   
+        for i in range(30):
+            if i < 10:
+                t1 = BashOperator(
+                task_id=f'print{i}',
+                bash_command=f"echo {i}",
+                )
+            else:
+                           
+                t2 = PythonOperator(
+                task_id=f'print_the_context{i}',  # нужен task_id, как и всем операторам
+                python_callable=print_context,  # свойственен только для PythonOperator - передаем саму функцию
+                op_kwargs={'my_keyword': i},
+                )
 
-        t2 = PythonOperator(
-            task_id='print_the_context',  # нужен task_id, как и всем операторам
-            python_callable=print_context,  # свойственен только для PythonOperator - передаем саму функцию
-        )
-
-        t1 >> t2
+                t1 >> t2
 
     
