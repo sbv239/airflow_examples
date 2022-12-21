@@ -5,30 +5,25 @@ from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
 
-# import requests
-# import json
 
-def test_connection():
+def test_connection(ti):
     from airflow.providers.postgres.operators.postgres import PostgresHook
-    
     res = dict()
-    
     postgres = PostgresHook(postgres_conn_id="startml_feed")
     with postgres.get_conn() as conn:
-      with conn.cursor() as cursor:
-        cursor.execute("""
-        SELECT user_id, COUNT(action) count
-        FROM feed_action
-        WHERE action = 'like'
-        GROUP BY user_id, action
-        ORDER BY count DESC
-        LIMIT 1
-        """)
-        results = cursor.fetchone()
-        print(f"this is results: {type(results)} {results[0]}")
-    res = {'user_id': results[0], 'count': results[1]}
-    print(res)
-    return res
+        with conn.cursor() as cursor:
+            cursor.execute("""
+            SELECT user_id, COUNT(user_id)
+            FROM feed_action
+            WHERE action = 'like'
+            GROUP BY user_id
+            ORDER BY count DESC
+            LIMIT 1
+            """)
+            results = cursor.fetchone()
+    print(f"Результат: {results}")
+    return results
+
 
 with DAG(
     'k-tjan_exercise_10',
