@@ -21,7 +21,7 @@ with DAG(
         catchup=False,
 ) as dag:
     def get_data(ts, run_id, **kwargs):
-        print(ts, run_id)
+        print(f'ts: {ts}, run_id: {run_id}')
 
 
     for i in range(20):
