@@ -5,12 +5,12 @@ from airflow.operators.python import BranchPythonOperator
 from airflow.operators.dummy import DummyOperator
 
 
-def get_task_id(**kwargs):
+def get_task_id():
     from airflow.models import Variable
     if Variable.get('is_startml') == 'True':
-        return 'startml_true'
+        return 'startml_desc'
     else:
-        return 'startml_false'
+        return 'not_startml_desc'
 
 
 def result1():
@@ -40,11 +40,11 @@ with DAG(
         task_id='determine_course',
         python_callable=get_task_id
     )
-    startml_true = PythonOperator(
+    startml_desc = PythonOperator(
         task_id='startml_desc',
         python_callable=result1
     )
-    startml_false = PythonOperator(
+    not_startml_desc = PythonOperator(
         task_id='not_startml_desc',
         python_callable=result2
     )
@@ -54,4 +54,4 @@ with DAG(
     last_dummy = DummyOperator(
         task_id='after_branching'
     )
-    first_dummy >> chooser >> [startml_true, startml_false] >> last_dummy
+    first_dummy >> chooser >> [startml_desc, not_startml_desc] >> last_dummy
