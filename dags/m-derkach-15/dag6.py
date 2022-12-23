@@ -18,7 +18,7 @@ def print_task_num(task_number, ts, run_id, **kwargs):
 
 
 with DAG(
-        'derkach_dag2',
+        'derkach_dag7',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
@@ -27,7 +27,7 @@ with DAG(
             'retries': 1,
             'retry_delay': timedelta(minutes=5)
         },
-        description='Dag for task_2',
+        description='Dag for task_7',
         schedule_interval=timedelta(minutes=5),
         start_date=datetime(2022, 12, 22)
 ) as dag:
