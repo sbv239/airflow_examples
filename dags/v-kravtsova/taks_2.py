@@ -1,6 +1,6 @@
 from airflow import DAG
 from airflow.operators.bash import BashOperator
-from airflow.operators.pythonoperator import Python Operator
+from airflow.operators.pythonoperator import PythonOperator
 from datetime import datetime, timedelta
 
 def ds_input(ds, **kwargs):
