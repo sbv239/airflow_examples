@@ -9,7 +9,7 @@ def ds_input(ds, **kwargs):
 
 
 with DAG(
-    'hw_2',
+    'hw_2_v-kravtsova',
     default_args={
     'depends_on_past': False,
     'email': ['airflow@example.com'],
