@@ -30,10 +30,10 @@ with DAG(
     )
 
 
-    def print_func(ds, ts, run_id, **kwargs):
+    def print_func(ts, run_id, **kwargs):
         print(ts)
         print(run_id)
-        return f"task number is: {task_number}"
+        return f"task_number is: {task_number}"
 
 
     for i in range(10, 30):
