@@ -5,7 +5,7 @@ from datetime import timedelta, datetime
 from textwrap import dedent
 
 with DAG(
-    'number_7',
+    'number_7_1',
     default_args={
         'depends_on_past': False,
         'email':['airflow@example.com'],
@@ -30,10 +30,10 @@ with DAG(
     )
 
 
-    def print_func(ts, run_id, **kwargs):
+    def print_func(task_number, ts, run_id, **kwargs):
         print(ts)
         print(run_id)
-        return f"task_number is: {task_number}"
+        return f"task number is: {task_number}"
 
 
     for i in range(10, 30):
