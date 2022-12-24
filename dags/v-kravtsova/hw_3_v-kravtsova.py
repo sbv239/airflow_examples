@@ -9,7 +9,7 @@ def ds_input(ds, **kwargs):
 
 
 with DAG(
-    'hw_2_v-kravtsova',
+    'hw_3_v-kravtsova',
     default_args={
     'depends_on_past': False,
     'email': ['airflow@example.com'],
@@ -26,14 +26,19 @@ with DAG(
     catchup=False
 
 ) as dag:
-    t1 = BashOperator(
-        task_id='pwd_printing',
-        bash_command='pwd'
-    )
 
-    t2 = PythonOperator(
-        task_id='ds_printing',
-        python_callable=ds_input
-    )
+    for i in range(10):
+        task1 = BashOperator(
+            task_id='task' + str(i),
+            bash_command=f"echo {i+1}"
+        )
 
-t1>>t2
+    def task_number(task_number):
+        print(f"task number is: {task_number}")
+
+    for i in range(20):
+        task2 = PythonOperator(
+            task_id='printing_task_number' + str(i),
+            python_callable=task_number,
+            op_kwargs={'task_number': i}
+        )
