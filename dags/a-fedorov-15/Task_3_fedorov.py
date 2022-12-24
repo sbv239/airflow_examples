@@ -12,7 +12,7 @@ from airflow.operators.bash import BashOperator
 
 with DAG(
 
-    'tutorial',
+    'Task_3_fedorov',
 
     default_args={
 
