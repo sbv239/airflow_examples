@@ -19,33 +19,28 @@ with DAG(
         ) as dag:
     
 
-    def print_s(task_number, ts, run_id):
-        print(task_number, ts, run_id)
+    def push_xcom(ti):
 
-    for i in range(30):
+        return "Airflow tracks everything"
 
-        if i < 10:
-            task = BashOperator(
-                    task_id = 'bash_task_' + str(i),
-                    bash_command = 'echo $NUMBER',
-                    dag=dag,
-                    env = {'NUMBER': str(i)} 
-                    )
-            task.doc_md = """
-            `This`
-            _my_
-            __first__
-            # dag
-            """
-        else:
-            task = PythonOperator(
-                    task_id = 'python_task_' + str(i),
-                    python_callable = print_s,
-                    op_kwargs = {"task_number":i, 'ts': "{{ ts }}", 'run_id': "{{ run_id }}"}
-                    )
-            task.doc_md = """
-            `This`
-            _my_
-            __first__
-            # dag
-            """
+    def print_xcom(ti):
+
+        result = ti.xcom_pull(
+                key='return_value',
+                task_ids='python_print'
+                )
+
+        print(result)
+
+    
+    python_push = PythonOperator(
+            task_id = 'python_print',
+            python_callable = push_xcom
+            )
+
+    python_print = PythonOperator(
+            task_id = 'python_pull',
+            python_callable = print_xcom 
+            )
+
+    python_push >> python_print
