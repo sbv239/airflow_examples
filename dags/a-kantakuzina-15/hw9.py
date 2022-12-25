@@ -12,22 +12,6 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python_operator import PythonOperator
 
-def x_push(ti, **kwargs):
-    k = kwargs['k']
-    v = kwargs['v']
-    ti.xcom_push(
-        key=k,
-        value=v
-    )
-
-def x_pull(ti, **kwargs):
-    k = kwargs['k']
-    res = ti.xcom_pull(
-        key=k,
-        task_ids='task_push'
-    )
-    print(f"Pulled value is {res}")
-
 with DAG(
     'kant_hw9',
     default_args={
