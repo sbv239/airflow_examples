@@ -3,7 +3,15 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 from datetime import datetime, timedelta
 with DAG(
-        'first_dag',
+        'pobol_first_dag',
+        default_args={
+            'depends_on_past': False,
+            'email': ['airflow@example.com'],
+            'email_on_failure': False,
+            'email_on_retry': False,
+            'retries': 1,
+            'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
+        },
         start_date = datetime(2022, 12, 24),
         schedule_interval = timedelta(days=1)
         ) as dag:
