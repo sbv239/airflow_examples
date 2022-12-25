@@ -1,39 +1,66 @@
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
-from datetime import timedelta
-
+from datetime import datetime, timedelta
+from textwrap import dedent
+ 
 with DAG(
+        'firstdag',
         default_args = {
             'depends_on_past':False,
-            'email':['pobol.email@yandex.ru']
+            'email':['pobol.email@yandex.ru'],
             'email_on_failure':True,
             'email_on_retries':False,
-            'retries':1,
-            'retry_daley': timedelta(minutes=5)
             },
-        descriptions = "My first dag",
         schedule_interval = timedelta(days=1),
-        start_date = datetime.datetime(2022,12,22),
-        cetchup=False,
-        tags=['first_dag']
+        start_date = datetime(2022,12,22)
         ) as dag:
     
     ### FUNC
-    def print_dt(dt):
-        print(dt)
+    def print_s(task_number):
+        print(task_number)
 
-    python_task = PythonOperator(
-            task_id = 'print dt',
-            python_callable = print_dt
-            )
+    for i in range(30):
+        if i < 10:
+            task = BashOperator(
+                    task_id = 'bash_task_' + str(i),
+                    bash_command = f'echo {i}'
+                    )
+            
+            task.doc_md = dedent(
+                    """
+                    `code`
+                    __полужирный__
+                    _курсив_
+                    # Документация
+                  """
+                    )
 
-    bash_task = BashOperator(
-            task_id = 'print current_directory',
-            bash_command = 'pwd'
-            )
 
-    bash_task >> python_task
+        else:
+            task = PythonOperator(
+                    task_id = 'python_task_' + str(i),
+                    python_callable = print_s,
+                    op_kwargs = {'task_number': {f"task number is: {i}"}})
+
+            task.doc_md = dedent(
+                    """
+                    `code`
+                    __полужирный__
+                    _курсив_
+                    # Документация
+                    """
+                    )
+        task.doc_md = dedent(
+                    """
+                    `code`
+                    __полужирный__
+                    _курсив_
+                # Документация
+                    """
+                    )
+        
+
 
 
 
