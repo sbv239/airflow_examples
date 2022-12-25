@@ -7,7 +7,7 @@ Lesson 12. Task 2.
 
 from airflow import DAG
 from airflow.operators.bash import BashOperator
-from airflow.operators.python_operators import PythonOperator
+from airflow.operators.python_operator import PythonOperator
 
 def print_ds(ds, **kwargs):
     print(ds)
