@@ -6,10 +6,11 @@ from airflow import DAG
 
 # Операторы - это кирпичики DAG, они являются звеньями в графе
 # Будем иногда называть операторы тасками (tasks)
-from airflow.operators.bash import BashOperator, PythonOperator
+from airflow.operators.bash import BashOperator
+from airflow.operators.python import PythonOperator
 
 with DAG(
-	'hw_2',
+	'hw_2_o-nesterova',
 	default_args={
 		'depends_on_past': False,
 		'email': ['airflow@example.com'],
@@ -18,6 +19,11 @@ with DAG(
 		'retries': 1,
 		'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
 	}
+	description = 'First Olya's dag',
+	schedule_interval=timedelta(days=1),
+	start_date=datetime(2022, 12, 25)
+	catchup=False,
+	tags=['Olya'],
 ) as dag:
 	t1 = BashOperator(
 		task_id='my_path',
