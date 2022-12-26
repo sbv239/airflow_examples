@@ -23,7 +23,7 @@ default_args={
 ) as dag:
 
     for i in range(1, 11):
-        t1 = BashOperator(task_id = 'bash_7_' + str(i), bash_command = "echo $NUMBER", dag=dag, env={"NUMBER": i})
+        t1 = BashOperator(task_id = 'bash_7_' + str(i), bash_command = "echo $NUMBER", dag=dag, env={"NUMBER": srt(i)})
 
     def print_task(ts, run_id, **kwargs):
         print(ts)
