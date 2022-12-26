@@ -24,7 +24,7 @@ with DAG(
             if i < 10:
                 task = BashOperator(
                     task_id = 'task_' + str(i + 1),
-                    bash_command = 'echo $NUMBER'
+                    bash_command = 'echo $NUMBER',
                     env = {'NUMBER': i}
                 )
             else:
