@@ -19,9 +19,9 @@ with DAG(
 		'retries': 1,
 		'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
 	},
-	description = 'First Olya's dag',
+	description='A simple tutorial DAG',
 	schedule_interval=timedelta(days=1),
-	start_date=datetime(2022, 12, 25)
+	start_date=datetime(2022, 12, 25),
 	catchup=False,
 	tags=['Olya'],
 ) as dag:
