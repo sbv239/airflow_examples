@@ -5,7 +5,7 @@ from airflow.operators.python import PythonOperator
 
 
 def print_context(ds, **kwargs):
-    print(**kwargs)
+    print(kwargs)
     print(ds)
 
 
