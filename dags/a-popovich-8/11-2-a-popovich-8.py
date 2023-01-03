@@ -33,6 +33,12 @@ with DAG(
             task_id=f'print_date_{i}',
             bash_command=f"echo {i}"
         )
+        task.doc_md = dedent(
+            f"""\
+            #### Task {i} documentation
+            "Это" `Документация`к коду, она **необходима** здесь _вот_
+            """
+        )
         t2 << task << t1
 
     def print_context(ts, run_id, **kwargs):
