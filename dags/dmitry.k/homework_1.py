@@ -5,7 +5,7 @@ from airflow.operators.python import PythonOperator
 
 
 with DAG(
-    'task_1',
+    'task_1_dmitryk',
     # Параметры по умолчанию для тасок
     default_args={
         # Если прошлые запуски упали, надо ли ждать их успеха
