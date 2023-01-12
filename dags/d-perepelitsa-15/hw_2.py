@@ -21,6 +21,7 @@ templated_command = dedent(
 )
 
 with DAG(
+        dag_id='dag_hw_2',
         default_args=default_args,
         description='Задание hw_2'
 ) as dag:
