@@ -29,12 +29,13 @@ with DAG(
     for i in range(30):
         if i <= 9:
             task1 = BashOperator(
-                task_id=f'task {i}',
+                task_id='task_bash' + str(i),
                 bash_command=f"echo {i}"
             )
         else:
             task2 = PythonOperator(
-                task_id=f'task_python {i}',
+                task_id='task_python' + str(i),
                 python_callable=print_world,
                 op_kwargs={'task_number': i}
             )
+    task1 >> task2
