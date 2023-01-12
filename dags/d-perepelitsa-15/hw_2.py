@@ -1,4 +1,4 @@
-from datetime import timedelta
+from datetime import datetime, timedelta
 from textwrap import dedent
 from airflow import DAG
 from airflow.operators.bash import BashOperator
@@ -23,7 +23,10 @@ templated_command = dedent(
 with DAG(
         dag_id='dag_hw_2',
         default_args=default_args,
-        description='Задание hw_2'
+        description='Задание hw_2',
+        schedule_interval=timedelta(days=1),
+        start_date=datetime(2023, 1, 11),
+        catchup=False
 ) as dag:
     task1 = PythonOperator(
         task_id='task_1',
