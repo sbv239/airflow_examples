@@ -1,9 +1,14 @@
 from datetime import datetime, timedelta
 
 from airflow import DAG
+from textwrap import dedent
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 from airflow.operators.dummy import DummyOperator
+
+def print_text(ts, **kwargs):
+    print(f'task number is: {kwargs.get('task_number')}')
+    print(ts)
 
 with DAG(
     'hw3',
@@ -15,7 +20,7 @@ with DAG(
     'retries': 1,
     'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
     },
-    description='hw2 DAG',
+    description='hw3 DAG',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 1, 1),
     catchup=False,
@@ -33,9 +38,6 @@ with DAG(
         )
         
         t1 >> bash_task >> t2
-    
-    def print_text(**kwargs):
-        print(f'task number is: {kwargs.get('task_number')}')
         
     for i in range(20):
         python_task = PythonOperator(
