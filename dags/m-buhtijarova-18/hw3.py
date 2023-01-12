@@ -6,12 +6,11 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 from airflow.operators.dummy import DummyOperator
 
-def print_text(ts, **kwargs):
-    print(f'task number is: {kwargs.get('task_number')}')
-    print(ts)
+def print_text(task_number, **kwargs):
+    print(f'task number is: {task_number}')
 
 with DAG(
-    'hw3',
+    'hw3_bm',
     default_args={
     'depends_on_past': False,
     'email': ['airflow@example.com'],
@@ -20,7 +19,7 @@ with DAG(
     'retries': 1,
     'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
     },
-    description='hw3 DAG',
+    description='hw3_bm DAG',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 1, 1),
     catchup=False,
