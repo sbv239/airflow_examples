@@ -6,6 +6,10 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 from airflow.operators.dummy import DummyOperator
 
+"""
+Test documentation
+"""
+
 def print_text(task_number, **kwargs):
     print(f'task number is: {task_number}')
 
@@ -37,6 +41,13 @@ with DAG(
         )
         
         t1 >> bash_task >> t2
+        
+        bash_task.doc_md = dedent(
+            f"""\
+            #### Task {i} documentation
+            Используя `Python`, можно достичь **больших** высот в _программировании_ :)))
+            """
+        )
         
     for i in range(20):
         python_task = PythonOperator(
