@@ -43,7 +43,7 @@ with DAG(
     for i in range(10):
         bash_task = BashOperator(
             task_id = f'print_echo_{i}',
-            bash_command = f'echo $NUMBER',
+            bash_command = 'echo $NUMBER',
             env = {'NUMBER': i}
         )
         
