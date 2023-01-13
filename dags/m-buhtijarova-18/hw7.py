@@ -15,11 +15,12 @@ def print_text(task_number, ts, run_id, **kwargs):
     print(ts)
     print(run_id)
     print(kwargs)
+    return "done"
     
     
 
 with DAG(
-    'hw3_bm',
+    'hw7_bm',
     default_args={
     'depends_on_past': False,
     'email': ['airflow@example.com'],
@@ -28,11 +29,11 @@ with DAG(
     'retries': 1,
     'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
     },
-    description='hw3_bm DAG',
+    description='hw7_bm DAG',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 1, 1),
     catchup=False,
-    tags=['BH_hw3'],
+    tags=['BH_hw7'],
 ) as dag:
     
     t1 = DummyOperator(task_id='start_dag')
