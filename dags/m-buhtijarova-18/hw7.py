@@ -15,6 +15,7 @@ def print_text(task_number, ts, run_id, **kwargs):
     print(ts)
     print(run_id)
     print(kwargs)
+    return "done"
     
     
 
