@@ -44,7 +44,7 @@ with DAG(
         bash_task = BashOperator(
             task_id = f'print_echo_{i}',
             bash_command = 'echo $NUMBER',
-            env = {'NUMBER': i}
+            env = {'NUMBER': str(i)}
         )
         
         t1 >> bash_task >> t2
