@@ -2,7 +2,8 @@ from datetime import timedelta, datetime
 
 from airflow import DAG
 
-from airflow.operators.bash import BashOperator, PythonOperator
+from airflow.operators.bash import BashOperator
+from airflow.operators.python_operator import PythonOperator
 
 def date_print(ds):
     print(ds)
