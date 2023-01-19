@@ -9,7 +9,7 @@ def task_num(task_number):
     print(f"task number is: {task_number}")
 
 with DAG(
-    'hw_1_cherepashchuk',
+    'cherepashchuk',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -29,12 +29,12 @@ catchup=False,
     for i in range(30):
         if i < 10:
             task = BashOperator(
-                task_id="task_number_"+str(i),
+                task_id="hw_7_cherepashchuk_task_number_"+str(i),
                 bash_command=f"echo {i}",
             )
         else:
             task = PythonOperator(
-                task_id="task_number_"+str(i),
+                task_id="hw_7_cherepashchuk_task_number_"+str(i),
                 python_callable=print_context,
                 op_kwargs={'task_number' : int(i)},
             )
