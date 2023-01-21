@@ -7,7 +7,9 @@ def print_ds(ds):
     pass
 
 
-from airflow.operators.bash import BashOperator, PythonOperator
+from airflow.operators.bash import BashOperator
+from airflow.operators.python import PythonOperator
+
 with DAG(
     'print_context_t2',
     # Параметры по умолчанию для тасок
