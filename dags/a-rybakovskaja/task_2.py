@@ -21,6 +21,9 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
     },
+    start_date=datetime(2022, 1, 21),
+    tags=['a-rybakovskaya'],
+
 ) as dag:
 
     t1 = BashOperator(
