@@ -3,7 +3,7 @@ from airflow import DAG
 from airflow.operators.python import PythonOperator
 
 with DAG(
-    'XCom_test',
+    'XCom_test_2',
     # Параметры по умолчанию для тасок
     default_args={
         'depends_on_past': False,
@@ -17,16 +17,12 @@ with DAG(
     tags=['a-rybakovskaya'],
 
 ) as dag:
-    def xcom_push(ti):
-        ti.xcom_push(
-            key="sample_xcom_key",
-            value="xcom test"
-        )
-        pass
+    def xcom_push():
+        return "Airflow tracks everything"
 
     def xcom_pull(ti):
         value = ti.xcom_pull(
-            key="sample_xcom_key",
+            key="return_value",
             task_ids="xcom_push")
         return print(value)
 
