@@ -6,7 +6,7 @@ from textwrap import dedent
 
 
 with DAG(
-    'print_tasks_t3',
+    'print_tasks_t3_2',
     # Параметры по умолчанию для тасок
     default_args={
         'depends_on_past': False,
