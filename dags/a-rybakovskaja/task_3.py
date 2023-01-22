@@ -2,6 +2,8 @@ from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
+from textwrap import dedent
+
 
 with DAG(
     'print_tasks_t3',
@@ -32,4 +34,12 @@ with DAG(
                 python_callable=print_task,
                 op_kwargs={'task_number': i},
             )
+        task.doc_md = dedent(
+            """\
+        #### **Task Documentation**
+        This task print *number* of task 
+        like `print(number_task)`
+
+        """
+        )  # dedent - это особенность Airflow, в него нужно оборачивать всю доку
         task
