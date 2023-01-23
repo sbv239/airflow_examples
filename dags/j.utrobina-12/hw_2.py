@@ -32,16 +32,16 @@ def print_task_number(task_number):
 for i in range(30):
     if i < 10:
         task = BashOperator(
-            task_id = 'echo_task_' + str(i),
-            bash_command=f"echo {i}",
+            task_id = 'echo_task_' + str(i+1),
+            bash_command=f"echo {i+1}",
             dag=dag
         )
     else:
         task = PythonOperator(
-        task_id='print_task_number_' + str(i),  # в id можно делать все, что разрешают строки в python
+        task_id='print_task_number_' + str(i+1),  # в id можно делать все, что разрешают строки в python
         dag=dag,
         python_callable=print_task_number,
-        op_kwargs={'task_number': i}
+        op_kwargs={'task_number': i+1}
     )
     
     task
