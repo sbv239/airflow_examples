@@ -1,7 +1,7 @@
 """
 Test documentation
 """
-#from datetime import datetime, timedelta
+from datetime import datetime, timedelta
 
 # Для объявления DAG нужно импортировать класс из airflow
 from airflow import DAG
