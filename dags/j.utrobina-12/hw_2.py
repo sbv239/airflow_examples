@@ -5,6 +5,7 @@ from airflow import DAG
 
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
+from textwrap import dedent
 
 default_args={
     'depends_on_past': False,
@@ -45,3 +46,7 @@ for i in range(30):
     )
     
     task
+task.doc_md = dedent("""
+# Documentation
+`PythonOperator` and `BashOperator` printed *task number* and **bla-bla-bla**
+""")
