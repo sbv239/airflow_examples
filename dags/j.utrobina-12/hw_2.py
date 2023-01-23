@@ -46,7 +46,7 @@ for i in range(30):
     )
     
     task
-task.doc_md = dedent("""
+dag.doc_md = dedent("""
 # Documentation
 `PythonOperator` and `BashOperator` printed *task number* and **bla-bla-bla**
 """)
