@@ -20,6 +20,7 @@ dag = DAG(
     catchup=False,
     default_args=default_args,
     schedule_interval='30 15 * * *',
+    start_date=datetime(2023, 1, 21),
     description='etl',
     tags=['j-utrobina']
 )
