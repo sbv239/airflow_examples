@@ -11,15 +11,13 @@ from airflow.operators.python_operator import PythonOperator
 # Будем иногда называть операторы тасками (tasks)
 from airflow.operators.bash import BashOperator
 
-def push_xcom(**kwargs):
+def push_xcom(ti):
     """Pushes an XCom without a specific target"""
-    ti = kwargs['ti']
     ti.xcom_push(key='sample_xcom_key', value="xcom test")
 
-def puller(**kwargs):
+def pull_xcom(ti):
     """Pull all previously pushed XComs and check if the pushed values match the pulled values."""
-    ti = kwargs['ti']
-    pulled_value = ti.xcom_pull(key="sample_xcom_key", task_ids='push')
+    pulled_value = ti.xcom_pull(key="sample_xcom_key", task_ids='push_xcom')
     print(pulled_value)
 
 with DAG(
@@ -56,12 +54,12 @@ with DAG(
 ) as dag:
     push_data = PythonOperator(
         # provide context is for getting the TI (task instance ) parameters
-        task_id='push', provide_context=True,
+        task_id='push_xcom', provide_context=True,
         python_callable=push_xcom,
     )
     pull_and_print_data = PythonOperator(
         # provide context is for getting the TI (task instance ) parameters
-        task_id='puller', provide_context=True,
-        python_callable=puller,
+        task_id='pull_xcom', provide_context=True,
+        python_callable=pull_xcom,
     )
     push_data >> pull_and_print_data
