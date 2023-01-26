@@ -13,7 +13,7 @@ from airflow.operators.bash import BashOperator
 
 def pusher(**kwargs):
     """Pushes an XCom without a specific target"""
-    kwargs['ti'].xcom_push(key='value from pusher 1', value=value_1)
+    kwargs['ti'].xcom_push(key='sample_xcom_key', value="xcom test")
 
 def puller(**kwargs):
     """Pull all previously pushed XComs and check if the pushed values match the pulled values."""
@@ -57,7 +57,6 @@ with DAG(
         # provide context is for getting the TI (task instance ) parameters
         task_id='push', provide_context=True,
         python_callable=pusher,
-        op_kwargs={'sample_xcom_key': "xcom test"}
     )
     pull_and_print_data = PythonOperator(
         # provide context is for getting the TI (task instance ) parameters
