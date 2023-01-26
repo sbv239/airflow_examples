@@ -64,7 +64,7 @@ with DAG(
         v_task_number = 10 + i
         t2 = PythonOperator(
             task_id=f'print_task_{v_task_number}_by_PythonOperator',  # нужен task_id, как и всем операторам
-            python_callable=print_context(v_task_number),
+            python_callable=print_context(),
             # передаем в аргумент с названием in_task_number значение task_number
             op_kwargs={'task_number': v_task_number}
         )
