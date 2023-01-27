@@ -53,7 +53,8 @@ with DAG(
                         order by 2 desc 
                     """)
                 result = cursor.fetchone()
-        output_dict[result[0]] = result[1]
+        output_dict['user_id'] = result[0]
+        output_dict['count'] = result[1]
         print(output_dict)
         return output_dict
 
