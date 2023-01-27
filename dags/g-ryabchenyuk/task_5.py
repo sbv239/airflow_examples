@@ -12,7 +12,7 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python_operator import PythonOperator
 with DAG(
-    'HW_ryabchenyuk_2',
+    'HW_ryabchenyuk_5',
     # Параметры по умолчанию для тасок
     default_args={
         # Если прошлые запуски упали, надо ли ждать их успеха
