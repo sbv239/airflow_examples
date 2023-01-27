@@ -41,7 +41,7 @@ with DAG(
         tags=['example'],
 ) as dag:
     def print_context():
-        postgres = PostgresHook(postgres_conn_id="startml_feed", schema="public")
+        postgres = PostgresHook(postgres_conn_id="startml_feed")
         with postgres.get_conn() as conn:  # вернет тот же connection, что вернул бы psycopg2.connect(...)
             with conn.cursor() as cursor:
                 cursor.execute("""
