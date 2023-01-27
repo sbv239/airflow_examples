@@ -56,3 +56,4 @@ with DAG(
         task_id="t1_pwd",
         bash_command= templated_command
     )
+#dag
