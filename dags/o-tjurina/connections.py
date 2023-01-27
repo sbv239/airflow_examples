@@ -41,19 +41,21 @@ with DAG(
         tags=['example'],
 ) as dag:
     def print_context():
+        output_dict = {}
         postgres = PostgresHook(postgres_conn_id="startml_feed")
         with postgres.get_conn() as conn:  # вернет тот же connection, что вернул бы psycopg2.connect(...)
             with conn.cursor() as cursor:
                 cursor.execute("""
-                        select user_id, count(action)
+                        select user_id as user_id, count(action) as cnt
                         from feed_action
                         where action = 'like'
                         group by user_id
                         order by 2 desc 
                     """)
                 result = cursor.fetchone()
-        print(result)
-        return result
+        output_dict[result[0]] = result[1]
+        print(output_dict)
+        return output_dict
 
 
     get_user = PythonOperator(
