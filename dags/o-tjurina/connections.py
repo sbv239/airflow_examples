@@ -53,8 +53,8 @@ with DAG(
                         order by 2 desc 
                     """)
                 result = cursor.fetchone()
-        print(output_dict)
-        return output_dict
+        print(result)
+        return result
 
 
     get_user = PythonOperator(
