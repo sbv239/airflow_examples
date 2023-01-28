@@ -7,6 +7,7 @@ from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.providers.postgres.operators.postgres import PostgresHook
 from airflow.operators.python_operator import PythonOperator
+from psycopg2.extras import RealDictCursor
 
 with DAG(
         dag_id='hw_11_o-tjurina',
@@ -41,20 +42,17 @@ with DAG(
         tags=['example'],
 ) as dag:
     def print_context():
-        output_dict = {}
         postgres = PostgresHook(postgres_conn_id="startml_feed")
         with postgres.get_conn() as conn:  # вернет тот же connection, что вернул бы psycopg2.connect(...)
-            with conn.cursor() as cursor:
+            with conn.cursor(cursor_factory=RealDictCursor) as cursor:
                 cursor.execute("""
-                        select user_id as user_id, count(action) as cnt
+                        select user_id as user_id, count(action) as count
                         from feed_action
                         where action = 'like'
                         group by user_id
                         order by 2 desc 
                     """)
                 result = cursor.fetchone()
-        output_dict['user_id'] = result[0]
-        output_dict['count'] = result[1]
         print(output_dict)
         return output_dict
 
