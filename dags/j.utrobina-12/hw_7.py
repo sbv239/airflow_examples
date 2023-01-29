@@ -17,7 +17,7 @@ default_args={
 }
 
 dag = DAG(
-    'hw_6_utrobina',
+    'hw_7_utrobina',
     catchup=False,
     default_args=default_args,
     schedule_interval='30 15 * * *',
@@ -26,16 +26,17 @@ dag = DAG(
     tags=['j-utrobina']
 )
 
-def print_task_number(task_number):
+def print_task_number(task_number, ts, run_id):
     print(f"task number is: {task_number}")
+    print(ts)
+    print(run_id)
 
 # Генерируем таски в цикле - так тоже можно
 for i in range(30):
     if i < 10:
         task = BashOperator(
             task_id = 'echo_task_' + str(i+1),
-            bash_command="echo $NUMBER",
-            env={"NUMBER": str(i)},
+            bash_command=f"echo {i+1}",
             dag=dag
         )
     else:
