@@ -8,6 +8,7 @@ from airflow import DAG
 from airflow.models import Variable
 from airflow.operators.python import BranchPythonOperator
 from airflow.operators.dummy import DummyOperator
+from airflow.operators.python_operator import PythonOperator
 
 with DAG(
         dag_id='hw_13_o-tjurina',
