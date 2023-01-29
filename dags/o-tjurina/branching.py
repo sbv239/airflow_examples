@@ -63,13 +63,13 @@ with DAG(
         python_callable=choose_branch,
     )
 
-    task1 = BranchPythonOperator(
+    task1 = PythonOperator(
         task_id="startml_desc",
         python_callable=print_context,
         op_kwargs={'str': "StartML is a starter course for ambitious people"},
     )
 
-    task2 = BranchPythonOperator(
+    task2 = PythonOperator(
         task_id="not_startml_desc",
         python_callable=print_context,
         op_kwargs={'str': "Not a startML course, sorry"},
