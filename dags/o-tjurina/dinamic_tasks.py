@@ -12,7 +12,7 @@ from airflow.operators.python_operator import PythonOperator
 from airflow.operators.bash import BashOperator
 
 with DAG(
-        'lesson11_task_3',
+        dag_id='hw_3_o-tjurina',
         # Параметры по умолчанию для тасок
         default_args={
             # Если прошлые запуски упали, надо ли ждать их успеха
@@ -63,7 +63,7 @@ with DAG(
             task_id=f'print_task_{v_task_number}_by_PythonOperator',  # нужен task_id, как и всем операторам
             python_callable=print_context,
             # передаем в аргумент с названием in_task_number значение task_number
-            op_kwargs={'in_task_number': v_task_number}
+            op_kwargs={'task_number': v_task_number}
         )
 
     # А вот так в Airflow указывается последовательность задач
