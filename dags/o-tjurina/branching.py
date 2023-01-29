@@ -42,10 +42,12 @@ with DAG(
         tags=['example'],
 ) as dag:
     def choose_branch():
-        task_id = "not_startml_desc"
+        task_id = []
         is_startml = Variable.get("is_startml")
         if is_startml == "True":
-            task_id = "startml_desc"
+            task_id.append("startml_desc")
+        else:
+            task_id.append("not_startml_desc")
         return task_id
 
     def print_context(str):
