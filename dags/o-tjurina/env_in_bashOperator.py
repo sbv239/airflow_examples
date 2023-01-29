@@ -46,7 +46,7 @@ with DAG(
     # t1, t2, t3 - это операторы (они формируют таски, а таски формируют даг)
     for i in range(10):
         t1 = BashOperator(
-            env={"NUMBER": i},  # задает переменные окружения
+            env={"NUMBER": str(i)},  # задает переменные окружения
             task_id=f'print_task_{i}_by_BashOperator',  # id, будет отображаться в интерфейсе
             bash_command="echo $NUMBER",  # какую bash команду выполнить в этом таске
         )
