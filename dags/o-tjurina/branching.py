@@ -51,8 +51,10 @@ with DAG(
             task_id.append("not_startml_desc")
         return task_id
 
+
     def print_context(str):
         print(str)
+
 
     start = DummyOperator(
         task_id='before_branching',
@@ -75,7 +77,6 @@ with DAG(
         python_callable=print_context,
         op_kwargs={'str': "Not a startML course, sorry"},
     )
-
 
     end = DummyOperator(
         task_id='after_branching',
