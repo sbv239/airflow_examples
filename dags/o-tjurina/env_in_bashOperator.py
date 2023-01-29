@@ -12,7 +12,7 @@ from airflow.operators.python_operator import PythonOperator
 from airflow.operators.bash import BashOperator
 
 with DAG(
-        'lesson11_task_6',
+        'hw_6_o-tjurina',
         # Параметры по умолчанию для тасок
         default_args={
             # Если прошлые запуски упали, надо ли ждать их успеха
