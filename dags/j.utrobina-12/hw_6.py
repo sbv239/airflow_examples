@@ -17,7 +17,7 @@ default_args={
 }
 
 dag = DAG(
-    'hw_2_utrobina',
+    'hw_6_utrobina',
     catchup=False,
     default_args=default_args,
     schedule_interval='30 15 * * *',
