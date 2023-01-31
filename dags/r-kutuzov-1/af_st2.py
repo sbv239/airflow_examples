@@ -20,11 +20,11 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
     },
-    description='Airflow lesson task 2',
+    description='Airflow lesson step 2',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2023, 1, 30),
     catchup=False,
-    tags=['r-kutuzov-1_task_2'],
+    tags=['r-kutuzov-1_step_2'],
 ) as dag:
 
     t1 = BashOperator(
