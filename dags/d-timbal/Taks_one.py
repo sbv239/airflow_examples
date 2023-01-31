@@ -1,5 +1,5 @@
 from airflow import DAG
-from airflow.operarots import BashOperator
+from airflow.operarots.bash import BashOperator
 from airflow.operators import PythonOperator
 
 from datetime import datetime, timedelta
@@ -23,7 +23,8 @@ with DAG(
     tags=['example'],
 ) as dag:
 
-    def print_ds(ds):
+    def print_context(ds, **kwargs):
+        print(kwargs)
         print(ds)
         return 'QQ'
 
