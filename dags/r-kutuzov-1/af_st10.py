@@ -17,7 +17,7 @@ def pull_xcom(ti):
 
 
 with DAG(
-    'r-kutuzov-1_dag_9-1',
+    'r-kutuzov-1_dag_10-1',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -26,11 +26,11 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
     },
-    description='Airflow lesson step 9',
+    description='Airflow lesson step 10',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2023, 1, 30),
     catchup=False,
-    tags=['r-kutuzov-1_step_9'],
+    tags=['r-kutuzov-1_step_10'],
 ) as dag:
     
     t1 = PythonOperator(
