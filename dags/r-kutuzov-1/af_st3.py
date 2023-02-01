@@ -42,7 +42,7 @@ with DAG(
                 task_id=f'print_task_num_{i}_with_Python',  # в id можно делать все, что разрешают строки в python
                 python_callable=print_context,
                 # передаем в аргумент с названием random_base значение float(i) / 10
-                op_kwargs={'task_num': i},
+                op_kwargs={'task_number': i},
             )
         
             task
