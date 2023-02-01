@@ -32,7 +32,7 @@ with DAG(
         
         task = BashOperator(
             task_id=f'print_task_num_{i}_with_Bash',  # id, будет отображаться в интерфейсе
-            env={"NUMBER": i},  # задает переменные окружения
+            env={"NUMBER": str(i)},  # задает переменные окружения
             bash_command="echo $NUMBER",  # какую bash команду выполнить в этом таске
         )
 
