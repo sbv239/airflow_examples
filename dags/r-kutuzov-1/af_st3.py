@@ -31,7 +31,7 @@ with DAG(
         
         if i < 10:
             task = BashOperator(
-                task_id=f'print_task_num_{i}',  # id, будет отображаться в интерфейсе
+                task_id=f'print_task_num_{i}_with_Bash',  # id, будет отображаться в интерфейсе
                 bash_command=f'echo task # {i}',  # какую bash команду выполнить в этом таске
             )
         
@@ -39,7 +39,7 @@ with DAG(
         
         else:
             task = PythonOperator(
-                task_id='sleep_for_' + str(i),  # в id можно делать все, что разрешают строки в python
+                task_id=f'print_task_num_{i}_with_Python',  # в id можно делать все, что разрешают строки в python
                 python_callable=print_context,
                 # передаем в аргумент с названием random_base значение float(i) / 10
                 op_kwargs={'task_num': i},
