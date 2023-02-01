@@ -8,6 +8,7 @@ def print_context(task_number, ts, run_id, **kwargs):
     print(f'task number is: {task_number}')
     print(f'ts is: {ts}')
     print(f'run_id is: {run_id}')
+    print(f'kwargs is: {kwargs}')
     # return 'Whatever you return gets printed in the logs'
 
 
@@ -44,7 +45,7 @@ with DAG(
                 task_id=f'print_task_num_{i}_with_Python',  # в id можно делать все, что разрешают строки в python
                 python_callable=print_context,
                 # передаем в аргумент с названием random_base значение float(i) / 10
-                op_kwargs={'task_num': i},
+                op_kwargs={'task_number': i},
             )
         
             task
