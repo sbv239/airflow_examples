@@ -4,6 +4,7 @@ hw_2.py DAG
 from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.operators.bash import BashOperator
+from airflow.operators.python import PythonOperator
 
 with DAG(
         'hw_2_a-bogdanov',  # уникальное имя DAG
