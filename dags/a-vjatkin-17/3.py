@@ -2,6 +2,7 @@ from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python_operator import PythonOperator
+from textwrap import dedent
 
 
 default_args = {
@@ -29,6 +30,15 @@ with DAG(
             bash_command=f"echo {i}",
         )
 
+        t1.doc_md = dedent(
+        """\
+        #### Task Documentation
+        You can document your task using the attributes `doc_md` (markdown),
+        `doc` (plain text), `doc_rst`, `doc_json`, `doc_yaml` which gets
+        rendered in the UI's Task Instance Details page.
+        """
+        )
+
 
     def print_task_number(task_number):
         print(f"task number is: {task_number}")
@@ -40,3 +50,12 @@ with DAG(
             python_callable=print_task_number,
             op_kwargs={'task_number': i},
             )
+
+        t2.doc_md = dedent(
+        """\
+        #### Task Documentation
+        You can document your task using the attributes `doc_md` (markdown),
+        `doc` (plain text), `doc_rst`, `doc_json`, `doc_yaml` which gets
+        rendered in the UI's Task Instance Details page.
+        """
+        )
