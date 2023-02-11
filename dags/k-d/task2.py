@@ -33,7 +33,7 @@ with DAG (
 ) as dag:
     
     bo = BashOperator(
-        task_id = 'bash operator task 2',
+        task_id = 'bash_operator_task_2',
         bash_command = 'pwd '
     )
 
@@ -41,7 +41,7 @@ with DAG (
         return (ds)
 
     po = PythonOperator(
-        task_id = 'python operator task 2',
+        task_id = 'python_operator_task_2',
         python_callable = foo
     )
 
