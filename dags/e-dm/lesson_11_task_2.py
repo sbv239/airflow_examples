@@ -8,7 +8,7 @@ def print_airflow_date(ds, **kwargs):
     print(ds)
 
 with DAG(
-    'lesson_11_task_2',
+    'e-dm_lesson_11_task_2',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
