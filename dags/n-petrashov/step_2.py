@@ -36,3 +36,5 @@ with DAG(
         task_id='bash_pwd',
         bash_command='pwd',
     )
+
+    t2 >> t1
