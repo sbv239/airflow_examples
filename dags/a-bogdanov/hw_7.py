@@ -37,3 +37,5 @@ with DAG(
             python_callable=print_context,  # передаем функцию print_context
             op_kwargs={'task_number': i}  # передаем значение i в функцию print_context в виде словаря
         )
+
+    t1
