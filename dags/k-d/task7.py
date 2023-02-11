@@ -12,7 +12,7 @@ from datetime import timedelta, datetime
 
 
 with DAG (
-    'k-d-t3',
+    'k-d-t7',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
