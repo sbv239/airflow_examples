@@ -51,12 +51,12 @@ with DAG (
     get_task = PythonOperator(
         task_id = 'get_task',
         python_callable=push_foo,
-        op_kwargs={'state':state}
+        # op_kwargs={'state':state}
     )
     return_task = PythonOperator(
         task_id = 'return_task',
         python_callable=get_foo,
-        op_kwargs={'state':state}
+        # op_kwargs={'state':state}
     )
 
     get_task >> return_task
