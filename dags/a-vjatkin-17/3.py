@@ -31,11 +31,11 @@ with DAG(
         )
 
         t1.doc_md = dedent(
-        """\
-        #### Task Documentation
-        You can document your task using the attributes `doc_md` (markdown),
-        `doc` (plain text), `doc_rst`, `doc_json`, `doc_yaml` which gets
-        rendered in the UI's Task Instance Details page.
+        """
+        # Task Documentation
+        `Task Documentation`
+        *Task Documentation*
+        **Task Documentation**
         """
         )
 
@@ -52,10 +52,10 @@ with DAG(
             )
 
         t2.doc_md = dedent(
-        """\
-        #### Task Documentation
-        You can document your task using the attributes `doc_md` (markdown),
-        `doc` (plain text), `doc_rst`, `doc_json`, `doc_yaml` which gets
-        rendered in the UI's Task Instance Details page.
+        """
+        # Task Documentation
+        `Task Documentation`
+        *Task Documentation*
+        **Task Documentation**
         """
         )
