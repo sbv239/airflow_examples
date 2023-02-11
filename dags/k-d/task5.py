@@ -8,8 +8,9 @@
 
 from airflow import DAG
 from airflow.operators.bash import BashOperator
-from airflow.operators.python import PythonOperator 
+# from airflow.operators.python import PythonOperator 
 from datetime import timedelta, datetime
+from textwrap import dedent
 
 
 with DAG (
@@ -31,7 +32,7 @@ with DAG (
     templated_command = dedent(
         """
     {% for i in range(5) %}
-        echo "{{ ds }}"
+        echo "{{ ts }}"
         echo "{{ run_id }}"
     {% endfor %}
     """
