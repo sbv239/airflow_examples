@@ -14,14 +14,8 @@ default_args = {
 }
 
 
-def print_context(ds, **kwargs):
-    print(kwargs)
-    print(ds)
-    return 0
-
-
 with DAG(
-    'a-vjatkin-17_task_2',
+    'a-vjatkin-17_task_3',
     default_args=default_args,
     description='test DAG',
     schedule_interval=timedelta(days=1),
@@ -29,14 +23,20 @@ with DAG(
     catchup=False
 ) as dag:
 
-    task1 = BashOperator(
-        task_id='exec_current_directory',
-        bash_command='pwd',
-    )
+    for i in range(10):
+        t1 = BashOperator(
+            task_id=f"print_echo_{i}",
+            bash_command=f"echo {i}",
+        )
 
-    task2 = PythonOperator(
-        task_id='printing_variable_ds',
-        python_callable=print_context
-    )
 
-    task1 >> task2
+    def print_task_number(task_id):
+        print(f"task number is: {task_id}")
+
+
+    for i in range(20):
+        t2 = PythonOperator(
+            task_id=f"print_task_id_{i}",
+            python_callable=print_task_number,
+            op_kwargs={'task_id': i},
+            )
