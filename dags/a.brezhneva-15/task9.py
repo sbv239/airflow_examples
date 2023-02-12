@@ -20,13 +20,13 @@ with DAG(
 
 	def put_ti(ti):
 		ti.xcom_push(
-			key='sample_xcom_key'
+			key='sample_xcom_key',
 			value='xcom test'
 		)
 
 	def get_ti(ti):
 		ti.xcom_pull(
-			key='sample_xcom_key'
+			key='sample_xcom_key',
 			task_ids='hw_9_put_aib'
 		)
 
