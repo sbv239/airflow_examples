@@ -12,7 +12,10 @@ with DAG(
     		'retries': 1,
     		'retry_delay': timedelta(minutes=5)
 	},
-	description='Second Task'
+	description='Second Task',
+	schedule_interval=timedelta(days=1),
+	start_date=datetime(2023, 2, 11),
+	catchup=False
 ) as dag:	
 
 	run_bash = BashOperator(
