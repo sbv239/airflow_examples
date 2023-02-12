@@ -17,14 +17,14 @@ with DAG(
 	start_date=datetime(2023, 2, 11),
 	catchup=False
 ) as dag:
-	
-	for j in range(20):
-		task_number = j
-	
-		def task_printing(ts, run_id, task_number, **kwargs):
-                print(task_number, ts, run_id)
-		
-		run_python = PythonOperator(
-			task_id='hw_7_po_aib_' + str(j),
-			python_callable=task_printing
-		)
+
+        for j in range(20):
+
+                def task_printing(ts, run_id, task_number, **kwargs):
+                        print(task_number, ts, run_id)
+
+                run_python = PythonOperator(
+                        task_id='hw_7_po_aib_' + str(j),
+                        python_callable=task_printing,
+                        op_kwargs={'task_number': int(j)}
+                        )
