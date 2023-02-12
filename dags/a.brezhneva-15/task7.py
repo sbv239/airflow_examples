@@ -21,7 +21,7 @@ with DAG(
         for j in range(20):
 
                 def task_printing(ts, run_id, task_number, **kwargs):
-                        print(task_number, ts, run_id)
+                        return print(task_number, ts, run_id)
 
                 run_python = PythonOperator(
                         task_id='hw_7_po_aib_' + str(j),
