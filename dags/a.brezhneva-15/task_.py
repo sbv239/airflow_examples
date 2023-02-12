@@ -1,6 +1,7 @@
 from airflow import DAG
 from datetime import datetime, timedelta
 from airflow.operators.bash import BashOperator
+from airflow.operators.python import PythonOperator
 
 with DAG(
 	'hw_2_dag_aib',
