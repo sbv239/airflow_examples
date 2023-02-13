@@ -27,7 +27,7 @@ with DAG(
     },
 
     # Описание DAG (не тасок, а самого DAG)
-    description='First DAG',
+    description='DAG_lesson_2_a-kalinkin',
     # Как часто запускать DAG
     schedule_interval=timedelta(days=1),
     # С какой даты начать запускать DAG
