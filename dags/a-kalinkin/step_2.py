@@ -5,7 +5,8 @@ from datetime import datetime, timedelta
 from textwrap import dedent
 
 from airflow import DAG
-from airflodew.operators.bash import BashOperator, PythonOperator
+from airflow.operators.bash import BashOperator
+from airflow.operators.python_operator import PythonOperator
 
 with DAG(
     'tutorial',
@@ -41,35 +42,24 @@ with DAG(
     tags=['example'],
 ) as dag:
 
-    # t1, t2, t3 - это операторы (они формируют таски, а таски формируют даг)
-    t1 = BashOperator(
-        task_id='print_date',  # id, будет отображаться в интерфейсе
-        bash_command='date',  # какую bash команду выполнить в этом таске
-    )
 
-    t2 = BashOperator(
-        task_id='sleep',
-        depends_on_past=False,  # переопределили настройку из DAG
-        bash_command='sleep 5',
-        retries=3,  # тоже переопределили retries (было 1)
-    )
-
-
-    templated_command = dedent(
-        """
-        echo pwd
-    """
-    )
+    #
+    # templated_command = dedent(
+    #     """
+    #     pwd
+    # """
+    # )
 
     t1= BashOperator(
         task_id='print_directory',
         depends_on_past=False,
-        bash_command=templated_command,
+        bash_command="pwd",
     )
 
     def print_context(ds, **kwargs):
         print(ds)
         print('My first DAG')
+        return 'CHECK'
 
     t2 = PythonOperator(
         task_id='print_the_context',  # нужен task_id, как и всем операторам
