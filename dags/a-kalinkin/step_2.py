@@ -53,7 +53,7 @@ with DAG(
     t1= BashOperator(
         task_id='print_directory',
         depends_on_past=False,
-        bash_command="pwd",
+        bash_command="pwd"
     )
 
     def print_context(ds, **kwargs):
