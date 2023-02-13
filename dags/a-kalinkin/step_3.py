@@ -42,20 +42,22 @@ with DAG(
     tags=['hw_2_tag_a-kalinkin'],
 ) as dag:
 
-    def print_task_number(op_kwargs):
-        print(f"task number is: {op_kwargs}")
+    def print_task_number(task_number):
+        print(f"task number is: {task_number}")
 
     for i in range(30):
         if i<10:
             t=BashOperator(
-                task_id='print_number_of_loop',
+                task_id=f'print_number_of_loop_{i}',
                 depends_on_past=False,
                 bash_command=f"echo {i}"
+
             )
         else:
             t1=PythonOperator(
-                task_id='print_task_number',  # нужен task_id, как и всем операторам
-                python_callable=print_task_number
+                task_id=f'print_task_number_{i}',
+                python_callable=print_task_number,
+                op_kwargs={'task_number': i}
 
             )
 
