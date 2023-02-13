@@ -9,7 +9,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python_operator import PythonOperator
 
 with DAG(
-    'DAG_lesson_2_a-kalinkin',
+    'hw_2_a-kalinkin',
     # Параметры по умолчанию для тасок
     default_args={
         # Если прошлые запуски упали, надо ли ждать их успеха
@@ -27,7 +27,7 @@ with DAG(
     },
 
     # Описание DAG (не тасок, а самого DAG)
-    description='DAG_lesson_2_a-kalinkin',
+    description='First DAG',
     # Как часто запускать DAG
     schedule_interval=timedelta(days=1),
     # С какой даты начать запускать DAG
@@ -39,7 +39,7 @@ with DAG(
     # https://airflow.apache.org/docs/apache-airflow/stable/dag-run.html
     catchup=False,
     # теги, способ помечать даги
-    tags=['example'],
+    tags=['hw_2_tag_a-kalinkin'],
 ) as dag:
 
 
