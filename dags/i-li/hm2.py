@@ -1,7 +1,13 @@
+'''
+Первое соприкосновение с Airflow
+'''
+
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 from datetime import timedelta, datetime
+from textwrap import dedent
+
 
 with DAG(
         'hm_1',
@@ -29,4 +35,17 @@ with DAG(
     t2 = PythonOperator(
         task_id='print_ds',
         python_callable=print_ds
+    )
+    dag.doc_ms=__doc__
+    dag.doc_nd = dedent(
+        '''# В этом задании нужно было создать
+         
+        **Tаски**
+        Для этого мы *инпортировали* библиотеки
+        ```from airflow import DAG
+        from airflow.operators.bash import BashOperator
+        from airflow.operators.python import PythonOperator
+        from datetime import timedelta, datetime
+        from textwrap import dedent```
+        '''
     )
