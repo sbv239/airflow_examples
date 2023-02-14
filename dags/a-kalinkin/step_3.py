@@ -1,7 +1,7 @@
 """
 #DAG c BashOperator, PythonOperator
 в них описаны `BashOperator` и `PythonOperator`
-*жирный*
+**жирный**
 _курсив_
 """
 
@@ -11,6 +11,7 @@ from textwrap import dedent
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python_operator import PythonOperator
+from textwrap import dedent
 
 with DAG(
     'hw_3_a-kalinkin',
@@ -64,5 +65,22 @@ with DAG(
                 op_kwargs={'task_number': i}
 
             )
+
+    t.doc_md = dedent(
+        """
+        #BashOperator
+        `code`
+        **полужирный**
+        _курсив_
+        """
+    )
+    t1.doc_md = dedent(
+        """
+        #PythonOperator
+        `code`
+        **полужирный**
+        _курсив_
+        """
+    )
 
     t >> t1
