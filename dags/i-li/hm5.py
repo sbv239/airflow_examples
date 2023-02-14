@@ -28,4 +28,5 @@ with DAG(
     t1 = BashOperator(
         task_id='hm_5',
         bash_command=templated_command
+
     )
