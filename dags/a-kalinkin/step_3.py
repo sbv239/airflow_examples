@@ -1,6 +1,10 @@
 """
-DAG c BashOperator, PythonOperator
+#DAG c BashOperator, PythonOperator
+в них описаны `BashOperator` и `PythonOperator`
+*жирный*
+_курсив_
 """
+
 from datetime import datetime, timedelta
 from textwrap import dedent
 
@@ -27,7 +31,7 @@ with DAG(
     },
 
     # Описание DAG (не тасок, а самого DAG)
-    description='First DAG',
+    description='Second DAG',
     # Как часто запускать DAG
     schedule_interval=timedelta(days=1),
     # С какой даты начать запускать DAG
