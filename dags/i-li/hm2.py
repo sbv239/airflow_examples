@@ -37,7 +37,7 @@ with DAG(
         python_callable=print_ds
     )
     dag.doc_ms=__doc__
-    dag.doc_nd = dedent(
+    t2.doc_md = dedent(
         '''# В этом задании нужно было создать
          
         **Tаски**
