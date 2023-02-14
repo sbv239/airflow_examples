@@ -2,7 +2,9 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 from datetime import timedelta, datetime
+
 from textwrap import dedent
+
 with DAG(
         'hm_2',
         default_args={
@@ -31,11 +33,11 @@ with DAG(
             python_callable=print_task,
             op_kwargs={'task_number':task}
         )
-    dag.doc_nd = dedent(
-        '''
-        # В этом задании нужно использовать возможность **Python**
-        
-        Для этого мы использовали *циклы* `for i in range()`
-        '''
+        t.doc_md = dedent(
+            '''
+            # В этом задании нужно использовать возможность **Python**
+            
+            Для этого мы использовали *циклы* `for i in range()`
+            '''
     )
 
