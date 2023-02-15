@@ -4,7 +4,7 @@ from airflow.operators.python import PythonOperator
 from datetime import datetime, timedelta
 
 with DAG(
-    'hm_6_i-li',
+    'hm_7_i-li',
     default_args={
         'dependes_on_past': False,
         'email' : ['airflow@example.com'],
