@@ -15,8 +15,9 @@ with DAG(
     },
     start_date=datetime(2023,2,13)
 ) as dag:
-    def print_task(task_number):
+    def print_task(task_number, ts, run_id):
         print(f"task number is: {task_number}")
+        print(ts, run_id)
 
 
     for task in range(10):
