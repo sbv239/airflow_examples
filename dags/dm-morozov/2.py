@@ -1,4 +1,4 @@
-from datetime import timedelta
+from datetime import timedelta, datetime
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
@@ -17,7 +17,8 @@ with DAG(
         'email_on_retry': False,
         'retries': 1,
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
-    }
+    },
+    start_date=datetime(2023, 2, 14)
 ) as dag:
     t1 = BashOperator(
         task_id='pwd',
