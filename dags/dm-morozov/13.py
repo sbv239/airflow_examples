@@ -42,7 +42,7 @@ with DAG(
     )
 
     t3 = PythonOperator(
-        task_id='startml_desk',
+        task_id='startml_desc',
         python_callable=print_if_true
     )
 
