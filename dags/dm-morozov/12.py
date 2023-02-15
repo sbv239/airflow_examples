@@ -9,7 +9,7 @@ def print_var():
 
 
 with DAG(
-        '11_dm-morozov',
+        '12_dm-morozov',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
