@@ -13,7 +13,7 @@ def push(ti):
 def pull(ti):
     value = ti.xcom_pull(
         key="sample_xcom_key",
-        task_ids="push"
+        task_ids="XCom_push"
     )
     print(value)
 
