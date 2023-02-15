@@ -46,3 +46,6 @@ with DAG(
                 op_kwargs={'task_number': i}
 
             )
+
+
+    t >> t1
