@@ -37,11 +37,12 @@ with DAG(
             python_callable=foorloop_print,
             op_kwargs = {'task_number': i}
             )
-t32.doc_md = dedent(
-    f"""\
-    ##Python operator docs: 
-    #Simple output: _pythoncomand_=print(task_number:{i})
-    """
-    )
+        t32.doc_md = dedent(
+        """
+            #Функция для использования в `PythonOperator`
+            ##*Печатает `номер` задания*
+            ###Например, **task1**
+        """
+        )
 
 t31 >> t32
