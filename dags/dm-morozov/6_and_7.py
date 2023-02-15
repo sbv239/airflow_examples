@@ -11,7 +11,7 @@ def print_info(task_number, ts, run_id):
 
 
 with DAG(
-        '6_and_7',
+        '6_and_7_dm-morozov',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
