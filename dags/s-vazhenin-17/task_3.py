@@ -37,6 +37,7 @@ with DAG(
             python_callable=foorloop_print,
             op_kwargs = {'task_number': i}
             )
+
         t32.doc_md = dedent(
         """
             #Функция для использования в `PythonOperator`
