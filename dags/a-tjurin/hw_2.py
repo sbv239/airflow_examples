@@ -13,7 +13,6 @@ def print_context(ds=None, **kwargs):
 
 with DAG(
     'Task_2',
-    # Параметры по умолчанию
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
