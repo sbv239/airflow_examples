@@ -26,7 +26,7 @@ with DAG(
         if Variable.get("is_startml") == 'True':
            return "startml_desc"
         else:
-	   return "not_startml_desc"
+            return "not_startml_desc"
 
     def print_true():
        print("StartML is a starter course for ambitious people")
