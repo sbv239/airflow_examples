@@ -41,7 +41,7 @@ with DAG(
     templated_command = dedent(
         """
     {% for i in range(5) %}
-        echo "{{ ds }}"
+        echo "{{ ts }}"
         echo "{{ run_id }}"
     {% endfor %}
     """
@@ -55,4 +55,4 @@ with DAG(
     )
 
     # последовательность задач
-    t_1
+    t1
