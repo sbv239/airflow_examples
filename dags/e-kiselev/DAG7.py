@@ -16,7 +16,7 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
     },
-    description='Ex. 6.',
+    description='Ex. 7.',
     # Как часто запускать DAG
     schedule_interval=timedelta(days=1),
     start_date=datetime(2023, 2, 16),
