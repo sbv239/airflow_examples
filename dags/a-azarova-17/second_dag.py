@@ -12,7 +12,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-    'a-azarova-17_hw6',
+    'a-azarova-17_hw7',
     # Параметры по умолчанию для тасок
     default_args={
         # Если прошлые запуски упали, надо ли ждать их успеха
@@ -36,6 +36,10 @@ with DAG(
     при этом функция должна задействовать переменную из цикла. 
     Вы можете добиться этого, если передадите переменную через op_kwargs и примете ее на стороне функции. 
     Функция должна печатать "task number is: {task_number}", где task_number - номер задания из цикла. 
+    
+    Добавьте в PythonOperator из второго задания (где создавали 30 операторов в цикле) kwargs 
+    и передайте в этот kwargs task_number со значением переменной цикла. 
+    Также добавьте прием аргумента ts и run_id в функции, указанной в PythonOperator, и распечатайте эти значения.
     """,
     schedule_interval=timedelta(days=1),
     start_date=datetime(2023, 1, 1),
@@ -43,8 +47,10 @@ with DAG(
     tags=['azarova'],
 ) as dag:
 
-    def print_task_number(task_number):
-        return f"task number is: {task_number}"
+    def print_task_number(task_number, ts, run_id):
+        print(f"task number is: {task_number}")
+        print(ts)
+        print(run_id)
 
 
     for i in range(10):
