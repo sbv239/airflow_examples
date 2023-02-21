@@ -4,7 +4,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-    'hw_6_e-kiselev',
+    'hw_7_e-kiselev',
     # Параметры по умолчанию для тасок
     default_args={
         # Если прошлые запуски упали, надо ли ждать их успеха
@@ -16,7 +16,7 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
     },
-    description='Ex. 6.',
+    description='Ex. 7.',
     # Как часто запускать DAG
     schedule_interval=timedelta(days=1),
     start_date=datetime(2023, 2, 16),
