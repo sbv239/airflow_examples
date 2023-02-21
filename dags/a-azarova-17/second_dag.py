@@ -1,5 +1,6 @@
 """
-Test documentation
+#### Task Documentation
+
 """
 from datetime import datetime, timedelta
 from textwrap import dedent
@@ -11,7 +12,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-    'a-azarova-17_hw3',
+    'a-azarova-17_hw6',
     # Параметры по умолчанию для тасок
     default_args={
         # Если прошлые запуски упали, надо ли ждать их успеха
@@ -50,8 +51,24 @@ with DAG(
         task_b = BashOperator(
             task_id=f't_{i}',
             depends_on_past=False,
-            bash_command=f'echo {i}',
+            # bash_command=f'echo {i}',
+            bash_command="echo $NUMBER",
+            env={"NUMBER": i},  # задает переменные окружения
         )
+
+    dag.doc_md = __doc__
+    task_b.doc_md = dedent(
+        """# Заголовок 1
+            ## Заголовок 2
+            ### Заголовок 3
+            #### Заголовок 4
+            *Текст курсивом*
+            _Текст курсивом_
+            **Жирный текст**
+            `code`
+            > цитируемый текст
+    """
+    )  # dedent - это особенность Airflow, в него нужно оборачивать всю доку
 
     for i in range(20):
         task_p = PythonOperator(
