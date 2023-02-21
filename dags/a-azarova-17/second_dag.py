@@ -47,34 +47,22 @@ with DAG(
     tags=['azarova'],
 ) as dag:
 
-    def print_task_number(task_number, ts, run_id):
+    def print_task_number(task_number, ts, run_id, **kwards):
         print(f"task number is: {task_number}")
         print(ts)
         print(run_id)
 
 
-    for i in range(10):
-        task_b = BashOperator(
-            task_id=f't_{i}',
-            depends_on_past=False,
-            # bash_command=f'echo {i}',
-            bash_command="echo $NUMBER",
-            env={"NUMBER": i},  # задает переменные окружения
-        )
+    # for i in range(10):
+    #     task_b = BashOperator(
+    #         task_id=f't_{i}',
+    #         depends_on_past=False,
+    #         # bash_command=f'echo {i}',
+    #         bash_command="echo $NUMBER",
+    #         env={"NUMBER": i},  # задает переменные окружения
+    #     )
 
-    dag.doc_md = __doc__
-    task_b.doc_md = dedent(
-        """# Заголовок 1
-            ## Заголовок 2
-            ### Заголовок 3
-            #### Заголовок 4
-            *Текст курсивом*
-            _Текст курсивом_
-            **Жирный текст**
-            `code`
-            > цитируемый текст
-    """
-    )  # dedent - это особенность Airflow, в него нужно оборачивать всю доку
+
 
     for i in range(20):
         task_p = PythonOperator(
@@ -84,4 +72,5 @@ with DAG(
         )
 
     # последовательность задач
-    task_b >> task_p
+    task_b
+    # >> task_p
