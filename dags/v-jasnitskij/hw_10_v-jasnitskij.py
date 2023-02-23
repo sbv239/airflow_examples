@@ -16,21 +16,17 @@ default_args={
     'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
 }
 
-#ts and run_id Airflow will take from context
-def print_task_number(ts, run_id, **kwargs):
-    print(ts)
-    print(run_id)
-
 
 def push_var(ti):
-    ti.xcom_push(key="sample_xcom_key", value="xcom test")
+    #var = ti.xcom_push(key="sample_xcom_key", value="Airflow tracks everything")
+    return "Airflow tracks everything"
 
 def pull_var(ti):
-    var = ti.xcom_pull(task_ids="push", key="sample_xcom_key")
+    var = ti.xcom_pull(task_ids="push", key="return_value")
     print(var)
 
 with DAG(
-     "hw_11_v-jasnitskij_dag",
+    "hw_11_v-jasnitskij_dag",
     default_args=default_args,
     schedule_interval=None
 ) as dag:
@@ -48,5 +44,3 @@ with DAG(
     )
 
     python_push >> python_pull
-
-

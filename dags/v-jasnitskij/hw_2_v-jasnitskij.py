@@ -2,7 +2,7 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 
 with DAG(
-    'tutorial'
+    'tutorial',
     dafault_args={
         'task_id',
         'bash_command',
