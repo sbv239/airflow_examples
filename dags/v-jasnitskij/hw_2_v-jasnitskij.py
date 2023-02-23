@@ -1,5 +1,6 @@
 from airflow import DAG
 from airflow.operators.bash import BashOperator
+from airflow.operators.python import PythonOperator
 
 with DAG(
     'tutorial',
@@ -33,13 +34,3 @@ run_this = PythonOperator(
     python_callable=print_context,  # свойственен только для PythonOperator - передаем саму функцию
 )
 
-"""
-# Генерируем таски в цикле - так тоже можно
-for i in range(5):
-    # Каждый таск будет спать некое количество секунд
-    task = PythonOperator(
-        task_id=''
-        python_callable=print_context,
-        # передаем в аргумент с названием random_base значение float(i) / 10
-        op_kwargs={'random_base': float(i) / 10},
-"""
