@@ -5,7 +5,6 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 default_args={
-    'start_date': datetime(2022, 11, 18),
     'depends_on_past': False,
     'email': ['airflow@example.com'],
     'email_on_failure': False,
@@ -20,7 +19,7 @@ def print_task_number(ts, run_id, **kwargs):
     print(run_id)
 
 with DAG(
-    "hw_7_v-jasnitskij",
+    "hw_7_v-jasnitskij_newdag",
     default_args=default_args,
     schedule_interval=None
 ) as dag:
