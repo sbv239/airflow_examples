@@ -26,7 +26,7 @@ def pull_var(ti):
     print(var)
 
 with DAG(
-    "hw_11_v-jasnitskij_dag",
+    "hw_10_v-jasnitskij_dag",
     default_args=default_args,
     schedule_interval=None
 ) as dag:
