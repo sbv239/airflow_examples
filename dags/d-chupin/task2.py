@@ -17,7 +17,7 @@ with DAG(
     },
     description='task2',
     schedule_interval=timedelta(days=1),
-    start_date=datetime(2023, 02, 24),
+    start_date=datetime(2023, 2, 24),
     catchup=False,
     tags=['task2'],
 ) as dag:
