@@ -6,7 +6,7 @@ from airflow.operators.python_operator import PythonOperator
 
 
 with DAG(
-    'task2',
+    'd-chupin_task2',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -15,6 +15,11 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),
     },
+    description='task2',
+    schedule_interval=timedelta(days=1),
+    start_date=datetime(2023, 02, 24),
+    catchup=False,
+    tags=['task2'],
 ) as dag:
     # t1, t2 - это операторы (они формируют таски, а таски формируют даг)
     t1 = BashOperator(
