@@ -5,7 +5,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python_operator import PythonOperator
 
 with DAG(
-    'task 2',
+    'task_2_y-volkova-22',
     # Параметры по умолчанию для тасок
     default_args={
         'depends_on_past': False,
