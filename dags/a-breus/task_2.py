@@ -3,7 +3,7 @@ from airflow.operators.bash import BashOperator
 from datetime import datetime, timedelta
 
 with DAG(
-    'HomeWork',
+    'HomeWork_r_safarov',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
