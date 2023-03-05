@@ -28,8 +28,8 @@ with DAG(
         )
         
     def print_context(task_number, ts, run_id):
-        print(ts)
-        print(run_id)
+        print(f"Параметр ts {ts}")
+        print(f"Параметр run_id {run_id}")
         print(f"task number is: {task_number}")
 
     for i in range(20):
