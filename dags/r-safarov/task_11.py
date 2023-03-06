@@ -5,13 +5,14 @@ from airflow.providers.postgres.operators.postgres import PostgresHook
 
 from airflow.hooks.base import BaseHook
 import psycopg2
+from psycopg2.extras import RealDictCursor
 
-''' 
+'''  
 def get_user_max_likes():
     creds = BaseHook.get_connection("startml_feed")
     with psycopg2.connect(
         f"postgresql://{creds.login}:{creds.password}"
-        f"@{creds.host}:{creds.port}/{creds.schema}"
+        f"@{creds.host}:{creds.port}/{creds.schema}", cursor_factory=RealDictCursor
     ) as conn:
         with conn.cursor() as cursor:
             cursor.execute(
@@ -41,7 +42,7 @@ def get_user_max_likes():
                 """
             )
             return cursor.fetchall()
-           
+          
 with DAG(
     'hw11_11_r-safarov',
     default_args={
@@ -62,3 +63,5 @@ with DAG(
         task_id="user_max_likes",
         python_callable=get_user_max_likes
     )
+
+t1

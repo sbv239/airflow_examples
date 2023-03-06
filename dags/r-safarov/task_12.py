@@ -29,3 +29,5 @@ with DAG(
         task_id="print_variable",
         python_callable=get_variable
     )
+
+t1
