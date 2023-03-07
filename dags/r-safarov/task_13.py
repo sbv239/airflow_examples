@@ -20,7 +20,7 @@ def print_2():
 
            
 with DAG(
-    'hw11_12_r-safarov',
+    'hw11_13_r-safarov',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -29,7 +29,7 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5)
     },
-    description='Task_12',
+    description='Task_13',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2023, 1, 1),
     catchup=False,
