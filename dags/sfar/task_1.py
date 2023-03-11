@@ -6,7 +6,7 @@ from textwrap import dedent
 from airflow import DAG
 
 from airflow.operators.bash import BashOperator
-from airflow.operators.python_operator import PythonOperator
+from airflow.operators.python import PythonOperator
 
 with DAG(
     'task_1',
@@ -35,7 +35,7 @@ with DAG(
         
     t2 = PythonOperator(
         task_id='print_ds',
-        python_callable=print_ds
+        python_callable=print_ds,
     )
     
     t1 >> t2
