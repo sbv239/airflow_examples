@@ -21,3 +21,19 @@ with DAG(
     catchup=False,
     tags=['attempt'],
 ) as dag:
+    
+    for i in range(10):
+        task = BashOperator(
+            task_id = 'ten_actions',
+            bash_command=f"echo {i}",
+        )
+        
+    for i in range(11, 30):
+        task = PythonOperator(
+            task_id = 'twenty_actions',
+            python_callable=print_number,
+            op_kwargs={'task_number': i},
+        )
+            
+    def print_number(task_number):
+            print(f"task number is: {task_number}")
