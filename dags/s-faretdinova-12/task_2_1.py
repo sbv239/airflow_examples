@@ -36,10 +36,10 @@ with DAG(
         t2 << task << t1
 
     def print_context(ts, run_id, **kwargs):
-        print(kwargs)
-        print(f"task number is: {kwargs.get('task_number')}")
-        print(run_id)
-        print(ts)
+        print(kwargs) # kwargs будет словарем, содержащим все переданные именованные аргументы
+        print(f"task number is: {kwargs.get('task_number')}") # и из него сможем достать task_number, например
+        print(run_id) # это еще одна переменная, которую передает эйрфлоу в функцию
+        print(ts) # равно как и ts - тайм стринг (логическая дата и время запуска оператора)
         return 'Whatever you return gets printed in the logs'
 
 
