@@ -6,7 +6,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-    'task_1',
+    'task_2',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -23,14 +23,14 @@ with DAG(
 ) as dag:
     
     for i in range(10):
-        task = BashOperator(
-            task_id = 'ten_actions',
+        bash_task = BashOperator(
+            task_id = f"bash_part_{i}",
             bash_command=f"echo {i}",
         )
         
     for i in range(11, 30):
-        task = PythonOperator(
-            task_id = 'twenty_actions',
+        python_task = PythonOperator(
+            task_id = f"python_part_{i}",
             python_callable=print_number,
             op_kwargs={'task_number': i},
         )
