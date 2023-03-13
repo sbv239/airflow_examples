@@ -26,5 +26,5 @@ with DAG(
         t1 = BashOperator(
             task_id = 'bash_part' + str(i), # task_id = f"print_date_{i}" - можно было и так
             bash_command="echo $NUMBER",
-            env={"NUMBER":i}, # env={"NUMBER" : str(i)} - так тоже можно
+            env={"NUMBER" : str(i)}, # env={"NUMBER":i} - так нельзя
         )
