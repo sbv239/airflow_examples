@@ -23,7 +23,7 @@ with DAG(
 ) as dag:
     
     for i in range(10):
-        bash_task = BashOperator(
+        bashtask = BashOperator(
             task_id = 'bash_part' + str(i),
             bash_command=f"echo {i}",
         )
@@ -32,22 +32,22 @@ with DAG(
         print(f"task number is: {task_number}")
     
     for i in range(11, 30):
-        python_task = PythonOperator(
+        pythontask = PythonOperator(
             task_id = 'python_part' + str(i),
             python_callable=print_number,
             op_kwargs={'task_number': i},
         )
                
-    bash_task >> python_task
+    bashtask >> pythontask
     
-    bash_task.doc_md = dedent(
+    bashtask.doc_md = dedent(
         """\
         ### Task Documentation
-        bash_task is used for running a number of tasks with *BashOperator* using **for** and `str(i)`
+        bashtask is used for running a number of tasks with *BashOperator* using **for** and `str(i)`
         """
         
-    python_task.doc_md = dedent(
+    pythontask.doc_md = dedent(
         """\
         ### Task Documentation
-        python_task is used for running a number of tasks with *PythonOperator* using **for** and `str(i)`
+        pythontask is used for running a number of tasks with *PythonOperator* using **for** and `str(i)`
         """
