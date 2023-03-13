@@ -28,12 +28,12 @@ with DAG(
             bash_command=f"echo {i}",
         )
         
-    def print_smth(ts, run_id, **kwargs):
-        print(f"task number is: {kwargs.get('task_number')}")
+    def print_smth(ts, run_id, task_number, **kwargs):
         print(ts)
-        print(run_id)   
+        print(run_id)
+        print(task_number)
         
-    for i in range(10, 30):
+    for i in range(11, 30):
         python_task = PythonOperator(
             task_id = 'python_part' + str(i),
             python_callable=print_smth,
