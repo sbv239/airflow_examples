@@ -29,12 +29,11 @@ with DAG(
         )
         
     def print_smth(ts, run_id, **kwargs):
-        print(**kwargs) # напечатает все поименованные аргументы, т.е. op_kwargs={'task_number': i} из питоноператора
         print(f"task number is: {kwargs.get('task_number')}")
         print(ts)
         print(run_id)   
         
-    for i in range(11, 30):
+    for i in range(10, 30):
         python_task = PythonOperator(
             task_id = 'python_part' + str(i),
             python_callable=print_smth,
