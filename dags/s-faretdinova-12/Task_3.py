@@ -28,6 +28,13 @@ with DAG(
             bash_command=f"echo {i}",
         )
         
+        bashtask.doc_md = dedent(
+            """\
+            ### Task Documentation
+            bashtask is used for running a number of tasks with *BashOperator* using **for** and `str(i)`
+            """
+        )    
+            
     def print_number(task_number):
         print(f"task number is: {task_number}")
     
@@ -37,17 +44,12 @@ with DAG(
             python_callable=print_number,
             op_kwargs={'task_number': i},
         )
-               
-    bashtask >> pythontask
-    
-    bashtask.doc_md = dedent(
-        """\
-        ### Task Documentation
-        bashtask is used for running a number of tasks with *BashOperator* using **for** and `str(i)`
-        """
         
-    pythontask.doc_md = dedent(
-        """\
-        ### Task Documentation
-        pythontask is used for running a number of tasks with *PythonOperator* using **for** and `str(i)`
-        """
+        pythontask.doc_md = dedent(
+            """\
+            ### Task Documentation
+            pythontask is used for running a number of tasks with *PythonOperator* using **for** and `str(i)`
+            """
+        )
+    
+        bashtask >> pythontask
