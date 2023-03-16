@@ -22,28 +22,34 @@ with DAG(
     tags=['attempt'],
 ) as dag:
     
+    STARTML_ID = "startml_desc" # это нужно, чтобы обращаться по айди к таскам без кавычек
+    NOT_STARTML_ID = "not_startml_id"
+    
     start = DummyOperator(task_id="before_branching")
     end = DummyOperator(task_id="after_branching")
     
     
     def branching_function():
-        if Variable.get("is_startml") == "True":
-            return "startml_desc"
-        else "not_startml_desc"
+        return STARTML_ID if Variable.get("is_startml") == "True" else NOT_STARTML_ID
     
     branching = BranchPythonOperator(
         task_id="determine_course",
         python_callable=branching_function,
     )
     
+    print_var = PythonOperator(
+        task_id="print_var",
+        python_callable=lambda: print(Variable.get("is_startml"))
+    )
+
     startml = PythonOperator(
-        task_id="startml_desc",
+        task_id=STARTML_ID,
         python_callable=lambda: print('StartML is a starter course for ambitious people')
     )
         
     notstartml = PythonOperator(
-        task_id="not_startml_desc",
+        task_id=NOT_STARTML_ID,
         python_callable=lambda: print('Not a startML course, sorry'),
     )
     
-    start >> branching >> [startml, notstartml] >> end
+    start >> print_var >> branching >> [startml, notstartml] >> end
