@@ -6,10 +6,15 @@ from airflow.operators.python import PythonOperator
 
 
 def push_test(ti):
-    url = "___"
-    res = requests.get(url)
-    ti.xcom_push(key="sample_xcom_key", value=json.loads(res.text
-
+    ti.xcom_push(
+        key="sample_xcom_key", 
+        value="xcom test"
+    )    
+        
+def pull_test(ti):
+    testing_smth = ti.xcom_pull(key="sample_xcom_key", task_ids="get_value")
+    print("If you understand what I am trying to do, print value for key sample_xcom_key", testing_smth)
+                 
 with DAG(
     'task_7',
     default_args={
@@ -27,15 +32,14 @@ with DAG(
     tags=['attempt'],
 ) as dag:
     
-    def print_smth(ts, run_id, task_number, **kwargs):
-        print(ts)
-        print(run_id)
-        print(task_number)
-        
-    push_task = PythonOperator(
-        task_id = 'python_part' + str(i),
-        python_callable=print_smth,
-        op_kwargs={'task_number': i},
+    get_smth = PythonOperator(
+        task_id = "get_value",
+        python_callable=push_test,
     )
-            
-    bash_task >> python_task
+    
+    give_smth = PythonOperator(
+        task_id = "give_value",
+        python_callable=pull_test,
+    )
+                 
+    get_smth >> give_smth
