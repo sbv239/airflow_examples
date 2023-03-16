@@ -10,6 +10,8 @@ def print_string(ti):
 def pull_string(ti):
     testing_pull = ti.xcom_pull(key="return_value", task_ids="simple_task")
     print(testing_pull)
+    
+""" История здесь такая, что все, что возвращается через return, само, без явных команд кладется в икском под ключом return_value. Поэтому, чтобы вытащить значение распечатанного в какой-либо функции, достаточно в ti.xcom_pull в следующей функции положить key="return_value" и обратиться по task_ids к задаче, которая принимала в себя функцию, возвращенное значение которой нужно вытащить из икскома """
                  
 with DAG(
     'task_8',
