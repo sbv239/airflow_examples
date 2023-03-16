@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 
+""" Если нет url, то значениея кладутся в локальный файл и получаются оттуда же """
 
 def push_test(ti):
     ti.xcom_push(
@@ -12,7 +13,7 @@ def push_test(ti):
     )    
         
 def pull_test(ti):
-    testing_smth = ti.xcom_pull(key="sample_xcom_key", task_ids="get_value")
+    testing_smth = ti.xcom_pull(key="sample_xcom_key", task_ids="get_value") # task_ids должен совпадать с task_id в таске, в которой питон     оператор принимает в себя функцию, содержащую ti.xcom_push
     print("If you understand what I am trying to do, print value for key sample_xcom_key", testing_smth)
                  
 with DAG(
