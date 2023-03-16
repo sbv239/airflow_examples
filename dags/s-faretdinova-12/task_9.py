@@ -33,7 +33,7 @@ with DAG(
                     """
                     SELECT f.user_id, COUNT(f.user_id)
                     FROM feed_action f
-                    WHERE f.action = "like"
+                    WHERE f.action = 'like'
                     GROUP BY f.user_id
                     ORDER BY COUNT(f.user_id) DESC
                     LIMIT 1
