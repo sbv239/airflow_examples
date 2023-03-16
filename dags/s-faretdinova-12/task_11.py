@@ -2,7 +2,7 @@ import json
 from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.models import Variable
-from airflow.operators.python import PythonOperator, BranchPytonOperator
+from airflow.operators.python import PythonOperator, BranchPythonOperator
 from airflow.operators.dummy import DummyOperator
 
 with DAG(
