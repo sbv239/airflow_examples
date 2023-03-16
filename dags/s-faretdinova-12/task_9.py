@@ -36,7 +36,7 @@ with DAG(
                     WHERE f.action = "like"
                     GROUP BY f.user_id
                     ORDER BY COUNT(f.user_id) DESC
-                    LIMIMT 1
+                    LIMIT 1
                     """
                 )
                 results = cursor.fetchone()
