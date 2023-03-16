@@ -6,7 +6,7 @@ from airflow.operators.python import PythonOperator, BranchPytonOperator
 from airflow.operators.dummy import DummyOperator
 
 with DAG(
-    'task_10',
+    'task_11',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -27,11 +27,9 @@ with DAG(
     
     
     def branching_function():
-        from airflow.models import Variable
-        is_startml = Variable.get("is_startml")
-        if is_startml = 'True':
+        if Variable.get("is_startml") == "True":
             return "startml_desc"
-        else return "not_startml_desc"
+        else "not_startml_desc"
     
     branching = BranchPythonOperator(
         task_id="determine_course",
