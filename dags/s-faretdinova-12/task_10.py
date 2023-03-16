@@ -29,3 +29,21 @@ with DAG(
         task_id="smth_variable",
         python_callable=get_variable,
     )
+    
+"""
+или так
+
+from airflow.models import Variable
+from airflow.operators.dummy import DummyOperator
+...  iапка DAG и остальные импорты
+
+    start = DummyOperator(task_id="before_branching")
+    end = DummyOperator(task_id="after_branching")
+
+    print_var = PythonOperator(
+        task_id="print_var",
+        python_callable=lambda: print(Variable.get("is_startml")) - лямбда заменяет функцию get_variable
+    )
+
+    start >> print_var >> end
+"""
