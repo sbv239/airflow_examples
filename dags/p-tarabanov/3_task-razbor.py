@@ -8,7 +8,7 @@ from airflow.operators.python import PythonOperator
 
 
 with DAG(
-    'hw_simple_dag_loop',
+    'hw_3_p-tarabanov_razbor',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
