@@ -5,7 +5,7 @@ from airflow.operators.python import PythonOperator
 from airflow import DAG
 
 with DAG(
-    'first_task',
+    'hw_2_m-korablin',
     # Параметры по умолчанию для тасок
     default_args={
         'depends_on_past': False,
