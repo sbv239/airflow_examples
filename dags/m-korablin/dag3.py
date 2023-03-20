@@ -26,7 +26,6 @@ with DAG(
             task_id='tB'+str(i),
             bash_command=f"echo {i}"
         )
-        tB
     
 
 
@@ -41,4 +40,5 @@ with DAG(
             python_callable=power2,
             op_kwargs={f"task_number_is: {i}"}
         )
-        tP
+    tB >> tP
+    
