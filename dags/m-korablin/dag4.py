@@ -1,13 +1,16 @@
-"""#Docs
+"""
+DAG doc
 Cycles 'for i in range(10)' and 'for i in range(20)'
-with **BashOperator** *and* **PythonOperator**"""
-from airflow import DAG
+with **BashOperator** *and* **PythonOperator**
+"""
+from airflow import DAG                         #импорты всякие
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 from datetime import datetime, timedelta
+from textwrap import dedent
 
 with DAG(
-    'hw_3_m-korablin',
+    'hw_3_m-korablin', #уникально имя
     # Параметры по умолчанию для тасок
     default_args={
         'depends_on_past': False,
@@ -21,25 +24,34 @@ with DAG(
     schedule_interval=timedelta(days=1),
     start_date=datetime(2023, 3, 20),
     catchup=False,
-    tags=['VanDarkholme'],
+    tags=['VanDarkholme'], #тэг
 ) as dag:
 
     for i in range(10):
         tB = BashOperator(
             task_id='tB'+str(i),
-            bash_command=f"echo {i}"
+            bash_command=f"echo {i}" # вывод номера в цикле
         )
     
 
 
-    def print_number_task(task_number):
+    def print_number_task(task_number): #сама функция
         print(f'task number is: {task_number}')
 
     for i in range(20):
-        tP = PythonOperator(
+        tP = PythonOperator( #часть с PythonOperator
             task_id='tP'+str(i),
             python_callable=print_number_task,
             op_kwargs={'task_number': i}
         )
+    tP.doc_md = dedent(
+        """\
+           # Task Documentation
+           ###`code`
+           ###*italic*
+           ###**bold**
+           """
+    )
+
     tB >> tP
     
