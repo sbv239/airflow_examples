@@ -29,16 +29,16 @@ with DAG(
     
 
 
-    def power2(arg, **kwargs):
+    def power2(arg):
         """Возведение в квадрат"""
-        print('Возвожу в квадрат')
+        print(f"Возвожу в квадрат {arg['task_number']}")
         return arg**2
 
     for i in range(20):
         tP = PythonOperator(
             task_id='tP'+str(i),
             python_callable=power2,
-            op_kwargs={f"task_number_is: {i}"}
+            op_kwargs={'task_number': i}
         )
     tB >> tP
     
