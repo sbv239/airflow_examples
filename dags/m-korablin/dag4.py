@@ -10,7 +10,7 @@ from datetime import datetime, timedelta
 from textwrap import dedent
 
 with DAG(
-    'hw_3_m-korablin', #уникально имя
+    'hw_4_m-korablin', #уникально имя
     # Параметры по умолчанию для тасок
     default_args={
         'depends_on_past': False,
