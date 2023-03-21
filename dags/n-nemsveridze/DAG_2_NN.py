@@ -12,11 +12,11 @@ with DAG('task2NN',
              'retries': 1,
              'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
          },
-         descrition='My first DAG',
+         description='My first DAG',
          schedule_interval=timedelta(days=1),
          start_date=datetime(2023, 3, 21),
          catchup=False,
-         tags=['example']
+         tags=['NNDAG2'],
          ) as dag:
     task1 = BashOperator(
         task_id='BashPWD',
