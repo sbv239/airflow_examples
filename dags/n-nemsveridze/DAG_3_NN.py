@@ -19,13 +19,14 @@ with DAG (
     tags=['NNtask3'],
 ) as dag:
     for i in range(10):
-        task1=BashOperator(task_id='Ten times + str(i)',
-                           bash_command='f"echo{i}')
+        task1=BashOperator(task_id='Ten times' + str(i),
+                           dag=dag,
+                           bash_command='f"echo{i}"')
     def cycle_twenty(task_number):
         return print(f"task number is: {task_number}")
 
     for j in range(20):
-        task2=PythonOperator(task_id='Twenty times + str(j)',
+        task2=PythonOperator(task_id='Twenty times' + str(j),
                              python_callable = cycle_twenty,
                              op_kwargs={'task_number':int(j)})
     task1 >> task2
