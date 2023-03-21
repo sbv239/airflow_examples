@@ -14,7 +14,7 @@ with DAG (
         },
     description = 'ten times bash twenty times py',
     schedule_interval = timedelta(days=1),
-    start_date=datetime(2023,3,21,22,15,20),
+    start_date=datetime(2023,3,21,22,30,20),
     catchup=False,
     tags=['NNtask3'],
 ) as dag:
