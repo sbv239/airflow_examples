@@ -15,7 +15,7 @@ with DAG('task2NN',
          description='My first DAG',
          schedule_interval=timedelta(days=1),
          start_date=datetime(2023, 3, 21),
-         catchup=False,
+         catchup=True,
          tags=['NNDAG2'],
          ) as dag:
     task1 = BashOperator(
