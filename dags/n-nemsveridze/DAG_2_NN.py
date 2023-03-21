@@ -20,7 +20,8 @@ with DAG('task2NN',
          ) as dag:
     task1 = BashOperator(
         task_id='BashPWD',
-        bash_command='pwd'
+        bash_command='pwd',
+        dag=dag
     )
 
 
