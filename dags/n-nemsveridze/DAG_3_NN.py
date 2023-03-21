@@ -2,6 +2,7 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 from datetime import datetime, timedelta
+
 with DAG (
     'task2NN',
         default_args={
@@ -18,15 +19,16 @@ with DAG (
     catchup=False,
     tags=['NNtask3'],
 ) as dag:
+
     for i in range(10):
-        task1=BashOperator(task_id='Ten times' + str(i),
+        task1=BashOperator(task_id='Ten_times_' + str(i),
                            dag=dag,
-                           bash_command='f"echo{i}"')
+                           bash_command=f"echo{i}")
     def cycle_twenty(task_number):
         return print(f"task number is: {task_number}")
 
     for j in range(20):
-        task2=PythonOperator(task_id='Twenty times' + str(j),
+        task2=PythonOperator(task_id='Twenty_times_' + str(j),
                              python_callable = cycle_twenty,
                              op_kwargs={'task_number':int(j)})
     task1 >> task2
