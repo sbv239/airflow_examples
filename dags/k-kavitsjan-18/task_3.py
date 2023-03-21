@@ -30,7 +30,7 @@ with DAG(
     for i in range(10):
         task_bash = BashOperator(
             task_id=f"date_{i}",
-            bash_command=f"echo {5}"
+            bash_command=f"echo {i}"
         )
 
     def print_task_context(ds, **kwargs):
@@ -41,9 +41,9 @@ with DAG(
 
     for i in range(20):
         task_python = PythonOperator(
-            task_id=f"task_№_{i}",
-            op_kwargs={"task_number": i},
+            task_id=f"task_con{i}",
             python_callable=print_task_context,
+            op_kwargs={"task_number": i},
         )
 
     dag.doc_md=__doc__
