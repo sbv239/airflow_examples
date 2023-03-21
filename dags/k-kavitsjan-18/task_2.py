@@ -5,6 +5,9 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
+def print_ds(ds):
+    print(ds)
+
 
 with DAG(
     'k-kavitsjan-18_task_2',
@@ -29,7 +32,7 @@ with DAG(
 
     t2 = PythonOperator(
         task_id='print_ds',
-        python_callable=print(ds),
+        python_callable=print_ds,
     )
     dag.doc_md="""
     This is documentation"""
