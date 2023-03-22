@@ -13,11 +13,11 @@ with DAG(
             'retries': 1,
             'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
         },
-        description='m-zaminev_task_2',
+        description='m-zinovenkov_task_2',
         schedule_interval=timedelta(days=1),
         start_date=datetime(2022, 11, 16),
         catchup=False,
-        tags=['m-zaminev_task_2']
+        tags=['m-zinovenkov_task_2']
 ) as dag:
     t1 = BashOperator(
         task_id='print_pwd',
