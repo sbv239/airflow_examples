@@ -3,7 +3,7 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
-with DAG('task2NN',
+with DAG('task2_1NN',
          default_args={
              'depends_on_past': False,
              'email': ['airflow@example.com'],
