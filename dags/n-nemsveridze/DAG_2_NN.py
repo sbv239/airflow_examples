@@ -16,7 +16,7 @@ with DAG('task2NN',
          schedule_interval=timedelta(days=1),
          start_date=datetime(2023, 3, 21),
          catchup=True,
-         tags=['NNDAG2'],
+
          ) as dag:
     task1 = BashOperator(
         task_id='BashPWD',
