@@ -2,13 +2,9 @@ from airflow import DAG
 from datetime import timedelta, datetime
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
-def print_ds(ds, **kwargs):
-    print(kwargs)
-    print(ds)
-    return 'Whatever you return gets printed in the logs'
 
 with DAG(
-        'hw_2',
+        'hw_2_m-gromov-18',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
@@ -27,6 +23,11 @@ with DAG(
         task_id='BO_hw2',
         bash_command=pwd
     )
+
+    def print_ds(ds, **kwargs):
+        print(kwargs)
+        print(ds)
+        return 'Whatever you return gets printed in the logs'
 
     t2 = PythonOperator(
         task_id='PO_hw2_print_date',
