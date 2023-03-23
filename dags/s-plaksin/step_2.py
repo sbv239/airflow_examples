@@ -21,7 +21,7 @@ with DAG(
         tags='hw_2',
 ) as dag:
     t1 = BashOperator(
-        task_id='print working directory',
+        task_id='print_working_directory',
         bash_command='pwd',
     )
 
@@ -32,7 +32,7 @@ with DAG(
 
 
     t2 = PythonOperator(
-        task_id='print the date',
+        task_id='print_the_date',
         python_callable=print_ds,
     )
     t1 >> t2
