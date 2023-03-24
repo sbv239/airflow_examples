@@ -5,7 +5,6 @@ from airflow.operators.python import PythonOperator
 from textwrap import dedent
 
 
-
 with DAG(
         'hw_3_m-gromov-18',
         default_args={
