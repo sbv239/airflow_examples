@@ -4,7 +4,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-        'hw_2_m-gromov-18',
+        'hw_2_m-gromov-18_v4',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
