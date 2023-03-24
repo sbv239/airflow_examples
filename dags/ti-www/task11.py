@@ -3,18 +3,19 @@ from textwrap import dedent
 
 from airflow.hooks.base import BaseHook
 import psycopg2
+from psycopg2.extras import RealDictCursor
 
 from airflow import DAG
 
 from airflow.operators.python import PythonOperator
 
-def connect_to_database(conn_id="startml_feed"):
-    creds = BaseHook.get_connection(conn_id)
+def connect_to_database():
+    creds = BaseHook.get_connection("startml_feed")
     with psycopg2.connect(
         f"postgresql://{creds.login}:{creds.password}"
         f"@{creds.host}:{creds.port}/{creds.schema}"
     ) as conn:
-        with conn.cursor() as cursor:
+        with conn.cursor(cursor_factory=RealDictCursor) as cursor:
             cursor.execute("""
             SELECT user_id, count(action) as count
             FROM feed_action
@@ -43,11 +44,10 @@ with DAG(
     tags=["ti-www"],
 ) as dag:
 
-
     t = PythonOperator(
-        task_id = "get_user_max_like",
+        task_id="get_user_max_like",
         python_callable=connect_to_database,
-
+        
     )
 
 t
