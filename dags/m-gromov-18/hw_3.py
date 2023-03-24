@@ -27,11 +27,11 @@ with DAG(
         if i < 10:
             task = BashOperator(
                 task_id='task_number_' + str(i),
-                bash_command= f"echo {i}"
+                bash_command=f"echo {i}"
             )
         else:
             task = PythonOperator(
                 task_id='task_number_' + str(i),
-                python_callable=task_number,
-                op_kwargs = {'task_number': int(i)}
+                python_callable=task_number_return,
+                op_kwargs={'task_number': int(i)}
             )
