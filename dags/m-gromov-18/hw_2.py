@@ -14,7 +14,7 @@ with DAG(
             'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
         },
         description='DAG for unit 2',
-        tegs=['DAG-2'],
+        tags=['DAG-2_m-gromov-18'],
         schedule_interval=timedelta(days=1),
         start_date=datetime(2023, 3, 22),
 
