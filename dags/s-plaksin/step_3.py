@@ -24,7 +24,7 @@ with DAG(
         schedule_interval=timedelta(days=1),
         start_date=datetime(2023, 3, 22),
         catchup=False,
-        tags='hw_3',
+        tags=['hw_3'],
 ) as dag:
     for i in range(1, 11):
         task = BashOperator(
