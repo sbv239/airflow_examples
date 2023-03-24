@@ -21,7 +21,7 @@ with DAG(
 ) as dag:
     t1 = BashOperator(
         task_id='BO_hw2',
-        bash_command=pwd
+        bash_command='pwd'
     )
 
     def print_ds(ds, **kwargs):
