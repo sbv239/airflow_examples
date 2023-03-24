@@ -32,6 +32,6 @@ with DAG(
         else:
             task = PythonOperator(
                 task_id='task_number_' + str(i),
-                python_callable=task_number
+                python_callable=task_number,
                 op_kwargs = {'task_number': int(i)}
             )
