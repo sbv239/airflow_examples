@@ -8,7 +8,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-    'hw_2',    # название DAG
+    'hw_2_s-birjukov',    # название DAG
     # ниже идут параметры по умолчанию
     default_args={
         'depends_on_past': False,
@@ -19,7 +19,7 @@ with DAG(
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
     },
     # описание DAG
-    description='hw_2',
+    description='hw_2_s-birjukov',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 1, 1),
     catchup=False,
