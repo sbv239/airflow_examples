@@ -35,7 +35,7 @@ with DAG(
         task = PythonOperator(
             task_id='print_' + str(i),  
             python_callable=my_function,
-            op_kwargs={'task_nummber': i},
+            op_kwargs={'task_number': i},
         )
     pre_task.doc_md = dedent(
         """
