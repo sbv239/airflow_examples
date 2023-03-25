@@ -10,7 +10,7 @@ def test_push(ti):
 def test_pull(ti):
 
     xcom_pull = ti.xcom_pull(
-        key='testing_increase',
+        key='sample_xcom_key',
         task_ids='push_xcom'
     )
     print(xcom_pull)
