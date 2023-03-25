@@ -19,7 +19,7 @@ with DAG(
 ) as dag:
 
     def my_function(task_number, ts, run_id):
-        print("task number is: {task_number}")
+        print(f"task number is: {task_number}")
         print(ts)
         print(run_id)
     
