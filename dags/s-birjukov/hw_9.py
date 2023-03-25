@@ -33,7 +33,7 @@ with DAG(
         },
         description = 'DAG_xcom',
         schedule_interval = timedelta(days = 1),
-        start_date = datetime(2022,12,12),
+        start_date = datetime(2023,3,25),
         catchup=False,
         tags = ['hw_9_s-birjukov_xcom']
 ) as dag:
