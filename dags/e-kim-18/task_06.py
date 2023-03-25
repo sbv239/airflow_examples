@@ -10,7 +10,7 @@ from airflow.operators.python import PythonOperator
 
 
 with DAG(
-    'task_06',
+    'e-kim-18_task_06',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
