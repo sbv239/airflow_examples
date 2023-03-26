@@ -18,11 +18,11 @@ with DAG(
     },
     start_date = datetime(2023, 3, 23)
 ) as dag:
-    postgres = PostgresHook(postgres_conn_id="startml_feed")
-    with postgres.get_conn() as conn:
-        with conn.cursor() as cursor:
-            @task(task_id="get_active_user")
-            def get_active_user():
+    @task(task_id="get_active_user")
+    def get_active_user():
+        postgres = PostgresHook(postgres_conn_id="startml_feed")
+        with postgres.get_conn() as conn:
+            with conn.cursor() as cursor:
                 cursor.execute("""
                 SELECT user_id, COUNT(action) AS "count"
                 FROM "feed_action"
