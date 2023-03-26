@@ -1,6 +1,7 @@
 from airflow import DAG
 from airflow.operators.python import task, PythonOperator, BranchPythonOperator
 from airflow.operators.bash import BashOperator
+from airflow.operators.dummy_operator import DummyOperator
 from datetime import datetime, timedelta
 from airflow.models import Variable
 
@@ -48,3 +49,4 @@ with DAG(
         task_id="not_startml_desc",
         bash_command = "echo Not a startML course, sorry"
         )
+    t5 = DummyOperator(task_id="That's all!")
