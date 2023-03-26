@@ -30,14 +30,10 @@ with DAG(
         else:
             return "not_startml_desc"
     
-    t2 = BranchPythonOperator(
-    task_id='branch_task',
-    python_callable=check_the_way,
-    )
 
     t2 = PythonOperator(
         task_id = "print_var",
-        python_callable = print_var
+        python_callable = check_the_way
     )
 
     t3 = BashOperator(
