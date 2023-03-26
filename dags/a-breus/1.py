@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 
 
 with DAG(
-    'dag_task11',
+    'test_dag_task11',
     default_args={
     'depends_on_past': False,
     'email': ['airflow@example.com'],
