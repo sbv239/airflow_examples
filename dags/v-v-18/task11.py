@@ -1,7 +1,8 @@
 from airflow.providers.postgres.operators.postgres import PostgresHook
 # from airflow.operators import PostgresOperator
 from airflow import DAG
-from airflow.operators.python import task, PythonOperator
+# from airflow.operators.python import task, PythonOperator
+from airflow.decorators import task
 from datetime import datetime, timedelta
 
 
