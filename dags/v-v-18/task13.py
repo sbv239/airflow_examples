@@ -19,7 +19,7 @@ with DAG(
     start_date = datetime(2023, 3, 23)
 ) as dag:
     
-    t1 = DummyOperator(task_id="Let's start!")
+    t1 = DummyOperator(task_id="start")
 
     
     def check_the_way(*kwargs):
@@ -49,6 +49,6 @@ with DAG(
         task_id="not_startml_desc",
         bash_command = "echo Not a startML course, sorry"
         )
-    t5 = DummyOperator(task_id="That's all!")
+    t5 = DummyOperator(task_id="Finish")
 
     t1 >> t2 >> [t3, t4] >> t5
