@@ -50,3 +50,5 @@ with DAG(
         bash_command = "echo Not a startML course, sorry"
         )
     t5 = DummyOperator(task_id="That's all!")
+
+    t1 >> t2 >> [t3, t4] >> t5
