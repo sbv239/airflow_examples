@@ -33,6 +33,7 @@ with DAG(
                 """)
                 result = cursor.fetchone()
                 return result
+    run_this = get_active_user
 
 
 
