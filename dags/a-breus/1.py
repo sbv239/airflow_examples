@@ -35,4 +35,4 @@ with DAG(
                         result = cursor.fetchone()
                 return result
 
-    get_active_user
+                get_active_user
