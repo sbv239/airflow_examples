@@ -24,8 +24,7 @@ with DAG(
     
     def check_the_way(*kwargs):
         my_value = Variable.get("is_startml")
-        xcom_value = my_value.xcom_pull(task_ids='start_task')
-        if xcom_value == "True":
+        if my_value == "True":
             return "startml_desc"
         else:
             return "not_startml_desc"
