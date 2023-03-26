@@ -50,4 +50,4 @@ with DAG(
             LIMIT 1
             """,
         )
-    print(get_active_user)
+    get_active_user
