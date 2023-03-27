@@ -13,12 +13,12 @@ with DAG(
             'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
         },
         description='DAG for unit 11',
-        tags=['DAG-10_m-gromov-11'],
+        tags=['DAG-11_m-gromov-18'],
         schedule_interval=timedelta(days=1),
         start_date=datetime(2023, 3, 26),
 
 ) as dag:
-    def get_conn():
+    def get_connect():
         from airflow.providers.postgres.operators.postgres import PostgresHook
         from psycopg2.extras import RealDictCursor
         postgres = PostgresHook(postgres_conn_id="startml_feed")
@@ -34,9 +34,9 @@ with DAG(
                     LIMIT 1
                     """
                 )
-            return cursor.fetchone()
+                return cursor.fetchone()
 
     t1 = PythonOperator(
         task_id='connection',
-        python_callable=get_conn
+        python_callable=get_connect
     )
