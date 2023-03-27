@@ -1,7 +1,8 @@
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 from datetime import datetime, timedelta
-from airflow.models import Variable
+
+
 
 with DAG(
         'hw_12_m-gromov-18',
@@ -20,10 +21,11 @@ with DAG(
 
 ) as dag:
     def var():
-        is_startml = Variable.get("is_startml")
-        print(is_startml)
+        from airflow.models import Variable
+        res = Variable.get("is_startml")
+        print(res)
 
     t1 = PythonOperator(
-        task_id='variable(is_startml)',
+        task_id='get_variable',
         python_callable=var
     )
