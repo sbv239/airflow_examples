@@ -13,7 +13,7 @@ def test_pull(ti):
     print(xcom_pull)
 
 with DAG(
-        'hw_9_m-gromov-18',
+        'hw_10_m-gromov-18',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
@@ -22,8 +22,8 @@ with DAG(
             'retries': 1,
             'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
         },
-        description='DAG for unit 9',
-        tags=['DAG-9_m-gromov-18'],
+        description='DAG for unit 10',
+        tags=['DAG-10_m-gromov-18'],
         schedule_interval=timedelta(days=1),
         start_date=datetime(2023, 3, 24),
 
