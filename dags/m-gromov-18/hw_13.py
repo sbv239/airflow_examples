@@ -50,11 +50,10 @@ with DAG(
     stop_op = PythonOperator(
         task_id='not_startml_desc',
         python_callable=stop_func
-        dag=dag)
+        )
 
     after_branching = DummyOperator(
-        task_id='after_branching',
-        dag=dag
+        task_id='after_branching'
     )
 
     before_branching >> branch_op >> [continue_op, stop_op] >> after_branching
