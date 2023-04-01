@@ -17,8 +17,8 @@ def print_task_number(ts, run_id, **kwargs):
     print(f'run_id: {str(run_id)}')
 
 with DAG(
-        'rag_hw_6',
-    description='HW_step_6',
+    'rag_hw_7',
+    description='HW_step_7',
     default_args=default_args,
     schedule_interval=timedelta(days=1),
     start_date=datetime(2023, 4, 1),
