@@ -1,7 +1,6 @@
 from datetime import timedelta, datetime
 from airflow import DAG
-from airflow.operators.bash import BashOperator
-
+from airflow.operators.python import PythonOperator
 
 default_args = {
     'depends_on_past': False,
@@ -12,8 +11,13 @@ default_args = {
     'retry_delay': timedelta(minutes=5),
 }
 
+def print_task_number(ts, run_id, **kwargs):
+    print(f'task number is: {str(kwargs["task_number"])}')
+    print(f'ts: {str(ts)}')
+    print(f'run_id: {str(run_id)}')
+
 with DAG(
-    'rag_hw_6',
+        'rag_hw_6',
     description='HW_step_6',
     default_args=default_args,
     schedule_interval=timedelta(days=1),
@@ -22,8 +26,9 @@ with DAG(
     tags=['rag23'],
 ) as dag:
     for i in range(10):
-        task = BashOperator(
-            task_id = f'bash_task_{i}',
-            bash_command = "echo $NUMBER",
-            env={"NUMBER": str(i)}
+        task = PythonOperator(
+            task_id = f'python_task_{i}',
+            python_callable=print_task_number,
+            op_kwargs = {'task_number': i}
         )
+        task
