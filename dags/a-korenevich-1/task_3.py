@@ -46,7 +46,7 @@ with DAG(
     
     def print_task_id(task_number):
         """Вывести task_number"""
-        print("task number is: {task_number}")
+        print(f'task number is: {task_number}')
 
     for i in range(10, 30):
         # Каждый таск будет выводить его номер
