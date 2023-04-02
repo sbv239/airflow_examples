@@ -5,11 +5,20 @@ from datetime import datetime, timedelta
 from airflow.providers.postgres.operators.postgres import PostgresHook
 
 
-def get_user_with_the_most_likes(conn_id):
-    postgres = PostgresHook(postgres_conn_id=conn_id)
+def get_user_with_the_most_likes():
+    postgres = PostgresHook(postgres_conn_id='startml_feed')
     with postgres.get_conn() as conn:   # вернет тот же connection, что вернул бы psycopg2.connect(...)
         with conn.cursor() as cursor:
-            return cursor.execute("SELECT user_id, COUNT(*) AS count FROM feed_action WHERE action = 'like' GROUP BY 1 ORDER BY 2 DESC LIMIT 1")
+            cursor.execute(
+                """
+                SELECT user_id, COUNT(action='like') AS count
+                FROM "feed_action"
+                WHERE action='like'
+                GROUP BY 1
+                ORDER BY 2 DESC
+                LIMIT 1
+                """)
+            return dict(cursor.fetchone())
 
 
 # Default settings applied to all tasks
@@ -33,6 +42,5 @@ with DAG(
 ) as dag:
     t1 = PythonOperator(
         task_id = 'user_with_the_most_likes_id',
-        python_callable=get_user_with_the_most_likes,
-        op_kwargs={'conn_id': 'startml_feed'},
+        python_callable=get_user_with_the_most_likes
     )
