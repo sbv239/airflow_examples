@@ -52,7 +52,7 @@ with DAG(
             task_id='print_bash_env_task_id_' + str(i),  # id, будет отображаться в интерфейсе
             bash_command="echo $NUMBER",  # какую bash команду выполнить в этом таске
             dag=dag,
-            env={'NUMBER': i}
+            env={'NUMBER': str(i)}
         )
 
         task.doc_md = dedent(__doc__)
@@ -67,7 +67,7 @@ with DAG(
             task_id='print_python_task_id_' + str(i),  # в id можно делать все, что разрешают строки в python
             python_callable=print_task_id,
             # передаем в аргумент с названием task_number номер таски i
-            op_kwargs={'task_number': str(i)},
+            op_kwargs={'task_number': i},
         )
 
         task.doc_md = dedent(__doc__)
