@@ -24,7 +24,7 @@ default_args = {
 }
 
 with DAG(
-    'hw_9_a-korenevich-1',
+    'hw_10_a-korenevich-1',
     start_date=datetime(2021, 1, 1),
     max_active_runs=2,
     schedule_interval=timedelta(minutes=30),
