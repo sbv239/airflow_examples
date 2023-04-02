@@ -67,7 +67,7 @@ with DAG(
             task_id='print_python_task_id_' + str(i),  # в id можно делать все, что разрешают строки в python
             python_callable=print_task_id,
             # передаем в аргумент с названием task_number номер таски i
-            op_kwargs={'task_number': i},
+            op_kwargs={'task_number': str(i)},
         )
 
         task.doc_md = dedent(__doc__)
