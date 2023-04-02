@@ -20,18 +20,25 @@ with DAG(
 	catchup=False,
 	tags=['hw6_lebedev'],
 ) as dag:
-    templated_command = dedent(
-        """
-        {% for i in range(5) %}
-            echo "{{ ts }}"
-            echo "{{ run_id }}"
-        {% endfor %}
-        """
-        )  # поддерживается шаблонизация через Jinja
-        # https://airflow.apache.org/docs/apache-airflow/stable/concepts/operators.html#concepts-jinja-templating
-    
-    t3 = BashOperator(
-        task_id='templated',
-        depends_on_past=False,
-        bash_command=templated_command,
-    )
+    # Генерируем таски в цикле - так тоже можно
+    def prn(ds, **kwargs):
+        task_number = kwargs['task_number']
+        print(f"task number is: {task_number}")
+	
+    for i in range(30):
+        if i < 10:
+            t1 = BashOperator(
+          		task_id=f'echo_task{i}',
+          		bash_command='echo $NUMBER',
+                env={"NUMBER": i})
+        else:
+            pass
+
+# =============================================================================
+#         	t2 = PythonOperator(
+#         		task_id=f'prn_{i}',
+#         		python_callable=prn,
+#                 op_kwargs={'task_number': str(i)}
+#         	)
+# 
+# =============================================================================
