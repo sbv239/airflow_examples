@@ -1,5 +1,6 @@
 from airflow import DAG
-from airflow.operators.bash import BashOperator, PythonOperator
+from airflow.operators.bash import BashOperator
+from airflow.operators.python import PythonOperator
 from datetime import timedelta, datetime
 from textwrap import dedent
 
@@ -19,7 +20,7 @@ with DAG(
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
     },
     description='dag for task 2',
-    schedule_interval=timedelta,
+    schedule_interval=timedelta(days=1),
     start_date=datetime(2023,4,2),
     catchup=False,
     tags=['task_2']
