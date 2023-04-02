@@ -32,7 +32,8 @@ with DAG(
     max_active_runs=2,
     schedule_interval=timedelta(minutes=30),
     default_args=default_args,
-    catchup=False
+    catchup=False,
+    tags=['a-korenevich-1']
 ) as dag:
     t1 = PythonOperator(
         task_id = 'update_task_id',
