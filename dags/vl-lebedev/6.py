@@ -19,17 +19,18 @@ with DAG(
 	catchup=False,
 	tags=['hw6_lebedev'],
 ) as dag:
-	t1 = BashOperator(
-		task_id='pwd_task',
-		bash_command='pwd',
-	)
-	
-	def prn(ds, **kwargs):
-		print(ds)
-	
-	t2 = PythonOperator(
-		task_id='prn_ds',
-		python_callable=prn,
-	)
-
-	t1>>t2
+    templated_command = dedent(
+        """
+        {% for i in range(5) %}
+            echo "{{ ts }}"
+            echo "{{ run_id }}"
+        {% endfor %}
+        """
+        )  # поддерживается шаблонизация через Jinja
+        # https://airflow.apache.org/docs/apache-airflow/stable/concepts/operators.html#concepts-jinja-templating
+    
+    t3 = BashOperator(
+        task_id='templated',
+        depends_on_past=False,
+        bash_command=templated_command,
+    )
