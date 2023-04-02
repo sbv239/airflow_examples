@@ -1,3 +1,10 @@
+"""
+#### Task Documentation
+You can document your task using the attributes `doc_md` (markdown),
+Here is example of code: `bash -c pwd`
+Here is example of cursive: *some text with cursive*
+Here is example of bold: **some bold text**
+"""
 from datetime import datetime, timedelta
 from textwrap import dedent
 
@@ -37,12 +44,16 @@ with DAG(
     tags=['example'],
 ) as dag:
 
+    dag.doc_md = dedent(__doc__)
+
     for i in range(10):
         # Каждый таск будет выводить его номер
         task = BashOperator(
             task_id='print_bash_task_id_' + str(i),  # id, будет отображаться в интерфейсе
             bash_command=f"echo {i}",  # какую bash команду выполнить в этом таске
         )
+
+        task.doc_md = dedent(__doc__)
     
     def print_task_id(task_number):
         """Вывести task_number"""
@@ -56,3 +67,5 @@ with DAG(
             # передаем в аргумент с названием task_number номер таски i
             op_kwargs={'task_number': i},
         )
+
+        task.doc_md = dedent(__doc__)

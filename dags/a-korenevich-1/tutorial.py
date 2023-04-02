@@ -1,5 +1,9 @@
 """
-Test documentation from header
+#### Task Documentation
+You can document your task using the attributes `doc_md` (markdown),
+Here is example of code: `bash -c pwd`
+Here is example of cursive: *some text with cursive*
+Here is example of bold: **some bold text**
 """
 from datetime import datetime, timedelta
 from textwrap import dedent
@@ -45,16 +49,7 @@ with DAG(
         bash_command='pwd',  # какую bash команду выполнить в этом таске
     )
 
-    t1.doc_md = dedent(
-        """\
-    #### Task Documentation
-    You can document your task using the attributes `doc_md` (markdown),
-    `doc` (plain text), `doc_rst`, `doc_json`, `doc_yaml` which gets
-    rendered in the UI's Task Instance Details page.
-    ![img](http://montcs.bloomu.edu/~bobmon/Semesters/2012-01/491/import%20soul.png)
-
-    """
-    )  # dedent - это особенность Airflow, в него нужно оборачивать всю доку
+    t1.doc_md = dedent(__doc__)
 
     def print_ds(ds, **kwargs):
         """Пример PythonOperator"""
@@ -66,7 +61,9 @@ with DAG(
         python_callable=print_ds,  # свойственен только для PythonOperator - передаем саму функцию
     )
 
-    dag.doc_md = __doc__  # Можно забрать докстрингу из начала файла вот так
+    t2.doc_md = dedent(__doc__)
+
+    dag.doc_md = dedent(__doc__)  # Можно забрать докстрингу из начала файла вот так
 
     # А вот так в Airflow указывается последовательность задач
     t1 >> t2
