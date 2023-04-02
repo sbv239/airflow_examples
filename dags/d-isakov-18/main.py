@@ -1,5 +1,5 @@
 """
-Task 2
+Task 3
 """
 from datetime import datetime, timedelta
 
@@ -9,7 +9,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-    'hw_2_d-isakov-18',
+    'hw_3_d-isakov-18',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -24,17 +24,20 @@ with DAG(
     catchup=False,
 ) as dag:
 
-    t1 = BashOperator(
-        task_id='command_pwd',
-        bash_command='pwd',
-    )
+    for i in range(10):
+        t1 = BashOperator(
+            task_id='command_echo_' + str(i),
+            bash_command=f"echo {i}",
+        )
 
-    def print_ds(ds):
-        print(ds)
+    def print_task_number(task_number):
+        print(f'task number is: {task_number}')
 
-    t2 = PythonOperator(
-        task_id='print_ds',
-        python_callable=print_ds,
-    )
+    for i in range(10, 30):
+        t2 = PythonOperator(
+            task_id='print_task_number_' + str(i),
+            python_callable=print_task_number,
+            op_kwargs={'task_number': i},
+        )
 
     t1 >> t2
