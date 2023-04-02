@@ -26,9 +26,9 @@ with DAG(
     		bash_command=f'echo {i}',
     	)
 	
-	def prn(ds, **kwargs):
+    def prn(ds, **kwargs):
         task_number = kwargs['task_number']
-		print("task number is: {task_number}")
+        print("task number is: {task_number}")
 	
     for i in range(20):
     	t2 = PythonOperator(
