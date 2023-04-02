@@ -20,20 +20,23 @@ with DAG(
 	tags=['hw3_lebedev'],
 ) as dag:
     # Генерируем таски в цикле - так тоже можно
-    for i in range(10):
-    	t1 = BashOperator(
-    		task_id=f'echo_task{i}',
-    		bash_command=f'echo {i}',
-    	)
-	
     def prn(ds, **kwargs):
         task_number = kwargs['task_number']
         print(f"task number is: {task_number}")
 	
-    for i in range(20):
-    	t2 = PythonOperator(
-    		task_id=f'prn_{i}',
-    		python_callable=prn,
-            op_kwargs={'task_number': str(i)}
-    	)
+    for i in range(30):
+        if i < 10:
+ 
+            = BashOperator(
+        		task_id=f'echo_task{i}',
+        		bash_command=f'echo {i}',
+        	)
+
+        else:
+
+        	t2 = PythonOperator(
+        		task_id=f'prn_{i}',
+        		python_callable=prn,
+                op_kwargs={'task_number': str(i)}
+        	)
 
