@@ -6,7 +6,7 @@ from airflow.operators.python import PythonOperator
 
 with DAG(
     #taskid
-    'hw1_task'
+    'hw_2_m-zharmakin-6'
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
