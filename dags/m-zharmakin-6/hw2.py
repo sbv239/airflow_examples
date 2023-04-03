@@ -28,7 +28,7 @@ with DAG(
         
         def current_date(ds, **kwargs):
             print(ds)
-            returm 'first DAG with python operator'
+            return 'first DAG with python operator'
             
         t2 = PythonOperator(
             taskid='current_date',
