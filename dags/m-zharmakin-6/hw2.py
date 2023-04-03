@@ -20,19 +20,19 @@ with DAG(
     start_date=datetime(2022, 1, 1),
     catchup=False,
     tags=['example'],    
-    ) as dag:
-        t1 = BashOperator(
-            taskid='location',
-            bash_command='pwd'
-            )
+) as dag:
+    t1 = BashOperator(
+        taskid='location',
+        bash_command='pwd'
+        )
         
-        def current_date(ds, **kwargs):
-            print(ds)
-            return 'first DAG with python operator'
+    def current_date(ds, **kwargs):
+        print(ds)
+        return 'first DAG with python operator'
             
-        t2 = PythonOperator(
-            taskid='current_date',
-            python_callable=current_date,
-            )
+    t2 = PythonOperator(
+        taskid='current_date',
+        python_callable=current_date,
+        )
             
-        t1 >> t2
+    t1 >> t2
