@@ -6,7 +6,7 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 with DAG(
-    'a-igumnov_task_3',
+    'a-igumnov_task_4',
 
     default_args={
     'depends_on_past': False,
@@ -16,11 +16,11 @@ with DAG(
     'retries': 1,
     'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
     },
-    description = 'hw_3_a-igumnov',
+    description = 'hw_4_a-igumnov',
     schedule_interval = timedelta(days=1),
     start_date=datetime(2023, 1, 1),
     catchup=False,
-    tags=['hw_3_a-igumnov']
+    tags=['hw_4_a-igumnov']
 
 
 ) as dag:
