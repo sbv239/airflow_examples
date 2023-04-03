@@ -17,9 +17,9 @@ with DAG(
     },
     description='A simple tutorial DAG',
     schedule_interval=timedelta(days=1),
-    start_date=datetime(2023, 1, 1),
+    start_date=datetime(2022, 1, 1),
     catchup=False,
-    tags['hw'],    
+    tags=['example'],    
     ) as dag:
         t1 = BashOperator(
             taskid='location',
