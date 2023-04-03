@@ -3,6 +3,7 @@ from datetime import timedelta, datetime
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
+from airflow.operators.dummy import DummyOperator
 
 
 with DAG('hw_3_m-zharmakin-6',
@@ -21,13 +22,19 @@ with DAG('hw_3_m-zharmakin-6',
         tags=['hw_3_m-zharmakin-6']
         ) as dag:
     
+    t1 = DummyOperator(task_id='start_dag')
+    t2 = DummyOperator(task_id='wait_for_all_bash_operators')
+    t3 = DummyOperator(task_id="finish_dag")
+    
     for i in range(10):
         bash_task = BashOperator(
             task_id=f'bash_task_{i}',
             bash_command=f'echo {i}'
         )
+        t1 >> bash_task >> t2
         
-    def py_task(task_number, **kwargs):
+    def py_task(run_id, **kwargs):
+        print(run_id)
         print(f"task number is: {kwargs.get('task_number')}")
         return 'pytask'
         
@@ -37,5 +44,4 @@ with DAG('hw_3_m-zharmakin-6',
             python_callable=py_task,
             op_kwargs={"task_number": i}
         )
-    
-    bash_task >> python_task
+        t2 >> python_task >> t3
