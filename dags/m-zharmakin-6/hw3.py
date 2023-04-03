@@ -37,5 +37,5 @@ with DAG('hw_3_m-zharmakin-6',
             python_callable=py_task,
             op_kwargs={"task_number": i}
         )
-        
+    
     bash_task >> python_task
