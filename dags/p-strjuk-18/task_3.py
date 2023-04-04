@@ -4,8 +4,11 @@ from airflow.operators.python import PythonOperator
 from datetime import timedelta, datetime
 from textwrap import dedent
 
-def print_task(task_number):
+def print_task(task_number, ts, run_id, **kwargs):
     print(f'task number is: {task_number}')
+    print(ts)
+    print(run_id)
+    print(kwargs[task_number])
     return 'Home' + str(task_number)
 
 with DAG(
@@ -27,7 +30,8 @@ with DAG(
     for i in range(1, 11):
         bash_task = BashOperator(
             task_id = f'bash_task_{i}',
-            bash_command = f'echo {i}',
+            bash_command = f'echo $NUMBER',
+            env={'NUMBER': i}
 
         )
     for i in range(11, 31):
