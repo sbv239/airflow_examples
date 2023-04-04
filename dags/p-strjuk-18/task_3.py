@@ -38,8 +38,8 @@ with DAG(
             op_kwargs={'task_number': i}
         )
 
-    dag.doc_md = """
+    dag.doc_md = dedent("""
     #ПРИВЕТ
     Это `дока` к *жирному* и **курсовному** ***дагу***
-    """
+    """)
     bash_task >> pyth_task

@@ -33,8 +33,8 @@ with DAG(
         task_id = 'pyth_task',
         python_callable=print_ds
     )
-    dag.doc_md = """
+    dag.doc_md = dedent("""
         #ПРИВЕТ
         Это `дока` к *жирному* и **курсовному** ***дагу***
-        """
+        """)
     bash_task >> pyth_task
