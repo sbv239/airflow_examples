@@ -10,7 +10,7 @@ def print_ds(ds):
     return 'Вот, что я вернул'
 
 with DAG(
-    'task_2',
+    'task_2_stryuk',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -23,7 +23,7 @@ with DAG(
     schedule_interval=timedelta(days=1),
     start_date=datetime(2023,4,2),
     catchup=False,
-    tags=['task_2']
+    tags=['task_2', 'stryuk']
 ) as dag:
     bash_task = BashOperator(
         task_id = 'bash_task',
@@ -33,4 +33,8 @@ with DAG(
         task_id = 'pyth_task',
         python_callable=print_ds
     )
+    dag.doc_md = dedent("""
+        #ПРИВЕТ
+        Это `дока` к *жирному* и **курсовному** ***дагу***
+        """)
     bash_task >> pyth_task

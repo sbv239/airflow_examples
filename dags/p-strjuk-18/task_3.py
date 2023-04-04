@@ -9,7 +9,7 @@ def print_task(task_number):
     return 'Home' + str(task_number)
 
 with DAG(
-    'task_3',
+    'task_3_stryuk',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -37,4 +37,9 @@ with DAG(
 
             op_kwargs={'task_number': i}
         )
+
+    dag.doc_md = dedent("""
+    #ПРИВЕТ
+    Это `дока` к *жирному* и **курсовному** ***дагу***
+    """)
     bash_task >> pyth_task
