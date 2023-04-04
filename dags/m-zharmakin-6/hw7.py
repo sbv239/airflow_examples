@@ -4,7 +4,6 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
-
 with DAG('hw_3_m-zharmakin-6',
         default_args={
             'depends_on_past': False,
