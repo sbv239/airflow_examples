@@ -1,12 +1,12 @@
 from airflow import DAG
 from airflow.operators.bash import BashOperator
-from airflow.operators.python import PythonOperator, op_kwargs
+from airflow.operators.python import PythonOperator
 from datetime import timedelta, datetime
 from textwrap import dedent
 
-def print_task(var):
-    print(f'task number is: {var}')
-    return 'Home' + str(var)
+def print_task(task_number):
+    print(f'task number is: {task_number}')
+    return 'Home' + str(task_number)
 
 with DAG(
     'task_3',
@@ -26,7 +26,7 @@ with DAG(
 ) as dag:
     for i in range(1, 11):
         bash_task = BashOperator(
-            task_id = f'bash_task {i}',
+            task_id = f'bash_task_{i}',
             bash_command = f'echo {i}',
 
         )
@@ -35,6 +35,6 @@ with DAG(
             task_id = f'pyth_task_{i}',
             python_callable=print_task,
 
-            op_kwargs={'var': i}
+            op_kwargs={'task_number': i}
         )
     bash_task >> pyth_task
