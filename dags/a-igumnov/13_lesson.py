@@ -11,11 +11,11 @@ def startml_true():
 def startml_false():
     print("Not a startML course, sorry")
 
-def get_branch(**kwargs):
+def get_branch():
     if Variable.get('is_startml') == 'True':
-        return 'startml_True'
+        return 'startml_desc'
     else:
-        return 'startml_False'
+        return 'not_startml_desc'
 
 
 with DAG(
@@ -27,7 +27,7 @@ with DAG(
     'email_on_failure': False,
     'email_on_retry': False,
     'retries': 1,
-    'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
+    'retry_delay': timedelta(minutes=5),
     },
     description = 'hw_13_a-igumnov',
     schedule_interval = timedelta(days=1),
@@ -48,12 +48,12 @@ with DAG(
     )
 
     is_startml = PythonOperator(
-        task_id = 'startml_True',
+        task_id = 'startml_desc',
         python_callable = startml_true
     )
 
     not_startml = PythonOperator(
-        task_id = 'startml_False',
+        task_id = 'not_startml_desc',
         python_callable = startml_false
     )
 
