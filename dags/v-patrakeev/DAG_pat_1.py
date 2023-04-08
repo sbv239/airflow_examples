@@ -9,6 +9,7 @@ def print_context(ds, **kwargs):
     print(ds)
     return 'Whatever you return gets printed in the logs'
 
+
 with DAG(
     'hw_2_v-patrakeev',
     default_args={
