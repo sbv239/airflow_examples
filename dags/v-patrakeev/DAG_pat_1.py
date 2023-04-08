@@ -10,7 +10,7 @@ def print_context(ds, **kwargs):
     return 'Whatever you return gets printed in the logs'
 
 with DAG(
-    'tutorial',
+    'hw_2_v-patrakeev',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
