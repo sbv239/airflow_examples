@@ -4,8 +4,9 @@ from airflow.operators.python import PythonOperator
 
 from airflow.operators.bash import BashOperator
 
-def print_task(task_number_is):
-    print(f'task number is: {task_number_is}')
+def print_task_num(task_number):
+    print(f'task number is: {task_number}')
+
 
 with DAG(
     'HW_3_v-patrakeev',
@@ -20,19 +21,19 @@ with DAG(
     start_date=datetime.now(),
 ) as dag:
 
-    # t1, t2, t3 - это операторы (они формируют таски, а таски формируют даг)
-
-   for i in range(10):
+    for i in range(10):
         t1 = BashOperator(
-            task_id='example ' + str(i),  # id, будет отображаться в интерфейсе
-            bash_command=f"echi {i}",
+            task_id='print_command_' + str(i),
+            bash_command=f'echo {i}',
         )
 
-   for i in range(20):
-        t2 =PythonOperator(
-            task_id = 'task' + str(i+10),
-            python_callable=print_task,
-            op_kwargs ={"task_number_is": i+10}
+    for i in range(20):
+        t2 = PythonOperator(
+            task_id='print_task_num_' + str(i),
+            python_callable=print_task_num,
+            op_kwargs={'task_number': i},
         )
 
-   t1 >> t2
+
+    t1 >> t2
+
