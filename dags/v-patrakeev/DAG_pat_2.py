@@ -7,7 +7,6 @@ from airflow.operators.bash import BashOperator
 def print_task(task_number_is):
     print(f'task number is: {task_number_is}')
 
-
 with DAG(
     'HW_3_v-patrakeev',
     default_args={
@@ -37,5 +36,3 @@ with DAG(
         )
 
    t1 >> t2
-
-    
