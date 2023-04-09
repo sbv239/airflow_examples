@@ -20,11 +20,7 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
     },
-    description='A simple tutorial DAG',
-    schedule_interval=timedelta(days=1),
-    start_date=datetime(2023, 8, 4),
-    catchup=False,
-    tags=['example'],
+    start_date=datetime.now(),
 ) as dag:
 
     # t1, t2, t3 - это операторы (они формируют таски, а таски формируют даг)
