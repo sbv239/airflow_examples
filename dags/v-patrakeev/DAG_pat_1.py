@@ -11,7 +11,7 @@ def print_context(ds, **kwargs):
 
 
 with DAG(
-    'hw_2_v-patrakeev',
+    'HW_2_v-patrakeev',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
