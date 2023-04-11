@@ -9,7 +9,7 @@ def print_task_num(task_number):
 
 
 with DAG(
-    'HW_5_v-patrakeev',
+    'HW_6_v-patrakeev',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
