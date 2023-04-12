@@ -5,7 +5,7 @@ from airflow.operators.python import PythonOperator
 from airflow.operators.bash import BashOperator
 
 def print_task_num(ts, run_id, **kwargs):
-    print(f'task number is: {kwargs}, {ts}, {run_id}')
+    print(f'task number is: {kwargs}, {{ts}}, {{run_id}}')
 
 
 with DAG(
