@@ -12,7 +12,7 @@ default_args={
     'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
 }
 
-def tusk_number2(ts,run_id,task_number):
+def task_number2(ts,run_id,task_number):
     print(ts)
     print(run_id)
     return  f"task number is: {task_number}"
@@ -27,8 +27,8 @@ catchup = False
     for task_number in range(20):
         t2 = PythonOperator(
         task_id = 'print_2_'+ str(task_number),
-        python_callable = tusk_number2,
-        op_kwargs = {'tusk_number':task_number}
+        python_callable = task_number2,
+        op_kwargs = {'task_number':task_number}
         )
 
 t2
