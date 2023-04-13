@@ -56,4 +56,4 @@ catchup = False
         task_id='dummy_finish'
     )
 
- a1 >> t2 >> [t3, t4] >> a2
+ a1 >> t1 >> [t2, t3] >> a2
