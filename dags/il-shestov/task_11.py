@@ -24,7 +24,7 @@ def get_id():
             group by user_id
             order by COUNT(user_id) desc
             limit 1""")
-            result = cursor.fethone()
+            result = cursor.fetchone()
     return result
 
 with DAG(
