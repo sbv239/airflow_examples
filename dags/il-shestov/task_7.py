@@ -21,7 +21,7 @@ with DAG(
 'il_shestov_task_7',
 default_args = default_args,
 schedule_interval= timedelta(days=1),
-start_date = datetime(2023,4,13),
+start_date = datetime(2023,4,12),
 catchup = False
 ) as dag:
     for task_number in range(20):
@@ -31,3 +31,4 @@ catchup = False
         op_kwargs = {'tusk_number':task_number}
         )
 
+t2
