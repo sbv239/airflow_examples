@@ -33,3 +33,5 @@ catchup = False
         python_callable = tusk_number2,
         op_kwargs = {'tusk_number':task_number}
         )
+
+t1 >> t2
