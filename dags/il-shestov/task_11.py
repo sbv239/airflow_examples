@@ -24,11 +24,11 @@ def get_id():
             group by user_id
             order by COUNT(user_id) desc
             limit 1""")
-            result = cursor.fetcone()
+            result = cursor.fethone()
     return result
 
 with DAG(
-'il_shestov_task_9',
+'il_shestov_task_11',
 default_args = default_args,
 schedule_interval= timedelta(days=1),
 start_date = datetime(2023,4,12),
