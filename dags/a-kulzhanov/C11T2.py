@@ -13,7 +13,7 @@ def print_da(ds, **kwargs):
 
 
 with DAG(
-    'Task 2',
+    'aakulzhanov_task_2',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
