@@ -25,19 +25,19 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
    },
-    description='A simple Task 2',
+    description='A simple Task 3',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2023, 1, 1),
     catchup=False,
     tags=['example'],
 ) as dag:
-    for i in range(11):
+    for i in range(10):
         task_Bash = BashOperator(
             task_id='print_Bash_comm' + str(i),
             depends_on_past=False,
             bash_command=f'echo{i}'
         )
-    for j in range(21):
+    for j in range(20):
         task_Python = PythonOperator(
             task_id='print_Python_comm' + str(j),
             op_kwargs={'task_number': j},
