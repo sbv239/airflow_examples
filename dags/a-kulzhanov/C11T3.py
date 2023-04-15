@@ -16,7 +16,7 @@ def print_task(task_number):
     print(f'task number is: {task_number}')
 
 with DAG(
-    'aakulzhanov_task_2',
+    'aakulzhanov_task_3',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
