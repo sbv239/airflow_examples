@@ -32,16 +32,16 @@ with DAG(
     tags=['example'],
 ) as dag:
     for i in range(11):
-        t1 = BashOperator(
-            task_id='print_path',
+        task_Bash = BashOperator(
+            task_id='print_Bash_comm' + str(i),
             depends_on_past=False,
             bash_command=f'echo{i}'
         )
     for j in range(21):
-        t2 = PythonOperator(
-            task_id='print_ds',
+        task_Python = PythonOperator(
+            task_id='print_Python_comm' + str(j),
             op_kwargs={'task_number': j},
             python_callable=print_task
         )
 
-    t1 >> t2
+    task_Bash >> task_Python
