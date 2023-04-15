@@ -35,4 +35,4 @@ with DAG(
             python_callable = new_tasks, 
             op_kwargs = {'task_number' : task}
         )
-    t1 >> t2
+    t1 >> t1
