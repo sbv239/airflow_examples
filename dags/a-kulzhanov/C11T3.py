@@ -35,7 +35,7 @@ with DAG(
         task_Bash = BashOperator(
             task_id='print_Bash_comm' + str(i),
             depends_on_past=False,
-            bash_command=f'echo{i}'
+            bash_command=f'echo {i}'
         )
     for j in range(20):
         task_Python = PythonOperator(
