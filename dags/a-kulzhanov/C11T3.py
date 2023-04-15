@@ -31,13 +31,13 @@ with DAG(
     catchup=False,
     tags=['example'],
 ) as dag:
-    for i in range(11):
+    for i in range(10):
         task_Bash = BashOperator(
             task_id='print_Bash_comm' + str(i),
             depends_on_past=False,
             bash_command=f'echo{i}'
         )
-    for j in range(21):
+    for j in range(20):
         task_Python = PythonOperator(
             task_id='print_Python_comm' + str(j),
             op_kwargs={'task_number': j},
