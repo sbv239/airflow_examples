@@ -23,7 +23,7 @@ with DAG(
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
    },
     description='A simple Task 2',
-    shedule_interval=timedelta(daus=1),
+    schedule_interval=timedelta(days=1),
     start_date=datetime(2023, 1, 1),
     catchup=False,
     tags=['example'],
@@ -36,7 +36,7 @@ with DAG(
 
     t2 = PythonOperator(
         task_id='print_ds',
-        python_collable=print_da
+        python_callable=print_da
     )
 
     t1 >> t2
