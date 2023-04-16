@@ -11,7 +11,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-    'HW_2_d-semenov',
+    'HW_4_d-semenov',
     # Параметры по умолчанию для тасок
         default_args={
             'depends_on_past': False,
@@ -44,7 +44,7 @@ with DAG(
     t1.doc_md = dedent(
         '''\
         #### Task documentation
-        this part for 'train'
+        # this part for `train`
         or *not*
         or **i don't know**
         '''
