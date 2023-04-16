@@ -18,6 +18,7 @@ def print_task(task_number, ts, run_id):
     print(run_id)
     print(f'task number is: {task_number}')
 
+
 with DAG(
     'aakulzhanov_task_7',
     default_args={
