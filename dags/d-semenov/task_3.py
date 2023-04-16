@@ -1,9 +1,8 @@
 from datetime import datetime, timedelta
-from textwrap import dedent
+
 
 # Для объявления DAG нужно импортировать класс из airflow
 from airflow import DAG
-from airflow.operators.bash import BashOperator
 
 # Операторы - это кирпичики DAG, они являются звеньями в графе
 # Будем иногда называть операторы тасками (tasks)
@@ -44,7 +43,7 @@ with DAG(
     for i in range(10):
         task = BashOperator(
             task_id='print_with_Bash_' + str(i),
-            tash_command=f'echo check this {i}'
+            bash_command=f'echo check this {i}'
         )
     for i in range(20):
         task = PythonOperator(
