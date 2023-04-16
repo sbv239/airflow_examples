@@ -11,7 +11,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-    'HW 2 d-semenov',
+    'HW_2_d-semenov',
     # Параметры по умолчанию для тасок
         default_args={
             'depends_on_past': False,
