@@ -9,14 +9,14 @@ from airflow import DAG
 from airflow.operators.python import PythonOperator
 
 
-def get_data(ts):
-    ts.xcom_push(
+def get_data(ti):
+    ti.xcom_push(
         key="sample_xcom_key",
         value="xcom test"
     )
 
-def pull_data(ts):
-    check = ts.xcom_pull(
+def pull_data(ti):
+    check = ti.xcom_pull(
         key='sample_xcom_key',
         task_ids='push_data'
     )
