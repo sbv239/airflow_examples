@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 
 from airflow import DAG
 from airflow.operators.bash import BashOperator
-from airflow.operators.python import PythonOperator
+
 from textwrap import dedent
 
 
@@ -13,9 +13,9 @@ from textwrap import dedent
 #     return 'Ok'
 #
 
-def print_task(task_number):
-    print(f'task number is: {task_number}')
-
+# def print_task(task_number):
+#     print(f'task number is: {task_number}')
+#
 with DAG(
     'aakulzhanov_task_6',
     default_args={
@@ -37,7 +37,7 @@ with DAG(
             task_id='print_Bash_comm' + str(i),
             depends_on_past=False,
             bash_command="echo $NUMBER",
-            env={"NUMBER": i},
+            env={"NUMBER": 'i'},
         )
         task_Bash.doc_md = dedent(
             """
