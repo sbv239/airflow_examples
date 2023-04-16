@@ -8,8 +8,10 @@ from airflow.operators.bash import BashOperator
 # Операторы - это кирпичики DAG, они являются звеньями в графе
 # Будем иногда называть операторы тасками (tasks)
 from airflow.operators.bash import BashOperator
+from airflow.operators.python import PythonOperator
+
 with DAG(
-    'tutorial',
+    'HW_2_d-semenov',
     # Параметры по умолчанию для тасок
         default_args={
             'depends_on_past': False,
