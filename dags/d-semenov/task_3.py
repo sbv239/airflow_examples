@@ -37,24 +37,19 @@ with DAG(
     tags=['example'],
 ) as dag:
 
-
-    def print_me(num_task):
-        print(f'task number is: {num_task}')
-
+    def print_me(task_number):
+        print(f'task number is: {task_number}')
 
 
-
-    for number in range(30):
-        if number < 11:
-            task = BashOperator(
-                task_id='print_with_Bash_' + str(number),
-                bash_command=f'echo check this {number}'
-            )
-        else:
-            task=PythonOperator(
-                task_id='print_with_Python_' + str(number),
-                python_callable=print_me,
-                op_kwargs={'num_task': number}
-            )
-
+    for i in range(10):
+        task = BashOperator(
+            task_id='print_with_Bash_' + str(i),
+            tash_command=f'echo check this {i}'
+        )
+    for i in range(20):
+        task = PythonOperator(
+            task_id='print_with_Python_' + str(i),
+            python_callable=print_me,
+            op_kwargs={'task_number': i}
+        )
 
