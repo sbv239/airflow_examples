@@ -5,13 +5,6 @@ from airflow import DAG
 from airflow.operators.python import PythonOperator
 from textwrap import dedent
 
-
-# def print_da(ds, **kwargs):
-#     print("This is ds date")
-#     print(ds)
-#     return 'Ok'
-#
-
 def print_task(task_number, ts, run_id):
     print(ts)
     print(run_id)
