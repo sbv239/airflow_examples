@@ -2,10 +2,8 @@ from datetime import datetime, timedelta
 
 
 from airflow import DAG
-<<<<<<< dags/a-kulzhanov/C11T7.py
-=======
+<<<<<<< dags/a-kulzhanov/C11T7.py 
 from airflow.operators.bash import BashOperator
->>>>>>> dags/a-kulzhanov/C11T7.py
 from airflow.operators.python import PythonOperator
 from textwrap import dedent
 
