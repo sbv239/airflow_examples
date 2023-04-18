@@ -34,7 +34,8 @@ default_args={
             env = {"NUMBER": i}
         )
     def print_task_number(ts, run_id, task_number):
-        print(ts, run_id)
+        print(ts)
+        print(run_id)
         return f"Something == {task_number}"
 
     for j in range(20):
