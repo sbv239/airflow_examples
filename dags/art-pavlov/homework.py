@@ -9,7 +9,7 @@ from airflow.operators.python import PythonOperator
 
 
 with DAG(
-    "first_task",
+    "more_arguments",
 
 default_args={
     'depends_on_past': False,
@@ -23,7 +23,7 @@ default_args={
     schedule_interval= timedelta(days=1),
     start_date= datetime(2023, 4, 17),
     catchup= False,
-    tags=['idk']
+    tags=['idk7']
 ) as dag:
 
     for i in range(10):
@@ -33,9 +33,9 @@ default_args={
             bash_command= f"echo $NUMBER",
             env = {"NUMBER": i}
         )
-    def print_task_number(task_number, **kwargs):
-        print(f"task number is {task_number}")
-        return "Something"
+    def print_task_number(ts, run_id, task_number):
+        print(ts, run_id)
+        return f"Something == {task_number}"
 
     for j in range(20):
 
@@ -43,8 +43,6 @@ default_args={
             task_id='python_task_' + str(j),
             python_callable=print_task_number,
             op_kwargs={'task_number': j}
-
-
         )
 
     t1 >> t2
