@@ -6,20 +6,17 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 
-def test_push(ti):
-    ti.xcom_push(
-        key="sample_xcom_key",
-        value="xcom test"
-    )
+def test_push():
+    return "Airflow tracks everything"
 
 def test_pull(ti):
     ti.xcom_pull(
         task_ids = "xcom_push",
-        key = "sample_xcom_key"
+        key = "return_value"
     )
 
 with DAG(
-    "XCOM_test",
+    "XCOM_test2",
 
 default_args={
     'depends_on_past': False,
