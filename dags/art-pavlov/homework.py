@@ -5,10 +5,7 @@ from airflow import  DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
-def print_context(ds, **kwargs):
-    print(kwargs)
-    print(ds)
-    return "Something"
+
 
 
 with DAG(
@@ -29,14 +26,24 @@ default_args={
     tags=['idk']
 ) as dag:
 
-    t1 = BashOperator(
-        task_id='current_direction',
-        bash_command="pwd"
-    )
+    for i in range(10):
 
-    t2 = PythonOperator(
-        task_id='print_ds',
-        python_callable=print_context
-    )
+        t1 = BashOperator(
+            task_id='bash_' + str(i),
+            bash_command= f"echo {i} string "
+        )
+    def print_task_number(task_number, **kwargs):
+        print(f"task number is {task_number}")
+        return "Something"
+
+    for j in range(20):
+
+        t2 = PythonOperator(
+            task_id='python_task_' + str(j),
+            python_callable=print_task_number,
+            op_kwargs={'task_number': j}
+
+
+        )
 
     t1 >> t2
