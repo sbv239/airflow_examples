@@ -30,7 +30,8 @@ default_args={
 
         t1 = BashOperator(
             task_id='bash_' + str(i),
-            bash_command= f"echo {i} string "
+            bash_command= f"echo $NUMBER",
+            env = {"NUMBER": i}
         )
     def print_task_number(task_number, **kwargs):
         print(f"task number is {task_number}")
