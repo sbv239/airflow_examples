@@ -6,10 +6,20 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 
+def test_push(ti):
+    ti.xcom_push(
+        key="sample_xcom_key",
+        value="xcom test"
+    )
 
+def test_pull(ti):
+    ti.xcom_pull(
+        task_ids = "xcom_push",
+        key = "sample_xcom_key"
+    )
 
 with DAG(
-    "more_arguments",
+    "XCOM_test",
 
 default_args={
     'depends_on_past': False,
@@ -26,24 +36,14 @@ default_args={
     tags=['idk7']
 ) as dag:
 
-    for i in range(10):
+    t1 = PythonOperator(
+        task_id="xcom_push",
+        python_callable=test_push
+    )
 
-        t1 = BashOperator(
-            task_id='bash_' + str(i),
-            bash_command= f"echo $NUMBER",
-            env = {"NUMBER": i}
-        )
-    def print_task_number(ts, run_id, task_number):
-        print(ts)
-        print(run_id)
-        return f"Something == {task_number}"
-
-    for j in range(20):
-
-        t2 = PythonOperator(
-            task_id='python_task_' + str(j),
-            python_callable=print_task_number,
-            op_kwargs={'task_number': j}
-        )
+    t2 = PythonOperator(
+        task_id = "xcom_pull",
+        python_callable = test_pull
+    )
 
     t1 >> t2
