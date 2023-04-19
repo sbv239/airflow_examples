@@ -6,17 +6,15 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 
-def test_push():
-    return "Airflow tracks everything"
+def get_var():
+    from airflow.models import Variable
 
-def test_pull(ti):
-    ti.xcom_pull(
-        task_ids = "xcom_push",
-        key = "return_value"
-    )
+    var = Variable.get("is_startml")
+    print(var)
+    return var
 
 with DAG(
-    "XCOM_test2",
+    "Variables",
 
 default_args={
     'depends_on_past': False,
@@ -30,17 +28,10 @@ default_args={
     schedule_interval= timedelta(days=1),
     start_date= datetime(2023, 4, 17),
     catchup= False,
-    tags=['idk7']
+    tags=['idk12']
 ) as dag:
 
     t1 = PythonOperator(
-        task_id="xcom_push",
-        python_callable=test_push
+        task_id="return_var",
+        python_callable=get_var
     )
-
-    t2 = PythonOperator(
-        task_id = "xcom_pull",
-        python_callable = test_pull
-    )
-
-    t1 >> t2
