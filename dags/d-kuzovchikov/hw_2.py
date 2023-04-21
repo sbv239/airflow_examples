@@ -30,10 +30,10 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
         },
-        description='task_1',
+        description='task_2',
         start_date=datetime(2023, 1, 1),
         catchup=False,
-        tags=['task_1'],
+        tags=['task_2'],
     ) as dag:
     
         t_bash = BashOperator(
