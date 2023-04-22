@@ -26,16 +26,16 @@ with DAG(
     description='Simple BashOperator and PythonOperator',
     # Как часто запускать DAG
     # schedule_interval=timedelta(days=1),
-    # # С какой даты начать запускать DAG
-    # # Каждый DAG "видит" свою "дату запуска"
-    # # это когда он предположительно должен был
-    # # запуститься. Не всегда совпадает с датой на вашем компьютере
-    # start_date=datetime(2022, 1, 1),
-    # # Запустить за старые даты относительно сегодня
-    # # https://airflow.apache.org/docs/apache-airflow/stable/dag-run.html
-    # catchup=False,
-    # # теги, способ помечать даги
-    # tags=['example'],
+    # С какой даты начать запускать DAG
+    # Каждый DAG "видит" свою "дату запуска"
+    # это когда он предположительно должен был
+    # запуститься. Не всегда совпадает с датой на вашем компьютере
+    start_date=datetime(2023, 4, 22),
+    # Запустить за старые даты относительно сегодня
+    # https://airflow.apache.org/docs/apache-airflow/stable/dag-run.html
+    catchup=False,
+    # теги, способ помечать даги
+    tags=['n-klokova'],
 ) as dag:
 
     # t1, t2 - это операторы (они формируют таски, а таски формируют даг)
