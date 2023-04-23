@@ -14,7 +14,7 @@ with DAG(
         'email_on_failure': False,
         'email_on_retry': False,
         'retries': 1,
-        'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
+        'retry_delay': timedelta(minutes=5),
     },
     description='task_2',
     schedule_interval=timedelta(days=1),
@@ -29,15 +29,16 @@ with DAG(
     tags=['task_2']
 
 ) as dag:
-    pwd_command = BashOperator(
+    t1 = BashOperator(
         task_id='pwd_command',
         bash_command= 'pwd'
     )
-
     def print_ds(ds):
         print(ds)
 
-    run_this = PythonOperator(
+    t2 = PythonOperator(
         task_id= 'print_the_context',
         python_callable=print_ds,
     )
+
+    t1 >> t2
