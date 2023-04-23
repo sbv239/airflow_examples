@@ -12,7 +12,7 @@ def print_ds(ds, **kwargs):
     return 'Some logs'
 
 with DAG(
-        'tutorial',
+        'e_2_demets',
         # Параметры по умолчанию для тасок
         default_args={
             'depends_on_past': False,
@@ -26,7 +26,7 @@ with DAG(
         schedule_interval=timedelta(days=1),
         start_date=datetime(2022, 1, 1),
         catchup=False,
-        tags=['excercise 2'],
+        tags=['demets'],
 ) as dag:
     t1 = BashOperator(
         task_id='print_dir',

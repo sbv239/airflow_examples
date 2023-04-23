@@ -13,7 +13,7 @@ def print_ds(ds, **kwargs):
 
 
 with DAG(
-        'e_3_demets',
+        'e_5_demets',
         # Параметры по умолчанию для тасок
         default_args={
             'depends_on_past': False,
@@ -29,31 +29,17 @@ with DAG(
         catchup=False,
         tags=['demets'],
 ) as dag:
-    for i in range(30):
-        if i < 10:
-            task = BashOperator(
-                task_id=f"bash_op_{i}",
-                bash_command=f"echo {i}",
-            )
-            task.doc_md = dedent(
-                """\
-            #### Bash operator
-            Prints `echo $i`  
-            **some bold text**  
-            *some italic text*
-            """
-            )
-        else:
-            task = PythonOperator(
-                task_id=f"python_op_{i}",
-                python_callable=print_ds,
-                op_kwargs={'i': i}
-            )
-            task.doc_md = dedent(
-                """\
-            #### Python operator
-            Prints `kw args`  
-            **some bold text**  
-            *some italic text*
-            """
-            )
+    templated_command = dedent(
+        """
+    {% for i in range(5) %}
+        echo "{{ ts }}"
+        echo "{{ run_id }}"
+    {% endfor %}
+    """
+    )
+
+    task = BashOperator(
+        task_id='templated',
+        depends_on_past=False,
+        bash_command=templated_command,
+    )
