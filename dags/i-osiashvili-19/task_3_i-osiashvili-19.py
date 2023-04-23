@@ -9,7 +9,7 @@ def task_number_is(task_number):
 
 
 with DAG(
-        'dag_task_3',
+        'les_11_task_3_i-osiashvili-19',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
