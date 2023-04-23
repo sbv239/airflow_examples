@@ -18,16 +18,9 @@ with DAG(
     },
     description='task_2',
     schedule_interval=timedelta(days=1),
-    #     С какой даты начать запускать DAG
-    #     каждый даг видит свою дату запуска
-    #
-    #
-    start_date=datetime(2023, 4, 21),
-    #     Запустить за старые даты относительно сегодня
+    start_date=datetime(2023, 4, 23),
     catchup=False,
-    # Способ помечать даги
     tags=['task_2']
-
 ) as dag:
     t1 = BashOperator(
         task_id='pwd_command',
