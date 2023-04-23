@@ -15,7 +15,7 @@ def print_ds(ts, run_id, **kwargs):
 
 
 with DAG(
-        'e_6_demets',
+        'e_7_demets',
         # Параметры по умолчанию для тасок
         default_args={
             'depends_on_past': False,
