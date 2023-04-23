@@ -5,6 +5,8 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
+from textwrap import dedent
+
 with DAG(
         'hw_3_mi-ponomarev',
     default_args={
@@ -26,7 +28,9 @@ with DAG(
                 task_1 = BashOperator(
                         task_id=f'echo' + str(i),
                         bash_command=f"echo {i}"
-                )
+                    )
+
+
 
         def print_task_number(task_number):
                 print(f"task number is: {task_number}")
