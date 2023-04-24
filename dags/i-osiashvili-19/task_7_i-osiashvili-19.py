@@ -12,7 +12,7 @@ def task_number_is(task_number, ts, run_id, **kwargs):
 
 
 with DAG(
-        'les_11_task_3_i-osiashvili-19',
+        'les_11_task_7_i-osiashvili-19',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
