@@ -1,13 +1,12 @@
 from airflow import DAG
 from datetime import timedelta, datetime
-from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 
-def task_number_is(task_number, ts, run_id, **kwargs):
+def task_number_is( ts, run_id, task_number):
     print("task number is: {task_number}")
-    print(kwargs['ts'])
-    print(kwargs['run_id'])
+    print("ts is: {ts}")
+    print("run_id is: {run_id}")
 
 
 
