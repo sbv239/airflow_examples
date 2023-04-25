@@ -1,5 +1,5 @@
 """
-step_6 DAG
+step_7 DAG
 """
 from datetime import datetime, timedelta
 
@@ -10,7 +10,7 @@ from airflow.operators.python import PythonOperator
 
 
 with DAG(
-    'hw_r-shahvaly_6',
+    'hw_r-shahvaly_7',
 
     default_args={
         'depends_on_past': False,
@@ -20,7 +20,7 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),
     },
-    description='DAG for step_6',
+    description='DAG for step_7',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2023, 1, 1),
     catchup=False,
