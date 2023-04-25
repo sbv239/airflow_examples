@@ -36,7 +36,7 @@ with DAG(
 
 ) as dag:
     def print_smth(ts, run_id, **kwargs):
-        print(ts, run_id, kwargs[task_number])
+        print("ts=",ts, "run_id=", run_id, kwargs['task_number'])
         return None
 
     for i in range(10):
