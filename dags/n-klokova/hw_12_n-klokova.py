@@ -17,7 +17,7 @@ def get_data():
     return result
 
 with DAG(
-    'hw_11_n-klokova',
+    'hw_12_n-klokova',
     # Параметры по умолчанию для тасок
     default_args={
         # Если прошлые запуски упали, надо ли ждать их успеха
