@@ -5,7 +5,7 @@ from airflow.operators.python import PythonOperator
 from textwrap import dedent
 
 with DAG(
-    'hw_3_al-savelev',
+    'hw_4_al-savelev',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -18,12 +18,12 @@ with DAG(
     schedule_interval=timedelta(days=1),
     start_date=datetime(2023, 4, 24),
     catchup=False,
-    tags=['hw_3_al-savelev']
+    tags=['hw_4_al-savelev']
 ) as dag:
 
     for i in range(10):
         t1 = BashOperator(
-            task_id=f'hw_3_al-savelev_bash_{i}',
+            task_id=f'hw_4_al-savelev_bash_{i}',
             bash_command=f'echo {i}')
     
     t1.doc_md = dedent(
@@ -40,7 +40,7 @@ with DAG(
 
     for i in range(20):
         t2 = PythonOperator(
-            task_id=f'hw_3_al-savelev_python_{i}',
+            task_id=f'hw_4_al-savelev_python_{i}',
             python_callable=print_task,
             op_kwargs={'task_number': i})
     
