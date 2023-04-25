@@ -1,7 +1,7 @@
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
-from datetime import timedelta
+from datetime import timedelta, datetime
 
 default_args = {
     'depends_on_past': False,
@@ -15,7 +15,8 @@ default_args = {
 with DAG(
         dag_id='hw_szaripova_2',
         default_args=default_args,
-        description='DAG for Step 2'
+        description='DAG for Step 2',
+        start_date=datetime(2023, 4, 25)
 ) as dag:
     t1 = BashOperator(
         task_id='hw_szaripova_2_bash',
