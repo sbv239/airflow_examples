@@ -14,7 +14,7 @@ from airflow.operators.python import PythonOperator
 
 
 with DAG(
-    'unit11-3-dementev',
+    'unit11-7-dementev',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
