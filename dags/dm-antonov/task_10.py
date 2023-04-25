@@ -3,41 +3,36 @@ from airflow import DAG
 from airflow.operators.python import PythonOperator
 
 with DAG(
-        'task_9_dm-antonov',
+        'task_10_dm-antonov',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
             'email_on_failure': False,
             'email_on_retry': False,
             'retries': 1,
-            'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
+            'retry_delay': timedelta(minutes=5),
         },
-        description='task_9',
+        description='task_10',
         schedule_interval=timedelta(days=1),
         start_date=datetime(2023, 4, 23),
         catchup=False,
-        tags=['task_9']
+        tags=['task_10']
 ) as dag:
-    def xcom_push(ti):
-        ti.xcom_push(
-            key='sample_xcom_key',
-            value='xcom test'
-        )
-        return 'string for log'
+    def return_string():
+        return 'Airflow tracks everything'
 
 
     t1 = PythonOperator(
-        task_id='xcom_push',
-        python_callable=xcom_push
+        task_id='return_string',
+        python_callable=return_string
     )
 
 
     def xcom_pull(ti):
         ti.xcom_pull(
-            key='sample_xcom_key',
-            task_ids='xcom_push'
+            key='return_value',
+            task_ids='return_string'
         )
-        return 'string for log'
 
 
     t2 = PythonOperator(
