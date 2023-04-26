@@ -51,3 +51,31 @@ with DAG(
 
     t1_Bash >> t2_python
 
+    t1_Bash.doc_md = dedent(
+    """
+    #### BashOperator
+    You can document your task using the attributes `doc_md` (markdown),
+    `doc` (plain text), `doc_rst`, `doc_json`, `doc_yaml` which gets
+    rendered in the UI's Task Instance Details page.
+    ![img](http://montcs.bloomu.edu/~bobmon/Semesters/2012-01/491/import%20soul.png)
+    `code`
+    **полужирный**
+    _курсив_
+    """
+    )  # dedent - это особенность Airflow, в него нужно оборачивать всю доку
+
+
+    t2_python.doc_md = dedent(
+    """
+    # PythonOperator
+    You can document your task using the attributes `doc_md` (markdown),
+    `doc` (plain text), `doc_rst`, `doc_json`, `doc_yaml` which gets
+    rendered in the UI's Task Instance Details page.
+    ![img](http://montcs.bloomu.edu/~bobmon/Semesters/2012-01/491/import%20soul.png)
+    `code`
+    **полужирный**
+    _курсив_
+    """
+    )  # dedent - это особенность Airflow, в него нужно оборачивать всю доку
+
+
