@@ -15,7 +15,7 @@ with DAG(
     },
     description='test_11_3',
     schedule_interval=timedelta(days=1),
-    start_date=datetime(2023, 4, 24),
+    start_date=datetime(2023, 4, 1),
     catchup=False,
     tags=['hw_3_al-savelev']
 ) as dag:
