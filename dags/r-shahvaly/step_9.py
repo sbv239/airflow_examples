@@ -27,17 +27,17 @@ with DAG(
 ) as dag:
 
         def push_xcom(ti):
+            ti.xcom_pull(
+                key="sample_xcom_key",
+                task_ids="PythonOperator1"
+            )
+
+        def get_xcom(ti):
             result = ti.xcom_push(
                 key="sample_xcom_key",
                 value="xcom test"
             )
             print(result)
-
-        def get_xcom(ti):
-            ti.xcom_pull(
-                key="sample_xcom_key",
-                task_ids="PythonOperator1"
-            )
 
         task1 = PythonOperator(
             task_id="PythonOperator1",
