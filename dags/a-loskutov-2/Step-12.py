@@ -28,7 +28,7 @@ with DAG(
     schedule_interval=timedelta(days=1),
     start_date=datetime(2023, 4, 25),
     catchup=False,
-    tags=['Loskutov_hm'],
+    tags=['Loskutov_hw'],
 ) as dag:    
 
     def get_variable():
