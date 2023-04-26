@@ -50,6 +50,4 @@ with DAG(
 
             )
 
-    t1_Bash >> t2_python
-
 
