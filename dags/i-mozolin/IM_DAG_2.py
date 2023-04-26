@@ -107,7 +107,7 @@ with DAG(
     # #  t1 |
     # #      -> t3
 
-    def print_date(ds):
+    def print_date(ds, **kwargs):
         # Через синтаксис **kwargs можно получить словарь
         # с настройками Airflow. Значения оттуда могут пригодиться.
         # Пока нам не нужно
@@ -116,8 +116,8 @@ with DAG(
         print(ds)
 
     t1 = PythonOperator(
-        task_id = 't1_id_1'
-        python_callable = print_date
+        task_id = 't1_id_1',
+        python_callable = print_date,
     )
 
     def pwd():
