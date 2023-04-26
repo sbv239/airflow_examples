@@ -119,9 +119,6 @@ with DAG(
         python_callable = print_date,
     )
 
-    def pwd():
-
-
     t2 = BashOperator(
         task_id='t2_id_2',  # id, будет отображаться в интерфейсе
         bash_command=pwd,
