@@ -10,7 +10,7 @@ from airflow.operators.python_operator import PythonOperator
 from airflow.operators.bash import BashOperator
 
 with DAG(
-    ' hw_a_loskutov_2',
+    'hw_a_loskutov',
     # Параметры по умолчанию для тасок
 
     default_args={
