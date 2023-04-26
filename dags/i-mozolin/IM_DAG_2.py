@@ -121,5 +121,5 @@ with DAG(
 
     t2 = BashOperator(
         task_id='t2_id_2',  # id, будет отображаться в интерфейсе
-        bash_command=pwd,
+        bash_command='pwd',
     )
