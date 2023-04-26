@@ -52,7 +52,3 @@ with DAG(
                 op_kwargs={'task_number': i}
 
             )
-
-    t1_Bash >> t2_python
-
-
