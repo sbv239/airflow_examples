@@ -10,7 +10,7 @@ from airflow.operators.python_operator import PythonOperator
 from airflow.operators.bash import BashOperator
 
 with DAG(
-    'hw_6_a_loskutov',
+    'hw_7_a_loskutov',
     # Параметры по умолчанию для тасок
 
     default_args={
@@ -26,12 +26,15 @@ with DAG(
     schedule_interval=timedelta(days=1),
     start_date=datetime(2023, 4, 25),
     catchup=False,
-    tags=['Loskutov_hm_6'],
+    tags=['Loskutov_hm_7'],
 ) as dag:
     
 
-    def print_task_number(task_number):
+
+    def print_task_number(task_number, ts, run_id):
         print(f"task number is: {task_number}")
+        print(ts)
+        print(run_id)
 
     for i in range(30):
         if i<10:
