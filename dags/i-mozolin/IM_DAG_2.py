@@ -94,7 +94,6 @@ with DAG(
     #     print(ds)
     #     return 'Whatever you return gets printed in the logs'
     #
-    #
     # t4 = PythonOperator(
     #     task_id='print_the_context',  # нужен task_id, как и всем операторам
     #     python_callable=print_context,  # свойственен только для PythonOperator - передаем саму функцию
