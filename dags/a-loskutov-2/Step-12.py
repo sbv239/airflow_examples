@@ -11,23 +11,6 @@ from airflow.operators.bash import BashOperator
 
 from airflow.providers.postgres.operators.postgres import PostgresHook
 
-
-def sql_request():
-    postgres = PostgresHook(postgres_conn_id="startml_feed")
-    with postgres.get_conn() as conn:
-        with conn.cursor() as cursor:
-            cursor.execute(
-                """
-                SELECT user_id, count(*) from feed_action
-                WHERE action = 'like'
-                GROUP BY user_id
-                ORDER BY count(*) desc
-                LIMIT 1
-                """
-            )
-            return cursor.fetchall()
-        
-
 with DAG(
     'hw_12_a_loskutov',
     # Параметры по умолчанию для тасок
