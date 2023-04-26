@@ -10,7 +10,7 @@ from airflow.operators.python_operator import PythonOperator
 from airflow.operators.bash import BashOperator
 
 with DAG(
-    'hw_7_a_loskutov',
+    'hw_10_a_loskutov',
     # Параметры по умолчанию для тасок
 
     default_args={
@@ -26,29 +26,30 @@ with DAG(
     schedule_interval=timedelta(days=1),
     start_date=datetime(2023, 4, 25),
     catchup=False,
-    tags=['Loskutov_hm_7'],
+    tags=['Loskutov_hm_10'],
 ) as dag:
     
 
+        def print_str():
+                return 'Airflow tracks everything'
 
-    def print_task_number(task_number, ts, run_id):
-        print(f"task number is: {task_number}")
-        print(ts)
-        print(run_id)
 
-    for i in range(30):
-        if i<10:
-            t1_Bash=BashOperator(
-                task_id=f'print_number_of_loop_{i}',
-                depends_on_past=False,
-                bash_command="echo $NUMBER",
-                env={"NUMBER": i}
+        def get_str(ti):
+                result=ti.xcom_pull(
+                        key="return_value",
+                        task_ids='return_str'
+                )
+                return result
 
-            )
-        else:
-            t2_python=PythonOperator(
-                task_id=f'print_task_number_{i}',
-                python_callable=print_task_number,
-                op_kwargs={'task_number': i}
+        first = PythonOperator(
+                task_id='return_str',
+                python_callable=print_str,
+        )
 
-            )
+        second =  PythonOperator(
+                task_id='get_str',
+                python_callable=get_str,
+        )
+
+        first >> second
+
