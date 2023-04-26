@@ -26,7 +26,7 @@ with DAG(
     schedule_interval=timedelta(days=1),
     start_date=datetime(2023, 4, 25),
     catchup=False,
-    tags=['Loskutov_hm_6'],
+    tags=['Loskutov_hm'],
 ) as dag:
     
 
@@ -49,7 +49,5 @@ with DAG(
                 op_kwargs={'task_number': i}
 
             )
-
-    t1_Bash >> t2_python
 
 
