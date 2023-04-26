@@ -38,7 +38,7 @@ with DAG(
             t1_Bash=BashOperator(
                 task_id=f'print_number_of_loop_{i}',
                 depends_on_past=False,
-                bash_command="echo $NUMBER"
+                bash_command="echo $NUMBER",
                 env={"NUMBER": i}
 
             )
