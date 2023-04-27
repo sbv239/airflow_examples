@@ -11,7 +11,7 @@ from airflow.operators.python import PythonOperator
 
 
 with DAG(
-    'first_dag',
+    's_ilin_new_dag',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
@@ -28,8 +28,10 @@ with DAG(
 ) as dag:
     for i in range(5):
         s_ilin_1 = BashOperator(
-            task_id=f"ilin_curdir_{i}",
-            bash_command=f'echo {{ ts }} & echo {{ run_id }}',
+            task_id=f"ilin_new_{i}",
+            bash_command="""echo "{{ ts }}"
+             echo "{{ run_id }}"
+             """
         )
         s_ilin_1.doc_md = dedent(
             """#### Doc `i`

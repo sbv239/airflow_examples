@@ -16,7 +16,7 @@ def print_smt(ts, run_id, **kwargs):
 
 
 with DAG(
-    'first_dag',
+    's_ilin_dag',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
