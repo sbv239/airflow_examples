@@ -10,8 +10,9 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 
-def print_smt(task_number):
-    print(f"task number is: {task_number}")
+def print_smt(ts, run_id, **kwargs):
+    print(f"task number is: {kwargs['task_number']}")
+    print(ts, run_id)
 
 
 with DAG(
