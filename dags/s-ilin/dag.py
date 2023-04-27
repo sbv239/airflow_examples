@@ -35,11 +35,21 @@ with DAG(
             task_id=f"ilin_curdir_{i}",
             bash_command=f'echo {i}',
         )
+        s_ilin_1.doc_md = dedent(
+            """#### **Doc** for dag ilin_curdir_`i`
+            *enjoy*
+            """
+        )
     for i in range(20):
         s_ilin_2 = PythonOperator(
             task_id=f"ilin_print_smt_{i}",
             python_callable=print_smt,
             op_kwargs={'task_number': i}
+        )
+        s_ilin_2.doc_md = dedent(
+            """#### **Doc** for dag ilin_print_smt_`i`
+            *enjoy*
+            """
         )
 
 s_ilin_1 >> s_ilin_2
