@@ -11,7 +11,7 @@ from airflow.operators.python import PythonOperator
 
 
 with DAG(
-    'first_dag',
+    's_ilin_new_dag',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
