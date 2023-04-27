@@ -113,6 +113,7 @@ with DAG(
         # print(kwargs)
         # В ds Airflow за нас подставит текущую логическую дату - строку в формате YYYY-MM-DD
         print(ds)
+        return ds
 
     t1 = PythonOperator(
         task_id = 't1_id_1',
@@ -123,3 +124,5 @@ with DAG(
         task_id='t2_id_2',  # id, будет отображаться в интерфейсе
         bash_command='pwd',
     )
+
+    t2 >> t1
