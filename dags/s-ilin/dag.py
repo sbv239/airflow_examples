@@ -33,7 +33,8 @@ with DAG(
     for i in range(10):
         s_ilin_1 = BashOperator(
             task_id=f"ilin_curdir_{i}",
-            bash_command=f'echo {i}',
+            bash_command='echo $NUMBER',
+            env={'NUMBER': str(i)}
         )
         s_ilin_1.doc_md = dedent(
             """#### **Doc** for dag ilin_curdir_`i`
