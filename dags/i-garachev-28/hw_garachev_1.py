@@ -22,24 +22,20 @@ with DAG(
     tags=['hw_1'],
 ) as dag:
 
-    def print_context(ds, i):
+    
+    t1 = BashOperator(
+        task_id="hw_garachev_1_bash",
+        bash_command="pwd"
+    )
+
+    def print_context(ds):
         """Пример PythonOperator"""
-        print(f"task numer is: {i}")
+        print(ds)
         return 'Whatever you return gets printed in the logs'
-    
-    for i in range(9):
-        t1 = BashOperator(
-            task_id="hw_garachev_1_bash",
-            bash_command=f"echo {i}"
-        )
 
-        t1
-    
-    for i in range(19):
-        t2 = PythonOperator(
-            task_id='hw_garachev_1_python',
-            python_callable=print_context ,
-            op_kwargs = {"i": i}
-        )
+    t2 = PythonOperator(
+        task_id='hw_garachev_1_python',
+        python_callable=print_context
+    )
 
-        t1 >> t2
+    t1 >> t2
