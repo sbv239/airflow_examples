@@ -23,11 +23,11 @@ with DAG(
 ) as dag:
 
 
-    def put_data():
-        return "Airflow tracks everything"
+    def put_data(ti):
+        ti.xcom_push(key="sample_xcom_key", value="xcom test")
 
     def get_data(ti):
-        print(ti.xcom_pull(key="return_value", task_ids="hw_9_garachev_put_data_task"))
+        print(ti.xcom_pull(key="sample_xcom_key", task_ids="hw_9_garachev_put_data_task"))
 
     t1 = PythonOperator(
         task_id='hw_9_garachev_put_data_task',
