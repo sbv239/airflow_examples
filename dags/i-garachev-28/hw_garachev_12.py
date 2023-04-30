@@ -1,8 +1,10 @@
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
+from airflow.models import Variable
 from airflow import DAG
 from datetime import datetime, timedelta
 from textwrap import dedent
+from airflow.providers.postgres.hooks.postgres import PostgresHook
 
 
 with DAG(
@@ -15,28 +17,20 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),
     },
-    description='hw_garachev_8_dag',
+    description='hw_garachev_12_dag',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 1, 1),
     catchup=False,
-    tags=['hw_8'],
+    tags=['hw_12'],
 ) as dag:
+    
 
-
-    def put_data(ti):
-        ti.xcom_push(key="sample_xcom_key", value="xcom test")
-
-    def get_data(ti):
-        print(ti.xcom_pull(key="sample_xcom_key", task_ids="hw_8_garachev_put_data_task"))
+    def get_user():
+        print(Variable.get("is_startml"))
 
     t1 = PythonOperator(
-        task_id='hw_8_garachev_put_data_task',
-        python_callable=put_data
+        task_id='hw_12_garachev',
+        python_callable=get_user
     )
 
-    t2 = PythonOperator(
-        task_id='hw_8_garachev_get_data_task',
-        python_callable=get_data
-    )
-
-    t1 >> t2
+    t1
