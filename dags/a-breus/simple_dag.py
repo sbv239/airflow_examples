@@ -15,15 +15,21 @@ def task_3():
     print('Task 3')
 
 
-default_args = {
-    'start_date': datetime(2023, 4, 30),
+default_args={
+
+    'depends_on_past': False,
+    'email': ['airflow@example.com'],
+    'email_on_failure': False,
+    'email_on_retry': False,
     'retries': 1,
-    schedule_interval=timedelta(days=1)
+    'retry_delay': timedelta(minutes=5)
 }
 
 
 with DAG('simple_dag_3',
         default_args=default_args,
+        schedule_interval=timedelta(days=1),
+        start_date=datetime(2023, 5, 1)
         ) as dag:
 
 
