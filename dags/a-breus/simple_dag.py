@@ -21,12 +21,15 @@ default_args = {
 }
 
 
-dag = DAG('simple_dag_3', default_args=default_args, schedule_interval=None)
+with DAG('simple_dag_3',
+        default_args=default_args,
+        schedule_interval=None) 
+as dag:
 
 
-t1 = PythonOperator(task_id='task_1', python_callable=task_1)
-t2 = PythonOperator(task_id='task_2', python_callable=task_2)
-t3 = PythonOperator(task_id='task_3', python_callable=task_3)
+    t1 = PythonOperator(task_id='task_1', python_callable=task_1)
+    t2 = PythonOperator(task_id='task_2', python_callable=task_2)
+    t3 = PythonOperator(task_id='task_3', python_callable=task_3)
 
 
-t1 >> t2 >> t3
+    t1 >> t2 >> t3
