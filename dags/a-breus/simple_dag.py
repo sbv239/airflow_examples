@@ -16,7 +16,7 @@ def task_3():
 
 
 default_args = {
-    'start_date': datetime(2023, 5, 1),
+    'start_date': datetime(2023, 4, 30),
     'retries': 1
 }
 
