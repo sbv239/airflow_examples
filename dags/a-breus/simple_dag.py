@@ -4,15 +4,15 @@ from datetime import datetime
 
 
 def task_1():
-    print("Task 1")
+    print('Task 1')
 
 
 def task_2():
-    print("Task 2")
+    print('Task 2')
 
 
 def task_3():
-    print("Task 3")
+    print('Task 3')
 
 
 default_args = {
@@ -23,8 +23,8 @@ default_args = {
 
 with DAG('simple_dag_3',
         default_args=default_args,
-        schedule_interval=None) 
-as dag:
+        schedule_interval=None
+        ) as dag:
 
 
     t1 = PythonOperator(task_id='task_1', python_callable=task_1)
