@@ -1,6 +1,6 @@
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
-from datetime import datetime
+from datetime import datetime, timedelta
 
 
 def task_1():
@@ -17,13 +17,13 @@ def task_3():
 
 default_args = {
     'start_date': datetime(2023, 4, 30),
-    'retries': 1
+    'retries': 1,
+    schedule_interval=timedelta(days=1)
 }
 
 
 with DAG('simple_dag_3',
         default_args=default_args,
-        schedule_interval=None
         ) as dag:
 
 
