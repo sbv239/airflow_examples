@@ -132,15 +132,15 @@ with DAG(
             bash_command=f"echo {i}",
         )
 
-    def print_number(i):
+    def print_number(task_number):
 
-        print(f"task number is: {i}")
+        print(f"task number is: {task_number}")
 
     for i in range(10, 30):
         t2 = PythonOperator(
             task_id='IM_t2_id4'+str(i),
             python_callable=print_number,
-            op_kwargs={'i': i}
+            op_kwargs={'task_number': i}
         )
 
     t1 >> t2
