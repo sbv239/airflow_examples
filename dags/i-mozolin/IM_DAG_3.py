@@ -129,7 +129,7 @@ with DAG(
 
     for i in range(10):
         t1 = BashOperator(
-            task_id='t1_id_3',
+            task_id='IM_t1_id3',
             bash_command=f"echo {i}",
         )
 
@@ -139,7 +139,7 @@ with DAG(
 
     for i in range(20):
         t2 = PythonOperator(
-            task_id='t2_id_4',
+            task_id='IM_t2_id4',
             python_callable=print_number,
         )
 
