@@ -140,6 +140,7 @@ with DAG(
         t2 = PythonOperator(
             task_id='IM_t2_id4'+str(i),
             python_callable=print_number,
+            op_kwargs={'i': i}
         )
 
     t1 >> t2
