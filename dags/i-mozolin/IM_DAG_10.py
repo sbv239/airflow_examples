@@ -27,7 +27,7 @@ def get_xcom_test(ti):
     )
     testing_increases = ti.xcom_pull(
         key='sample_xcom_key',
-        task_ids='IM_t1_id11'
+        task_ids='IM_t2_id11'
     )
     return testing_increases
 
