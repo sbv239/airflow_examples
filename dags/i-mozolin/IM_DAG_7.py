@@ -41,7 +41,6 @@ with DAG(
         tags=['IM_DAG_3'],
 ) as dag:
 
-
     for i in range(10):
         t1 = BashOperator(
             task_id='IM_t1_id3'+str(i),
