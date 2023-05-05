@@ -32,7 +32,7 @@ def get_xcom_test(ti):
     return testing_increases
 
 with DAG(
-    'IM_DAG_9',
+    'IM_DAG_10',
     # Параметры по умолчанию для тасок
     default_args={
         # Если прошлые запуски упали, надо ли ждать их успеха
@@ -61,7 +61,7 @@ with DAG(
         # https://airflow.apache.org/docs/apache-airflow/stable/dag-run.html
         catchup=False,
         # теги, способ помечать даги
-        tags=['IM_DAG_9'],
+        tags=['IM_DAG_10'],
 ) as dag:
 
     def return_str():
