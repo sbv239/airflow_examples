@@ -41,13 +41,13 @@ with DAG(
         # теги, способ помечать даги
         tags=['IM_DAG_6'],
 ) as dag:
-    NUMBER = Variable.get("NUMBER")  # необходимо передать имя, заданное при создании Variable
+    # NUMBER = Variable.get("NUMBER")  # необходимо передать имя, заданное при создании Variable
 
     for i in range(10):
-        NUMBER = i
         t1 = BashOperator(
             task_id='IM_t1_id6'+str(i),
             # bash_command=f"echo {i}",
+            env={"NUMBER": str(i)},
             bash_command="echo $NUMBER",
         )
 
