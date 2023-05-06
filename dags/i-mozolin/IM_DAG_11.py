@@ -9,22 +9,24 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 from airflow.providers.postgres.hooks.postgres import PostgresHook
+from psycopg2.extras import RealDictCursor
 
-postgres = PostgresHook(postgres_conn_id="startml_feed")
-with postgres.get_conn() as conn:   # вернет тот же connection, что вернул бы psycopg2.connect(...)
-  with conn.cursor() as cursor:
-      def get_user():
-          cursor.execute("""
-          SELECT user_id, COUNT(action)
-          FROM "feed_action"
-          WHERE action = 'like'
-          GROUP BY user_id
-          ORDER BY COUNT(action) desc
-          """)
-          result = cursor.fetchone()
-          user_id = result[0]
-          like_count = result[1]
-          return {'user_id': user_id, 'count': like_count}
+
+def get_user():
+    postgres = PostgresHook(postgres_conn_id="startml_feed")
+    with postgres.get_conn() as conn:  # вернет тот же connection, что вернул бы psycopg2.connect(...)
+        with conn.cursor(cursor = RealDictCursor) as cursor:
+            cursor.execute("""
+            SELECT user_id, COUNT(action)
+            FROM "feed_action"
+            WHERE action = 'like'
+            GROUP BY user_id
+            ORDER BY COUNT(action) desc
+            """)
+            result = cursor.fetchone()
+            # user_id = result[0]
+            # like_count = result[1]
+            return result #{'user_id': user_id, 'count': like_count}
 
 with DAG(
     'IM_DAG_11',
