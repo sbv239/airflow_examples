@@ -51,7 +51,7 @@ with DAG(
 
     def get_var():
         from airflow.models import Variable
-        is_startml = Variable.get('False')
+        is_startml = Variable.get('is_startml')
         return is_startml
 
     def decide_what_to_do(**kwargs):
