@@ -13,7 +13,7 @@ from airflow.operators.dummy import DummyOperator
 
 
 with DAG(
-    'IM_DAG_12',
+    'IM_DAG_13',
     # Параметры по умолчанию для тасок
     default_args={
         # Если прошлые запуски упали, надо ли ждать их успеха
@@ -42,7 +42,7 @@ with DAG(
         # https://airflow.apache.org/docs/apache-airflow/stable/dag-run.html
         catchup=False,
         # теги, способ помечать даги
-        tags=['IM_DAG_12'],
+        tags=['IM_DAG_13'],
 ) as dag:
 
     t1 = DummyOperator(
