@@ -15,7 +15,7 @@ from psycopg2.extras import RealDictCursor
 def get_user():
     postgres = PostgresHook(postgres_conn_id="startml_feed")
     with postgres.get_conn() as conn:  # вернет тот же connection, что вернул бы psycopg2.connect(...)
-        with conn.cursor(cursor = RealDictCursor) as cursor:
+        with conn.cursor(cursor_factory = RealDictCursor) as cursor:
             cursor.execute("""
             SELECT user_id, COUNT(action)
             FROM "feed_action"
@@ -29,7 +29,7 @@ def get_user():
             return result # {'user_id': user_id, 'count': like_count}
 
 with DAG(
-    'IM_DAG_11_1',
+    'IM_DAG_11_2',
     # Параметры по умолчанию для тасок
     default_args={
         # Если прошлые запуски упали, надо ли ждать их успеха
@@ -58,7 +58,7 @@ with DAG(
         # https://airflow.apache.org/docs/apache-airflow/stable/dag-run.html
         catchup=False,
         # теги, способ помечать даги
-        tags=['IM_DAG_11_1'],
+        tags=['IM_DAG_11_2'],
 ) as dag:
 
 
