@@ -15,13 +15,12 @@ with postgres.get_conn() as conn:   # вернет тот же connection, чт�
   with conn.cursor() as cursor:
       def get_user():
           cursor.execute("""
-                SELECT user_id, COUNT(action)
-                FROM "feed_action"
-                WHERE action = 'like'
-                GROUP BY user_id
-                ORDER BY COUNT(action) desc
-                LIMIT 1
-            """)
+          SELECT user_id, COUNT(action)
+          FROM "feed_action"
+          WHERE action = 'like'
+          GROUP BY user_id
+          ORDER BY COUNT(action) desc
+          """)
           result = cursor.fetchone()
           user_id = result[0]
           like_count = result[1]
