@@ -26,10 +26,10 @@ def get_user():
             result = cursor.fetchone()
             # user_id = result[0]
             # like_count = result[1]
-            return result #{'user_id': user_id, 'count': like_count}
+            return result # {'user_id': user_id, 'count': like_count}
 
 with DAG(
-    'IM_DAG_11',
+    'IM_DAG_11_1',
     # Параметры по умолчанию для тасок
     default_args={
         # Если прошлые запуски упали, надо ли ждать их успеха
@@ -58,7 +58,7 @@ with DAG(
         # https://airflow.apache.org/docs/apache-airflow/stable/dag-run.html
         catchup=False,
         # теги, способ помечать даги
-        tags=['IM_DAG_11'],
+        tags=['IM_DAG_11_1'],
 ) as dag:
 
 
