@@ -13,7 +13,7 @@ from airflow.operators.dummy import DummyOperator
 
 
 with DAG(
-    'IM_DAG_13_1',
+    'IM_DAG_13_2',
     # Параметры по умолчанию для тасок
     default_args={
         # Если прошлые запуски упали, надо ли ждать их успеха
@@ -42,7 +42,7 @@ with DAG(
         # https://airflow.apache.org/docs/apache-airflow/stable/dag-run.html
         catchup=False,
         # теги, способ помечать даги
-        tags=['IM_DAG_13_1'],
+        tags=['IM_DAG_13_2'],
 ) as dag:
 
     t1 = DummyOperator(
@@ -53,7 +53,6 @@ with DAG(
         from airflow.models import Variable
         is_startml = Variable.get('False')
         return is_startml
-
 
     def decide_what_to_do(**kwargs):
         v = get_var()
