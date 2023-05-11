@@ -17,10 +17,36 @@ with DAG(
         'retry_delay': timedelta(minutes=5),
     },
 ) as dag:
+    dag.doc_md = (
+    """
+    # Test documentation added by 
+    `dag.doc_md = `
+    **bold text**
+    *italic text*
+    ***very important information***
+    `code`
+    `pointless_task == True`
+    some text
+    """)
+
+
     for i in range(1, 11):
         bash_task = BashOperator(
             task_id=f'task{i}',
             bash_command=f"echo {i}"
+        )
+
+        bash_task.doc_md = (
+            """
+            # Test documentation added by 
+            `bash_task.doc_md = `
+            **bold text**
+            *italic text*
+            ***very important information***
+            `code`
+            `pointless_task == True`
+            some text
+            """
         )
 
     def print_task_number(task_number):
@@ -31,4 +57,17 @@ with DAG(
             task_id=f'task{i}',
             python_callable=print_task_number,
             op_kwargs={'n': {i}}
+        )
+
+        bash_task.doc_md = (
+            """
+            # Test documentation added by 
+            `python_task.doc_md = `
+            **bold text**
+            *italic text*
+            ***very important information***
+            `code`
+            `pointless_task == True`
+            some text
+            """
         )
