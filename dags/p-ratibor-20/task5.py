@@ -6,7 +6,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-    'hw_p-ratibor-20_3',
+    'ratibor_task5',
     start_date=datetime(2023, 5, 11),
     default_args={
         'depends_on_past': False,
@@ -17,18 +17,15 @@ with DAG(
         'retry_delay': timedelta(minutes=5),
     },
 ) as dag:
-    for i in range(1, 11):
-        bash_task = BashOperator(
-            task_id=f'task{i}',
-            bash_command=f"echo {i}"
-        )
-
-    def print_task_number(task_number):
-        print("task number is: {task_number}")
-    
-    for i in range(11, 31):
-        python_task = PythonOperator(
-            task_id=f'task{i}',
-            python_callable=print_task_number,
-            op_kwargs={'n': {i}}
-        )
+    command_template = dedent(
+        """
+        {% for i in range(5) %}
+            echo "{{ ts }}"
+            echo "{{ run_id }}"
+        {% endfor %}
+        """
+    )
+    task1 = BashOperator(
+        task_id='5_commands',
+        bash_command=command_template
+    )
