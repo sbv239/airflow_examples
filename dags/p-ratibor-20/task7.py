@@ -6,7 +6,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-    'hw_p-ratibor-20_3',
+    'ratibor_task7',
     start_date=datetime(2023, 5, 11),
     default_args={
         'depends_on_past': False,
@@ -23,7 +23,7 @@ with DAG(
         print('run_id:', run_id)
         print(f"task number is: {kwargs['task_number']}")
     
-    
+
     for i in range(5):
         python_task = PythonOperator(
             task_id=f'task{i}',
