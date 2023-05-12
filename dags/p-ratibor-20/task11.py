@@ -2,10 +2,14 @@ from datetime import datetime, timedelta
 from textwrap import dedent
 
 from airflow import DAG
+
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
-from airflow.providers.postgres.hooks.postgres import PostgresHook
+from airflow.hooks.base import BaseHook
+import psycopg2
+from psycopg2.extras import RealDictCursor
+
 
 with DAG(
     'ratibor_task11',
@@ -21,19 +25,24 @@ with DAG(
 ) as dag:
     
     def get_most_liking_user():
-        postgres = PostgresHook(postgres_conn_id="startml_feed")
-        with postgres.get_conn() as conn:
+        creds = BaseHook.get_connection("startml_feed")
+        with psycopg2.connect(
+        f"postgresql://{creds.login}:{creds.password}"
+        f"@{creds.host}:{creds.port}/{creds.schema}",
+        cursor_factory=RealDictCursor
+        ) as conn:
+            
             with conn.cursor() as cursor:
                 cursor.execute(
                     """
-                    SELECT interim_table.user_id, interim_table.like_count
+                    SELECT interim_table.user_id, interim_table.count
                     FROM(
-                        SELECT user_id AS user_id, COUNT(action) AS like_count
+                        SELECT user_id AS user_id, COUNT(action) AS count
                         FROM feed_action
                         WHERE action = 'like'
                         GROUP BY user_id
                     ) AS interim_table
-                    ORDER BY interim_table.like_count DESC
+                    ORDER BY interim_table.count DESC
                     LIMIT 1
                     """
                 )
