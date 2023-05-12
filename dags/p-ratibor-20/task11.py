@@ -21,7 +21,7 @@ with DAG(
 ) as dag:
     
     def get_most_liking_user():
-        postgres = PostgresHook(postgres_conn_id=...)
+        postgres = PostgresHook(postgres_conn_id="startml_feed")
         with postgres.get_conn() as conn:
             with conn.cursor() as cursor:
                 cursor.execute(
@@ -40,6 +40,6 @@ with DAG(
                 return dict(cursor.fetchone())
             
     most_liking_user_getter = PythonOperator(
-        task_id="get_most_liking_user"
+        task_id="get_most_liking_user",
         python_callable=get_most_liking_user
     )
