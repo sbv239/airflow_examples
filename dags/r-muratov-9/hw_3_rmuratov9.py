@@ -29,9 +29,9 @@ with DAG(
             bash_command=f"echo {i}",
         )
     
-def print_something(task_number):
+    def print_something(task_number):
 
-    print(f'task number is {task_number}')
+        print(f'task number is {task_number}')
 
     for r in range(20):
         t2 = PythonOperator(
