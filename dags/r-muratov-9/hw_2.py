@@ -33,7 +33,7 @@ with DAG(
         print(ds)
 
     t2 = PythonOperator(
-        task_id='',
+        task_id='print_ds_from_airflow',
         python_callable=print_ds
     )
 
