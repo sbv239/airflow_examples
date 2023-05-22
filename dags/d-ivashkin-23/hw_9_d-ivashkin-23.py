@@ -52,3 +52,5 @@ with DAG(
         task_id='xcom_pull',
         python_callable=value_pull
     )
+
+airflow_return >> pull_value
