@@ -2,7 +2,7 @@ from airflow import DAG
 from datetime import timedelta, datetime
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
-with DAG (
+with DAG(
     'hw_d-ivashkin-23_2',
     default_args={
         'depends_on_past': False,
