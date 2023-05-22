@@ -23,7 +23,8 @@ def sample_push(ti):
 
 def sample_pull(ti):
     value = ti.xcom_pull(
-        key='sample_xcom_key'
+        key='sample_xcom_key',
+        task_ids='xcom_push'
     )
     print(value)
 
