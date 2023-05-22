@@ -18,7 +18,7 @@ NB! Давайте своим DAGs уникальные названия. Луч
 """
 
 with DAG(
-    'hw_d-ivashkin-23_2',
+    'hw_d-ivashkin-23_3',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
