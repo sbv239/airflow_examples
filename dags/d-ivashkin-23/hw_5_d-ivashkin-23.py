@@ -13,11 +13,11 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),
     },
-        description='Homework 5-th step DAG',
-        schedule_interval=timedelta(days=1),
-        start_date=datetime(2023, 5, 21),
-        catchup=False,
-        tags=['homework', 'di']
+    description='Homework 5-th step DAG',
+    schedule_interval=timedelta(days=1),
+    start_date=datetime(2023, 5, 21),
+    catchup=False,
+    tags=['homework', 'di']
 ) as dag:
 
     """
@@ -31,7 +31,7 @@ with DAG(
 
     templated_command = dedent(
         """
-        {% for i in {0...4} %}
+        {% for i in range(4) %}
             echo "{{ ts }}"
             echo "{{ run_id }}"
         {% endfor %}
@@ -40,7 +40,8 @@ with DAG(
 
     task = BashOperator(
         task_id='templated',
-        bash_command=templated_command
+        bash_command=templated_command,
+        dag=dag
     )
 
 task
