@@ -14,7 +14,7 @@ with DAG (
     },
     description='Homework 2-nd step DAG',
     schedule_interval=timedelta(days=1),
-    start_date=datetime(2023, 20, 21),
+    start_date=datetime(2023, 5, 21),
     catchup=False,
     tags=['homework', 'di']
 ) as dag:
