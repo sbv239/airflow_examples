@@ -12,7 +12,7 @@ with DAG (
         'retries': 1,
         'retry_delay': timedelta(minutes=5),
     },
-    description='Homework 2-nd step DAG',
+    description='Homework 2 step DAG',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2023, 5, 21),
     catchup=False,
