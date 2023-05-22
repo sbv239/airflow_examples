@@ -1,5 +1,5 @@
 from airflow import DAG
-from datetime import timedelta
+from datetime import timedelta, datetime
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 with DAG (
@@ -13,6 +13,9 @@ with DAG (
         'retry_delay': timedelta(minutes=5),
     },
     description='Homework 2-nd step DAG',
+    schedule_interval=timedelta(days=1),
+    start_date=datetime(2023, 20, 21),
+    catchup=False,
     tags=['homework', 'di']
 ) as dag:
     t1 = BashOperator(
