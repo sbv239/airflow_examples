@@ -17,7 +17,7 @@ def print_context(ds=None):
 
 
 with DAG(
-    'Task 2',
+    'Task_2',
     # DAG dafault parameters
     default_args={
         'depends_on_past': False,
