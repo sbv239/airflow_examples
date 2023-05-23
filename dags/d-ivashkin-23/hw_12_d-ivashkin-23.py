@@ -13,7 +13,7 @@ def get_variables():
     from airflow.models import Variable
 
     is_startml = Variable.get('is_startml')
-    return is_startml
+    return print(is_startml)
 
 
 with DAG(
