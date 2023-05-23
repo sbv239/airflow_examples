@@ -10,9 +10,9 @@ NB! Давайте своим DAGs уникальные названия. Луч
 
 
 def get_variables():
-    from airflow.models import Variables
+    from airflow.models import Variable
 
-    is_startml = Variables.get('is_startml')
+    is_startml = Variable.get('is_startml')
     return is_startml
 
 
