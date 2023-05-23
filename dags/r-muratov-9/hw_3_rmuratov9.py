@@ -4,6 +4,7 @@ from airflow.operators.python import PythonOperator
 from airflow import DAG
 from textwrap import dedent
 
+
 with DAG(
 
     'hw_3_r-muratov-9',
