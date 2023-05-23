@@ -39,7 +39,7 @@ with DAG(
                     from feed_action
                     where action = 'like'
                     group by user_id
-                    order by like_count desc
+                    order by count desc
                     limit 1
                 """)
                 return cursor.fetchone()
