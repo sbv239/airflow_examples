@@ -27,7 +27,7 @@ with DAG(
     for i in range(10):
         t1 = BashOperator(
             task_id=f'just_something_{i}',
-            bash_command="echo $NUMBER",
+            bash_command="echo $NUMBER ",
             env={'NUMBER': i}
         )
 
@@ -42,6 +42,8 @@ with DAG(
     def print_something(**kwargs):
         task_number = kwargs['task_number']
         print(f'task number is {task_number}')
+        print(kwargs['ds'])
+        print(kwargs['run_id'])
 
     for r in range(20):
         t2 = PythonOperator(
