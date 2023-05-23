@@ -15,15 +15,15 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
     },
-    description='Task 1',
+    description='HW step 2',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2023, 5, 22),
     catchup=False,
-    tags=['example'],
+    tags=['a-petuhova'],
 ) as dag:
 
     t1 = BashOperator(
-        task_id='print_date',
+        task_id='BashOperator for task 1 step 2 a-petuhova',
         bash_command='pwd',
     )
 
@@ -34,7 +34,7 @@ with DAG(
 
 
     t2 = PythonOperator(
-        task_id='print_the_context',
+        task_id='PythonOperator for task 1 step 2 a-petuhova',
         python_callable=print_context,
     )
 
