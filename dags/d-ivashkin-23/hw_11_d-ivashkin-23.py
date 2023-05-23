@@ -10,11 +10,11 @@ def most_likes_user():
         with conn.cursor() as cursor:
             # Execute SQL query to find user with most likes
             cursor.execute("""
-                select user_id, COUNT(*) AS like_count
+                select user_id, count(*) as like_count
                 from feed_action
                 where action = 'like'
                 group by user_id
-                order by like_count DESC
+                order by like_count desc
                 limit 1
             """)
             result = cursor.fetchone()
