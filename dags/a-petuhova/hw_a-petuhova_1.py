@@ -23,7 +23,7 @@ with DAG(
 ) as dag:
 
     t1 = BashOperator(
-        task_id='BashOperator for task 1 step 2 a-petuhova',
+        task_id='BashOperator step 2',
         bash_command='pwd',
     )
 
@@ -34,7 +34,7 @@ with DAG(
 
 
     t2 = PythonOperator(
-        task_id='PythonOperator for task 1 step 2 a-petuhova',
+        task_id='PythonOperator step 2',
         python_callable=print_context,
     )
 
