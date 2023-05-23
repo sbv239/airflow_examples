@@ -1,35 +1,11 @@
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 from datetime import timedelta, datetime
-from airflow.providers.postgres.hooks.postgres import PostgresHook
-
-
-def most_likes_user():
-    postgres = PostgresHook(postgres_conn_id='startml_feed')
-    with postgres.get_conn() as conn:
-        with conn.cursor() as cursor:
-            # Execute SQL query to find user with most likes
-            cursor.execute("""
-                select user_id, count(*) as like_count
-                from feed_action
-                where action = 'like'
-                group by user_id
-                order by like_count desc
-                limit 1
-            """)
-            result = cursor.fetchone()
-
-            # Create dictionary with user_id and like_count
-            user_dict = {
-                'user_id': result[0],
-                'count': result[1]
-            }
-
-            return user_dict
+from airflow.providers.postgres.operators.postgres import PostgresHook
 
 
 with DAG(
-    'hw_11_d-ivashkin-23',
+    'hw_d-ivashkin-23_11',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -51,6 +27,24 @@ with DAG(
     найти пользователя, который поставил больше всего лайков, и вернуть словарь
     {'user_id': <идентификатор>, 'count': <количество лайков>}. Эти значения, кстати, сохранятся в XCom.
     """
+
+
+    def most_likes_user():
+        from psycopg2.extras import RealDictCursor
+        postgres = PostgresHook(postgres_conn_id="startml_feed")
+        with postgres.get_conn() as conn:
+            with conn.cursor(cursor_factory=RealDictCursor) as cursor:
+                cursor.execute("""
+                    select user_id, count(*) as like_count
+                    from feed_action
+                    where action = 'like'
+                    group by user_id
+                    order by like_count desc
+                    limit 1
+                """)
+                result = cursor.fetchone()
+
+                return result
 
     task = PythonOperator(
         task_id='most_likes_user',
