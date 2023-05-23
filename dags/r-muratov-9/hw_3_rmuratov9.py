@@ -28,17 +28,17 @@ with DAG(
     for i in range(10):
         t1 = BashOperator(
             task_id=f'just_something_{i}',
-            bash_command="echo $NUMBER ",
+            bash_command="echo $NUMBER",
             env={'NUMBER': i}
         )
 
-    t1.doc_md = dedent(
-        """\
+        t1.doc_md = dedent(
+        f"""\
         #### Bash task documantation
-        This bash has one attribute: `i` 
+        This bash has one attribute: `{i}` 
         and using for ***echo*** **bash command**
         """
-    )
+        )
     
     def print_something(task_number, ts, run_id):
         # task_number = kwargs['task_number']
