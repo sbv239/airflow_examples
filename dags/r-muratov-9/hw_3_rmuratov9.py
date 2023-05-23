@@ -27,7 +27,8 @@ with DAG(
     for i in range(10):
         t1 = BashOperator(
             task_id=f'just_something_{i}',
-            bash_command=f"echo {i}",
+            bash_command="echo $NUMBER",
+            env={'NUMBER': i}
         )
 
     t1.doc_md = dedent(
