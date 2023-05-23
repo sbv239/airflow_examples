@@ -17,7 +17,7 @@ def get_info(ti):
 
 with DAG(
 
-    'hw_9_r-muratov-9',
+    'hw_10_r-muratov-9',
 
     default_args={
     'depends_on_past': False,
