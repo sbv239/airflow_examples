@@ -19,7 +19,13 @@ def most_likes_user():
             """)
             result = cursor.fetchone()
 
-            return result
+            # Create dictionary with user_id and like_count
+            user_dict = {
+                'user_id': result[0],
+                'count': result[1]
+            }
+
+            return user_dict
 
 
 with DAG(
