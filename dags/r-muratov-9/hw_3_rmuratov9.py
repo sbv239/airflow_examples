@@ -40,17 +40,17 @@ with DAG(
         """
     )
     
-    def print_something(task_number, **kwargs):
+    def print_something(task_number, ts, run_id):
         # task_number = kwargs['task_number']
         print(f'task number is {task_number}')
-        print(kwargs['ds'])
-        print(kwargs['run_id'])
+        print(ts)
+        print(run_id)
 
     for r in range(20):
         t2 = PythonOperator(
             task_id=f'print_task_number_{r}',
             python_callable=print_something,
-            op_kwargs={'task_number': r},
+            op_kwargs={'task_number': r, 'ts': '{{ ts }}', 'run_id': '{{ run_id }}'},
         )
 
 
