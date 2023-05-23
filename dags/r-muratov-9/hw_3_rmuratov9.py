@@ -39,8 +39,8 @@ with DAG(
         """
     )
     
-    def print_something(task_number):
-
+    def print_something(**kwargs):
+        task_number = kwargs['task_number']
         print(f'task number is {task_number}')
 
     for r in range(20):
