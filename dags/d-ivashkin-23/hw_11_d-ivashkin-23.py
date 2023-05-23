@@ -35,16 +35,15 @@ with DAG(
         with postgres.get_conn() as conn:
             with conn.cursor(cursor_factory=RealDictCursor) as cursor:
                 cursor.execute("""
-                    select user_id, count(*) as like_count
+                    select user_id, count(*) as count
                     from feed_action
                     where action = 'like'
                     group by user_id
                     order by like_count desc
                     limit 1
                 """)
-                result = cursor.fetchone()
+                return cursor.fetchone()
 
-                return result
 
     task = PythonOperator(
         task_id='most_likes_user',
