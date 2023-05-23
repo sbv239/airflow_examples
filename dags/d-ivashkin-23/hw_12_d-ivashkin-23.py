@@ -15,6 +15,7 @@ def get_variables():
     is_startml = Variables.get('is_startml')
     return is_startml
 
+
 with DAG(
     'hw_d-ivashkin-23_12',
     default_args={
