@@ -4,27 +4,22 @@ from datetime import timedelta, datetime
 from airflow.providers.postgres.hooks.postgres import PostgresHook
 
 
-def find_user_with_most_likes():
+def most_likes_user():
     postgres = PostgresHook(postgres_conn_id='startml_feed')
     with postgres.get_conn() as conn:
         with conn.cursor() as cursor:
             # Execute SQL query to find user with most likes
             cursor.execute("""
-                SELECT user_id, COUNT(*) AS like_count
-                FROM feed_action
-                GROUP BY user_id
-                ORDER BY like_count DESC
-                LIMIT 1
+                select user_id, COUNT(*) AS like_count
+                from feed_action
+                where action = 'like'
+                group by user_id
+                order by like_count DESC
+                limit 1
             """)
             result = cursor.fetchone()
 
-            # Create dictionary with user_id and like_count
-            user_dict = {
-                'user_id': result[0],
-                'count': result[1]
-            }
-
-            return user_dict
+            return result
 
 
 with DAG(
@@ -52,8 +47,8 @@ with DAG(
     """
 
     task = PythonOperator(
-        task_id='find_user_with_most_likes',
-        python_callable=find_user_with_most_likes
+        task_id='most_likes_user',
+        python_callable=most_likes_user
     )
 
 task
