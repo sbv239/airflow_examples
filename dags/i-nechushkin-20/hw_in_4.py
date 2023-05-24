@@ -12,7 +12,7 @@ from airflow.operators.python_operator import PythonOperator
 
 
 with DAG(
-    'Task_2',
+    'Task_4',
     # DAG dafault parameters
     default_args={
         'depends_on_past': False,
@@ -23,7 +23,7 @@ with DAG(
         'retry_delay': timedelta(minutes=5),
     },
     start_date=datetime.now(),
-    tags=['Task_2'],
+    tags=['i-nechushkin-20_task_4'],
 ) as dag:
 
     for i in range(10):
