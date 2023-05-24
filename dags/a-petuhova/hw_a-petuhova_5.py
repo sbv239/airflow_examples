@@ -23,9 +23,9 @@ with DAG(
     tags=['a-petuhova'],
 ) as dag:
 
-    for NUMBER in range(10):
+    for i in range(10):
         task = BashOperator(
             task_id=f'task_bash_{NUMBER}',
             bash_command="echo $NUMBER",
-            env = {'NUMBER': NUMBER}
+            env = {"NUMBER":str(i)}
         )
