@@ -24,8 +24,8 @@ with DAG(
 ) as dag:
 
     for i in range(10):
-        task = BashOperator(
-            task_id=f'task_bash_{NUMBER}',
+        task=BashOperator(
+            task_id="task"+str(i),            
             bash_command="echo $NUMBER",
-            env = {"NUMBER":str(i)}
-        )
+            env={"NUMBER":str(i)}
+            )        
