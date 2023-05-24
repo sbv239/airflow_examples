@@ -29,4 +29,3 @@ with DAG(
             bash_command="echo $NUMBER",
             env = {'NUMBER': NUMBER}
         )
-        task
