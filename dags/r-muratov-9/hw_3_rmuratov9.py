@@ -2,6 +2,8 @@ from datetime import datetime, timedelta
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 from airflow import DAG
+from textwrap import dedent
+
 
 with DAG(
 
@@ -26,18 +28,29 @@ with DAG(
     for i in range(10):
         t1 = BashOperator(
             task_id=f'just_something_{i}',
-            bash_command=f"echo {i}",
+            bash_command="echo $NUMBER",
+            env={'NUMBER': i}
+        )
+
+        t1.doc_md = dedent(
+        f"""\
+        #### Bash task documantation
+        This bash has one attribute: `{i}` 
+        and using for ***echo*** **bash command**
+        """
         )
     
-    def print_something(task_number):
-
+    def print_something(task_number, ts, run_id):
+        # task_number = kwargs['task_number']
         print(f'task number is {task_number}')
+        print(ts)
+        print(run_id)
 
     for r in range(20):
         t2 = PythonOperator(
             task_id=f'print_task_number_{r}',
             python_callable=print_something,
-            op_kwargs=r,
+            op_kwargs={'task_number': r, 'ts': '{{ ts }}', 'run_id': '{{ run_id }}'},
         )
 
 
