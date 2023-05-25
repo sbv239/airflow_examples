@@ -1,12 +1,8 @@
 from datetime import datetime, timedelta
 from textwrap import dedent
-
-# Для объявления DAG нужно импортировать класс из airflow
 from airflow import DAG
-
-# Операторы - это кирпичики DAG, они являются звеньями в графе
-# Будем иногда называть операторы тасками (tasks)
 from airflow.operators.bash import BashOperator
+from airflow.operators.python import PythonOperator
 
 
 def print_context(ds, **kwargs):
@@ -15,19 +11,19 @@ def print_context(ds, **kwargs):
     return 'Whatever you return gets printed in the logs'
 
 with DAG(
-    'hw_i-loskutov_2'
+    'hw_i-loskutov_2',
     default_args={
     'depends_on_past': False,
     'email': ['airflow@example.com'],
     'email_on_failure': False,
     'email_on_retry': False,
     'retries': 1,
-    'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
-}
+    'retry_delay': timedelta(minutes=5),  
+},
 
     description='task02',
     schedule_interval=timedelta(days=1),
-    start_date=datetime(2023, 05, 26),
+    start_date=datetime(2023, 5, 26),
     catchup=False
 
 ) as dag:
