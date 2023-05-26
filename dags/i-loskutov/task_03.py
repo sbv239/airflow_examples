@@ -27,13 +27,13 @@ with DAG(
 ) as dag:
     for i in range(10):
         t1 = BashOperator(
-        task_id = 'task03_BashOperator',
-        bash_command = 'f"echo {i}" ',
+        task_id = f'task03_BashOperator_{i}',
+        bash_command = f"echo {i}",
         )
     for i in range(20):
         t2 = PythonOperator(
-        task_id = 'task03_PythonOperator',
-        python_callable = print_context(i),
+        task_id = f'task03_PythonOperator_{i}',
+        python_callable = print_context,
         op_kwargs={'task_number': i}
         )
     t1 >> t2
