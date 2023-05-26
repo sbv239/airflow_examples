@@ -22,7 +22,7 @@ default_args = {
 }
 
 with DAG(
-        'xcom_dag',
+        'hw_2_d-nikolaev',
         start_date=datetime(2021, 1, 1),
         max_active_runs=2,
         schedule_interval=timedelta(minutes=30),
