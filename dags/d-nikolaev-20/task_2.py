@@ -3,26 +3,6 @@ from airflow.operators.python import PythonOperator
 from airflow.operators.bash import BashOperator
 from datetime import datetime, timedelta
 
-import requests
-import json
-
-url = 'https://covidtracking.com/api/v1/states/'
-state = 'wa'
-
-
-def get_testing_increase(state, ti):
-    """
-    Gets totalTestResultsIncrease field from Covid API for given state and returns value
-    """
-    res = requests.get(url + '{0}/current.json'.format(state))
-    testing_increase = json.loads(res.text)['totalTestResultsIncrease']
-    # в ti уходит task_instance, его передает Airflow под таким названием
-    # когда вызывает функцию в ходе PythonOperator
-    ti.xcom_push(
-        key='testing_increase',
-        value=testing_increase
-    )
-
 
 def task_2_python_script(ds):
     """
