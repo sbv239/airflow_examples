@@ -2,7 +2,7 @@ from airflow import DAG
 from airflow.operators.python import PythonOperator
 from airflow.operators.bash import BashOperator
 from datetime import datetime, timedelta
-
+from textwrap import dedent
 
 def task_3_python_script(task_number):
     """
@@ -29,20 +29,24 @@ with DAG(
         default_args=default_args,
         catchup=False
 ) as dag:
-    dag.doc_md = '''
-    Выполняются 30 задач 
-    # **10 Задач** определяются через `'BashOperator'`
-    # **20 Задач** определяются через `'PythonOperator'`
-    # *Примечание: нумерация не сквозная* 
-    
-    '''
+
     for i in range(10):
         task = BashOperator(
             task_id=f'hw_d-nikolaev-20_{i}',
             bash_command=f"echo {i}")
+        task.doc_md = dedent(f'''
+            # **Задача № {i}**, которая *выполняет* `f"echo {i}"`   
+            # Выполнено с помощью `'BashOperator'`
+
+            ''')
     for i in range(20):
         task = PythonOperator(
             task_id=f'hw_d-nikolaev-20_p_{i}',
             python_callable=task_3_python_script,
             op_kwargs={'task_number': i}
             )
+        task.doc_md = dedent(f'''
+                # **Задача № {i}**, которая *выполняет* `task_3_python_script`   
+                # Выполнено с помощью `'PythonOperator'`
+
+                ''')
