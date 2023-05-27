@@ -2,13 +2,20 @@ from airflow import DAG
 from airflow.operators.python import PythonOperator
 from airflow.operators.bash import BashOperator
 from datetime import datetime, timedelta
+import json
+
+str_text = 'xcom test'
 
 
-def task_3_python_script(task_number):
-    """
-    Print i
-    """
-    print(f'task number is: {task_number}')
+def task_8_push_func(ti):
+    testing_increase = "xcom test"
+    ti.xcom_push(key="sample_xcom_key",
+                 value=testing_increase)
+
+
+def task_8_pull_func(ti):
+    print(ti.xcom_pull(key="sample_xcom_key",
+                       task_ids="push_task"))
 
 
 # Default settings applied to all tasks
@@ -22,24 +29,19 @@ default_args = {
 }
 
 with DAG(
-        'hw_6_d-nikolaev',
+        'hw_8_d-nikolaev',
         start_date=datetime(2021, 1, 1),
         max_active_runs=2,
         schedule_interval=timedelta(minutes=30),
         default_args=default_args,
         catchup=False
 ) as dag:
-
-    for i in range(10):
-        task = BashOperator(
-            task_id=f'hw_d-nikolaev-20_{i}',
-            bash_command="echo $NUMBER",
-            env={"NUMBER": str(i)})
-    for i in range(20):
-        task = PythonOperator(
-            task_id=f'hw_d-nikolaev-20_p_{i}',
-            python_callable=task_3_python_script,
-            op_kwargs={'task_number': str(i)}
-            )
-
-
+    task_1 = PythonOperator(
+        task_id='push_task',
+        python_callable=task_8_push_func,
+    )
+    task_2 = PythonOperator(
+        task_id='pull_task',
+        python_callable=task_8_pull_func,
+    )
+    task_1 >> task_2
