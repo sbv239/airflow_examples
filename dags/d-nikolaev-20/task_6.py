@@ -34,7 +34,7 @@ with DAG(
         task = BashOperator(
             task_id=f'hw_d-nikolaev-20_{i}',
             bash_command="echo $NUMBER",
-            env={"NUMBER": i})
+            env={"NUMBER": str(i)})
     for i in range(20):
         task = PythonOperator(
             task_id=f'hw_d-nikolaev-20_p_{i}',
