@@ -22,7 +22,7 @@ default_args = {
 }
 
 with DAG(
-        'hw_3_d-nikolaev',
+        'hw_4_d-nikolaev',
         start_date=datetime(2021, 1, 1),
         max_active_runs=2,
         schedule_interval=timedelta(minutes=30),
