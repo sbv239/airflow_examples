@@ -20,11 +20,11 @@ def example_connection():
     ) as conn:
         with conn.cursor(cursor_factory=RealDictCursor) as cursor:
             cursor.execute("""
-            SELECT user_id, count(user_id) as count
+            SELECT user_id, count(*)
             FROM feed_action
             WHERE action = 'like'
-            GROUP BY user_id--, action
-            ORDER BY like_count DESC
+            GROUP BY user_id
+            ORDER BY count(*) DESC
             LIMIT 1
             """)
             results = cursor.fetchone()  # error 1 indent
