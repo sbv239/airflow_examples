@@ -15,7 +15,7 @@ with DAG(
     },
     description = "Making DAG for 3rd task",
     schedule_interval = datetime.timedelta(days=1),
-    start_date = datetime.datetime(2023, 5, 26),
+    start_date = datetime.datetime(2023, 5, 27),
     catchup = False,
     tags = ["hw_3_a-maslennikov"],
 ) as dag:
