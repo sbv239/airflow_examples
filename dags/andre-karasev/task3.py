@@ -32,7 +32,7 @@ with DAG('andre-karasev_hw_3',
 
     for i in range(20):
         t2 = PythonOperator(
-            task_id='func',
+            task_id=f'func {i}',
             python_callable=print_number,
             op_kwargs={'task_number': i},
         )
