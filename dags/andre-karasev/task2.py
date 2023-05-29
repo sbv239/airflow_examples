@@ -3,8 +3,7 @@ from airflow.operators.bash import BashOperator, PythonOperator
 from airflow import DAG
 
 
-with DAG(
-    default_args={
+default_args = {
         'depends_on_past': False,
         'email': ['airflow@example.com'],
         'email_on_failure': False,
@@ -12,20 +11,21 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
     }
-) as dag:
+
+with DAG('andre-karasev_hw_2',
+         default_args=default_args,
+         tags=['andre-karasev_hw_2']) as dag:
+    def print_date(ds):
+        print(ds)
+        return ds
+
     bash = BashOperator(
         task_id='python_pwd',
         bash_command='pwd',
     )
 
-
-    def print_date(ds):
-        print(ds)
-        return ds
-
     operator = PythonOperator(
         task_id='print_date',
         python_callable=print_date,
     )
-
     bash >> operator
