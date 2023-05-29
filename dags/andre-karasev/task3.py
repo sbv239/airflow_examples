@@ -36,3 +36,4 @@ with DAG('andre-karasev_hw_3',
             python_callable=print_number,
             op_kwargs={'task_number': i},
         )
+    t1 >> t2
