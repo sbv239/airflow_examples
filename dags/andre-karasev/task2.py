@@ -32,4 +32,5 @@ with DAG('andre-karasev_hw_2',
         task_id='print_date',
         python_callable=print_date,
     )
+
     bash >> operator
