@@ -14,6 +14,10 @@ default_args = {
 
 with DAG('andre-karasev_hw_2',
          default_args=default_args,
+         description='hw_2_',
+         schedule_interval=timedelta(days=1),
+         start_date=datetime(2022, 9, 9),
+         catchup=False,
          tags=['andre-karasev_hw_2']) as dag:
     def print_date(ds):
         print(ds)
