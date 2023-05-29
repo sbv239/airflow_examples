@@ -2,12 +2,6 @@ from datetime import timedelta, datetime
 from airflow.operators.bash import BashOperator, PythonOperator
 from airflow import DAG
 
-date = "{{ ds }}"
-
-
-def print_date(ds):
-    print(ds)
-
 
 with DAG(
     default_args={
@@ -23,6 +17,12 @@ with DAG(
         task_id='python_pwd',
         bash_command='pwd',
     )
+
+
+    def print_date(ds):
+        print(ds)
+        return ds
+
     operator = PythonOperator(
         task_id='print_date',
         python_callable=print_date,
