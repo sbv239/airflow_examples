@@ -9,7 +9,7 @@ from airflow.operators.python import PythonOperator
 from textwrap import dedent
 
 with DAG(
-        'hw_l-anoshkina_3',
+        'hw_l-anoshkina_7',
 
         default_args={
         'depends_on_past': False,
@@ -19,7 +19,7 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
         },
-        description = 'HomeWork task2',
+        description = 'HomeWork task7',
         schedule_interval = timedelta(days=1),
         start_date = datetime(2023, 5, 29),
 
@@ -28,13 +28,16 @@ with DAG(
         ) as dag:
 
         for i in range(10):
-                task = BashOperator(
+                task1 = BashOperator(
                         task_id = 'print' + str(i),
-                        bash_command = "echo"+ str(i)
+                        bash_command = "echo $NUMBER",
+                        env={"NUMBER": i},
                 )
 
-        def print_task_number(task_number):
-                print(f"task number is: {task_number}")
+        def print_task_number(ts, run_id, **kwargs):
+                print(f"task number is: {kwargs['task_number']}")
+                print(ts)
+                print(run_id)
 
         for i in range(10, 30):
             task = PythonOperator(
