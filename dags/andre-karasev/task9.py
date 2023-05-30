@@ -13,9 +13,9 @@ def push_xcom(ti):
 def pull_xcom(ti):
         test = ti.xcom_pull(
                 key="sample_xcom_key",
-                task_ids="xcom test pull"
+                task_ids="push_xcom"
         )
-        print(test)
+        return test
 
 
 default_args = {
