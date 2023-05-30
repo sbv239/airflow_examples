@@ -6,14 +6,14 @@ from datetime import datetime, timedelta
 def push_xcom(ti):
         ti.xcom_push(
                 key="sample_xcom_key",
-                values="xcom test"
+                value="xcom test"
         )
 
 
 def pull_xcom(ti):
         test = ti.xcom_pull(
                 key="sample_xcom_key",
-                task_ids="push_xcom"
+                task_ids="display"
         )
         return test
 
@@ -42,7 +42,7 @@ with DAG(
         )
 
         t2 = PythonOperator(
-                task_id="xcom_pull",
+                task_id="display",
                 python_callable=pull_xcom
         )
 
