@@ -9,7 +9,7 @@ from airflow.operators.python import PythonOperator
 from textwrap import dedent
 
 with DAG(
-        'hw_l-anoshkina_3',
+        'hw_l-anoshkina_7',
 
         default_args={
         'depends_on_past': False,
@@ -19,7 +19,7 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
         },
-        description = 'HomeWork task8',
+        description = 'HomeWork task7',
         schedule_interval = timedelta(days=1),
         start_date = datetime(2023, 5, 29),
 
