@@ -22,8 +22,8 @@ with DAG(
         catchup=False,
         tags=['andre-karasev_hw_6']) as dag:
     for i in range(10):
-        NUMBER = i
         t1 = BashOperator(
             task_id='echo' + str(i),
             bash_command='echo $NUMBER',
+            env={'NUMBER': i}
         )
