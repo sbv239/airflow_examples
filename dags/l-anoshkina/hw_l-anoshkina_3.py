@@ -30,7 +30,8 @@ with DAG(
         for i in range(10):
                 task = BashOperator(
                         task_id = 'print' + str(i),
-                        bash_command = "echo"+ str(i)
+                        bash_command = "echo $NUMBER",
+                        env={"NUMBER": i},
                 )
 
         def print_task_number(task_number):
