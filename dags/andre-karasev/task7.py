@@ -14,13 +14,13 @@ default_args = {
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
     }
 with DAG(
-        'andre-karasev_hw_3',
+        'andre-karasev_hw_7',
         default_args=default_args,
-        description='hw_3_',
+        description='hw_7_',
         schedule_interval=timedelta(days=1),
         start_date=datetime(2022, 9, 9),
         catchup=False,
-        tags=['andre-karasev_hw_3']) as dag:
+        tags=['andre-karasev_hw_7']) as dag:
     for i in range(10):
         t1 = BashOperator(
             task_id='echo' + str(i),
