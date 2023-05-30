@@ -2,6 +2,7 @@ from datetime import timedelta, datetime
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 from airflow import DAG
+from textwrap import dedent
 
 
 default_args = {
@@ -25,6 +26,12 @@ with DAG(
             task_id='echo' + str(i),
             bash_command=f'echo {i}',
         )
+        t1.doc_md = dedent(
+            """
+            #Абзац
+            `code` **bold** _italic_
+            """
+        )
 
     def print_number(task_number):
         return f"task number is: {task_number}"
@@ -35,5 +42,11 @@ with DAG(
             task_id="task_number" + str(i),
             python_callable=print_number,
             op_kwargs={'task_number': i},
+        )
+        t2.doc_md = dedent(
+            """
+            #Абзац
+            `code` **bold** _italic_
+            """
         )
     t1 >> t2
