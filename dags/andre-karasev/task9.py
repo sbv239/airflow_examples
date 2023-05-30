@@ -45,4 +45,5 @@ with DAG(
                 task_id="xcom_pull",
                 python_callable=pull_xcom
         )
+
         t1 >> t2
