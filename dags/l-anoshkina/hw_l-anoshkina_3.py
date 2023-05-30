@@ -1,8 +1,12 @@
+
+
 from airflow import DAG
 from datetime import timedelta, datetime
 
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
+
+from textwrap import dedent
 
 with DAG(
         'hw_l-anoshkina_3',
@@ -38,3 +42,13 @@ with DAG(
                     python_callable = print_task_number,
                     op_kwargs = {'task_number': int(i)},
             )
+
+        task.doc_md = dedent(
+                """\
+                #### Test documentation
+                **bold text**
+                _italic text_
+                `some code`
+                # abzac
+                """
+        )
