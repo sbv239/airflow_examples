@@ -13,7 +13,7 @@ def push_xcom(ti):
 def pull_xcom(ti):
         test = ti.xcom_pull(
                 key="sample_xcom_key",
-                task_ids="display"
+                task_ids="xcom_push"
         )
         return test
 
@@ -42,7 +42,7 @@ with DAG(
         )
 
         t2 = PythonOperator(
-                task_id="display",
+                task_id="xcom_pull",
                 python_callable=pull_xcom
         )
 
