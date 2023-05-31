@@ -2,7 +2,7 @@ from airflow.models import Variable
 from airflow import DAG
 
 from datetime import timedelta, datetime
-from airflow.operators.python import PythonOperator, BranchPythonOperator
+from airflow.operators.python import PythonOperator, BranchPythonOperator, DummyOperator
 from airflow.providers.postgres.hooks.postgres import PostgresHook
 
 
@@ -38,22 +38,27 @@ with DAG(
         def not_startml_desc():
                 print("Not a startML course, sorry")
 
-        branching = BranchPythonOperator(
+
+        t1 = DummyOperator(
+                task_id="before_branching"
+        )
+
+        t2 = BranchPythonOperator(
                 task_id='branching',
                 python_callable=choose_branch,
 
             )
-        t1 = PythonOperator(
+        t3 = PythonOperator(
                 task_id='startml_desc',
                 python_callable=startml_desc
         )
 
-        t2 = PythonOperator(
+        t4 = PythonOperator(
                 task_id='not_startml_desc',
                 python_callable=not_startml_desc
         )
 
-        branching
+        t1 >> t2 >> [t3, t4]
 
 
 # теперь в is_prod лежит значение Variable
