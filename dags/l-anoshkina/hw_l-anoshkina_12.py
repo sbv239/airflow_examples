@@ -2,7 +2,7 @@ from airflow.models import Variable
 from airflow import DAG
 
 from datetime import timedelta, datetime
-from airflow.operators.python import PythonOperator, BranchPythonOperator, EmptyOperator
+from airflow.operators.python import PythonOperator, BranchPythonOperator
 from airflow.providers.postgres.hooks.postgres import PostgresHook
 
 
