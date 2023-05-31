@@ -15,7 +15,7 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),
         },
-        description = 'HomeWork task7',
+        description = 'HomeWork task9',
         schedule_interval = timedelta(days=1),
         start_date = datetime(2023, 5, 30),
 
@@ -23,12 +23,12 @@ with DAG(
 
         ) as dag:
 
-        def add_key(ti, key):
+        def add_key(ti):
                 ti.xcom_push(
                         key='sample_xcom_key',
                         value="xcom test"
                 )
-        def get_key(ti, key):
+        def get_key(ti):
                 temp = ti.xcom_pull(
                         key='sample_xcom_key',
                         task_ids='add_key'
@@ -43,7 +43,6 @@ with DAG(
         t2 = PythonOperator(
                 task_id='get_key',
                 python_callable=get_key,
-                op_kwargs={'key': "xcom test"}
         )
 
         t1 >> t2
