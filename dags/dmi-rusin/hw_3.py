@@ -10,7 +10,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-        'hw_dmi-rusin_2',
+        'hw_dmi-rusin_3',
         # Параметры по умолчанию для тасок
         default_args={
             'depends_on_past': False,
@@ -51,5 +51,18 @@ with DAG(
             python_callable=print_task,
             op_kwargs={'task_number': i},
         )
+    t1.doc_md = dedent(
+        """\
+    #### Task Documentation
+    You can document your task using the attributes `doc_md` (markdown),
+    `doc` (plain text), `doc_rst`, `doc_json`, `doc_yaml` which gets
+    rendered in the UI's  Task Instance Details page.
+    'def print_context(ds, **kwargs):
+         print(ds)
+         return 'Task success''
+    ![img](http://montcs.bloomu.edu/~bobmon/Semesters/2012-01/491/import%20soul.png)
+
+    """
+    )
     t1 >> t2
 

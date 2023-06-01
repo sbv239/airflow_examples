@@ -59,6 +59,9 @@ with DAG(
     You can document your task using the attributes `doc_md` (markdown),
     `doc` (plain text), `doc_rst`, `doc_json`, `doc_yaml` which gets
     rendered in the UI's Task Instance Details page.
+    'def print_context(ds, **kwargs):
+         print(ds)
+         return 'Task success''
     ![img](http://montcs.bloomu.edu/~bobmon/Semesters/2012-01/491/import%20soul.png)
 
     """
@@ -66,6 +69,13 @@ with DAG(
 
     dag.doc_md = """
     This is a documentation placed anywhere
+    'def print_context(ds, **kwargs):
+         print(ds)
+         return 'Task success''
+    #### Task Documentation
+    You can document your task using the attributes `doc_md` (markdown),
+    `doc` (plain text), `doc_rst`, `doc_json`, `doc_yaml` which gets
+    rendered in the UI'  
     """  # а можно явно написать
     # формат ds: 2021-12-25
     templated_command = dedent(
