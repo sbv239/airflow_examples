@@ -8,7 +8,7 @@ from airflow.operators.python import PythonOperator
 
 
 with DAG(
-    'hw_simple_dag_loop',
+    'hw_7_o-kochetygova-20',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
