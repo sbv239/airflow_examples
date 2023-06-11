@@ -16,7 +16,7 @@ with DAG(
         },
         description='DAG from step 3',
         schedule_interval=timedelta(days=1),
-        start_date=datetime(2022, 2, 10),
+        start_date=datetime(2023, 6, 11),
         catchup=False,
         tags=['kokh'],
 ) as dag:
