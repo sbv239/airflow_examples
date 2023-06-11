@@ -15,11 +15,11 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),
     },
-    description='First DAG from step 2 of HW Lesson 11',
+    description='First DAG from step 2',
     schedule_interval=timedelta(days=1),
-    start_date=datetime(2022, 2, 10),
+    start_date=datetime(2023, 6, 11),
     catchup=False,
-    tags=['first'],
+    tags=['kokh'],
 ) as dag:
 
     t1 = BashOperator(
