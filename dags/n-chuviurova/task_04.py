@@ -17,7 +17,7 @@ def print_context(task_number):
 
 
 with DAG(
-        "hw_3_n-chuviurova",
+        "hw_4_n-chuviurova",
         default_args={
             "depends_on_past": False,
             "email": ["airflow@example.com"],
@@ -26,11 +26,11 @@ with DAG(
             "retries": 1,
             "retry_delay": timedelta(minutes=5)
         },
-        description="dynamic tasks",
+        description="documentation",
         schedule_interval=timedelta(days=1),
         start_date=datetime(2023, 6, 15),
         catchup=False,
-        tags=["task_03"],
+        tags=["task_04"],
 ) as dag:
     dag.doc_md = __doc__
 
