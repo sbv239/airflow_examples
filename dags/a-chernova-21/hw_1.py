@@ -7,7 +7,7 @@ from airflow.operators.python_operator import PythonOperator
 
 def print_date(ds):
     print(ds)
-    return f'Current date = {df}'
+    return f'Current date: {df}'
     
 with DAG(
     'hw_a-chernova-21_1',
@@ -19,7 +19,7 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5)
     }
-    description='Try a dag'
+    description='Try a new dag'
     
     shedule_interval=timedelta(days=1),
     start_day=datetime(2023, 6, 16),
