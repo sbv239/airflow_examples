@@ -18,7 +18,7 @@ with DAG(
         'email_on_retry': False,
         'retries': 1,
         'retry_delay': timedelta(minutes=5)
-    }
+    },
     
     description='Try a new dag',
     shedule_interval=timedelta(days=1),
