@@ -7,7 +7,7 @@ from airflow.operators.python_operator import PythonOperator
 
 def print_date(ds):
     print(ds)
-    return f'Current date = {df}'
+    return f'Current date: {df}'
     
 with DAG(
     'hw_a-chernova-21_1',
