@@ -21,8 +21,8 @@ with DAG(
     },
     
     description='Try a new dag',
-    shedule_interval=timedelta(days=1),
-    start_day=datetime(2023, 6, 16),
+    schedule_interval=timedelta(days=1),
+    start_date=datetime(2023, 6, 16),
     catchup=False,
     tags=['hw1'],
 ) as dag:
