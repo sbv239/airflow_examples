@@ -19,8 +19,8 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5)
     }
-    description='Try a new dag'
     
+    description='Try a new dag',
     shedule_interval=timedelta(days=1),
     start_day=datetime(2023, 6, 16),
     catchup=False,
