@@ -18,7 +18,7 @@ with DAG ('hw_pave-sokolov_2',
             'retry_delay': timedelta(minutes=5), 
             },
             description= 'A simpletutorial DAG',
-            schedule=timedelta(days = 1),
+            schedule_interval=timedelta(days = 1),
             start_date= datetime(2023,6,12),
             catchup= False,
             tags= ['example']
