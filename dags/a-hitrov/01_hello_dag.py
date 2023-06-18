@@ -29,7 +29,7 @@ dag_params = {
     'tags': ['xa'],
 }
 
-with DAG(**dag_params):
+with DAG(**dag_params) as dag:
     pwd = BashOperator(
         task_id='pwd',
         bash_command='pwd',
