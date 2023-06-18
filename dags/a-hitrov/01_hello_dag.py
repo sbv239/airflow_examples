@@ -13,7 +13,8 @@ from airflow.operators.python import PythonOperator
 
 dag_params = {
     'dag_id': 'XA01-hello-dag',
-    'doc_md': __doc__,
+    'description': __doc__ + ' [description]',  # Высплывающая подсказка?
+    'doc_md': __doc__,  # Подробное описание графа?
     'start_date': datetime.datetime(2023, 6, 18),
     'schedule_interval': datetime.timedelta(days=1),
     'default_args': {
@@ -24,6 +25,8 @@ dag_params = {
         'retries': 1,
         'retry_delay': datetime.timedelta(minutes=5),
     },
+    'catchup': False,
+    'tags': ['xa'],
 }
 
 with DAG(**dag_params):
