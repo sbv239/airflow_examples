@@ -25,7 +25,7 @@ with DAG ('hw_pave-sokolov_7',
         ) as dag:
     
     def tn(ts, run_id, **kwargs):
-        print(f'task number is: {kwargs['task_number']}')
+        print(f'task number is: {kwargs["task_number"]}')
         print(ts)
         print(run_id)
 
@@ -35,7 +35,7 @@ with DAG ('hw_pave-sokolov_7',
         t2 = PythonOperator(
         task_id = 'print_task_number_' + str(y),
         python_callable= tn,
-        op_kwargs= {'task_number': y}        
+        op_kwargs= {"task_number": y}        
         )
 
     t2
