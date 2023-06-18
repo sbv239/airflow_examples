@@ -7,14 +7,17 @@ from airflow.operators.python import PythonOperator
 from airflow.models.baseoperator import chain, cross_downstream
 
 
-def pretty_print(task_number):
+def pretty_print(task_number, ts, run_id):
     print(f'task number is: {task_number}')
+    print(f'run_id: {run_id}')
+    print(f'ts: {ts}')
 
 
 def echo(i):
     return BashOperator(
         task_id=f'echo-{i}',
-        bash_command=f'echo {i}',
+        bash_command='echo $NUMBER',
+        env={'NUMBER': i},
         doc_md=dedent('''
 
             # Задача на основе `BashOperator`
