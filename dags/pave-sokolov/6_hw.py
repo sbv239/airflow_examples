@@ -28,7 +28,7 @@ with DAG ('hw_pave-sokolov_6',
         t1 = BashOperator (
         task_id = 'echo_' + str(i),
         bash_command= 'echo $NUMBER ',
-        env = {"NUMBER": i}
+        env = {"NUMBER": str(i)}
         )
     
     t1
