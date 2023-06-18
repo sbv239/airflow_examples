@@ -1,7 +1,9 @@
 '''
-Первый DAG на AirFlow.
+Первый DAG на AirFlow 2.2.4.
 
-Выполняет команду `pwd` в рамках BashOperator, а затем распечатывает аргумент `ds` через PythonOperator.
+Выполняет команду `pwd` в рамках `BashOperator`,
+а затем распечатывает шаблонизируемую jinja 
+переменную `ds` из `PythonOperator`.
 '''
 import datetime
 
@@ -13,7 +15,7 @@ dag_params = {
     'dag_id': 'XA01-hello-dag',
     'doc_md': __doc__,
     'start_date': datetime.datetime(2023, 6, 18),
-    'schedule': datetime.timedelta(days=1),
+    'schedule_interval': datetime.timedelta(days=1),
     'default_args': {
         'depends_on_past': False,
         'email': ['airflow@example.com'],
