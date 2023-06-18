@@ -44,16 +44,24 @@ with DAG(
         
     t1.doc_md = dedent(
         """\
-        ### Tast 1 Documentation
+        ### Task 1 Documentation
         Create __loop__ using `for` operator, repeat _10_ times
-        #Then go to task 2
+        
+        ## Then go to task 2
+        
+        test
         """)
         
     t2.doc_md = dedent(
         """\
-        ### Tast 2 Documentation
+        ### Task 2 Documentation
         Create __loop__ using `for` operator, repeat _20_ times
-        #Then end
+        
+        ## Then end
+        
+        test
         """)
+    
+    dag.doc_md = __doc__
         
     t1 >> t2
