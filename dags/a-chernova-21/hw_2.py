@@ -1,4 +1,4 @@
-from daetime import datetime, timedelta
+from datetime import datetime, timedelta
 
 from airflow import DAG
 
