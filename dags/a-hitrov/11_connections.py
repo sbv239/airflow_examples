@@ -28,11 +28,11 @@ def most_liking_user():
         with conn.cursor(cursor_factory=RealDictCursor) as cursor:
             cursor.execute('''
 
-                SELECT user_id, COUNT(user_id) AS "count"
+                SELECT user_id, COUNT(*)
                 FROM feed_action
                 WHERE action = 'like'
                 GROUP BY user_id
-                ORDER BY COUNT(user_id)
+                ORDER BY COUNT(*) DESC
                 LIMIT 1
 
             ''')
