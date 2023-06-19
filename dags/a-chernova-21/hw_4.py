@@ -25,9 +25,9 @@ with DAG(
     
     templated_command = dedent(
         """
-        {% for run_id in range(5) %}
+        {% for i in range(5) %}
             echo "{{ ts }}"
-            echo "{{ params.run_id }}"
+            echo "{{ run_id }}"
         {% endfor %}
         """
     )
@@ -36,7 +36,6 @@ with DAG(
         task_id='templated',
         depends_on_past=False,
         bash_command=templated_command,
-        params={'run_id': run_id},
         dag=dag
     )
     
