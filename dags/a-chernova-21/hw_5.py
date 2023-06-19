@@ -31,7 +31,7 @@ with DAG(
         number = i
         t1 = BashOperator(
             task_id='task_' + str(i),
-            env={'NUMBER': number},
+            env={'NUMBER': 'number'},
             bash_command='echo $NUMBER',
             dag=dag
         )
