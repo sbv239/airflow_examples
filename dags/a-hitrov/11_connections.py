@@ -18,7 +18,7 @@ def most_liking_user():
     #    with conn.cursor() as cursor:
     #        # ...
 
-    # Альтернативный вариант
+    # Вариант с использованием PostgresHook
 
     from airflow.providers.postgres.hooks.postgres import PostgresHook
     from psycopg2.extras import RealDictCursor
@@ -28,7 +28,7 @@ def most_liking_user():
         with conn.cursor(cursor_factory=RealDictCursor) as cursor:
             cursor.execute('''
 
-                SELECT user_id, COUNT(user_id)
+                SELECT user_id, COUNT(user_id) AS "count"
                 FROM feed_action
                 WHERE action = 'like'
                 GROUP BY user_id
@@ -37,6 +37,7 @@ def most_liking_user():
 
             ''')
             user = cursor.fetchone()
+    print(user)
     return user
 
 
@@ -44,7 +45,7 @@ dag_params = {
     'dag_id': 'xxa11-connection',
     'description': 'Использование базы данных',
     'start_date': datetime(2023, 6, 7),
-    'schedule_interval': timedelta(days=365),
+    'schedule_interval': timedelta(days=10),
     'default_args': {
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -53,7 +54,7 @@ dag_params = {
         'retries': 1,
         'retry_delay': timedelta(minutes=5),
     },
-    'catchup': True,
+    'catchup': False,
     'tags': ['xxa'],
 }
 
