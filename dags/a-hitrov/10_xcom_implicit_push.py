@@ -1,9 +1,3 @@
-'''
-Дегустируем XCom (cross-communications) -- механизм передачи
-небольших данных между задачами AirFlow. Если необходимо
-обмениваться объемными данными, то надо смотреть в сторону
-S3, HDFS и баз данных.
-'''
 from datetime import datetime, timedelta
 
 from airflow import DAG
@@ -11,22 +5,21 @@ from airflow.operators.python import PythonOperator
 
 
 SRC_TASK_ID = 'src'
-XCOM_KEY = 'sample_xcom_key'
+DEFAULT_XCOM_KEY = 'return_value'
 
 
-def xcom_src_func(ti):  # `ti` -- task instance (airflow builtin variable)
-    ti.xcom_push(key=XCOM_KEY, value='xcom test')
+def xcom_src_func():
+    return 'Airflow tracks everything'
 
 
-def xcom_dst_func(**kwargs):  # Get `ti` from `kwargs`
-    #value = ti.xcom_pull(key=XCOM_KEY, task_ids=SRC_TASK_ID)
-    value = kwargs['ti'].xcom_pull(key=XCOM_KEY, task_ids=SRC_TASK_ID)
+def xcom_dst_func(ti):
+    value = ti.xcom_pull(key=DEFAULT_XCOM_KEY, task_ids=SRC_TASK_ID)
     print(value)
 
 
 dag_params = {
-    'dag_id': 'xxa09-xcoms',
-    'description': 'Передача небольших данных между задачами с помощью XComs',
+    'dag_id': 'xxa10-xcom-implicit-push',
+    'description': 'Неявная передача данных в XCom при возврате функции',
     'start_date': datetime(2023, 6, 7),
     'schedule_interval': timedelta(days=365),
     'default_args': {
