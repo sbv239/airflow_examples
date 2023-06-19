@@ -19,7 +19,7 @@ with DAG(
     schedule_interval=timedelta(days=1),
     start_date=datetime(2023, 6, 17),
     catchup=False,
-    tags=['example'],
+    tags=['hw_4'],
 ) as dag:
     
     
