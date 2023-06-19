@@ -17,7 +17,7 @@ def echo(i):
     return BashOperator(
         task_id=f'echo-{i}',
         bash_command='echo $NUMBER',
-        env={'NUMBER': i},
+        env={'NUMBER': str(i)},
         doc_md=dedent('''
 
             # Задача на основе `BashOperator`
@@ -71,14 +71,22 @@ dag_params = {
 
 with DAG(**dag_params) as dag:
 
-    a = [echo(i) for i in range(1, 11)]
-    b = [pp(i) for i in range(11, 19)]
+    a = [echo(i) for i in range(1, 9)]
+    b = [pp(i) for i in range(9, 14)]
+    c = pp(15)
     cross_downstream(a, b)
+    cross_downstream(b, c)
     chain(
-        pp(19),
+        c,
+
+       [pp(16), pp(17)],
+       [pp(18), pp(19)],
+
         pp(20),
+
        [pp(i) for i in range(21, 25)],
        [pp(i) for i in range(25, 29)],
+
       *[pp(i) for i in range(29, 31)]
     )
 
