@@ -1,3 +1,10 @@
+'''
+Connection в AirFlow немного напоминает секреты в Kubernetes.
+Это структурированные данные, предназначенные для установки
+соединения со сторонней системой. Часть (?) полей этих
+структурированных данных AirFlow маскирует, если пытаться
+их вывести в журнал.
+'''
 from datetime import datetime, timedelta
 
 from airflow import DAG
@@ -28,11 +35,11 @@ def most_liking_user():
         with conn.cursor(cursor_factory=RealDictCursor) as cursor:
             cursor.execute('''
 
-                SELECT user_id, COUNT(user_id) AS "count"
+                SELECT user_id, COUNT(*)
                 FROM feed_action
                 WHERE action = 'like'
                 GROUP BY user_id
-                ORDER BY COUNT(user_id)
+                ORDER BY COUNT(*) DESC
                 LIMIT 1
 
             ''')
