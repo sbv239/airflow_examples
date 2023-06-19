@@ -20,7 +20,7 @@ with DAG(
         'retry_delay': timedelta(minutes=5)
     },
     
-    description='A new dag',
+    description='A new dag_hw5',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2023, 6, 17),
     catchup=False,
