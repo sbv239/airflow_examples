@@ -1,6 +1,7 @@
 '''
-`airflow.model.Variable` -- это реестр пользовательских
-глобальных перменных в AirFlow.
+`airflow.models.Variable` -- это реестр пользовательских
+глобальных перменных в AirFlow. Подобно `os.environ`
+всегда возвращает строковые значения.
 '''
 from datetime import datetime, timedelta
 
