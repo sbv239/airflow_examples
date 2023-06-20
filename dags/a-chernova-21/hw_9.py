@@ -38,7 +38,7 @@ with DAG(
         task_id = 'put',
         python_callable=put_xcom
     )
-    t1 = PythonOperator(
+    t2 = PythonOperator(
         task_id = 'extract',
         python_callable=extract_xcom
     )   
