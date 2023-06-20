@@ -20,31 +20,35 @@ with DAG(
         'retry_delay': timedelta(minutes=5)
     },
     
-    description='Try a new dag',
+    description='HW3',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2023, 6, 16),
     catchup=False,
     tags=['hw_maks-novikov_3'],
 ) as dag:
-dag.doc_md = """
-This is a documentation placed anywhere
-"""    
-
+    dag.doc_md = """
+        This is a documentation placed anywhere
+    """ 
     for i in range(1, 11):
         t1 = BashOperator(
             task_id='task_' + str(i),
             bash_command=f'echo {i}',
             dag=dag
         )
-        
-t1.doc_md = dedent(
-"""\
-#### Task Documentation
-function echo
-"""
-)
-
-
+    t1.doc_md = dedent(
+    """\
+    #### Task Documentation
+    *You* can document your task using the attributes `doc_md` (markdown),
+    `doc` (plain text), `doc_rst`, `doc_json`, `doc_yaml` which gets
+    #rendered in the UI's **Task Instance Details page**.
+    ![img](http://montcs.bloomu.edu/~bobmon/Semesters/2012-01/491/import%20soul.png)
+    `for i in range(11, 31):
+        t2 = PythonOperator(
+            task_id='task_' + str(i),
+            python_callable=check_num,
+            op_kwargs={'task_number': i}`
+    """
+    ) # dedent - это особенность Airflow, в него нужно оборачивать всю доку    
 
     for i in range(11, 31):
         t2 = PythonOperator(
@@ -53,12 +57,6 @@ function echo
             op_kwargs={'task_number': i}
         )
 
-t2.doc_md = dedent(
-"""\
-#### Task Documentation
-function echo
-"""
-)
 
 t1 >> t2
 
