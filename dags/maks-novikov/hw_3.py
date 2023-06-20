@@ -5,6 +5,7 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python_operator import PythonOperator
 
+from textwrap import dedent
 def check_num(task_number):
     return f'task number is: {task_number}'
 
@@ -35,14 +36,14 @@ with DAG(
             bash_command=f'echo {i}',
             dag=dag
         )
-    t1.doc_md = dedent(
+    t1.doc_md = dedent(git checkout
     """\
     #### Task Documentation
     *You* can document your task using the attributes `doc_md` (markdown),
     `doc` (plain text), `doc_rst`, `doc_json`, `doc_yaml` which gets
     #rendered in the UI's **Task Instance Details page**.
     ![img](http://montcs.bloomu.edu/~bobmon/Semesters/2012-01/491/import%20soul.png)
-    `for i in range(11, 31):
+    `for i in range(61, 31):
         t2 = PythonOperator(
             task_id='task_' + str(i),
             python_callable=check_num,
