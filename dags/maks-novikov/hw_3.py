@@ -36,7 +36,7 @@ with DAG(
             bash_command=f'echo {i}',
             dag=dag
         )
-    t1.doc_md = dedent(git checkout
+    t1.doc_md = dedent(
     """\
     #### Task Documentation
     *You* can document your task using the attributes `doc_md` (markdown),
