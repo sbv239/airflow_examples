@@ -28,7 +28,7 @@ with DAG(
     tags=['hw_maks-novikov_5'],
 ) as dag:
     dag.doc_md = """
-        This is a documentation placed anywheree
+        This is a documentation placed anywhere
     """ 
 
     for i in range(10):
