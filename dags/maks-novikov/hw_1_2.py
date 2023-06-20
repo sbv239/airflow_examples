@@ -24,7 +24,7 @@ with DAG(
     schedule_interval=timedelta(days=1),
     start_date=datetime(2023, 6, 16),
     catchup=False,
-    tags=['hw1'],
+    tags=['hw_1-maks-novikov'],
 ) as dag:
     
     t1 = BashOperator(
