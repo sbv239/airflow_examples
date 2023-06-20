@@ -10,7 +10,7 @@ def print_date(ds):
     return f'Current date: {ds}'
     
 with DAG(
-    'hw_a-chernova-21_1',
+    'hw_1-maks-novikov',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
