@@ -10,7 +10,7 @@ def print_date(ds):
     return f'Current date: {ds}'
     
 with DAG(
-    'hw_1-maks-novikov',
+    'hw_2-maks-novikov',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -24,7 +24,7 @@ with DAG(
     schedule_interval=timedelta(days=1),
     start_date=datetime(2023, 6, 16),
     catchup=False,
-    tags=['hw_1-maks-novikov'],
+    tags=['hw_2-maks-novikov'],
 ) as dag:
     
     templated_command = dedent(
