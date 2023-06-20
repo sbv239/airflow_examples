@@ -1,9 +1,6 @@
-from datetime import datetime, timedelta
-
 from airflow import DAG
-
 from airflow.operators.python import PythonOperator
-from airflow.providers.postgres.operators.postgres import PostgresHook
+from datetime import timedelta, datetime
 
 with DAG(
     'hw_maks-novikov_8',
@@ -23,25 +20,24 @@ with DAG(
     tags=['hw_maks-novikov_8'],
 ) as dag:
 
-    def max_likes():
-        postgres = PostgresHook(postgres_conn_id="startml_feed")
-        with postgres.get_conn() as conn:
-            with conn.cursor() as cursor:
-                cursor.execute('''
-                    SELECT user_id, COUNT(user_id)
-                    FROM feed_action
-                    WHERE action = 'like'
-                    GROUP BY user_id
-                    ORDER BY COUNT(user_id) DESC
-                    LIMIT 1 
-                    '''
-                )
-                result = cursor.fetchone()
-                return result
+    def push_xcom():
+        return "Airflow tracks everything"
 
+    def pull_xcom(ti):
+        res = ti.xcom_pull(
+            key='return_value',
+            task_ids='push_xcom'
+        )
+        print(res)
+    
     t1 = PythonOperator(
-        task_id='max_likes',
-        python_callable=max_likes,
+        task_id='push_xcom',
+        python_callable=push_xcom,
     )
 
-    t1
+    t2 = PythonOperator(
+        task_id='pull_xcom',
+        python_callable=pull_xcom,
+    )
+    
+    t1 >> t2
