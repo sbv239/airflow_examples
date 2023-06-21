@@ -6,7 +6,7 @@ def put_xcom(ti):
     value = 'xcom test'
     ti.xcom_push(
         key='sample_xcom_key',
-        value='value'
+        value=value
     )
 
 def extract_xcom(ti):
