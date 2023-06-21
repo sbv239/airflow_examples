@@ -5,7 +5,7 @@ from airflow.operators.python import PythonOperator
 from textwrap import dedent
 
 with DAG(
-        'task_r-izutov_3',
+        'task_r-izutov_4',
 
         default_args={
             'depends_on_past': False,
