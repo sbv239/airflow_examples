@@ -4,7 +4,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-    'task_r-izutov_3',
+    'task_r-izutov_7',
 
 
 default_args={
