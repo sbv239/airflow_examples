@@ -42,5 +42,5 @@ with DAG(
     t1 = PythonOperator(
         task_id = 'find_user',
         python_callable=find_top_user
-    
-t1
+        
+        
