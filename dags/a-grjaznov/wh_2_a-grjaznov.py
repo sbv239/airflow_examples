@@ -4,18 +4,20 @@ from airflow.operators.python import PythonOperator
 from datetime import datetime, timedelta
 
 with DAG(
-        'tutorial'
-        , default_args={'depends_of_past': False
-            , 'email': ['sashalesbiznes@yandex.ru']
-            , 'email_on_failure': False
-            , 'email_on_retry': False
-            , 'retries': 1
-            , 'retry_delay': timedelta(minutes=5)}
+        # 'tutorial_gryaznov'
+        default_args={
+            'depends_on_past': False,
+            'email': ['airflow@example.com'],
+            'email_on_failure': False,
+            'email_on_retry': False,
+            'retries': 1,
+            'retry_delay': timedelta(minutes=5)}
         , description='test Gryaznov'
         , schedule_interval=timedelta(days=1)
         , start_date=datetime(2023, 6, 20)
         , catchup=False
-        , tags=['example'])as dag_agryaznov:
+        , tags=['example']
+        , dag_id='dag_2_agryaznov')as dag_agryaznov:
     bash_gryaz_2 = BashOperator(
         task_id='gryaz_bash'
         , bash_command='pwd'
