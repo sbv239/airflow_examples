@@ -13,7 +13,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-    'tutorial',
+    'HW_2_a-samofalov',
     # Параметры по умолчанию для тасок
     default_args={
             'depends_on_past': False,
@@ -24,7 +24,7 @@ with DAG(
             'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
         },
     # Описание DAG (не тасок, а самого DAG)
-    description='A simple tutorial DAG',
+    description='A simple tutorial DAG june 2023',
     # Как часто запускать DAG
     schedule_interval=timedelta(days=1),
     # С какой даты начать запускать DAG
