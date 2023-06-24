@@ -36,12 +36,12 @@ with DAG(
     # https://airflow.apache.org/docs/apache-airflow/stable/dag-run.html
     catchup=False,
     # теги, способ помечать даги
-    tags=['example'],
+    tags=['hw_2_a-samofalov'],
 ) as dag:
 
 
     t1 = BashOperator(
-        task_id='print_date',  # id, будет отображаться в интерфейсе
+        task_id='Print_PWD_Samofalov',  # id, будет отображаться в интерфейсе
         bash_command='pwd',  # какую bash команду выполнить в этом таске
     )
 
@@ -58,7 +58,7 @@ with DAG(
 
 
     t2 = PythonOperator(
-        task_id='print_the_context',  # нужен task_id, как и всем операторам
+        task_id='PRINT_PythonOp_Samofalov',  # нужен task_id, как и всем операторам
         python_callable=print_context,  # свойственен только для PythonOperator - передаем саму функцию
     )
     # А вот так в Airflow указывается последовательность задач
