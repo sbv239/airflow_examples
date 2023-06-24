@@ -1,6 +1,5 @@
 from datetime import datetime, timedelta
-
-# Для объявления DAG нужно импортировать класс из airflow
+from textwrap import dedent
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
@@ -24,25 +23,18 @@ with DAG(
     catchup=False,
     tags=['hw_3_a-samofalov'],
 ) as dag:
+    def print_task(task_number):
+        return print(f'task number is: {task_number}')
 
-    for i in range(10):
-        # Каждый таск будет спать некое количество секунд
-        bash_task = BashOperator(
-            task_id='bash_print_' + str(i),  # в id можно делать все, что разрешают строки в python
-            bash_command=f'echo {i}'
-        )
-    def my_sleeping_function(task_number):
-        print(f'task number is: {task_number}')
-
-    # Генерируем таски в цикле - так тоже можно
-    for i in range(20):
-        # Каждый таск будет спать некое количество секунд
-        python_task = PythonOperator(
-            task_id='python_print_' + str(i),  # в id можно делать все, что разрешают строки в python
-            python_callable=my_sleeping_function(),
-            # передаем в аргумент с названием random_base значение float(i) / 10
-            op_kwargs={'task_number': i},
-        )
-        # настраиваем зависимости между задачами
-        # run_this - это некий таск, объявленный ранее (в этом примере не объявлен)
-        bash_task >> python_task
+    for i in range(30):
+        if i <= 9:
+            bash_task = BashOperator(
+                task_id='bash_print_' + str(i),  # в id можно делать все, что разрешают строки в python
+                bash_command= f"echo {i}")
+        else:
+            python_task = PythonOperator(
+                task_id=f'python_command_{i}',
+                python_callable=print_task,
+                op_kwargs={'task_number': i}
+            )
+    bash_task >> python_task
