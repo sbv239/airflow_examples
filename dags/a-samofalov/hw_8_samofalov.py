@@ -31,7 +31,7 @@ def pull_function(ti):
 
 
 with DAG(
-        'xcom_dag',
+        'hw_8_a-samofalov',
         start_date=datetime(2021, 1, 1),
         max_active_runs=2,
         schedule_interval=timedelta(minutes=30),
