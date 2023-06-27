@@ -29,7 +29,4 @@ run_this = PythonOperator(
 )
 ) as dag:
     t1 = BashOperator(
-        task_id='print_derictory',  # id, будет отображаться в интерфейсе
-        bash_command='pwd',  # какую bash команду выполнить в этом таске
-    )
-t1 >> run_this
+        task_id='print_derictory',  # id, будет s
