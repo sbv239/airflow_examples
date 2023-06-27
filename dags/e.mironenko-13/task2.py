@@ -2,8 +2,19 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python_operator import PythonOperator
 
+from datetime import timedelta
+
 with DAG(
     'hw_e.mironenko-13_2',
+    default_args={
+        'depends_on_past': False,
+        'email': ['airflow@example.com'],
+        'email_on_failure': False,
+        'email_on_retry': False,
+        'retries': 1,
+        'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
+            },
+    tags = ['e.mironenko-13']
 ) as dag:
     t1 = BashOperator(
         task_id='task_bash_pwd',
