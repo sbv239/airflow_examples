@@ -1,5 +1,5 @@
 from airflow import DAG
-from airflow.operators. bash import BashOperator
+from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 from datetime import timedelta, datetime
 with DAG (
@@ -18,15 +18,15 @@ with DAG (
     catchup = False
 ) as dag:
     t1 = BashOperator(
-        task_id = 'pwd',
-        bash_command = 'pwd ',
+        task_id='pwd',
+        bash_command='pwd'
     )
-    def print_date(ds):
-        print('something')
+    def print_ds(ds):
+        print('date is')
         print(ds)
 
     t2 = PythonOperator(
-        task_id = 'print date',
-        python_callable = print_date,
+        task_id='print_ds',
+        python_callable=print_ds
     )
     t1 >> t2
