@@ -9,7 +9,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-    'hw_p-bochkarev_3',
+    'hw_p-bochkarev_4',
 
     default_args={
         'depends_on_past': False,
@@ -19,7 +19,7 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),
     },
-    description='Task 3',
+    description='Task 4',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 1, 1),
     catchup=False,
@@ -34,7 +34,8 @@ with DAG(
         t1.doc_md = dedent(
         """
         #### DOCUMENTATION
-        'code', *italic*, **bold**
+        `code`, *italic*, **bold**
+        #text
         """
         )
     def print_task_number(task_number):
@@ -49,7 +50,8 @@ with DAG(
         t2.doc_md = dedent(
         """
         #### DOCUMENTATION
-        'code', *italic*, **bold**
+        `code`, *italic*, **bold**
+        #text
         """
         )
 t1 >> t2
