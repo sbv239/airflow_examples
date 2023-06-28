@@ -2,6 +2,8 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 from datetime import timedelta, datetime
+from textwrap import dedent
+
 with DAG (
     'hw_d-orlova-21_3',
     default_args={
@@ -31,4 +33,19 @@ with DAG (
             python_callable = task_number,
             op_kwargs={'task_number': int(i)}
         )
+
+    task_1.doc_md = dedent(
+        """
+        ###**Task Documentation**
+        _Attribute 'doc_md' is for markdown_
+        """
+    )
+
+    task_2.doc_md = dedent(
+        """
+        `for i in range(10, 30)
+            print(f'task_number is {i}')`
+        """
+    )
+
     task_1 >> task_2
