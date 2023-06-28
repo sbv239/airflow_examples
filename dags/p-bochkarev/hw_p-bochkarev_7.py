@@ -36,3 +36,5 @@ with DAG(
             task_id='task_number_' + str(i),
             python_callable=print_task_number,
             op_kwargs={'task_number': i},
+        )
+
