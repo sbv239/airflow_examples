@@ -1,3 +1,4 @@
+
 """
 Test documentation
 """
@@ -5,6 +6,7 @@ from datetime import datetime, timedelta
 from textwrap import dedent
 from airflow import DAG
 from airflow.operators.bash import BashOperator
+from airflow.operators.python import PythonOperator
 with DAG(
     'hw_fe-denisenko-21_1',
         default_args={
@@ -19,14 +21,17 @@ with DAG(
     start_date=datetime(2023, 6, 24),
     catchup=False,
     tags=['example'],
-    def print_context(ds):
-    """Пример PythonOperator"""
-    print(ds)
-    return 'Whatever you return gets printed in the logs'
-run_this = PythonOperator(
-    task_id='print_the_context',  # нужен task_id, как и всем операторам
-    python_callable=print_context,  # свойственен только для PythonOperator - передаем саму функцию
-)
 ) as dag:
     t1 = BashOperator(
-        task_id='print_derictory',  # id, будет s
+        task_id='print_derictory',  # id, будет отображаться в интерфейсе
+        bash_command='pwd',  # какую bash команду выполнить в этом таске
+    )
+    def print_context(ds, **kwargs):
+        print(kwargs)
+        print(ds)
+        return 'Whatever you return gets printed in the logs'
+      # свойственен только для PythonOperator - передаем саму функцию
+    run_this = PythonOperator(
+        task_id='print_the_context',  # нужен task_id, как и всем операторам
+        python_callable=print_context)
+    t1 >> run_this
