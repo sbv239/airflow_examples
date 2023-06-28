@@ -2,7 +2,7 @@ from airflow.operators. bash import BashOperator
 from airflow.operators.python import PythonOperator
 from datetime import timedelta, datetime
 with DAG (
-    'hw_d-orlova-21_2'
+    'hw_d-orlova-21_2',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
