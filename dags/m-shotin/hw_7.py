@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 from textwrap import dedent
 
 with DAG(
-        'hw_m-shotin_3',
+        'hw_m-shotin_7',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
