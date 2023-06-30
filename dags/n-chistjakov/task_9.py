@@ -5,7 +5,7 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python_operator import PythonOperator
 
-ID = "hw_7_n-chistjakov_"
+ID = "hw_9_n-chistjakov_"
 
 def set_data(ti):
     ti.xcom_push(
@@ -27,7 +27,7 @@ def print_info(ts,  run_id, **kwargs):
     print(f'task number is: {kwargs["task_number"]}'    )
 
 with DAG(
-    'hw_7_n-chistjakov',
+    'hw_9_n-chistjakov',
     default_args={
     'depends_on_past': False,
     'email': ['airflow@example.com'],
@@ -40,7 +40,7 @@ with DAG(
     start_date=datetime(2023, 6, 30),
     schedule_interval=timedelta(days=1),
     catchup=False,
-    tags=["task_03"],
+    tags=["task_09"],
 ) as dag:
 
     pyth_1 = PythonOperator(
