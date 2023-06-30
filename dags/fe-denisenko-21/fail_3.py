@@ -1,4 +1,3 @@
-
 """
 Test documentation
 """
@@ -21,17 +20,19 @@ with DAG(
     catchup=False,
     tags=['example'],
 ) as dag:
-    for i in range(9):
+    def print_context(task_number):
+        print(f"task number is: {task_number}")
+    for i in range(10):
         t1 = BashOperator(
-        task_id='echo_id',  # id, будет отображаться в интерфейсе
+        task_id='echo_id' + str(i),  # id, будет отображаться в интерфейсе
         bash_command=f'echo,{i}',  # какую bash команду выполнить в этом таске
         )
       # свойственен только для PythonOperator - передаем саму функцию
-    for i in range(19):
-        def print_context(task_number = i):
-            print("task number is: {task_number}")
+    for i in range(20):
         run_this = PythonOperator(
-        task_id='print_i',  # нужен task_id, как и всем операторам
-        python_callable=print_context)
+            task_id='print_' + str(i),  # нужен task_id, как и всем операторам
+            python_callable=print_context,
+            op_kwargs = {"task_number": i}
+        )
     t1 >> run_this
-
+    
