@@ -23,5 +23,5 @@ with DAG(
         t1 = BashOperator(
             task_id=f"task_id_{i})",
             bash_command="echo $NUMBER",
-            env={"NUMBER": str(i)}
+            env={"NUMBER": i}
         )
