@@ -1,7 +1,5 @@
 from airflow import DAG
 from airflow.operators.bash import BashOperator
-from airflow.operators.python_operator import PythonOperator
-from textwrap import dedent
 
 from datetime import timedelta, datetime
 
@@ -27,15 +25,3 @@ with DAG(
             bash_command="echo $NUMBER",
             env={"NUMBER": str(i)}
         )
-
-    def print_11_30(task_number):
-        print(f"task number is: {task_number}")
-
-    for i in range(11, 31):
-        t2 = PythonOperator(
-            task_id=f'task_id_{i}',
-            python_callable=print_11_30,
-            op_kwargs={'task_number': i},
-        )
-
-t1 >> t2
