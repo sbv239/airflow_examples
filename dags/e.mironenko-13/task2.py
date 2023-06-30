@@ -15,6 +15,8 @@ with DAG(
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
             },
     start_date=datetime(2023, 6, 26),
+    schedule_interval=timedelta(days=1),
+    catchup=False,
     tags = ['e.mironenko-13']
 ) as dag:
     t1 = BashOperator(
