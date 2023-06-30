@@ -26,7 +26,7 @@ with DAG(
     start_date=datetime(2023, 6, 30),
     schedule_interval=timedelta(days=1),
     catchup=False,
-    tags=["task_03"],
+    tags=["task_07"],
 ) as dag:
 
     for i in range(10, 30):
