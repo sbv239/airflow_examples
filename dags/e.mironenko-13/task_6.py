@@ -25,8 +25,8 @@ with DAG(
         t1 = BashOperator(
             task_id=f"task_id_{i}",
             depends_on_past=False,
-            env={"NUMBER": i},
             bash_command="echo $NUMBER",
+            env={"NUMBER": i}
         )
 
     def print_11_30(ds, task_number):
