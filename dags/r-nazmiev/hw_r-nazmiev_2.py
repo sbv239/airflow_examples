@@ -3,8 +3,8 @@ My first DAG
 """
 from datetime import datetime, timedelta
 from airflow import DAG
-from airflow.operators.BashOperator import BashOperator
-from airflow.operators.PythonOperator import PythonOperator
+from airflow.operators.bash import BashOperator
+from airflow.operators.python import PythonOperator
 
 with DAG(
     'hw_r-nazmiev_2',
