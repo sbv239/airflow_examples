@@ -17,6 +17,7 @@ def first_python_operator(*args, **kwargs):
 
 default_args={
     'depends_on_past': False,
+    'owner': 'and-f'
     'email': ['airflow@example.com'],
     'email_on_failure': False,
     'email_on_retry': False,
