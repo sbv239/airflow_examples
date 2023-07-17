@@ -42,4 +42,4 @@ with DAG(dag_id='hw_2_and-f',
     t2 = PythonOperator(task_id='first_python_operator', python_callable=first_python_operator)
     t2.doc_md = dedent("""#### Task Documentation in markdown for 'first_python_operator' task""")
 
-    [t1, t2]
+    t1 >> t2
