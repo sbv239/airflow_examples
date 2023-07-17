@@ -14,8 +14,8 @@ def first_python_operator(*args, **kwargs):
     # logger.info(args)
     # logger.info(kwargs)
     # print(kwargs['ds'])
-    print(*args)
-    print(**kwargs)
+    print(args)
+    print(kwargs)
 
 
 default_args={
