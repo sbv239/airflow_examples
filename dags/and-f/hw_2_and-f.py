@@ -9,15 +9,17 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 
-def first_python_operator(*args, **kwargs):
-    from loguru import logger
-    logger.info(args)
-    logger.info(kwargs)
+def first_python_operator(ds, *args, **kwargs):
+    # from loguru import logger
+    # logger.info(args)
+    # logger.info(kwargs)
+    # print(kwargs['ds'])
+    print(ds)
 
 
 default_args={
     'depends_on_past': False,
-    'owner': 'and-f'
+    'owner': 'and-f',
     'email': ['airflow@example.com'],
     'email_on_failure': False,
     'email_on_retry': False,
@@ -29,7 +31,7 @@ with DAG(dag_id='hw_2_avf',
          default_args=default_args,
          description='--DAG description here--',
          schedule_interval=timedelta(days=1),
-         start_date=datetime(2023, 07, 17),
+         start_date=datetime(2023, 7, 17),
          catchup=False,
          tags=['--DAG tag here--']) as dag:
 
@@ -39,4 +41,4 @@ with DAG(dag_id='hw_2_avf',
     t2 = PythonOperator(task_id='first_python_operator', python_callable=first_python_operator)
     t2.doc_md = dedent("""#### Task Documentation in markdown for 'first_python_operator' task""")
 
-    [t1, t2]
+    t1 >> t2
