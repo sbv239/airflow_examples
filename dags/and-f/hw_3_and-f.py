@@ -28,7 +28,7 @@ default_args={
     'retry_delay': timedelta(minutes=5),
 }
 
-with DAG(dag_id='hw_3_avf',
+with DAG(dag_id='hw_3_and-f',
          default_args=default_args,
          description='--DAG description here--',
          schedule_interval=timedelta(days=1),
@@ -36,9 +36,9 @@ with DAG(dag_id='hw_3_avf',
          catchup=False,
          tags=['--DAG tag here--']) as dag:
 
+    dag.doc_md = __doc__
     for i in range(1,31):
-        dag.doc_md = __doc__
-        if i<+10:
+        if i<=10:
             b_task = BashOperator(task_id=f'b_task_{i}',
                                   bash_command=f'echo {i}')
         else:
