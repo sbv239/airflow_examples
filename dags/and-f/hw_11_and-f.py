@@ -38,15 +38,6 @@ def first_python_operator(*args, **kwargs):
             return cursor.fetchone()
 
 
-hook = PostgresHook(postgres_conn_id='...')
-
-with hook.get_conn() as conn:
-    with conn.cursor(cursor_factory=RealDictCursor) as cursor:
-        cursor.execute("SELECT ...")
-
-
-
-
 default_args={
     'depends_on_past': False,
     'owner': 'and-f',
