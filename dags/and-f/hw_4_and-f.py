@@ -66,7 +66,7 @@ with DAG(dag_id='hw_4_and-f',
     **bold text**
     *italic text*
     `some code`
-    i = {i}
+    i = {0}
     """
     for i in range(1,31):
         if i<=10:
