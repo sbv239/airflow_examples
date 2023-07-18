@@ -61,19 +61,20 @@ with DAG(dag_id='hw_4_and-f',
          tags=['--DAG tag here--']) as dag:
 
     dag.doc_md = __doc__
-    t_doc = """
+    t_doc_template = """
     #### Task Title
     **bold text**
     *italic text*
     `some code`
+    i = {i}
     """
     for i in range(1,31):
         if i<=10:
             b_task = BashOperator(task_id=f'b_task_{i}',
                                   bash_command=f'echo {i}')
-            b_task.doc_md = t_doc.format(i)
+            b_task.doc_md = t_doc_template.format(i)
         else:
             p_task = PythonOperator(task_id=f'p_task_{i}',
                                     python_callable=first_python_operator,
                                     op_kwargs={'task_number': i})
-            p_task.doc_md = t_doc.format(i)
+            p_task.doc_md = t_doc_template.format(i)
