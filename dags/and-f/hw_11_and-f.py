@@ -24,10 +24,10 @@ def first_python_operator(*args, **kwargs):
     #         # your code
 
     from airflow.providers.postgres.hooks.postgres import PostgresHook
-    import json
+    from psycopg2.extras import RealDictCursor
 
     postgres = PostgresHook(postgres_conn_id="startml_feed")
-    with postgres.get_conn() as conn:  # вернет тот же connection, что вернул бы psycopg2.connect(...)
+    with postgres.get_conn(cursor_factory=RealDictCursor) as conn:  # вернет тот же connection, что вернул бы psycopg2.connect(...)
         with conn.cursor() as cursor:
             cursor.execute("""
             SELECT user_id, count(action)
@@ -35,7 +35,7 @@ def first_python_operator(*args, **kwargs):
             WHERE action='like'
             GROUP BY user_id
             ORDER BY count(action) DESC""")
-            return json.dumps(cursor.fetchone())
+            return cursor.fetchone()
 
 
 default_args={
