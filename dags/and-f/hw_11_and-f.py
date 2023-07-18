@@ -26,7 +26,7 @@ def first_python_operator(*args, **kwargs):
     from airflow.providers.postgres.hooks.postgres import PostgresHook
     # from psycopg2.extras import RealDictCursor
 
-    postgres = PostgresHook(postgres_conn_id="startml_feed", cursor="dictcursor")
+    postgres = PostgresHook(postgres_conn_id="startml_feed", cursor="realdictcursor")
     with postgres.get_conn() as conn:  # вернет тот же connection, что вернул бы psycopg2.connect(...)
         with conn.cursor() as cursor:
             cursor.execute("""
