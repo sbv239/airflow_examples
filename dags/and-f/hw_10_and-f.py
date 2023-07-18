@@ -30,7 +30,7 @@ default_args={
     'retry_delay': timedelta(minutes=5),
 }
 
-with DAG(dag_id='hw_9_and-f',
+with DAG(dag_id='hw_10_and-f',
          default_args=default_args,
          description='--DAG description here--',
          schedule_interval=timedelta(days=1),
