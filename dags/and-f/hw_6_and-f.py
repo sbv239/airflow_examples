@@ -40,7 +40,7 @@ with DAG(dag_id='hw_6_and-f',
         if i<=10:
             b_task = BashOperator(task_id=f'b_task_{i}',
                                   bash_command='echo $NUMBER',
-                                  env={"NUMBER": i})
+                                  env={"NUMBER": str(i)})
         else:
             p_task = PythonOperator(task_id=f'p_task_{i}',
                                     python_callable=first_python_operator,
