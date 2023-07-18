@@ -24,10 +24,10 @@ def first_python_operator(*args, **kwargs):
     #         # your code
 
     from airflow.providers.postgres.hooks.postgres import PostgresHook
-    from psycopg2.extras import RealDictCursor
+    # from psycopg2.extras import RealDictCursor
 
-    postgres = PostgresHook(postgres_conn_id="startml_feed")
-    with postgres.get_conn(cursor_factory=RealDictCursor) as conn:  # вернет тот же connection, что вернул бы psycopg2.connect(...)
+    postgres = PostgresHook(postgres_conn_id="startml_feed", cursor="realdictcursor")
+    with postgres.get_conn() as conn:  # вернет тот же connection, что вернул бы psycopg2.connect(...)
         with conn.cursor() as cursor:
             cursor.execute("""
             SELECT user_id, count(action)
