@@ -15,19 +15,19 @@ with DAG('hw_a-gajchuk-22_3',
                     },
          description = 'Dag for hw3',
          start_date = datetime(2023, 7, 21),
-         tag = "agaychuk3") as dag:
+         tags = ["agaychuk3"]) as dag:
 
     for k in range(10):
-        t1 = BashOperator(task_id = 'print something ' +str(k),
+        t1 = BashOperator(task_id = 'print_something_' +str(k),
                       bash_command = f"echo {k}")
 
-    def print_number(num):
-        print(f"task number is: {num}")
+    def print_number(task_number):
+        print(f"task number is: {task_number}")
 
     for k in range(20):
-        t2 = PythonOperator(task_id = 'print task number ' +str(k),
+        t2 = PythonOperator(task_id = 'print_task_number_' +str(k),
                         python_callable = print_number,
-                        op_kwargs = {'num': k})
+                        op_kwargs = {'task_number': k})
 
 
     t1>>t2
