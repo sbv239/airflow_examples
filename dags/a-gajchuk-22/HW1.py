@@ -4,10 +4,6 @@ from airflow import DAG
 from datetime import timedelta, datetime
 
 
-def print_date(ds):
-    print(ds)
-    print('All is OK')
-
 with DAG('hw_a-gajchuk-22_1',
          default_args={
                         'depends_on_past': False,
@@ -23,9 +19,13 @@ with DAG('hw_a-gajchuk-22_1',
     t1 = BashOperator(task_id = 'print_directory',
                       bash_command = "pwd")
 
+    def print_date(ds):
+        print(ds)
+        print('All is OK')
+
+    
     t2 = PythonOperator(task_id = 'print_date',
-                        python_callable = print_date,
-                        op_kwargs = {'ds':ds})
+                        python_callable = print_date)
 
 
     t1>>t2
