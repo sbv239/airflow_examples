@@ -20,7 +20,7 @@ with DAG('hw_a-gajchuk-22_1',
          description = 'Dag for hw1') as dag:
 
     t1 = BashOperator(task_id = 'print directory',
-                      bash_command = pwd)
+                      bash_command = "pwd")
 
     t2 = PythonOperator(task_id = 'print date',
                         python_callable = print_date,
