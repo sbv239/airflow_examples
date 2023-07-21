@@ -19,10 +19,10 @@ with DAG('hw_a-gajchuk-22_1',
                     },
          description = 'Dag for hw1') as dag:
 
-    t1 = BashOperator(task_id = 'print directory',
+    t1 = BashOperator(task_id = 'print_directory',
                       bash_command = "pwd")
 
-    t2 = PythonOperator(task_id = 'print date',
+    t2 = PythonOperator(task_id = 'print_date',
                         python_callable = print_date,
                         op_kwargs = {'ds':ds})
 
