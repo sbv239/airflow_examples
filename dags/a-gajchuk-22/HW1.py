@@ -1,7 +1,7 @@
 from airflow.operators.python import PythonOperator
 from airflow.operators.bash import BashOperator
 from airflow import DAG
-from datetime import timedelta
+from datetime import timedelta, datetime
 
 
 def print_date(ds):
@@ -17,7 +17,8 @@ with DAG('hw_a-gajchuk-22_1',
                         'retries': 1,
                         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
                     },
-         description = 'Dag for hw1') as dag:
+         description = 'Dag for hw1',
+         start_date = datetime(2023, 7, 21)) as dag:
 
     t1 = BashOperator(task_id = 'print_directory',
                       bash_command = "pwd")
