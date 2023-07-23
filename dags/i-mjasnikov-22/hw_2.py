@@ -19,7 +19,6 @@ with DAG(
 
     def print_ds(ds):
         print(ds)
-        return '1st dag with operators'
 
     t1 = PythonOperator(
         task_id='python_1',
