@@ -19,7 +19,7 @@ with DAG(
     schedule_interval=timedelta(days=1),
     start_date=datetime(2023, 7, 21),
     catchup=False,
-    tags=['homework_2'],
+    tags=['homework_2_pavelp'],
 ) as dag:
 
     t1 = BashOperator(
