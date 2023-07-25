@@ -11,33 +11,21 @@
 NB! Давайте своим DAGs уникальные названия. Лучше именовать их в формате hw_{логин}_1, hw_{логин}_2
 """
 
-"""
-Test documentation
-"""
 from datetime import datetime, timedelta
-from textwrap import dedent
 
-# Для объявления DAG нужно импортировать класс из airflow
 from airflow import DAG
-
-# Операторы - это кирпичики DAG, они являются звеньями в графе
-# Будем иногда называть операторы тасками (tasks)
 from airflow.operators.bash import BashOperator
+from airflow.operators.python import PythonOperator
+
 with DAG(
     '11-1-treshcheva',
     # Параметры по умолчанию для тасок
     default_args={
-        # Если прошлые запуски упали, надо ли ждать их успеха
         'depends_on_past': False,
-        # Кому писать при провале
         'email': ['airflow@example.com'],
-        # А писать ли вообще при провале?
         'email_on_failure': False,
-        # Писать ли при автоматическом перезапуске по провалу
         'email_on_retry': False,
-        # Сколько раз пытаться запустить, далее помечать как failed
         'retries': 1,
-        # Сколько ждать между перезапусками
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
     },
     # Описание DAG (не тасок, а самого DAG)
@@ -55,30 +43,24 @@ with DAG(
     # теги, способ помечать даги
     tags=['example'],
 ) as dag:
-
-    # t1, t2, t3 - это операторы (они формируют таски, а таски формируют даг)
     t1 = BashOperator(
-        task_id='hw_n-treshcheva_1',  # id, будет отображаться в интерфейсе
-        bash_command='pwd',  # какую bash команду выполнить в этом таске
+    task_id='print_date',
+    bash_command='pwd',
     )
 
 
-
     def print_context(ds, **kwargs):
-    """Пример PythonOperator"""
-    # Через синтаксис **kwargs можно получить словарь
-    # с настройками Airflow. Значения оттуда могут пригодиться.
-    # Пока нам не нужно
         print(kwargs)
-    # В ds Airflow за нас подставит текущую логическую дату - строку в формате YYYY-MM-DD
         print(ds)
         return 'Whatever you return gets printed in the logs'
 
 
-    run_this = PythonOperator(
-        task_id='hw_n-treshcheva_2',  # нужен task_id, как и всем операторам
-        python_callable=print_context,  # свойственен только для PythonOperator - передаем саму функцию
+    t2 = PythonOperator(
+         task_id='print_the_context',
+         python_callable=print_context,
     )
 
-t1>>t2
+
+    t1 >> t2
+
 
