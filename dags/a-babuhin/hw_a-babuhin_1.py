@@ -11,7 +11,7 @@ from airflow import DAG
 # Будем иногда называть операторы тасками (tasks)
 from airflow.operators.bash import BashOperator
 with DAG(
-    'hw_2',
+    'lesson_11_a-babuhin_hw_2',
     # Параметры по умолчанию для тасок
     default_args={
         # Если прошлые запуски упали, надо ли ждать их успеха
@@ -56,7 +56,9 @@ def print_context(ds, **kwargs):
     print(ds)
     return 'This is mmy first teat of AirFlow'
 
-run_this = PythonOperator(
+t2 = PythonOperator(
     task_id='print_the_context',  # нужен task_id, как и всем операторам
     python_callable=print_context,  # свойственен только для PythonOperator - передаем саму функцию
 )
+
+t1 >> t2
