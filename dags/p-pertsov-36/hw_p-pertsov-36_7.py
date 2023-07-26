@@ -33,11 +33,11 @@ with DAG(
             def print_task_number(ts, run_id, **kwargs):
                 print(ts)
                 print(run_id)
-                return (f'task number is: {task_number[i]}')
+                return (f'task number is: {kwargs["task_number"]}')
 
 
             t2 = PythonOperator(
-                task_id=f'hw_7_p-pertsov-36_{task_number[i]}',
+                task_id=f'hw_7_p-pertsov-36_{kwargs["task_number"]}',
                 python_callable=print_task_number,
                 op_kwargs={'task_number': i},
             )
