@@ -5,7 +5,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-    'i-mjasnikov-22_hw_6',
+    'i-mjasnikov-22_hw_7',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -14,7 +14,7 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),
     },
-    description='6 hw',
+    description='7 hw',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2023, 2, 10),
     catchup=False,
