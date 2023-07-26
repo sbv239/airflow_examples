@@ -22,11 +22,11 @@ with DAG(
     tags=['pavelp_hw_7'],
 ) as dag:
 
-    for i in range(1, 31):  # 10 задач сделайте типа BashOperatort
+    for i in range(1, 31):
         if i <= 10:
             t1 = BashOperator(
-                task_id=f'hw_7_p-pertsov-36_{i}',  # id, будет отображаться в интерфейсе
-                bash_command=f'echo {i} ',  # можете указать f"echo {i}"
+                task_id=f'hw_7_p-pertsov-36_{i}', 
+                bash_command=f'echo {i} ',
                 dag=dag
             )
         else:

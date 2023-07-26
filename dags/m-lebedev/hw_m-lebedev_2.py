@@ -1,12 +1,13 @@
 from datetime import datetime, timedelta
-
 from airflow import DAG
-
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
+def some_print(ds):
+    print(f'current date: {ds}')
+
 with DAG(
-    'hw_p-pertsov-36_2',
+    'hw_m-lebedev_2',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -15,25 +16,21 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),
     },
-    description='hw_2 DAG',
+    description='Homework: 2, login: m-lebedev',
     schedule_interval=timedelta(days=1),
-    start_date=datetime(2023, 7, 21),
+    start_date=datetime(2023, 7, 23),
     catchup=False,
-    tags=['homework_2_pavelp'],
+    tags=['m-lebedev'],
 ) as dag:
 
     t1 = BashOperator(
-        task_id='print_directory',
+        task_id='print_dir',
         bash_command='pwd',
     )
 
-def print_ds(ds):
-    print(ds)
-    return 'Whatever you return gets printed in the logs'
+    t2 = PythonOperator(
+        task_id='print_date',
+         python_callable=some_print,
+    )
 
-run_this = PythonOperator(
-    task_id='print_ds',
-    python_callable=print_ds,
-)
-
-t1 >> run_this
+    t1 >> t2
