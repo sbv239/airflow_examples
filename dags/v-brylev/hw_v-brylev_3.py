@@ -10,7 +10,7 @@ default_args={
     'email_on_failure': False,
     'email_on_retry': False,
     'retries': 1,
-    'retry_delay': timedelta(minutes=5),
+    'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
 }
 
 
@@ -21,7 +21,7 @@ def print_context(ds, **kwargs):
 
 
 with DAG(
-        '2_a-beljaninov-14',
+        'hw_v-brylev_3',
         start_date=datetime(2021, 1, 1),
         max_active_runs=2,
         schedule_interval=timedelta(minutes=5),
