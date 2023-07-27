@@ -1,12 +1,10 @@
 from datetime import datetime, timedelta
-from textwrap import dedent
 from airflow import DAG
 from airflow.operators.bash import BashOperator
-from airflow.operators.python import PythonOperator
-
-from airflow.hooks.base import BaseHook
+from airflow.operators.python import PythonOperator, BranchPythonOperator
+from airflow.operators.dummy import DummyOperator
+from textwrap import dedent
 from airflow.providers.postgres.operators.postgres import PostgresHook
-
 
 with DAG(
     'i-mjasnikov-22_hw_13',
