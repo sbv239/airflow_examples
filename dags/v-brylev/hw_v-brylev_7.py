@@ -22,7 +22,7 @@ def print_context(ts, run_id, **kwargs):
 
 
 with DAG(
-        'hw_v-brylev_7',
+        'hw_v-brylev_77',
         start_date=datetime(2023, 7, 26),
         max_active_runs=2,
         schedule_interval=timedelta(minutes=5),
