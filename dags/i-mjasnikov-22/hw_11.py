@@ -6,7 +6,7 @@ from textwrap import dedent
 from airflow.providers.postgres.hooks.postgres import PostgresHook
 
 with DAG(
-    'i-mjasnikov-22_hw_10',
+    'i-mjasnikov-22_hw_11',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -15,7 +15,7 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),
     },
-    description='10 hw',
+    description='11 hw',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2023, 2, 10),
     catchup=False,
