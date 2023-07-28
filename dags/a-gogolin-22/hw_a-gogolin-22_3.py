@@ -6,7 +6,7 @@ from textwrap import dedent
 
 from airflow import DAG
 
-from airflow.operators.bash import BashOperator
+from airflow.operators.bash_operator import BashOperator
 from airflow.operators.python_operator import PythonOperator
 
 with DAG(
@@ -26,16 +26,16 @@ with DAG(
         tags=['ag_3'],
 ) as dag:
     
-    bash_list = []
+    bash_tasks = []
     for i in range(10):
         task = BashOperator(
             task_id='echo__' + str(i),
             bash_command=f"echo {i}"
         )
-        bash_list.append(task)
+        bash_tasks.append(task)
 
-    py_list = []
-    def print_task_number:(task_number, **kwargs):
+    python_tasks = []
+    def print_task_number(task_number, **kwargs):
         print(f"task number is: {task_number}")
 
 
@@ -46,6 +46,12 @@ with DAG(
             op_kwargs={'task_number': i},
             provide_context=True
         )
-        py_list.append(task)
+        python_tasks.append(task)
 
-    bash_list >> py_list
+    for i in range(1, 10):
+        bash_tasks[i-1] >> bash_tasks[i]
+
+    for i in range(1, 20):
+        python_tasks[i-1] >> python_tasks[i]
+
+    bash_tasks[-1] >> python_tasks
