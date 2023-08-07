@@ -4,10 +4,10 @@ simple dag
 from datetime import datetime, timedelta
 from textwrap import dedent
 from airflow import DAG
-from airflow.operators.bash import BashOperator
 
+from airflow.operators.bash import BashOperator
 with DAG(
-    'Tima_first_dag,
+    'Tima_first_dag',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
