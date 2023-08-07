@@ -6,6 +6,7 @@ from textwrap import dedent
 from airflow import DAG
 
 from airflow.operators.bash import BashOperator
+from airflow.operators.python import PythonOperator
 with DAG(
     'Tima_first_dag',
     default_args={
