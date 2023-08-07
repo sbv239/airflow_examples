@@ -42,6 +42,5 @@ with DAG(
             op_kwargs={'random_base': float(i) / 10},
         )
 
-        run_this >> task
 
     t1 >> t2
