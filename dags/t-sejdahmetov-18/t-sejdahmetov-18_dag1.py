@@ -32,7 +32,7 @@ with DAG(
     def print_date(ds, **kwargs):
         print(kwargs)
         print(ds)
-    return 'GOOD JOB'
+        return 'GOOD JOB'
 
     t2= PythonOperator(
         task_id='print_the_ds',
