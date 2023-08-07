@@ -24,21 +24,24 @@ with DAG(
     catchup=False,
     tags=['tima'],
 ) as dag:
-
-    t1 = BashOperator(
-        task_id = 'print_directory',
-        bash_command = 'pwd'
+    for i in range(10):
+        t1 = BashOperator(
+            task_id = 'task_number_is:' + str(i),
+            bash_command = 'f"echo {i}"'
     )
 
-    def print_date(ds, **kwargs):
-        print(kwargs)
-        print(ds)
-        return 'GOOD JOB'
 
-    t2= PythonOperator(
-        task_id='print_the_ds',
-        python_callable=print_date,
-    )
+    def my_sleeping_function(random_base):
+         time.sleep(random_base)
 
+
+    for i in range(20):
+        t2 = PythonOperator(
+            task_id='task_number_is:' + str(i),
+            python_callable=my_sleeping_function,
+            op_kwargs={'random_base': float(i) / 10},
+        )
+
+        run_this >> task
 
     t1 >> t2
