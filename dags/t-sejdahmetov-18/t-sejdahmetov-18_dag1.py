@@ -24,6 +24,7 @@ with DAG(
     catchup=False,
     tags=['tima'],
 ) as dag:
+
     for i in range(10):
         t1 = BashOperator(
             task_id = 'task_number_is:' + str(i),
@@ -42,5 +43,6 @@ with DAG(
             op_kwargs={'random_base': float(i) / 10},
         )
 
+        t1>>t2
 
-    t1 >> t2
+
