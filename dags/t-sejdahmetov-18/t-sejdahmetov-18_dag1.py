@@ -27,8 +27,8 @@ with DAG(
 
     for i in range(10):
         t1 = BashOperator(
-            task_id = 'task_number_is:' + str(i),
-            bash_command = 'f"echo {i}"'
+            task_id = f'task_number_is{i}',
+            bash_command = f'"echo {i}"'
     )
 
 
@@ -38,7 +38,7 @@ with DAG(
 
     for i in range(20):
         t2 = PythonOperator(
-            task_id='task_number_is:' + str(i),
+            task_id= f'task_number_is{i}',
             python_callable=my_sleeping_function,
             op_kwargs={'random_base': float(i) / 10},
         )
