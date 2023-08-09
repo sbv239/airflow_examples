@@ -10,7 +10,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 from airflow.operators.dummy import DummyOperator
 with DAG(
-    'Tima_dag_task_3',
+    'tima_dag_task_7',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -45,9 +45,8 @@ with DAG(
         )
         run_this_first >> bush_task >> run_after_bash
 
-    def print_context(ts,run_id,**kwargs):
-        print(kwargs)
-        print(f"task_number_is:{kwargs.get('task_number')}")
+    def print_context(ts,task_number,run_id,**kwargs):
+        print(task_number)
         print(run_id)
         print(ts)
         return 'Hello!'
