@@ -39,10 +39,11 @@ with DAG(
         bush_task.doc_md = dedent(
             f"""\
             #### Tash {i}  doc
-            TEST DOC
+            Задача `Python`,  **привет** от  _боты_
             """
         )
         run_this_first >> bush_task >> run_after_bash
+
     def print_context(ts,run_id,**kwargs):
         print(kwargs)
         print(f"task_number_is:{kwargs.get('task_number')}")
