@@ -4,6 +4,7 @@ simple dag
 from datetime import datetime, timedelta
 from textwrap import dedent
 from airflow import DAG
+from textwrap import dedent
 
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
@@ -36,7 +37,12 @@ with DAG(
             bash_command =f"echo{i}"
         )
         run_this_first >> bush_task>> run_after_bash
-
+        bush_task.doc_md = dedent(
+            f"""\
+            #### Tash {i}  doc
+            TEST DOC
+            """
+        )
     def print_context(ts,run_id,**kwargs):
         print(kwargs)
         print(f"task_number_is:{kwargs.get('task_number')}")
