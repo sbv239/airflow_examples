@@ -34,7 +34,8 @@ with DAG(
     for i in range(10):
         bush_task = BashOperator(
             task_id = f'task_number_{i}',
-            bash_command =f"echo{i}"
+            bash_command ='echo "doing magic $NUMBER"',
+            env = {"NUMBER":str(i)}
         )
         bush_task.doc_md = dedent(
             f"""\
