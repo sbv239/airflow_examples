@@ -39,7 +39,7 @@ with DAG(
 
     def print_context(ts,run_id,**kwargs):
         print(kwargs)
-        print(f"task_number_is:{kwargs.get('task_number'}")
+        print(f"task_number_is:{kwargs.get('task_number')}")
         print(run_id)
         print(ts)
         return 'Hello!'
