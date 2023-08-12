@@ -1,10 +1,15 @@
-from datetime import timedelta
+from datetime import timedelta, datetime
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
         "hw_2_s-kim",
+        description="Homework 2",
+        schedule_interval=timedelta(days=1),
+        start_date=datetime(2023, 8, 1),
+        catchup=true,
+        tags=["s-kim"],
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
@@ -18,6 +23,7 @@ with DAG(
     def python_func(ds, **kwargs):
         print(ds)
         print("End of execution of Python Operator")
+        return "Python Operator is done"
 
     # Task 1 to print working directory
     t1 = BashOperator(
