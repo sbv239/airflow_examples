@@ -11,7 +11,7 @@ from airflow import DAG
 # Будем иногда называть операторы тасками (tasks)
 from airflow.operators.bash import BashOperator
 with DAG(
-        'sergey_kim_lesson_11_1',
+        'sergey_kim_lesson_11_2',
         # Параметры по умолчанию для тасок
         default_args={
             # Если прошлые запуски упали, надо ли ждать их успеха
