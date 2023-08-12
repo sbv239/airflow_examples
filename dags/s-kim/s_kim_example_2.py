@@ -57,4 +57,23 @@ with DAG(
         python_callable=print_context,  # свойственен только для PythonOperator - передаем саму функцию
     )
 
-    run_this
+
+
+    def my_sleeping_function(random_base):
+        import time
+        """Заснуть на random_base секунд"""
+        time.sleep(random_base)
+
+    # Генерируем таски в цикле - так тоже можно
+    for i in range(5):
+        # Каждый таск будет спать некое количество секунд
+        task = PythonOperator(
+            task_id='sleep_for_' + str(i),  # в id можно делать все, что разрешают строки в python
+            python_callable=my_sleeping_function,
+            # передаем в аргумент с названием random_base значение float(i) / 10
+            op_kwargs={'random_base': float(i) / 10},
+        )
+
+    # настраиваем зависимости между задачами
+    # run_this - это некий таск, объявленный ранее (в этом примере не объявлен)
+    run_this >> task
