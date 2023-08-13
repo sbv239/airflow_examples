@@ -8,7 +8,7 @@ with DAG(
         description="Homework 2",
         schedule_interval=timedelta(days=1),
         start_date=datetime(2023, 8, 1),
-        catchup=true,
+        catchup=True,
         tags=["s-kim"],
         default_args={
             'depends_on_past': False,
