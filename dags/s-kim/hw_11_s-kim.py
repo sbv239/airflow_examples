@@ -1,7 +1,6 @@
 from datetime import timedelta, datetime
 from airflow import DAG
 from airflow.operators.python import PythonOperator
-from airflow.providers.postgres.hooks.postgres import PostgresHook
 
 with DAG(
         "hw_11_s-kim",
@@ -21,10 +20,18 @@ with DAG(
 ) as dag:
 
     def most_likes_user():
-        postgres = PostgresHook(postgres_conn_id="startml_feed")
-        with postgres.get_conn() as conn:
+        from airflow.hooks.base import BaseHook
+        import psycopg2
+
+        creds = BaseHook.get_connection("startml_feed")
+        with psycopg2.connect(
+                database=creds.schema,
+                user=creds.login,
+                password=creds.password,
+                host=creds.host,
+                port=creds.port
+        ) as conn:
             with conn.cursor() as cursor:
-                # your code
                 cursor.execute("""
                 select
                     f.user_id
@@ -42,7 +49,7 @@ with DAG(
 
         final_dict = {}
         final_dict["user_id"] = results[0]
-        final_dict["count"] = result[1]
+        final_dict["count"] = results[1]
 
         return final_dict
 
