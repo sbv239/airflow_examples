@@ -4,8 +4,8 @@ from airflow.operators.python import PythonOperator
 from airflow.providers.postgres.hooks.postgres import PostgresHook
 
 with DAG(
-        "hw_10_s-kim",
-        description="Homework 10",
+        "hw_11_s-kim",
+        description="Homework 11",
         schedule_interval=timedelta(days=1),
         start_date=datetime(2023, 8, 1),
         catchup=True,
