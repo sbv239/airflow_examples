@@ -3,8 +3,6 @@ from airflow import DAG
 from airflow.operators.python import PythonOperator
 from airflow.models import Variable
 
-gl_var = Variable.get("is_startml")
-
 with DAG(
         "hw_12_s-kim",
         description="Homework 12",
@@ -23,6 +21,7 @@ with DAG(
 ) as dag:
 
     def print_var():
+        gl_var = Variable.get("is_startml")
         print(gl_var)
 
     t1 = PythonOperator(task_id="print_gl_var",
