@@ -8,7 +8,7 @@ from airflow import DAG
 # Операторы - это кирпичики DAG, они являются звеньями в графе
 # Будем иногда называть операторы тасками (tasks)
 from airflow.operators.bash import BashOperator
-from aitflow.operators.python import PythonOperator
+from airflow.operators.python import PythonOperator
 
 login = 'a-korostelev-23'
 
@@ -21,7 +21,7 @@ default_args={
     'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
 }
 
-with DAG(f'hw_{login}_2', default_args=default_args) as dag:
+with DAG(f'hw_{login}_2', default_args=default_args, start_date=datetime(2023, 8, 13)) as dag:
     t1 = BashOperator(task_id='print_pwd',
                       bash_command='pwd')
     
