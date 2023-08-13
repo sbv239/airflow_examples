@@ -29,11 +29,11 @@ default_args={
     'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
 }
 
-with DAG(f'hw_{login}_3', default_args=default_args, start_date=datetime(2023, 8, 13)) as dag:
+with DAG(f'hw_{login}_7', default_args=default_args, start_date=datetime(2023, 8, 13)) as dag:
         
     def func_for_po(ts, run_id, **kwargs):
-        print(ts)
-        print(run_id)
+        print(f" printing ts: {ts}")
+        print(f" printing runid: {run_id}")
         print(f"task number is: {kwargs['task_number']}")
     
     for j in range(20):
