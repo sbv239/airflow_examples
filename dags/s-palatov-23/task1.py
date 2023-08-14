@@ -1,4 +1,4 @@
-from datetime import timedelta
+from datetime import timedelta, datetime
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
@@ -26,7 +26,7 @@ with DAG(
         # https://airflow.apache.org/docs/apache-airflow/stable/dag-run.html
         catchup=False,
         # теги, способ помечать даги
-        tags=['example'],
+        tags=['123123'],
 ) as dag:
     t1 = BashOperator(
         task_id='print_pwd',
