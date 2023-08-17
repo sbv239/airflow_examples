@@ -31,7 +31,7 @@ with DAG(
     catchup=False,
 
     # теги, способ помечать даги
-    tags=['task2_L11'],
+    tags=['task2_L11']
 ) as dag:
 
     task1 = BashOperator(
