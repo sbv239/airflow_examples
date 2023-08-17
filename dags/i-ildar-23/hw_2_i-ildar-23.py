@@ -1,11 +1,15 @@
 from airflow import DAG
-from airflow.operators.bash import BashOperator, PythonOperator
+from airflow.operators.bash import BashOperator
+from airflow.operators.python import PythonOperator
 from datetime import timedelta, datetime
+
 
 def print_ds(ds):
     print(ds)
 
+
 with DAG(
+        'hw_i-ildar-23_2',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
@@ -24,3 +28,5 @@ with DAG(
         task_id='hw_2_i-ildar-23_python',
         python_callable=print_ds,
     )
+
+    t1 >> t2
