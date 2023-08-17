@@ -48,4 +48,7 @@ with DAG(
         task_id="print_ds_and_more",
         python_callable=print_ds)
 
+    # tasks sequence
+    task1 >> task2
+
 
