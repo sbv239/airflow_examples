@@ -29,13 +29,13 @@ with DAG(
             bash_command=f"echo {i}"
         )
 
-    def task_number(t_number:int):
-        print(f"task number is: {t_number}")
+    def print_t_number(task_number:int):
+        print(f"task number is: {task_number}")
 
     for i in range(20):
         task_PO = PythonOperator(
             task_id= f"Python_task_{i}",
-            python_callable=task_number,
+            python_callable=print_t_number,
             op_kwargs={"t_number":i}
         )
 
