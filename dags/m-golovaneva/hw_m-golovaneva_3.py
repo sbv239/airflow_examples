@@ -36,7 +36,7 @@ with DAG(
         task_PO = PythonOperator(
             task_id= f"Python_task_{i}",
             python_callable=print_t_number,
-            op_kwargs={"t_number":i}
+            op_kwargs={"task_number":i}
         )
 
     task_BO >> task_PO
