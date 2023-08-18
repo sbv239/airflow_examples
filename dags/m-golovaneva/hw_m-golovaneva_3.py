@@ -28,7 +28,7 @@ with DAG(
     tags=['task3_L11']
 ) as dag:
 
-    for i in range(10):
+    for i in range(1,11):
         task_BO = BashOperator(
             task_id= f"task_{i}",
             bash_command=f"echo {i}")
@@ -38,13 +38,15 @@ with DAG(
             - indeed, no one needs these tasks :)
             - but the dont get bored... bcs *there re 10 of them*!
             
-            'print("Hi reader, we re tasks!")'
+            ```python
+            print("Hi reader, we re tasks!")
+            ```
             """)
 
     def print_t_number(task_number:int):
         print(f"task number is: {task_number}")
 
-    for i in range(20):
+    for i in range(11,31):
         task_PO = PythonOperator(
             task_id= f"Python_task_{i}",
             python_callable=print_t_number,
@@ -53,6 +55,10 @@ with DAG(
         task_PO.doc_md = dedent(
             """
             ## 20 more tasks with **PythonOperator**!
+            
+            ```python
+            print("Hi reader, we re tasks!")
+            ```
             """
         )
 
