@@ -1,6 +1,5 @@
 """
-*Documentation DAG "hw_m-golovaneva_task3"*
-> created on {ds}
+# Documentation for DAG **"hw_m-golovaneva_task3"**
 """
 
 from datetime import timedelta, datetime
@@ -35,7 +34,7 @@ with DAG(
             bash_command=f"echo {i}")
         task_BO.doc_md = dedent(
             """
-            **First 10 tasks with BashOperator**
+            ## First 10 tasks with **BashOperator**
             - indeed, no one needs these tasks :)
             - but the dont get bored... bcs *there re 10 of them*!
             
@@ -53,7 +52,7 @@ with DAG(
         )
         task_PO.doc_md = dedent(
             """
-            **20 tasks with PythonOperator!**
+            ## 20 more tasks with **PythonOperator**!
             """
         )
 
