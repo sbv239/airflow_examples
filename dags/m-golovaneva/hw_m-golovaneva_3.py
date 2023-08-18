@@ -1,4 +1,10 @@
+"""
+*Documentation DAG "hw_m-golovaneva_task3"*
+> created on {ds}
+"""
+
 from datetime import timedelta, datetime
+from textwrap import dedent
 
 from airflow import DAG
 from airflow.operators.bash import BashOperator
@@ -15,7 +21,7 @@ with DAG(
             'retries': 1,
             'retry_delay': timedelta(minutes=5),
     },
-    description='my DAG for 2d task Lecture 11',
+    description='my DAG for 3d task Lecture 11',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 1, 1),
     catchup=False,
@@ -26,8 +32,15 @@ with DAG(
     for i in range(10):
         task_BO = BashOperator(
             task_id= f"task_{i}",
-            bash_command=f"echo {i}"
-        )
+            bash_command=f"echo {i}")
+        task_BO.doc_md = dedent(
+            """
+            **First 10 tasks with BashOperator**
+            - indeed, no one needs these tasks :)
+            - but the dont get bored... bcs *there re 10 of them*!
+            
+            'print("Hi reader, we re tasks!")'
+            """)
 
     def print_t_number(task_number:int):
         print(f"task number is: {task_number}")
@@ -38,5 +51,12 @@ with DAG(
             python_callable=print_t_number,
             op_kwargs={"task_number":i}
         )
+        task_PO.doc_md = dedent(
+            """
+            **20 tasks with PythonOperator!**
+            """
+        )
+
+    dag.doc_md =  __doc__
 
     task_BO >> task_PO
