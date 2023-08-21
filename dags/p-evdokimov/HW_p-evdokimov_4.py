@@ -5,7 +5,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-    'hw_p-evdokimov_3',
+    'hw_p-evdokimov_4',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -14,11 +14,11 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),
     },
-    description='hw_p-evdokimov_3',
+    description='hw_p-evdokimov_4',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 1, 1),
     catchup=False,
-    tags=['hw_p-evdokimov_3'],
+    tags=['hw_p-evdokimov_4'],
 ) as dag:
     def print_number(task_number):
         print(f'task number is: {task_number}')
@@ -31,7 +31,7 @@ with DAG(
         t1.doc_md = dedent(
         """
         #### paragraph
-        `code` *bald* _italic_ 
+        `code` **bald** _italic_ 
         """
         ) 
     for i in range(20):
@@ -43,7 +43,7 @@ with DAG(
         t1.doc_md = dedent(
         """
         #### paragraph
-        `code` *bald* _italic_ 
+        `code` **bald** _italic_ 
         """
         )
 t1 >> t2
