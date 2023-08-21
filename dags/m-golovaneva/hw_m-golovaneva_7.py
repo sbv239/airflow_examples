@@ -10,7 +10,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-        "hw_m-golovaneva_task6",
+        "hw_m-golovaneva_task7",
 
         default_args={
             'depends_on_past': False,
@@ -25,37 +25,24 @@ with DAG(
         start_date=datetime(2022, 1, 1),
         catchup=False,
 
-        tags=['task3_L11']
+        tags=['mariaSG']
 ) as dag:
 
-    # добавить в BashOperator переменную окружения NUMBER, чье значение будет равно i из цикла
-    for i in range(1, 11):
-        task_BO = BashOperator(
-            task_id=f"Bash_task_{i}",
-            bash_command=f"echo $NUMBER",
-            env={"NUMBER": i})
+    logical_date = "{{ ts }}"
+    current_DAG_run = "{{ run_id }}"
 
-        task_BO.doc_md = dedent(
-            """
-            ## First 10 tasks with **BashOperator**
-            - indeed, no one needs these tasks :)
-            - but the dont get bored... bcs *there re 10 of them*!
-
-            ```python
-            print("Hi reader, we re tasks!")
-            ```
-            """)
-
-
-    def print_t_number(task_number: int):
+    def print_t_number(task_number, ts, run_id, **kwargs):
         print(f"task number is: {task_number}")
-
+        print(f"logical date is: {logical_date}")
+        print(f"current DAG run is: {current_DAG_run}")
 
     for i in range(11, 31):
         task_PO = PythonOperator(
             task_id=f"Python_task_{i}",
             python_callable=print_t_number,
-            op_kwargs={"task_number": i}
+            op_kwargs={"task_number": i,
+                       "ts": logical_date,
+                       "run_id": current_DAG_run},
         )
         task_PO.doc_md = dedent(
             """
@@ -68,5 +55,3 @@ with DAG(
         )
 
     dag.doc_md = __doc__
-
-    task_BO >> task_PO
