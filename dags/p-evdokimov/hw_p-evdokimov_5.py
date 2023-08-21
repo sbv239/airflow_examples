@@ -20,30 +20,18 @@ with DAG(
     catchup=False,
     tags=['hw_p-evdokimov_5'],
 ) as dag:
-    def print_number(task_number):
-        print(f'task number is: {task_number}')
-
-    for i in range(10):
+    ts = "{{ ts }}"
+    run_id = "{{ run_id }}"
+    for i in range(5):
         t1 = BashOperator(
             task_id='counter_num_' + str(i),
-            bash_command=f'echo {i}',
+            bash_command= f'echo {ts}\
+                echo {run_id}',
         )
-        t1.doc_md = dedent(
-        """
-        #### paragraph
-        `code` **bald** _italic_ 
-        """
-        ) 
-    for i in range(20):
-        t2 = PythonOperator(
-            task_id='task_num_' + str(i),
-            python_callable=print_number,
-            op_kwargs={'task_number': i}
-        )
-        t1.doc_md = dedent(
-        """
-        #### paragraph
-        `code` **bald** _italic_ 
-        """
-        )
-t1 >> t2
+        # t1.doc_md = dedent(
+        # """
+        # #### paragraph
+        # `code` **bald** _italic_ 
+        # """
+        # )
+t1 
