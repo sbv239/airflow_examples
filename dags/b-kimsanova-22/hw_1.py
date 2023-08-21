@@ -15,7 +15,7 @@ default_args = {
 }
 
 dag = DAG(
-    'hw_your_username_1',  # Replace 'your_username' with your actual username
+    'hw_b-kimsanova-22_1',  
     default_args=default_args,
     schedule_interval=timedelta(days=1),
     catchup=False,
