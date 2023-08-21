@@ -1,10 +1,10 @@
-from airflow import dag, DAG
+from airflow import  DAG
 from datetime import datetime, timedelta
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-'first dag',
+'hw_a-miller-23_2',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
@@ -12,13 +12,13 @@ with DAG(
             'email_on_retry': False,
             'retries': 1,
             'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
-        }
-    #
-    #     description='A simple tutorial DAG',
-    #     schedule_interval=timedelta(days=1),
-    #     start_date=datetime(2022, 1, 1),
-    #     catchup=False,
-    #     tags=['example'],
+        },
+
+        description='A simple tutorial DAG',
+        schedule_interval=timedelta(days=1),
+        start_date=datetime(2023, 8, 19),
+        catchup=False,
+        tags=['example'],
 
 ) as dag:
 
