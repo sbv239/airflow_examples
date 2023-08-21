@@ -25,7 +25,7 @@ with DAG(
     start_date=datetime(2022, 1, 1),
     catchup=False,
 
-    tags=['task3_L11']
+    tags=['mariaSG']
 ) as dag:
 
     for i in range(1,11):

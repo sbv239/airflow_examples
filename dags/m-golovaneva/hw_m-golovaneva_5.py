@@ -16,10 +16,10 @@ with DAG("hw_m-golovaneva_task5",
     },
     description='my DAG for 5th task Lecture 11',
     schedule_interval=timedelta(days=1),
-    start_date=datetime(2023, 8, 21),
+    start_date=datetime(2023, 8, 20),
     catchup=False,
 
-    tags=['task5_L11']
+    tags=['mariaSG']
 
          ) as dag:
 
