@@ -14,9 +14,9 @@ with DAG (
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
     },
     description = 'lesson_11_step_2',
-    shedule_interval = timedelta(days=1),
+    schedule_interval = timedelta(days=1),
     start_date = datetime(2023, 8, 21),
-    catchup = False
+    catchup = False,
 ) as dag:
     t1 = BashOperator(
         task_id = 'print_pwd',
