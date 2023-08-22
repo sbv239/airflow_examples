@@ -43,6 +43,7 @@ with DAG(
             op_kwargs={"task_number": i,
                        "ts": logical_date,
                        "run_id": current_DAG_run},
+            provide_context=True
         )
         task_PO.doc_md = dedent(
             """
