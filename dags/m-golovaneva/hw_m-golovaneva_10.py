@@ -13,7 +13,7 @@ def printing():
 def pulls_statement(ti):
     pulled_statement = ti.xcom_pull(
         key="return_value",
-        task_ids="pull_statement"
+        task_ids="print_statement"
     )
     print(pulled_statement)
 
