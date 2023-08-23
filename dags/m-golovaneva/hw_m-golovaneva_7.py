@@ -28,18 +28,17 @@ with DAG(
         tags=['mariaSG']
 ) as dag:
 
-    # ts, task_number, run_id,
     def print_t_number(**kwargs):
-        for key, value in kwargs.items():
-            print(f"{key} is: {value}")
+        task_number = kwargs['task_number']
+        ts = kwargs['ts']
+        run_id = kwargs['run_id']
+        print(f"Task number: {task_number}, ts: {ts}, run_id: {run_id}")
 
     for i in range(11, 31):
         task_PO = PythonOperator(
             task_id=f"Python_task_{i}",
             python_callable=print_t_number,
-            op_kwargs={"task_number": i,
-                       "ts": "{{ ts }}",
-                       "run_id": "{{ run_id }}"},
+            op_kwargs={"task_number": i},
             #provide_context=True
         )
         task_PO.doc_md = dedent(
