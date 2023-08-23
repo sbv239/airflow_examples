@@ -15,7 +15,7 @@ def pulls_statement(ti):
         key="return_value",
         task_ids="pull_statement"
     )
-    #print(pulled_statement)
+    print(pulled_statement)
 
 with DAG(
         "hw_m-golovaneva_task10",
