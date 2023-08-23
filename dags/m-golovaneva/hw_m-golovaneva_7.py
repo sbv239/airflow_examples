@@ -28,22 +28,19 @@ with DAG(
         tags=['mariaSG']
 ) as dag:
 
-    logical_date = "{{ ts }}"
-    current_DAG_run = "{{ run_id }}"
-
-    def print_t_number(task_number, ts, run_id, **kwargs):
-        print(f"task number is: {task_number}")
-        print(f"logical date is: {logical_date}")
-        print(f"current DAG run is: {current_DAG_run}")
+    # ts, task_number, run_id,
+    def print_t_number(**kwargs):
+        for key, value in kwargs.items():
+            print(f"{key} is: {value}")
 
     for i in range(11, 31):
         task_PO = PythonOperator(
             task_id=f"Python_task_{i}",
             python_callable=print_t_number,
             op_kwargs={"task_number": i,
-                       "ts": logical_date,
-                       "run_id": current_DAG_run},
-            provide_context=True
+                       "ts": "{{ ts }}",
+                       "run_id": "{{ run_id }}"},
+            #provide_context=True
         )
         task_PO.doc_md = dedent(
             """
