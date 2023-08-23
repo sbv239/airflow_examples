@@ -28,6 +28,15 @@ with DAG(
         tags=['mariaSG']
 ) as dag:
 
+    # какие переменные содержаться в **kwargs
+    def my_func(**kwargs):
+        print("Variables:", kwargs)
+
+    kwargs_check = PythonOperator(
+        task_id="kwargs_check",
+        python_callable=my_func
+    )
+
     def print_t_number(**kwargs):
         task_number = kwargs['task_number']
         ts = kwargs['ts']
@@ -52,3 +61,5 @@ with DAG(
         )
 
     dag.doc_md = __doc__
+
+    kwargs_check >> task_PO
