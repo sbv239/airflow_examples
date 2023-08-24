@@ -15,7 +15,7 @@ default_args={
 
 # Создайте объект DAG
 dag = DAG(
-    'my_bash_template_dag',
+    'hw_s-frangulidi-23_5',
     default_args=default_args,
     schedule_interval=None,
     start_date=datetime(2023, 8, 24),
