@@ -18,6 +18,7 @@ dag = DAG(
     'my_bash_template_dag',
     default_args=default_args,
     schedule_interval=None,
+    start_date=datetime(2023, 8, 24),
 )
 
 bash_command_template = """
