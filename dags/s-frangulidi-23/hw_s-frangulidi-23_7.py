@@ -17,6 +17,7 @@ default_args={
 dag = DAG(
     'hw_s-frangulidi-23_6',
     # Описание DAG (не тасок, а самого DAG)
+    default_args=default_args,
     description='task_3 DAG',
     # Как часто запускать DAG
     schedule_interval=timedelta(days=1),
