@@ -7,6 +7,7 @@ from airflow.operators.python import PythonOperator
 def get_variable():
     from airflow.models import Variable
     is_startml= Variable.get("is_startml")
+    print(is_startml)
     return is_startml
 
 with DAG(
