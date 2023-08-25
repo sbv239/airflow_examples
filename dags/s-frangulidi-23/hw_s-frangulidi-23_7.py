@@ -15,7 +15,7 @@ default_args={
 
 # Создание объекта DAG
 dag = DAG(
-    'hw_s-frangulidi-23_6',
+    'hw_s-frangulidi-23_7',
     # Описание DAG (не тасок, а самого DAG)
     default_args=default_args,
     description='task_3 DAG',
