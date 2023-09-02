@@ -10,6 +10,7 @@ from airflow import DAG
 # Операторы - это кирпичики DAG, они являются звеньями в графе
 # Будем иногда называть операторы тасками (tasks)
 from airflow.operators.bash import BashOperator
+from airflow.operators.python import PythonOperator
 with DAG(
     'skin_tutorial',
     # Параметры по умолчанию для тасок
@@ -85,6 +86,23 @@ with DAG(
         task_id='templated',
         depends_on_past=False,
         bash_command=templated_command,
+    )
+
+
+    def print_context(ds, **kwargs):
+        """Пример PythonOperator"""
+        # Через синтаксис **kwargs можно получить словарь
+        # с настройками Airflow. Значения оттуда могут пригодиться.
+        # Пока нам не нужно
+        print(kwargs)
+        # В ds Airflow за нас подставит текущую логическую дату - строку в формате YYYY-MM-DD
+        print(ds)
+        return 'Whatever you return gets printed in the logs'
+
+
+    run_this = PythonOperator(
+        task_id='print_the_context',  # нужен task_id, как и всем операторам
+        python_callable=print_context,  # свойственен только для PythonOperator - передаем саму функцию
     )
 
     # А вот так в Airflow указывается последовательность задач
