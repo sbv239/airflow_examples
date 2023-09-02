@@ -11,7 +11,7 @@ from airflow import DAG
 # Будем иногда называть операторы тасками (tasks)
 from airflow.operators.bash import BashOperator
 with DAG(
-    'tutorial',
+    'skin_tutorial',
     # Параметры по умолчанию для тасок
     default_args={
         # Если прошлые запуски упали, надо ли ждать их успеха
@@ -40,7 +40,7 @@ with DAG(
     # https://airflow.apache.org/docs/apache-airflow/stable/dag-run.html
     catchup=False,
     # теги, способ помечать даги
-    tags=['example'],
+    tags=['skin'],
 ) as dag:
 
     # t1, t2, t3 - это операторы (они формируют таски, а таски формируют даг)
