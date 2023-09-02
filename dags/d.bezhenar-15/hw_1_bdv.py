@@ -40,7 +40,7 @@ with DAG(
     # https://airflow.apache.org/docs/apache-airflow/stable/dag-run.html
     catchup=False,
     # теги, способ помечать даги
-    tags=['skin'],
+    tags=['skin_tag'],
 ) as dag:
 
     # t1, t2, t3 - это операторы (они формируют таски, а таски формируют даг)
