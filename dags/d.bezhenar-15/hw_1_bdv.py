@@ -100,13 +100,13 @@ with DAG(
         return 'Whatever you return gets printed in the logs'
 
 
-    run_this = PythonOperator(
+    t4 = PythonOperator(
         task_id='print_the_context',  # нужен task_id, как и всем операторам
         python_callable=print_context,  # свойственен только для PythonOperator - передаем саму функцию
     )
 
     # А вот так в Airflow указывается последовательность задач
-    t1 >> [t2, t3]
+    t1 >> [t2, t3] >> t4
     # будет выглядеть вот так
     #      -> t2
     #  t1 |
