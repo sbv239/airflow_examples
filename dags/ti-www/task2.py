@@ -17,7 +17,7 @@ with DAG(
     },
     description="A simple DAG for task 2",
     schedule_interval=timedelta(days=1),
-    start_date=datetime(2023, 3, 19),
+    start_date=datetime(2023, 9, 16),
     catchup=False,
     tags=["ti-www"],
 ) as dag:
@@ -28,9 +28,10 @@ with DAG(
         bash_command='pwd',
     )
 
-    def my_print(ds):
+    def my_print(ds, **kwargs):
         print(ds)
         print("My name is Timur")
+        print(kwargs)
 
     t2 = PythonOperator(
         task_id='print_the_date_and_my_name',
