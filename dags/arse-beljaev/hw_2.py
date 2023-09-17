@@ -21,7 +21,7 @@ with DAG(
         },
     description='hw_2_lesson_11',
     schedule_interval=timedelta(days=1),
-    start_date=datetime(2023, 17, 9),
+    start_date=datetime(2023, 9, 17),
     catchup=False,
     tags=['example']
     ) as dag:
