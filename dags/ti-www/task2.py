@@ -6,7 +6,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-    "ti-www_task2",
+    "ti-www_task2_new",
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
