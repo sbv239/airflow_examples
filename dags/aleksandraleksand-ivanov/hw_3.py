@@ -14,8 +14,8 @@ default_args = {
 }
 
 
-def print_info(*args):
-    return f"task number is: {args}"
+def print_info(task_number):
+    print( f"task number is: {task_number}")
 
 
 with DAG(
@@ -30,11 +30,31 @@ with DAG(
             bash_command=f"echo {i}"
 
         )
+    task_bash.doc_md = """
+    #Динамически принтим номер задания через BashOperator
+    `for i in range(10):
+        task_bash = BashOperator(
+            task_id=f"bash_print_{i}",
+            bash_command=f"echo {i}"`
+    **великолпеный код**
+    *lild1tz автор кода*
+    """
     for i in range(20):
         task_python = PythonOperator(
             task_id=f"python_task_print_{i}",
             python_callable=print_info,
-            op_args=[i]
+            op_kwargs={"task_number": i}
         )
-
+    task_python.doc_md ="""
+    #Динамически принтим номер задания через PythonOperator
+    `task_python = PythonOperator(
+            task_id=f"python_task_print_{i}",
+            python_callable=print_info,
+            op_kwargs={"task_number": i}`
+        )
+    
+    ** op_kwargs={"task_number": i} в функции распечатает i по ключу**
+    *снова lild1tz атвор кода*
+    
+    """
     task_bash >> task_python
