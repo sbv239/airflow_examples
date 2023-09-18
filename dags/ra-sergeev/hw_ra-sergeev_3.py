@@ -20,7 +20,7 @@ with DAG(
         schedule_interval=timedelta(days=1),
         start_date=datetime(2023, 2, 11),
         catchup=False,
-        tags=['hw_ra-sergeev_1']
+        tags=['hw_ra-sergeev_3']
 ) as dag:
     for i in range(10):
         t1 = BashOperator(
