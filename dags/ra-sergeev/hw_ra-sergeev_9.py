@@ -1,6 +1,5 @@
 from datetime import datetime, timedelta
 from airflow import DAG
-from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
@@ -28,7 +27,7 @@ with DAG(
 
     t1 = PythonOperator(
         task_id='xcom_push',
-        bash_command=xcom_push
+        python_callable=xcom_push
     )
 
     def xcom_pull(ti):
