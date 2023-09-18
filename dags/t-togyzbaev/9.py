@@ -26,15 +26,15 @@ with DAG(
         ti.xcom_push(key="sample_xcom_key", value="some key")
 
     def print_value(ti):
-        val = ti.xcom_pull(key="sample_xcom_key", task_ids="put value")
+        val = ti.xcom_pull(key="sample_xcom_key", task_ids="put_value")
         print("valud in xcom: ", val)
 
     t1 = PythonOperator(
-        task_id="put value",
+        task_id="put_value",
         python_callable=put_in
     )
     t2 = PythonOperator(
-        task_id="print value",
+        task_id="print_value",
         python_callable=print_value
     )
 
