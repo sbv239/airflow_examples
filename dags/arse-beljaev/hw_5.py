@@ -22,21 +22,20 @@ with DAG(
     tags=['example']
 ) as dag:
 
-    for i in range(10):
+    templated_command = dedent(
+        """
+        {% for i in range(5) %}
+            echo "{{ ts }}"
+            echo "{{ run_id }}"
+        {% endfor %}
+        """
+    )
 
-        templated_command = dedent(
-            """
-            {% for i in range(5) %}
-                echo "{{ ts }}"
-                echo "{{ run_id }}"
-            {% endfor %}
-            """
-        )
+    t1 = BashOperator(
+        task_id='templated_command_5',
+        depends_on_past=False,
+        bash_command=templated_command
+    )
 
-        t1 = BashOperator(
-            task_id='templated',
-            bash_command=f"echo {i}",
-            bash_command=templated_command
-        )
+    t1
 
-        t1
