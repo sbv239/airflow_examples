@@ -16,7 +16,7 @@ default_args = {
 
 
 with DAG(
-        dag_id="hw_aleksandraleksand-ivanov_3",
+        dag_id="hw_aleksandraleksand-ivanov_6",
         default_args=default_args,
         start_date=datetime(2023, 9, 18),
         schedule_interval=timedelta(days=1)
