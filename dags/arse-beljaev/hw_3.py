@@ -18,7 +18,7 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5)
         },
-    description='hw_2_lesson_11',
+    description='hw_3_lesson_11',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2023, 9, 17),
     catchup=False,
@@ -38,33 +38,9 @@ with DAG(
 
     for i in range(20):
         t2 = PythonOperator(
-            task_id='pn: ' + str(i),
-            python_callable=print_numbers,
-            op_kwargs={'task_number': i},
-        )
-
-        t2  GNU nano 7.2                        hw_3.py
-    for i in range(10):
-        t1 = BashOperator(
-            task_id='print_the_context' + str(i),
-            bash_command=f"echo {i}",
-        )
-
-        t1
-
-    def print_numbers(task_number):
-        print(f"task number is: {task_number}")
-
-    for i in range(20):
-        t2 = PythonOperator(
-            task_id='pn: ' + str(i),
+            task_id='print_number' + str(i),
             python_callable=print_numbers,
             op_kwargs={'task_number': i},
         )
 
         t2
-
-
-^G Help      ^O Write Out ^W Where Is  ^K Cut       ^T Execute   ^C Location
-^X Exit      ^R Read File ^\ Replace   ^U Paste     ^J Justify   ^/ Go To Line
-
