@@ -9,7 +9,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-    'hw_arse-beljaev_2',
+    'hw_arse-beljaev_3',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -27,7 +27,7 @@ with DAG(
 
     for i in range(10):
         t1 = BashOperator(
-            task_id='print_the_context',
+            task_id='print_the_context' + str(i),
             bash_command=f"echo {i}",
         )
 
