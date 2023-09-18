@@ -33,7 +33,7 @@ with DAG(
     def xcom_pull(ti):
         result = ti.xcom_pull(
             key='sample_xcom_key',
-            task_ids='xcom_push'
+            task_ids='xcom_pull'
         )
         print(result)
         return result
