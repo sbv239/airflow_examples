@@ -1,7 +1,7 @@
 """
 Create BashOperator - pwd & PythonOperator - print ds
 """
-from datetime import timedelta
+from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
@@ -16,7 +16,10 @@ with DAG(
             'retries': 1,
             'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
         },
-        description='my_first_dag'
+        description='my_first_dag',
+        schedule_interval=timedelta(days=1),
+        start_date=datetime(2023, 2, 11),
+        catchup=False
 ) as dag:
     t1 = BashOperator(
         task_id='get_directory',
