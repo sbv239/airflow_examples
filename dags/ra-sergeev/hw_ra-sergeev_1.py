@@ -19,7 +19,8 @@ with DAG(
         description='my_first_dag',
         schedule_interval=timedelta(days=1),
         start_date=datetime(2023, 2, 11),
-        catchup=False
+        catchup=False,
+        tags=['hw_ra-sergeev_1']
 ) as dag:
     t1 = BashOperator(
         task_id='get_directory',
@@ -27,13 +28,14 @@ with DAG(
     )
 
 
-    def print_ds(ds):
+    def print_ds(ds, **kwargs):
+        print(kwargs)
         print(ds)
         return f'Logic time is {ds}'
 
 
     t2 = PythonOperator(
-        task_id='',
+        task_id='Print DS',
         python_callable=print_ds
     )
     t1 >> t2
