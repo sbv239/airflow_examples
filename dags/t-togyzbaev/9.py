@@ -23,7 +23,7 @@ with DAG(
         tags=['t-togyzbaev']
 ) as dag:
     def put_in(ti):
-        ti.xcom_push(key="sample_xcom_key", value="some key")
+        ti.xcom_push(key="sample_xcom_key", value="xcom test")
 
     def print_value(ti):
         val = ti.xcom_pull(key="sample_xcom_key", task_ids="put_value")
