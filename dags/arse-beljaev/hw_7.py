@@ -23,6 +23,7 @@ with DAG(
 
     def print_conntext(ts, run_id, task_number):
         print(f"task number is: {task_number}")
+        print(ts, run_id)
 
     for i in range(20):
         t1 = PythonOperator(
