@@ -6,8 +6,8 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 from datetime import timedelta, datetime
 
-def print_task_num(task_num):
-    print(f"task number is: {task_num}")
+def print_task_num(task_number):
+    print(f"task number is: {task_number}")
     return
 
 with DAG(
@@ -34,7 +34,7 @@ with DAG(
         tasks_po = PythonOperator(
             task_id='po' + str(i),
             python_callable=print_task_num,
-            op_kwargs={'task_num': i}
+            op_kwargs={'task_number': i}
         )
 
     tasks_bo >> tasks_po
