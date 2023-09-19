@@ -21,7 +21,9 @@ with DAG(
     'retries': 1,
     'retry_delay': timedelta(minutes=5)},
 
-    start_date=datetime.now(),
+    start_date= datetime(2023, 9, 18),
+    dag_id="hw_2_a-ratushnyj",
+    schedule_interval=timedelta(days=1),
     tags=['hw-2'],
     # Описание DAG (не тасок, а самого DAG)
 
