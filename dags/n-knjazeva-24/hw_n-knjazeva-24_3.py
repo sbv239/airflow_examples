@@ -25,9 +25,10 @@ with DAG(
 ) as dag:
 
     for i in range(10):
+        NUMBER = i
         tasks_bo = BashOperator(
             task_id='bo' + str(i),
-            bash_command=f'echo {i}'
+            bash_command="echo $NUMBER"
         )
 
     for i in range(20):
