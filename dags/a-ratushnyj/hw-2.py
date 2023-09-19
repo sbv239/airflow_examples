@@ -28,7 +28,7 @@ with DAG(
 ) as dag:
     t1 = BashOperator(
         task_id="hw-2_bo",
-        bash_command="pwd ",  # обратите внимание на пробел в конце!
+        bash_command="pwd",  # обратите внимание на пробел в конце!
         dag=dag,  # говорим, что таска принадлежит дагу из переменной dag
     )
 
