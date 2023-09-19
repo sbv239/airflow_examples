@@ -6,8 +6,10 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 from datetime import timedelta, datetime
 
-def print_task_num(task_number):
-    print(f"task number is: {task_number}")
+def print_task_num(ts, run_id, **kwargs):
+    print(f"task number is: ${kwargs['task_number']}")
+    print(ts)
+    print(run_id)
     return
 
 with DAG(
