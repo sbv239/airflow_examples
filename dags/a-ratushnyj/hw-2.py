@@ -12,7 +12,7 @@ def print_context(ds):
 
 
 with DAG(
-    'hw-2',
+    'hw-2 a-ratushnyj',
     default_args={
     'depends_on_past': False,
     'email': ['airflow@example.com'],
