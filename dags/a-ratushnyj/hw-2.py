@@ -12,7 +12,6 @@ def print_context(ds):
 
 
 with DAG(
-    'hw-2',
     default_args={
     'depends_on_past': False,
     'email': ['airflow@example.com'],
