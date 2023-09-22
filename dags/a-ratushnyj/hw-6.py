@@ -32,7 +32,7 @@ with DAG(
             task_id="task_bash_" + str(i),
             bash_command=f"echo $NUMBER",  # обратите внимание на пробел в конце!
             dag=dag,  # говорим, что таска принадлежит дагу из переменной dag
-            env={"NUMBER": i},
+            env={"NUMBER": str(i)},
         )
 
 
