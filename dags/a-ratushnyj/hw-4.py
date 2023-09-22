@@ -1,7 +1,9 @@
 """
-Test documentation
+
 """
 from datetime import datetime, timedelta
+from textwrap import dedent
+
 from airflow.operators.python import PythonOperator
 from airflow import DAG
 from airflow.operators.bash import BashOperator
@@ -33,6 +35,12 @@ with DAG(
             bash_command=f"echo {i}",  # обратите внимание на пробел в конце!
             dag=dag,  # говорим, что таска принадлежит дагу из переменной dag
         )
+    t1.doc_md = dedent(
+    """\
+    #### Task Documentation
+    В данной задаче  `task_bash_` 10 раз вызывается _команда_ **echo** с порядковым номером задачи,
+    
+    """)
 
     for i in range(20):
         t2 = PythonOperator(
@@ -40,5 +48,10 @@ with DAG(
             python_callable=print_context,  # свойственен только для PythonOperator - передаем саму функцию
             op_kwargs={'task_number': i},
         )
+    t2.doc_md = dedent(
+        """\
+        #### Task Documentation
+        В данной задаче  `task_python_` 20 раз вызывается _команда_ **print task_number** с порядковым номером задачи,
+        """)
 
     t1 >> t2
