@@ -1,10 +1,15 @@
+"""
+Test documentation
+"""
 from datetime import datetime, timedelta
-from textwrap import dedent
-
 from airflow.operators.python import PythonOperator
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 
+
+def print_context(ts, run_id, **kwargs):
+    print(ts)
+    print(run_id)
 
 
 with DAG(
@@ -16,27 +21,18 @@ with DAG(
             'retries': 1,
             'retry_delay': timedelta(minutes=5)},
 
-        start_date=datetime(2023, 9, 21),
-        dag_id="hw_5_a-ratushnyj",
+        start_date=datetime(2023, 9, 18),
+        dag_id="hw_7_a-ratushnyj",
         schedule_interval=timedelta(days=1),
-        tags=['hw-3'],
+        tags=['hw-7'],
         # Описание DAG (не тасок, а самого DAG)
 
 ) as dag:
+    for i in range(20):
+        t2 = PythonOperator(
+            task_id="task_python_" + str(i),
+            python_callable=print_context,  # свойственен только для PythonOperator - передаем саму функцию
+            op_kwargs={'task_number': i}
+        )
 
-    templated_command = dedent(
-    """
-    {% for i in range(5) %}
-        echo "{{ ts }}"
-        echo "{{ run_id }}"
-    {% endfor %}
-    """
-    )
-
-    t1 = BashOperator(
-        task_id='templated',
-        depends_on_past=False,
-        bash_command=templated_command,
-    )
-
-    t1
+    t2
