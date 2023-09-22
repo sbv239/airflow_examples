@@ -2,21 +2,24 @@ from airflow import DAG
 from airflow.operators.python import PythonOperator
 from datetime import timedelta, datetime
 
-def push_xcom(t):
 
-    t.xcom_push(
+def push_xcom(ti):
+    ti.xcom_push(
         key='sample_xcom_key',
         value='xcom test'
     )
 
-def get_xcom(t):
-    value = t.xcom_pull(
+
+def get_xcom(ti):
+    value = ti.xcom_pull(
         key='sample_xcom_key',
+        task_ids='push_xcom_test'
     )
     print(value)
 
+
 with DAG(
-        'hw_n-knjazeva-24_3',
+        'hw_n-knjazeva-24_9',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
