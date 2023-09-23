@@ -2,24 +2,12 @@
 Test documentation
 """
 from datetime import datetime, timedelta
-from airflow.operators.python import PythonOperator, BranchPythonOperator
+from airflow.operators.python import PythonOperator
 from airflow import DAG
 from airflow.models import Variable
-from airflow.operators.dummy_operator import DummyOperator
-from airflow.operators.python_operator import BranchPythonOperator, PythonOperator
 
-def get_choose():
-    if Variable.get('is_startml'):
-        return 'startml_desc'
-    else:
-        return 'not_startml_desc'
-
-def print_right_choose():
-    print("StartML is a starter course for ambitious people")
-
-def print_wrong_choose():
-    print("Not a startML course, sorry")
-
+def get_variables():
+    print(Variable.get('is_startml'))
 
 with DAG(
         default_args={
@@ -37,27 +25,8 @@ with DAG(
 
 ) as dag:
 
-    first = DummyOperator(
-        task_id='first'
+    get_variable =  PythonOperator(
+        task_id = 'get_var',
+        python_callable=get_variables
     )
-
-    choose_way = BranchPythonOperator(
-        task_id='choose_way',
-        python_callabel=get_choose
-    )
-
-    right_way = PythonOperator(
-        task_id="startml_desc",
-        python_callabel=print_right_choose
-    )
-
-    wrong_way = PythonOperator(
-        task_id="not_startml_desc",
-        python_callabel=print_wrong_choose
-    )
-
-    last = DummyOperator(
-        task_id='last'
-    )
-
-    first >> choose_way >> [right_way,wrong_way] >> last
+    get_variable
