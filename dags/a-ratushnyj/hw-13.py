@@ -31,9 +31,9 @@ with DAG(
             'retry_delay': timedelta(minutes=5)},
 
         start_date=datetime(2023, 9, 22),
-        dag_id="hw_12_a-ratushnyj",
+        dag_id="hw_13_a-ratushnyj",
         schedule_interval=timedelta(days=1),
-        tags=['hw-12'],
+        tags=['hw-13'],
 
 ) as dag:
 
