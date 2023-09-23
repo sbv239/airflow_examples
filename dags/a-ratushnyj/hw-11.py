@@ -13,7 +13,7 @@ def get_user():
             query = """
             select 
             fa.user_id,
-            count(*) as cnt
+            count(*) as count
             from feed_action fa
             where fa.action = 'like'
             group by 1
