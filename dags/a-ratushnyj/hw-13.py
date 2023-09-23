@@ -5,8 +5,8 @@ from datetime import datetime, timedelta
 from airflow.operators.python import PythonOperator, BranchPythonOperator
 from airflow import DAG
 from airflow.models import Variable
-from airflow.operators.dummy_operator import DummyOperator
-from airflow.operators.python_operator import BranchPythonOperator, PythonOperator
+from airflow.operators.dummy import DummyOperator
+
 
 def get_choose():
     if Variable.get('is_startml'):
