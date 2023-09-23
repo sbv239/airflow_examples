@@ -5,19 +5,19 @@ from datetime import datetime, timedelta
 from airflow.operators.python import PythonOperator, BranchPythonOperator
 from airflow import DAG
 from airflow.models import Variable
-from airflow.operators.dummy import DummyOperator
+from airflow.operators.dummy_operator import DummyOperator
 
 
-def get_choose():
-    if Variable.get('is_startml'):
+def get_choice():
+    if Variable.get('is_startml') == 'True':
         return 'startml_desc'
     else:
         return 'not_startml_desc'
 
-def print_right_choose():
+def print_right_choice():
     print("StartML is a starter course for ambitious people")
 
-def print_wrong_choose():
+def print_wrong_choice():
     print("Not a startML course, sorry")
 
 
@@ -43,17 +43,17 @@ with DAG(
 
     choose_way = BranchPythonOperator(
         task_id='choose_way',
-        python_callabel=get_choose
+        python_callable=get_choice,
     )
 
     right_way = PythonOperator(
         task_id="startml_desc",
-        python_callabel=print_right_choose
+        python_callable=print_right_choice,
     )
 
     wrong_way = PythonOperator(
         task_id="not_startml_desc",
-        python_callabel=print_wrong_choose
+        python_callable=print_wrong_choice,
     )
 
     last = DummyOperator(
