@@ -9,7 +9,7 @@ from airflow.operators.dummy import DummyOperator
 
 
 def get_choose():
-    if Variable.get('is_startml'):
+    if Variable.get('is_startml') == 'True':
         return 'startml_desc'
     else:
         return 'not_startml_desc'
