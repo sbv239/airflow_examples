@@ -14,7 +14,7 @@ def pull_data(ti):
 
 
 with DAG(
-    "hw_a-ulyanov_9",
+    "hw_a-ulyanov_10",
     default_args={
         "depends_on_past": False,
         "email": ["airflow@example.com"],
