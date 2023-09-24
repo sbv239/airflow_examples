@@ -7,8 +7,10 @@ from airflow.operators.python import PythonOperator
 from airflow.models import Variable
 
 
-def print_task_number(ts, run_id, **kwargs):
-    print(ts, run_id)
+def print_context(ts, run_id, **kwargs):
+    print("Task number:", kwargs["task_number"])
+    print("ts:", ts)
+    print("run_id:", run_id)
 
 
 with DAG(
@@ -29,40 +31,18 @@ with DAG(
     bash_tasks = []
     python_tasks = []
 
-    # templated_command = dedent(
-    #     f"""
-    #     echo "{i}"
-    #     echo "{{ $NUMBER }}"
-    # """
-    # )
-
     for i in range(10):
         t1 = BashOperator(
             task_id=f"echo_{i}", bash_command=f"echo $NUMBER", env={"NUMBER": str(i)}
-        )
-        t1.doc_md = dedent(
-            f"""Prints {i} number in the **console**.
-                *xample:*
-                `echo {i}`
-                #### Your code here
-                <p> Here is the paragraph </p>
-                """
         )
         bash_tasks.append(t1)
 
     for i in range(20):
         t2 = PythonOperator(
             task_id=f"print_{i}_task_number",
-            python_callable=print_task_number,
+            python_callable=print_context,
             op_kwargs={"task_number": i},
-        )
-        t2.doc_md = dedent(
-            f"""Prints {i} task number in the **console**.
-                *Example:*
-                `echo {i}`
-                #### Your code here
-                <p> Here is the paragraph </p>
-                """
+            provide_context=True,
         )
         python_tasks.append(t2)
 
