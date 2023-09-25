@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import timedelta
 
 from airflow import DAG
 from airflow.operators.bash import BashOperator
@@ -11,7 +11,12 @@ def print_date(ds, **kwargs) -> None:
 
 
 default_args = {
-    "start_date": datetime(2022, 1, 1),
+    "depends_on_past": False,
+    "email": ["airflow@example.com"],
+    "email_on_failure": False,
+    "email_on_retry": False,
+    "retries": 1,
+    "retry_delay": timedelta(minutes=5),  # timedelta из пакета datetime
 }
 
 dag = DAG(
