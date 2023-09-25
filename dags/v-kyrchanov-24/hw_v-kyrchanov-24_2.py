@@ -18,7 +18,7 @@ dag = DAG(
     dag_id="my_dag",
     default_args=default_args,
     description="A simple tutorial DAG",
-    schedule="@daily",
+    schedule_interval="@daily",
 )
 
 bash_task = BashOperator(
@@ -30,6 +30,7 @@ bash_task = BashOperator(
 python_task = PythonOperator(
     task_id="python_task",
     python_callable=print_date,
+    provide_context=True,
     dag=dag,
 )
 
