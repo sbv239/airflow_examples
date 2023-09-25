@@ -7,7 +7,6 @@ from airflow.operators.python import PythonOperator
 
 def print_task_number(task_number: int, ts: str, run_id: str, **kwargs) -> None:
     print(f"task number is: {task_number}")
-    print(f"task number is: {task_number}")
     print(f"ts: {ts}")
     print(f"run_id: {run_id}")
 
