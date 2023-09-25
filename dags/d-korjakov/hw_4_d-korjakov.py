@@ -2,6 +2,7 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 from datetime import datetime, timedelta
+from textwrap import dedent
 
 default_args = {
     'depends_on_past': False,
@@ -29,10 +30,29 @@ with DAG('hw_3_d-korjakov',
                 BashOperator(
                     task_id=f'{i}_less_then_10',
                     bash_command=f'echo {i}',
+                    doc_md=dedent(
+                    """\
+                    ##BashOperator
+                    **Documentation**
+                    *code*
+                    `task_id=f'{i}_less_then_10',
+                    bash_command=f'echo {i}'
+                    `
+                    """
+                    )
                 )
             else:
                 PythonOperator(
                     task_id=f'{i}_grater_then_10',
                     python_callable=python_operator_func,
+                    op_kwargs={'task_number': i},
+                    doc_md =(
+                        """\
+                        #PythonOperator
+                        `task_id=f'{i}_grater_then_10',
+                    python_callable=python_operator_func,
                     op_kwargs={'task_number': i}
+                    `
+                        """
+                    )
                 )
