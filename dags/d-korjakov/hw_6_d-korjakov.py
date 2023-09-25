@@ -13,7 +13,7 @@ default_args = {
     'retry_delay': timedelta(minutes=5),
 }
 
-with DAG('hw_3_d-korjakov',
+with DAG('hw_6_d-korjakov',
          default_args=default_args,
          description='DAG with "for" BashOperator and PythonOperator',
          start_date=datetime(2023, 9, 24),
@@ -29,7 +29,8 @@ with DAG('hw_3_d-korjakov',
             if i < 10:
                 BashOperator(
                     task_id=f'{i}_less_then_10',
-                    bash_command=f'echo {i}',
+                    env={'NUMBER': i},
+                    bash_command="echo $NUMBER",
                     doc_md=dedent(
                     """\
                     ##BashOperator
