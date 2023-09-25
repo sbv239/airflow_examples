@@ -9,7 +9,7 @@ from airflow.operators.bash import (
 )
 
 with DAG(
-    'tutorial',
+    'HW 2 f-kobak',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
