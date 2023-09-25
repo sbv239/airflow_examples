@@ -13,7 +13,7 @@ default_args = {
     'retry_delay': timedelta(minutes=5),
 }
 
-with DAG('hw_6_d-korjakov',
+with DAG('hw_7_d-korjakov',
          default_args=default_args,
          description='DAG with "for" BashOperator and PythonOperator',
          start_date=datetime(2023, 9, 24),
@@ -21,7 +21,9 @@ with DAG('hw_6_d-korjakov',
          ) as dag:
 
 
-        def python_operator_func(task_number):
+        def python_operator_func(task_number,ts,run_id):
+            print(ts)
+            print(run_id)
             return f'task number is: {task_number}'
 
 
