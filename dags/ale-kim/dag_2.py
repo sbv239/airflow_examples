@@ -13,7 +13,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-    "tutorial",
+    "ale-kim_dag",
     # Параметры по умолчанию для тасок
     default_args={
         "depends_on_past": False,
@@ -29,7 +29,7 @@ with DAG(
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 1, 1),
     catchup=False,
-    tags=["example"],
+    tags=["ale-kim"],
 ) as dag:
     t1 = BashOperator(
         task_id="hw_ale-kim_pwd",
