@@ -1,7 +1,13 @@
 from airflow import DAG
-from airflow.operators.bash import BashOperator
+from airflow.operators.python import PythonOperator
 from datetime import datetime, timedelta
-from textwrap import dedent
+from airflow.models import Variable
+
+
+def print_var():
+    var = Variable.get('is_startml')
+    print(var)
+
 
 default_args = {
     'depends_on_past': False,
@@ -13,22 +19,15 @@ default_args = {
 }
 
 with DAG(
-        'hw_5_d-korjakov',
+        'hw_12_d-korjakov',
+        description='variable DAG',
         default_args=default_args,
         start_date=datetime(2023, 9, 24),
         schedule_interval=timedelta(days=1),
 ) as dag:
-    templated_command = dedent(
-        """
-    {% for i in range(5) %}
-        echo "{{ ts }}"
-        echo "{{ run_id }}"
-    {% endfor %}
-    """
+    t1 = PythonOperator(
+        task_id='variable_test',
+        python_callable=print_var,
     )
 
-    for i in range(5):
-        BashOperator(
-            task_id=f'task_{i}',
-            bash_command=templated_command,
-        )
+    t1
