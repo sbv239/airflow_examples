@@ -13,7 +13,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-    "ale-kim_dag",
+    "ale-kim_dag_",
     # Параметры по умолчанию для тасок
     default_args={
         "depends_on_past": False,
