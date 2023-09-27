@@ -1,4 +1,4 @@
-from datetime import timedelta
+from datetime import timedelta, datetime
 
 from airflow import DAG
 from airflow.operators.bash import BashOperator
@@ -19,7 +19,10 @@ with DAG(
             'email_on_retry': False,
             'retries': 1,
             'retry_delay': timedelta(minutes=5),
-        }
+        },
+        description='DAG hw2',
+        start_date=datetime(2022, 1, 1),
+        catchup=False
 ) as dag:
     t1 = BashOperator(
         task_id='print_pwd',
