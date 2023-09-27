@@ -23,7 +23,7 @@ default_args = {
 
 with DAG(
     description="A simple tutorial DAG",
-    dag_id="ale-kim_dag_7",
+    dag_id="ale-kim_dag_7.1",
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 1, 1),
     catchup=False,
