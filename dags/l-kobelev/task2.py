@@ -11,7 +11,7 @@ def print_time(ds, **kwargs):
 
 
 with DAG(
-        ' hw_l_kobelev_2',
+        'hw_l_kobelev_2',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
