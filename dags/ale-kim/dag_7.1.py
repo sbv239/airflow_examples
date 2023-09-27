@@ -32,7 +32,7 @@ with DAG(
 
     def print_context(ds, ts, run_id, **kwargs):
         """Пример PythonOperator"""
-        print(ts, run_id)
+        print("-----------", ts, run_id, "-----------------")
         return "Whatever you return gets printed in the logs"
 
     for i in range(20):
