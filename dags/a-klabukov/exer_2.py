@@ -10,7 +10,7 @@ from airflow.operators.python_operator import PythonOperator
 
 
 with DAG(
-    'tutorial',
+    'a-klabukov',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
