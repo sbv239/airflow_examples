@@ -20,7 +20,7 @@ default_args = {
 
 with DAG(
     description="A simple tutorial DAG",
-    dag_id="ale-kim_dag_12",
+    dag_id="ale-kim_dag_12.1",
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 1, 1),
     catchup=False,
@@ -28,7 +28,7 @@ with DAG(
 ) as dag:
 
     def print_variable():
-        print(Variable.get("is_startml"))
+        print(Variable.get("is_startml"), type(Variable.get("is_startml")))
         return "--------- variable print -------"
 
     first_oper = PythonOperator(
