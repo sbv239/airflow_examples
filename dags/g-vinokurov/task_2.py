@@ -30,7 +30,7 @@ with DAG(
 
     for i in range(20):
         operator_2 = PythonOperator(
-            task_id='Python_operator' + str(i),
+            task_id=f'Python_operator_{i}',
             python_callable=count_task,
             op_kwargs={'task_number': i},
         )
