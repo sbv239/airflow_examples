@@ -28,11 +28,11 @@ with DAG(
     def count_task(task_number):
         print("task number is: {task_number}")
 
-    for i in range(20):
+    for k in range(20):
         operator_2 = PythonOperator(
-            task_id=f'Python_operator_{i}',
+            task_id=f'Python_operator_{k}',
             python_callable=count_task,
-            op_kwargs={'task_number': i},
+            op_kwargs={'task_number': k},
         )
 
     operator_1 >> operator_2
