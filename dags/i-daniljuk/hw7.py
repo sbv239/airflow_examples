@@ -35,8 +35,8 @@ with DAG(
         )
         i += 1
 
-    def print_funcnum(ts, run_id, **kwargs):
-        print(f"task number is: {kwargs['task_number']}")
+    def print_funcnum(task_number, ts, run_id, **kwargs):
+        print(f"task number is: {task_number}")
         print(run_id)
         print(ts)
 
@@ -45,7 +45,7 @@ with DAG(
         task_python = PythonOperator(
             task_id='task_number_' + str(i),
             python_callable=print_funcnum,
-            # op_kwargs={'task_number': i},
+            op_kwargs={'task_number': i}
         )
         i += 1
         
