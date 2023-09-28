@@ -21,18 +21,18 @@ with DAG(
 
     for i in range(10):
         operator_1 = BashOperator(
-            task_id=f'Bash_operator_{i}',
-            bash_command=f"Count BashOperator: {i}",
+            task_id='Bash_operator' + str(i),
+            bash_command=f"echo {i}",
         )
 
     def count_task(task_number):
-        print("task number is: {task_number}")
+        print(f"task number is: {task_number}")
 
-    for k in range(20):
+    for i in range(20):
         operator_2 = PythonOperator(
-            task_id=f'Python_operator_{k}',
+            task_id='Python_operator' + str(i),
             python_callable=count_task,
-            op_kwargs={'task_number': k},
+            op_kwargs={'task_number': i},
         )
 
     operator_1 >> operator_2
