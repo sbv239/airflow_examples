@@ -48,5 +48,3 @@ with DAG(
             op_kwargs={'task_number': i}
         )
         i += 1
-        
-    task_bash >> task_python
