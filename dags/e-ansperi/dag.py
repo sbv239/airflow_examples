@@ -1,7 +1,6 @@
 from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
-from airflow.operators.bash import BashOperator
 
 # Define the default arguments
 default_args = {
@@ -14,36 +13,43 @@ default_args = {
     'retry_delay': timedelta(minutes=5)
 }
 
-# Updated Python function for the PythonOperator
-def print_task_details(ts, run_id, task_number, **kwargs):
-    print(f"Timestamp: {ts}")
-    print(f"Run ID: {run_id}")
-    print(f"Task Number: {task_number}")
+# Function to push value to XCom
+def push_to_xcom(ti, **kwargs):
+    key = 'sample_xcom_key'
+    value = 'xcom test'
+    ti.xcom_push(key=key, value=value)
+
+# Function to pull value from XCom and print it
+def pull_from_xcom(ti, **kwargs):
+    key = 'sample_xcom_key'
+    value = ti.xcom_pull(key=key, task_ids='push_value_task')
+    print(f"Value from XCom with key '{key}': {value}")
 
 # Define the DAG, its schedule, and set it to run
 dag = DAG(
-    'hw_e-ansperi_7',
+    'hw_e-ansperi_9',
     default_args=default_args,
-    description='A DAG with tasks declared using a for loop and updated PythonOperator',
+    description='A DAG with two PythonOperators working with XCom',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2023, 9, 28),
     catchup=False
 )
 
-# First 10 tasks using BashOperator
-for i in range(10):
-    bash_task = BashOperator(
-        task_id=f'bash_task_{i}',
-        bash_command=f'echo {i}',
-        dag=dag
-    )
+# Task using PythonOperator to push value to XCom
+push_value_task = PythonOperator(
+    task_id='push_value_task',
+    python_callable=push_to_xcom,
+    provide_context=True,
+    dag=dag
+)
 
-# Next 20 tasks using updated PythonOperator
-for i in range(10, 30):
-    python_task = PythonOperator(
-        task_id=f'python_task_{i}',
-        python_callable=print_task_details,
-        op_kwargs={'task_number': i},
-        provide_context=True,
-        dag=dag
-    )
+# Task using PythonOperator to pull value from XCom and print it
+pull_value_task = PythonOperator(
+    task_id='pull_value_task',
+    python_callable=pull_from_xcom,
+    provide_context=True,
+    dag=dag
+)
+
+# Set task order
+push_value_task >> pull_value_task
