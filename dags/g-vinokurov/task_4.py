@@ -13,7 +13,7 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),
     },
-        description='DAG in task_2',
+        description='DAG in task_4',
         schedule_interval=timedelta(days=1),
         start_date=datetime(2023, 9, 28),
         catchup=False,
