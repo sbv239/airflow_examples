@@ -24,13 +24,13 @@ with DAG(
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 1, 1),
     catchup=False,
-    tags=['hw_7_i-daniljuk'],
+    tags=['i-daniljuk'],
 ) as dag:
     
 
     def push_data(ti):
         """
-        Gets test value
+        Push test value
         """
         ti.xcom_push(
             key='sample_xcom_key',
@@ -39,21 +39,21 @@ with DAG(
 
     def pull_data(ti):
         """
-        Evaluates testing increase results
+        Print test value
         """
         pull_result = ti.xcom_pull(
             key='sample_xcom_key',
-            task_ids='xcom push'
+            task_ids='xcom_push'
         )
         print(pull_result)
 
-    opr_get_covid_data = PythonOperator(
-        task_id = 'get_data',
+    t1 = PythonOperator(
+        task_id = 'xcom_push',
         python_callable=push_data,
     )
-    opr_analyze_testing_data = PythonOperator(
-        task_id = 'pull_data',
+    t2 = PythonOperator(
+        task_id = 'xcom_pull',
         python_callable=pull_data,
     )
 
-    opr_get_covid_data >> opr_analyze_testing_data
+    t1 >> t2
