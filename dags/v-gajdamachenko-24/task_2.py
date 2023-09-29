@@ -28,7 +28,7 @@ with DAG (
     description='v-gajdamachenko-24, lesson 11 task 2',
     default_args=default_args,
     schedule_interval=timedelta(days=1),
-    start_date=datetime(2022, 1, 1),
+    start_date=datetime(2023, 9, 26),
     catchup=False,
     tags=['v-gajdamachenko'],
 ) as dag:
