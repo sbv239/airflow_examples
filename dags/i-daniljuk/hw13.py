@@ -42,6 +42,16 @@ with DAG(
             task_id = 'not_startml_desc'
 
 
+    positive = PythonOperator(
+        task_id='startml_desc',
+        python_callable=print_startml,
+    )
+
+    negative = PythonOperator(
+        task_id='not_startml_desc',
+        python_callable=print_not_startml,
+    )
+    
     before = DummyOperator(task_id='before_branching')
     after = DummyOperator(task_id='after_branching')
     
@@ -50,14 +60,5 @@ with DAG(
         python_callable=determine_course
     )
     
-    t3 = PythonOperator(
-        task_id='startml_desc',
-        python_callable=print_startml,
-    )
-
-    t4 = PythonOperator(
-        task_id='not_startml_desc',
-        python_callable=print_not_startml,
-    )
-    
-before > determinator >> after
+   
+before >> determinator >> after
