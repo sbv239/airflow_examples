@@ -17,7 +17,7 @@ with DAG(
     },
     description='home work "first dag"',
     schedule_interval=timedelta(days=1),
-    start_date=datetime(2022, 1, 1),
+    start_date=datetime(2023, 9, 28),
     catchup=False,
     tags=['hw_2'],
 ) as dag:
