@@ -10,7 +10,7 @@ from airflow.operators.python import PythonOperator
 
 
 with DAG(
-    'hw_7_i-daniljuk',
+    'hw_9_i-daniljuk',
     # Параметры по умолчанию для тасок
     default_args={
     'depends_on_past': False,
