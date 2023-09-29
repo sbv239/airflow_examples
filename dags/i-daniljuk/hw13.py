@@ -37,9 +37,9 @@ with DAG(
         from airflow.models import Variable
         is_startml = Variable.get('is_startml')
         if is_startml == 'True':
-            return 'startml_desc'
+            return task_id = 'startml_desc'
         else:
-             return 'not_startml_desc'
+             return task_id = 'not_startml_desc'
 
 
     before = DummyOperator(task_id='before_branching')
