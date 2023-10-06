@@ -16,6 +16,7 @@ with DAG(
     schedule_interval=timedelta(days=1),
     start_date=datetime(2023, 10, 6),
     catchup=False,
+    tags=['bezsmen'],
 ) as dag:
     t1=BashOperator(
         task_id='print_pwd',
