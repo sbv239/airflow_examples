@@ -1,5 +1,6 @@
-from airflow improt DAG
+from airflow import DAG
 from textwrap import dedent
+from datetime import timedelta
 
 with DAG(
     'hw_s-bezjazychnyj_1',
