@@ -15,8 +15,8 @@ with DAG(
     },
     description='First DAG',
     schedule_interval=timedelta(days=1),
-    start_date=datetime(2023, 10, 6),
-    catchup=False,
+    start_date=datetime(2023, 10, 5),
+    catchup=True,
     tags=['bezsmen'],
 ) as dag:
     t1=BashOperator(
