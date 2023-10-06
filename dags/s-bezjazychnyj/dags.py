@@ -1,7 +1,8 @@
 from airflow import DAG
 from textwrap import dedent
 from datetime import timedelta
-
+from airflow.operators.bash import BashOperator
+from airflow.operators.python import PythonOperator
 with DAG(
     'hw_s-bezjazychnyj_1',
     default_args={
@@ -17,9 +18,8 @@ with DAG(
     t1=BashOperator(
         task_id='print_pwd',
         bash_command='pwd ',
-        dag=dag,
     )
-    def print_ds(ds):
+    def print_ds(ds,**kwargs):
         print(ds)
     t2=PythonOperator(
         task_id='prind_ds',
