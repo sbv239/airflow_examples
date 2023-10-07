@@ -2,6 +2,7 @@ from airflow import DAG
 from datetime import datetime, timedelta
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
+import logging
 with DAG(
     'hw_7_s-bezjazychnyj',
     default_args={
@@ -27,6 +28,7 @@ with DAG(
         def print_task_number(ts,run_id,**kwargs):
             print(f'{ts}')
             print(f'{run_id}')
+            logging.info(f'PRINT {ts} ---  {run_id}')
         t2=PythonOperator(
             task_id=f'prind_task_{i}',
             python_callable=print_task_number,
