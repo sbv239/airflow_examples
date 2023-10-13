@@ -28,18 +28,15 @@ with DAG(
     },
     start_date=datetime(2023, 10, 13),
     dag_id='hw_2_a-bendjukov',
-    # Запустить за старые даты относительно сегодня
-    # https://airflow.apache.org/docs/apache-airflow/stable/dag-run.html
-    catchup=False,
     # теги, способ помечать даги
-    tags=['hw_2_try_2']
+    tags=['hw_2_try_3']
 ) as dag:
     hw_bendjukov_1 = BashOperator(
         task_id='print_dir',  # id, будет отображаться в интерфейсе
         bash_command='pwd',  # какую bash команду выполнить в этом таске
     )
     hw_bendjukov_2 = PythonOperator(
-        task_id='more context logs',
+        task_id='more_context_logs',
         python_callable = print_context
     )
 
