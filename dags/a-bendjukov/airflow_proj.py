@@ -11,8 +11,6 @@ def print_context(ds, **kwargs):
 
 
 with DAG(
-
-    'tutorial',
     # Параметры по умолчанию для тасок
     default_args={
         # Если прошлые запуски упали, надо ли ждать их успеха
@@ -28,20 +26,13 @@ with DAG(
         # Сколько ждать между перезапусками
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
     },
-    # Описание DAG (не тасок, а самого DAG)
-    description='A simple tutorial DAG',
-    # Как часто запускать DAG
-    schedule_interval=timedelta(days=1),
-    # С какой даты начать запускать DAG
-    # Каждый DAG "видит" свою "дату запуска"
-    # это когда он предположительно должен был
-    # запуститься. Не всегда совпадает с датой на вашем компьютере
-    start_date=datetime(2022, 1, 1),
+    start_date=datetime(2023, 10, 13),
+    dag_id='hw_2_a-bendjukov',
     # Запустить за старые даты относительно сегодня
     # https://airflow.apache.org/docs/apache-airflow/stable/dag-run.html
     catchup=False,
     # теги, способ помечать даги
-    tags=['example'],
+    tags=['hw_2_try_2']
 ) as dag:
     hw_bendjukov_1 = BashOperator(
         task_id='print_dir',  # id, будет отображаться в интерфейсе
