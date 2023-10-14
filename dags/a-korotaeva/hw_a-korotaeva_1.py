@@ -6,7 +6,7 @@ from airflow.operators.python import PythonOperator
 
 
 with DAG(
-    'tutorial',
+    'hw_2_a-korotaeva',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
