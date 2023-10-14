@@ -36,3 +36,5 @@ with DAG(
         task_id = 'print_datetime',
         python_callable= print_date
     )
+
+t1 >> t2
