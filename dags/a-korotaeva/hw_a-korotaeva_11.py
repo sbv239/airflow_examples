@@ -10,12 +10,12 @@ postgres = PostgresHook(postgres_conn_id='startml_feed')
 def conn_data():
     with postgres.get_conn() as conn:
         with conn.cursor() as cursor:
-            cursor.execute("SELECT user_id, COUNT(post_id) FROM feed_action WHERE action = 'like' GROUP BY user_id ORDER BY COUNT(post_id) DESC LIMIT 1;")
-            cursor.fetchone()
+            cursor.execute("""SELECT user_id, COUNT(post_id) FROM feed_action WHERE action = 'like' GROUP BY user_id ORDER BY COUNT(post_id) DESC LIMIT 1;""")
+            return cursor.fetchone()
 
 
 with DAG(
-    'hw_11_a-korotaeva',
+    'hw_11_1_a-korotaeva',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
