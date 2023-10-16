@@ -16,7 +16,7 @@ default_args = {
 }
 
 with DAG(
-    'task_2',
+    'hw_2_a-bosikov',
     start_date=datetime.now(),
     default_args=default_args,
     tags=['a-bosikov']
