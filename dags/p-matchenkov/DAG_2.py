@@ -1,3 +1,5 @@
+import datetime
+
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
@@ -6,7 +8,7 @@ from datetime import timedelta
 
 
 
-def print_context(ds, **kwargs):
+def get_ds(ds, **kwargs):
     print(kwargs)
     print(ds)
     return ds
@@ -21,7 +23,11 @@ with DAG(
         'email_on_retry': False,
         'retries': 1,
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
-    }
+    },
+    description='task 2 dag',
+    start_date=datetime.datetime(2023, 10, 17),
+    catchup=False,
+    tags=['matchenkov']
 ) as dag:
 
     t1 = BashOperator(
