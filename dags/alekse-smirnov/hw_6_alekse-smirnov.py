@@ -30,7 +30,7 @@ with DAG(
         btask = BashOperator(
             task_id= f"step_{i}_bash",
             bash_command=f"echo $NUMBER",
-            env={"NUMBER": i}
+            env={"NUMBER": str(i)}
         )
         btask.doc_md = dedent(
             """\
