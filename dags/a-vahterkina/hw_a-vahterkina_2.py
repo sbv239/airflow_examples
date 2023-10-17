@@ -32,7 +32,8 @@ with DAG(
     
     t1 = PythonOperator(
         task_id='print_the_context',  # нужен task_id, как и всем операторам
-        python_callableprint_context,  # свойственен только для PythonOperator - передаем саму функцию
+        python_callable=print_context,  # свойственен только для PythonOperator - передаем саму 
+функцию
     )
 
 t >> t1
