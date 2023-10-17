@@ -14,9 +14,8 @@ def func():
     result = Variable.get("is_startml")
     print(result)
 
-
 with DAG(
-        'hw_11_a-vahterkina',
+        'hw_12_a-vahterkina',
         default_args={
             'depends_on_past': False,
             'email': ['airflow@example.com'],
@@ -25,11 +24,11 @@ with DAG(
             'retries': 1,
             'retry_delay': timedelta(minutes=5),
         },
-        description='hw_a-vahterkina_11',
+        description='hw_a-vahterkina_12',
         schedule_interval=timedelta(days=1),
         start_date=datetime(2023, 10, 17),
         catchup=False,
-        tags=['hw_11_a-vahterkina']
+        tags=['hw_12_a-vahterkina']
 ) as dag:
 
     t1 = PythonOperator(
