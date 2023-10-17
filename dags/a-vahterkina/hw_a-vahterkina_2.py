@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 from airflow import DAG
+
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
@@ -26,12 +27,12 @@ with DAG(
 
 
     t = BashOperator(
-        task_id="print_the_context",
+        task_id="print_the_context_1",
         bash_command="pwd",
     )
     
     t1 = PythonOperator(
-        task_id='print_the_context',  # нужен task_id, как и всем операторам
+        task_id='print_the_context_1',  # нужен task_id, как и всем операторам
         python_callable=print_context,  # свойственен только для PythonOperator - передаем саму 
 функцию
     )
