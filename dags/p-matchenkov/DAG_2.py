@@ -6,12 +6,14 @@ from datetime import timedelta
 
 
 
-def get_ds(ds="{{ds}}"):
+def print_context(ds, **kwargs):
+    print(kwargs)
     print(ds)
+    return ds
 
 
 with DAG(
-    ' hw_p-matchenkov_2',
+    'hw_p-matchenkov_2',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
