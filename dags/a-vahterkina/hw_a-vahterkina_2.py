@@ -3,6 +3,11 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
+def print_context(ds, **kwargs):
+    print(kwargs)
+    print(ds)
+    return 'Whatever you return gets printed in the logs'
+
 with DAG(
     'tutorial',
     default_args={
@@ -24,14 +29,10 @@ with DAG(
         task_id="print_the_context",
         bash_command="pwd",
     )
-    def print_context(ds, **kwargs):
-        print(kwargs)
-        print(ds)
-        return 'Whatever you return gets printed in the logs'
-
-    run_this = PythonOperator(
+    
+    t1 = PythonOperator(
         task_id='print_the_context',  # нужен task_id, как и всем операторам
         python_callableprint_context,  # свойственен только для PythonOperator - передаем саму функцию
     )
 
-t >> run_this
+t >> t1
