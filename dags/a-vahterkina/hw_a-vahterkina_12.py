@@ -14,7 +14,6 @@ def func():
     result = Variable.get("is_startml")
     print(result)
 
-
 with DAG(
         'hw_12_a-vahterkina',
         default_args={
