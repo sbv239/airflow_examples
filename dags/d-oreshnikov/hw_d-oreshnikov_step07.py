@@ -16,7 +16,7 @@ def print_range_number(task_number, ts, run_id):
 
 
 with DAG(
-    'hw_d-oreshnikov_02',
+    'hw_d-oreshnikov_07',
     default_args={
     'depends_on_past': False,
     'email': ['airflow@example.com'],
