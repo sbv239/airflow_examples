@@ -8,12 +8,8 @@ from textwrap import dedent
 from datetime import timedelta
 
 
-def print_task_number(task_number):
-    print(f'task number is: {task_number}')
-
-
 with DAG(
-    'hw_p-matchenkov_4',
+    'hw_p-matchenkov_5',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -22,7 +18,7 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),
     },
-    description='task 3 dag',
+    description='task 5 dag',
     start_date=datetime.datetime(2023, 10, 16),
     catchup=False,
     tags=['matchenkov']
@@ -31,7 +27,7 @@ with DAG(
     bash_commands = """
     {% for i in range(5) %}
         echo "{{ ts }}"
-        echo '{{ i }}"        
+        echo "{{ i }}"        
     {% endfor %}
     """
 
