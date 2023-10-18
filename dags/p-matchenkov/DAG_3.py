@@ -35,7 +35,7 @@ with DAG(
 
     for i in range(20):
         python_task = PythonOperator(
-            task_id='current_task_{0}'.format(i),
+            task_id=f'current_task_{i}',
             python_callable=print_task_number,
             op_kwargs={'number': i}
         )
