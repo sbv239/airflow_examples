@@ -24,15 +24,15 @@ with DAG(
     tags=['matchenkov']
 ) as dag:
 
-    bash_commands = """
+    bash_commands = dedent("""
     {% for i in range(5) %}
         echo "{{ ts }}"
         echo "{{ i }}"        
     {% endfor %}
-    """
+    """)
 
     bash_task = BashOperator(
-        task_id='print vars',
+        task_id='print_vars',
         bash_command=bash_commands
     )
 
