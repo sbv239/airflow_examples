@@ -27,17 +27,18 @@ with DAG(
     tags=['matchenkov']
 ) as dag:
 
-    for i in range(10):
-        bash_task = BashOperator(
-            task_id=f'bash_task_{i}',
-            bash_command=f'echo {i}'
-        )
+    for i in range(30):
+        if i < 10:
+            bash_task = BashOperator(
+                task_id=f'bash_task_{i}',
+                bash_command=f'echo {i}'
+            )
 
-    for i in range(20):
-        python_task = PythonOperator(
-            task_id=f'current_task_{i}',
-            python_callable=print_task_number,
-            op_kwargs={'number': i}
-        )
+        else:
+            python_task = PythonOperator(
+                task_id=f'current_task_{i}',
+                python_callable=print_task_number,
+                op_kwargs={'number': i}
+            )
 
     bash_task >> python_task
