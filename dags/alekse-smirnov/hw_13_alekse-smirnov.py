@@ -41,12 +41,12 @@ with DAG(
 
     is_startml_task = PythonOperator(
         task_id="startml_desc",
-        python_callable=(lambda _: print("StartML is a starter course for ambitious people"))
+        python_callable=(lambda: print("StartML is a starter course for ambitious people"))
     )
 
     not_startml_task = PythonOperator(
         task_id="not_startml_desc",
-        python_callable=(lambda _: print("Not a startML course, sorry"))
+        python_callable=(lambda: print("Not a startML course, sorry"))
     )
 
     end_task = DummyOperator(
