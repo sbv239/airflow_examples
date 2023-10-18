@@ -28,9 +28,10 @@ with DAG(
         print(ds)
     
     t2 = PythonOperator(
-        task_id = "print ds"
-        pythoon_callable = print_ds
+        task_id='print_ds',
+        python_callable=print_ds
     )
     
     t1 >> t2
+
     
