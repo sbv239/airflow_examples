@@ -27,7 +27,7 @@ with DAG(
     bash_commands = dedent("""
     {% for i in range(5) %}
         echo "{{ ts }}"
-        echo "{{ i }}"        
+        echo "{{ run_id }}"        
     {% endfor %}
     """)
 
