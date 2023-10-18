@@ -39,7 +39,7 @@ with DAG(
             python_task = PythonOperator(
                 task_id=f'current_task_{i}',
                 python_callable=print_task_number,
-                op_kwargs={'number': i}
+                op_kwargs={'number': i} # передает данные в питоновскую функцию
             )
 
         bash_task.doc_md = dedent(
