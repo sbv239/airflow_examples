@@ -15,7 +15,7 @@ with DAG(
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
     },
     description='First DAG start',
-    schedule_interval=timedelta(days=1),
+    schedule_interval=timedelta(minutes=5),
     start_date=datetime(2023, 10, 18),
 ) as dag:
 
