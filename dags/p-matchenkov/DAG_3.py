@@ -3,12 +3,13 @@ import datetime
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
+from textwrap import dedent
 
 from datetime import timedelta
 
 
-def print_task_number(**kwargs):
-    print(kwargs)
+def print_task_number(task_number):
+    print(f'task number is: {task_number}')
 
 
 with DAG(
@@ -27,10 +28,10 @@ with DAG(
     tags=['matchenkov']
 ) as dag:
 
-    for i in range(1, 31):
-        if i <= 10:
+    for i in range(30):
+        if i < 10:
             bash_task = BashOperator(
-                task_id=f'print {i}',
+                task_id=f'bash_task_{i}',
                 bash_command=f'echo {i}'
             )
 
@@ -41,4 +42,11 @@ with DAG(
                 op_kwargs={'number': i}
             )
 
-bash_task >> python_task
+        bash_task.doc_md = dedent(
+            """
+            # Doc
+            __Документация__ по `bashOperator` добавлена в _задании 4_
+            """
+        )
+
+    bash_task >> python_task
