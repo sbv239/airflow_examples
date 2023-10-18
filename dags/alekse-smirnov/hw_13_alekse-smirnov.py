@@ -2,7 +2,8 @@ from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.operators.python import PythonOperator, BranchPythonOperator
 # from airflow.operators.branch import BranchPythonOperator
-from airflow.operators.empty import EmptyOperator
+# from airflow.operators.empty import EmptyOperator
+from airflow.operators.dummy import DummyOperator
 from airflow.models import Variable
 
 
@@ -29,7 +30,7 @@ with DAG(
     catchup=False,
     tags=['alekse-smirnov'],
 ) as dag:
-    start_task = EmptyOperator(
+    start_task = DummyOperator(
         task_id="start_branching_task",
     )
 
@@ -48,7 +49,7 @@ with DAG(
         python_callable=(lambda _: print("Not a startML course, sorry"))
     )
 
-    end_task = EmptyOperator(
+    end_task = DummyOperator(
         task_id="end_branching_task",
     )
 
