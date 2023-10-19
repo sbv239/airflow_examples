@@ -15,7 +15,7 @@ def send_xcom(ti):
 def receive_xcom(ti):
     value = ti.xcom_pull(
         key='return_value',
-        task_ids='pull'
+        task_ids='xcom_sender'
     )
     print(value)
 
