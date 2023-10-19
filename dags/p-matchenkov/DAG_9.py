@@ -24,7 +24,7 @@ def receive_xcom(ti):
 
 
 with DAG(
-        'hw_p-matchenkov_95',
+        'hw_p-matchenkov_9',
         default_args={
                 'depends_on_past': False,
                 'email': ['airflow@example.com'],
@@ -38,6 +38,7 @@ with DAG(
         catchup=False,
         tags=['matchenkov']
 ) as dag:
+
     sender_task = PythonOperator(
         task_id="xcom_sender",
         python_callable=send_xcom
