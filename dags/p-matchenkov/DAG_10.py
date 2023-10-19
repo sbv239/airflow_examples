@@ -8,28 +8,31 @@ from textwrap import dedent
 from datetime import timedelta
 
 
-def send_xcom():
-    return {"Airflow_track":"Airflow tracks everything"}
+def send_xcom(ti):
+    return "Airflow tracks everything"
 
 
-def receive_xcom(Airflow_track):
-    print(Airflow_track)
-
+def receive_xcom(ti):
+    value = ti.xcom_pull(
+        key='return_value',
+        task_ids='pull'
+    )
+    print(value)
 
 with DAG(
-        'hw_p-matchenkov_10',
-        default_args={
-                'depends_on_past': False,
-                'email': ['airflow@example.com'],
-                'email_on_failure': False,
-                'email_on_retry': False,
-                'retries': 1,
-                'retry_delay': timedelta(minutes=5),
-        },
-        description='task 10 dag',
-        start_date=datetime.datetime(2023, 10, 16),
-        catchup=False,
-        tags=['matchenkov']
+    'hw_p-matchenkov_10',
+    default_args={
+            'depends_on_past': False,
+            'email': ['airflow@example.com'],
+            'email_on_failure': False,
+            'email_on_retry': False,
+            'retries': 1,
+            'retry_delay': timedelta(minutes=5),
+    },
+    description='task 10 dag',
+    start_date=datetime.datetime(2023, 10, 16),
+    catchup=False,
+    tags=['matchenkov']
 ) as dag:
 
     sender_task = PythonOperator(
