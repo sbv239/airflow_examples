@@ -9,6 +9,8 @@ from datetime import timedelta
 
 
 def print_task_number(ts, run_id, **kwargs):
+    print(f'ts = {ts}')
+    print(f'run_id = {run_id}')
     print(f'task number is: {kwargs}')
 
 
