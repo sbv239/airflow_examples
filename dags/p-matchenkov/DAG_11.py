@@ -4,6 +4,7 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 from textwrap import dedent
+from psycopg2.extras import RealDictCursor
 
 from datetime import timedelta
 
@@ -17,7 +18,7 @@ def get_user():
       f"postgresql://{creds.login}:{creds.password}"
       f"@{creds.host}:{creds.port}/{creds.schema}"
     ) as conn:
-        with conn.cursor() as cursor:
+        with conn.cursor(cursor_factory=RealDictCursor) as cursor:
             cursor.execute(
                 """
                 SELECT user_id, COUNT("action")
@@ -29,7 +30,7 @@ def get_user():
                 """
         )
             result = cursor.fetchall()
-            return result.__dict__
+            return result
 
 
 with DAG(
