@@ -27,14 +27,14 @@ with DAG(
     tags=['task_2', 'lesson_11', 'j-rzayev'],
 ) as dag:
     t1 = BashOperator(
-        task_id='hw_j-rzayev_1',
+        task_id='print_path',
         depends_on_past=False,
         bash_command='pwd'
     )
 
     t2 = PythonOperator(
-        task_id='hw_j-rzayev_2',
-        python_callable=print_ds
+        task_id='print_ds',
+        python_callable=print_da
     )
 
     t1 >> t2
