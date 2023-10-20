@@ -17,9 +17,9 @@ dag = DAG(
     },
     description='task_4',
     schedule_interval=timedelta(days=1),
-    start_date=datetime(2023, 10, 18),
+    start_date=datetime(2023, 10, 20),
     catchup=False,
-    tags=['task_4', 'lesson_11']
+    tags=['task_4', 'lesson_11', 'j-rzayev']
 )
 dag.doc_md = dedent(
     """\

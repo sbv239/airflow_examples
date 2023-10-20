@@ -24,17 +24,17 @@ with DAG(
     schedule_interval=timedelta(days=1),
     start_date=datetime(2023, 10, 20),
     catchup=False,
-    tags=['task_2', 'lesson_11'],
+    tags=['task_2', 'lesson_11', 'j-rzayev'],
 ) as dag:
     t1 = BashOperator(
-        task_id='hw_j-rzayev_1',
+        task_id='print_path',
         depends_on_past=False,
         bash_command='pwd'
     )
 
     t2 = PythonOperator(
-        task_id='hw_j-rzayev_2',
-        python_callable=print_ds
+        task_id='print_ds',
+        python_callable=print_da
     )
 
     t1 >> t2
