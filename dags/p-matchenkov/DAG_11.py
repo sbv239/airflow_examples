@@ -29,7 +29,7 @@ def get_user():
                 """
         )
             result = cursor.fetchall()
-            return result
+            return result.__dict__
 
 
 with DAG(
