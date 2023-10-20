@@ -28,7 +28,7 @@ def get_user():
                 LIMIT 1
                 """
         )
-            result = cursor.one_or_none()
+            result = cursor.all()
             return result
 
 
