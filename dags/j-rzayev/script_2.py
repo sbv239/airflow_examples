@@ -20,7 +20,7 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),
    },
-    description='Print ds and directory',
+    description='task_2',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2023, 10, 20),
     catchup=False,

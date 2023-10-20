@@ -15,10 +15,11 @@ dag = DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),
     },
-    description='Task7',
+    description='task_7',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2023, 10, 18),
     catchup=False,
+    tags=['task_7', 'lesson_11']
 )
 
 tasks = []
