@@ -22,7 +22,7 @@ def get_user():
                 """
                 SELECT user_id, COUNT("action")
                 FROM feed_action
-                WHERE "action" = "like"
+                WHERE "action" = 'like'
                 GROUP BY user_id
                 ORDER BY COUNT("action") DESC
                 LIMIT 1
