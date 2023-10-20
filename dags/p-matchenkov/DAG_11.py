@@ -28,7 +28,7 @@ def get_user():
                 LIMIT 1
                 """
         )
-            result = cursor.all()
+            result = cursor.fetchall()
             return result
 
 
