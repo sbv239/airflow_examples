@@ -24,7 +24,7 @@ with DAG(
     schedule_interval=timedelta(days=1),
     start_date=datetime(2023, 10, 20),
     catchup=False,
-    tags=['task_2', 'lesson_11'],
+    tags=['task_2', 'lesson_11', 'j-rzayev'],
 ) as dag:
     t1 = BashOperator(
         task_id='hw_j-rzayev_1',

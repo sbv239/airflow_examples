@@ -17,9 +17,9 @@ dag = DAG(
     },
     description='task_3',
     schedule_interval=timedelta(days=1),
-    start_date=datetime(2023, 10, 18),
+    start_date=datetime(2023, 10, 20),
     catchup=False,
-    tags=['task_3', 'lesson_11']
+    tags=['task_3', 'lesson_11', 'j-rzayev']
 )
 
 tasks = []
