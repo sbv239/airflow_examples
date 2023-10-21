@@ -19,19 +19,19 @@ with DAG('hw_d-shestak_3',
          start_date=datetime(2023, 10, 21),
          tags=['hw_3_d-shestak']
          ) as dag:
-    def print_smth(smth):
-        return f'task {smth} PythonOperator'
+    def print_task_number(task_number):
+        return f'task number is: {task_number}'
 
 
     for i in range(30):
         if i < 10:
             BashOperator(
-                task_id=f'task {i} BashOperator' ,
+                task_id=f'task_{i}_BashOperator',
                 bash_command=f"echo task_{i}_by_Bash"
             )
         else:
             PythonOperator(
                 task_id='task_' + str(i),
-                python_callable=print_smth,
-                op_kwargs={'smth': i}
+                python_callable=print_task_number,
+                op_kwargs={'task_number': i}
             )
