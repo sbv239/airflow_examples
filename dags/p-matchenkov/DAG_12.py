@@ -27,7 +27,7 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),
     },
-    description=['task 12'],
+    description='task_12',
     tags=['matchenkov'],
     start_date=datetime.datetime(2023, 10, 19),
     catchup=False
