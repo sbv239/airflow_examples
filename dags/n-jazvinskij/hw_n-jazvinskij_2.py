@@ -1,6 +1,8 @@
 from datetime import datetime, timedelta
 from textwrap import dedent
-from airflow import DAG, BashOperator, PythonOperator
+from airflow import DAG
+from airflow.operators.bash import BashOperator, PythonOperator
+
 
 with DAG(
     "hw_11_ex_2-n-jazvinskij",
