@@ -18,14 +18,14 @@ with DAG(
         },
         description='hw_d-shestak_2',
         schedule_interval=timedelta(days=1),
-        start_date=datetime(2022, 4, 3),
+        start_date=datetime(2023, 10, 21),
         catchup=False,
         tags=['task_1'],
 ) as dag:
 
     t1 = BashOperator(
-        task_id = 'print_pwd',
-        bash_command = 'pwd'
+        task_id='print_pwd',
+        bash_command='pwd'
     )
 
     t1.doc_md = dedent(
