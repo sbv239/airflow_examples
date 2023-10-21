@@ -1,8 +1,8 @@
 from datetime import datetime, timedelta
 from textwrap import dedent
 from airflow import DAG
-from airflow.operators.bash import BashOperator, PythonOperator
-
+from airflow.operators.bash import BashOperator
+from airflow.operators.python import PythonOperator
 
 with DAG(
     "hw_11_ex_2-n-jazvinskij",
@@ -15,7 +15,7 @@ with DAG(
         "retry_delay": timedelta(minutes=5),
     },
     description="ex_2-n-jazvinskij",
-    schedule=timedelta(days=1),
+    schedule_interval=timedelta(days=1),
     start_date=datetime(2023, 10, 21),
     catchup=False,
     tags=["hw_11_ex_2"],
@@ -31,6 +31,6 @@ with DAG(
 
         t2 = PythonOperator(
                 task_id = 'print_python_operator',
-                python_calleble = print_ds
+                python_callable = print_ds
         )
         t1 >> t2
