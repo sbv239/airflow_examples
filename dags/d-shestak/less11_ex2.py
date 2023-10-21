@@ -20,7 +20,7 @@ with DAG(
         schedule_interval=timedelta(days=1),
         start_date=datetime(2023, 10, 21),
         catchup=False,
-        tags=['task_1'],
+        tags=['hw_2_d-shestak']
 ) as dag:
 
     t1 = BashOperator(
