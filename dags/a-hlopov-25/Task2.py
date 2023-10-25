@@ -26,7 +26,7 @@ with DAG(
 ) as dag:
     t1 = BashOperator(
         task_id="BashPwd",
-        bash_command="pwd "  
+        bash_command="pwd",  
     )
     def print_date(ds):
         print(ds)
