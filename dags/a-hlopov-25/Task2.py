@@ -4,9 +4,6 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 from datetime import timedelta
 from datetime import datetime 
-def print_logic_date(ds):
-        print(ds)
-        return 'Whatever you return gets printed in the logs'
 with DAG(
     'hw_a-hlopov-25_2',
     default_args={
@@ -25,21 +22,18 @@ with DAG(
     # Каждый DAG "видит" свою "дату запуска"
     # это когда он предположительно должен был
     # запуститься. Не всегда совпадает с датой на вашем компьютере
-    start_date=datetime(2023, 10, 25),
-    # Запустить за старые даты относительно сегодня
-    # https://airflow.apache.org/docs/apache-airflow/stable/dag-run.html
-    catchup=False,
-    # теги, способ помечать даги
-    tags=['example'],
+    start_date=datetime(2023, 10, 25)
 ) as dag:
     t1 = BashOperator(
         task_id="BashPwd",
         bash_command="pwd "  
     )
-  
+    def print_date(ds):
+        print(ds)
+        print("Date printed")
     t2 = PythonOperator(
         task_id='PrintDs',
-        python_callable=print_logic_date
+        python_callable=print_date
     )
 
     t1>>t2
