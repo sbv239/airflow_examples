@@ -7,17 +7,16 @@ from airflow.operators.python import PythonOperator
 with DAG(
     'hw_a-kramarenko_2',
     default_args={
-    'depends_on_past': False,
-    'email': ['airflow@example.com'],
-    'email_on_failure': False,
-    'email_on_retry': False,
-    'retries': 1,
-    'retry_delay': timedelta(minutes=5),
+        'depends_on_past': False,
+        'email': ['airflow@example.com'],
+        'email_on_failure': False,
+        'email_on_retry': False,
+        'retries': 1,
+        'retry_delay': timedelta(minutes=5),
 }
     description='lesson 11 task 2 DAG',
 ) as dag:
-
-    t1 = BashOperator(
+    task1 = BashOperator(
         task_id='task1',
         bash_command='pwd',
     )
@@ -27,7 +26,7 @@ with DAG(
         print(ds)
         return 'Whatever you return gets printed in the logs'
 
-    run_this = PythonOperator(
+    task2 = PythonOperator(
         task_id='taks2',
         python_callable=print_context,
     )
