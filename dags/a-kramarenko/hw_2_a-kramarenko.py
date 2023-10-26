@@ -13,7 +13,7 @@ with DAG(
         'email_on_retry': False,
         'retries': 1,
         'retry_delay': timedelta(minutes=5),
-}
+    },
     description='lesson 11 task 2 DAG',
 ) as dag:
     task1 = BashOperator(
