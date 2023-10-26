@@ -11,7 +11,7 @@ def my_sleeping_function(task_number):
 
 
 with DAG(
-    'Task_2',
+    'task_3_ahmetov',
     # Параметры по умолчанию
     default_args={
         'depends_on_past': False,
