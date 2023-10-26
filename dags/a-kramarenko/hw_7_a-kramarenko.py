@@ -15,11 +15,10 @@ with DAG(
         'retry_delay': timedelta(minutes=5),
     },
     description='lesson 11 task 7 DAG',
-    schedule_interval=timedelta(minutes=1)
     start_date=datetime(2023, 10, 27),
 ) as dag:
     
-    def print_numbers(task_number, **kwargs):
+    def print_numbers(task_number, ts, run_id):
         print(f"task number is: {task_number}")
         print(ts, run_id)
 
