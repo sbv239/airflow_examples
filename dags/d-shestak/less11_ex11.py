@@ -14,12 +14,12 @@ default_args = {
     'retry_delay': timedelta(minutes=5),
 
 }
-with DAG('hw_d-shestak_10',
+with DAG('hw_d-shestak_11',
          default_args=default_args,
-         description='hw_d-shestak_10',
+         description='hw_d-shestak_11',
          schedule_interval=timedelta(days=1),
          start_date=datetime(2023, 10, 21),
-         tags=['hw_10_d-shestak']
+         tags=['hw_11_d-shestak']
          ) as dag:
 
     def print_variable():
