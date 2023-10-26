@@ -23,7 +23,7 @@ with DAG(
 
         for i in range(1,11):
             t1 = BashOperator(  
-                task_id='print_dir',
+                task_id='task_' + str(i),
                 bash_command=f'echo {i}',
             )
         
@@ -39,5 +39,14 @@ with DAG(
                 python_callable=print_tasks,
                 op_kwargs={'random_base':i}
             )
+        
+        t1.doc_md = dedent(
+            """\
+            ### Task Documentation
+            #*курсив*
+            #**жирный**
+            #`code`
+            """
+        )
 
         t1 >> t2
