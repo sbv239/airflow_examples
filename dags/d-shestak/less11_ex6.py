@@ -13,28 +13,16 @@ default_args = {
     'retry_delay': timedelta(minutes=5),
 
 }
-with DAG('hw_d-shestak_5',
+with DAG('hw_d-shestak_6',
          default_args=default_args,
-         description='hw_d-shestak_5',
+         description='hw_d-shestak_6',
          schedule_interval=timedelta(days=1),
          start_date=datetime(2023, 10, 21),
-         tags=['hw_5_d-shestak']
+         tags=['hw_6_d-shestak']
          ) as dag:
-    templated_command = dedent(
-        '''
-        {% for i in range(5) %}
-            echo '{{ ts }}'
-            echo '{{ run_id }}'
-        {% endfor %}
-        '''
-    )
-    t1 = BashOperator(
-        task_id='print-ts-run_id',
-        bash_command=templated_command
-    )
-    t1.doc_md = dedent(
-        '''
-        # t1 doc:
-        `Bash_operator` print `ts` and `run_id`
-        '''
-    )
+    for i in range(10):
+        BashOperator(
+            task_id=f'task_{i}_BashOperator',
+            bash_command="echo $NUMBER",
+            env={'NUMBER': i}
+        )

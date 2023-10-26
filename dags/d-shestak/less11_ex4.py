@@ -15,7 +15,7 @@ default_args = {
 }
 with DAG('hw_d-shestak_4',
          default_args=default_args,
-         description='hw_d-shestak_3',
+         description='hw_d-shestak_4',
          schedule_interval=timedelta(days=1),
          start_date=datetime(2023, 10, 21),
          tags=['hw_4_d-shestak']
