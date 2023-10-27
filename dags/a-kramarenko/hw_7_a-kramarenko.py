@@ -15,7 +15,7 @@ with DAG(
         'retry_delay': timedelta(minutes=5),
     },
     description='lesson 11 task 7 DAG',
-    start_date=datetime(2023, 10, 27),
+    start_date=datetime(2023, 10, 26),
 ) as dag:
     
     def print_numbers(task_number, ts, run_id):
