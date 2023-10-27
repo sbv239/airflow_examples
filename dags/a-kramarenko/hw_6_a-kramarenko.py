@@ -16,7 +16,7 @@ with DAG(
     },
     description='lesson 11 task 6 DAG',
     schedule_interval=timedelta(days=1),
-    start_date=datetime(2023, 10, 27),
+    start_date=datetime(2023, 10, 26),
 ) as dag:
 
     for i in range(10):
