@@ -14,7 +14,7 @@ from airflow.operators.python import PythonOperator
 
 
 with DAG(
-    'task_2',
+    'task_2_andreeva',
     # Параметры по умолчанию для тасок
     default_args={
         # Если прошлые запуски упали, надо ли ждать их успеха
@@ -43,7 +43,7 @@ with DAG(
     # https://airflow.apache.org/docs/apache-airflow/stable/dag-run.html
     catchup=False,
     # теги, способ помечать даги
-    #tags=['example'],
+    tags=['task2','task_2'],
 ) as dag:
     t1 = BashOperator(
         task_id='print_pwd',  # id, будет отображаться в интерфейсе
