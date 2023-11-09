@@ -30,6 +30,9 @@ with DAG(
             value="xcom test"
         )
 
+    #!!! ЭТО НЕПРАВИЛЬНО!! ЭТО ПРО Variables А НЕ ПРО XCOM
+    #ОСТАВИЛА КОД В НАЗИДАТЕЛЬНЫХ ЦЕЛЯХ. НО ЭТОТ ДАГ НЕ СРАБОТАЕТ, ТАК КАК НЕ СРАБОТАЕТ ТАСКА t2 !!!
+
     def get_xcom():
         from airflow.models import Variable
         var_xcom=Variable.get("sample_xcom_key")
@@ -44,6 +47,9 @@ with DAG(
         python_callable=put_in_xcom,
     )
 
+    # ТАСКА t2 НЕ СРАБОТАЕТ, ТАК КАК АЭРФЛОУ НЕ НАЙДЕТ ПЕРЕМЕННУЮ
+    # KeyError: 'Variable sample_xcom_key does not exist'
+    # ПОТОМУ ЧТО МЫ ПОЛОЖИЛИ В ТАСКЕ t1 "put_in_XCom" ЗНАЧЕНИЕ В XCOM, А НЕ В  VARIABLES
     t2 = PythonOperator(
         task_id='pull_from_XCom',
         python_callable=get_xcom,
