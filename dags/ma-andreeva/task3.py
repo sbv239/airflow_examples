@@ -45,9 +45,11 @@ with DAG(
             task_id=f'print_python_{i}',
             python_callable=print_task_number,
             op_kwargs={'task_number':i},
-    )
+        )
 
 t2 >> task_python >> t3
+#ОШИБКА!! надо, чтобы последовательность тасок была В цикле (оставлю основной код с косяком для наглядности, ошибка исправлена в task3_1.py):
+#       t2 >> task_python >> t3
 
 
 #def print_context(ts, run_id, **kwargs):
