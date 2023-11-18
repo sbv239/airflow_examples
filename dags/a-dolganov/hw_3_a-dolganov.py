@@ -33,7 +33,7 @@ with DAG(
             task = BashOperator(
                     task_id = 'print_num_' + str(i),
                     bash_command = "echo $NUMBER",
-                    env = {"NUMBER": i},
+                    env = {"NUMBER": str(i)},
             )
         else:
             task = PythonOperator(
