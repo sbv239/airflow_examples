@@ -1,8 +1,4 @@
-"""
-Dag 1
-"""
 from datetime import datetime, timedelta
-from textwrap import dedent
 
 from airflow import DAG
 
@@ -36,12 +32,12 @@ with DAG(
 ) as dag:
 
     t1 = BashOperator(
-        task_id='present working directory ',
+        task_id='present_working_directory ',
         bash_command='pwd',
     )
 
     t2 = PythonOperator(
-        task_id='print date',
+        task_id='print_date',
         python_callable='print_ds',
     )
 
