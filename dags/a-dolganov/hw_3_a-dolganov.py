@@ -23,7 +23,9 @@ with DAG(
     tags=['a-dolganov'],
 ) as dag:
 
-    def print_num(task_number):
+    def print_num(task_number, ts, run_id):
+        print(ts)
+        print(run_id)
         return f"task number is: {task_number}"
 
     for i in range(30):
