@@ -38,4 +38,14 @@ with DAG(
                     python_callable = print_num,
                     op_kwargs = {'task_number': i},
             )
+    task.doc_md = dedent(
+        """\
+#### Task Documentation
+#### `code`
+#### **полужирный**
+#### _курсив_
+"""
+    )
+
     task
+
