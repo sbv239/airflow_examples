@@ -17,18 +17,18 @@ default_args={
     'email_on_retry': False,
     'retries': 1,
     'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
-}
+},
 
-    schedule_interval=timedelta(days=1),
-    start_date=datetime(2022, 3, 31),
-    catchup=False
+    start_date=datetime.now(),
+    tags=["Cool_tag"]
 ) as dag:
+
     t1 = BashOperator(task_id="print_pwd", bash_command="pwd")
 
     def print_ds(ds):
         print(ds)
         return "Epshtein didn't kill himself"
 
-    t2 = PythonOperator(ds, python_callable=print_context)
+    t2 = PythonOperator(task_id="print_ds", python_callable=print_ds)
 
     t1 >> t2
