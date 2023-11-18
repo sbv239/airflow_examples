@@ -26,14 +26,14 @@ with DAG(
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
     },
 
-    start_date=datetime(202, 1, 1),
+    start_date=datetime(2023, 1, 1),
     tags=['hw_s-razumov_3'],
 ) as dag:
 
     for i in range(10):
         t1 = BashOperator(
             task_id='echo_number_task',
-            bash_command=f'echo {i}',
+            bash_command=f'echo {{i}}',
         )
     for task_number in range(10, 30):
         t2 = PythonOperator(
