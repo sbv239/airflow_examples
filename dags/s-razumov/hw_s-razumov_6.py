@@ -33,11 +33,7 @@ with DAG(
     for i in range(10):
         t1 = BashOperator(
             task_id=f'echo_number_' + str(i),
-            bash_command=f"echo {i}",
+            bash_command='echo $NUMBER',
+            env={'NUMBER': i},
         )
-    for task_number in range(10, 30):
-        t2 = PythonOperator(
-            task_id='print_task_' + str(task_number),
-            python_callable=print_number_task,
-            op_kwargs={'task_number': task_number}
-        )
+

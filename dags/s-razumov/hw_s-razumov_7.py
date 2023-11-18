@@ -6,8 +6,9 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 
-def print_number_task(task_number):
-    print(f"task number is: {task_number}")
+def print_number_task(ts, run_id, **kwargs):
+    print(f"{ts}")
+    print(f"{run_id}")
 
 
 with DAG(
@@ -30,11 +31,7 @@ with DAG(
         start_date=datetime(2023, 1, 1),
         tags=['hw_s-razumov_3'],
 ) as dag:
-    for i in range(10):
-        t1 = BashOperator(
-            task_id=f'echo_number_' + str(i),
-            bash_command=f"echo {i}",
-        )
+
     for task_number in range(10, 30):
         t2 = PythonOperator(
             task_id='print_task_' + str(task_number),

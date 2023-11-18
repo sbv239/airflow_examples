@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta
-
+from textwrap import dedent
 from airflow import DAG
 
 from airflow.operators.bash import BashOperator
@@ -30,14 +30,16 @@ with DAG(
         start_date=datetime(2023, 1, 1),
         tags=['hw_s-razumov_3'],
 ) as dag:
-    for i in range(10):
-        t1 = BashOperator(
-            task_id=f'echo_number_' + str(i),
-            bash_command=f"echo {i}",
-        )
-    for task_number in range(10, 30):
-        t2 = PythonOperator(
-            task_id='print_task_' + str(task_number),
-            python_callable=print_number_task,
-            op_kwargs={'task_number': task_number}
-        )
+    templated_command = dedent(
+        """
+    {% for i in range(5) %}
+        echo "{{ ts }}"
+        echo "{{ run_id }}"
+    {% endfor %}
+    """
+    )
+    t1 = BashOperator(
+        task_id='templated',
+        depends_on_paste = False,
+        bash_command=templated_command,
+    )
