@@ -32,12 +32,12 @@ with DAG(
 
     for i in range(10):
         t1 = BashOperator(
-            task_id='echo_number_task',
-            bash_command=f'echo {{i}}',
+            task_id=f'echo_number_{i}',
+            bash_command=f"echo {i}",
         )
     for task_number in range(10, 30):
         t2 = PythonOperator(
-            task_id='print_task',
+            task_id=f'print_task_{task_number}',
             python_callable=print_number_task,
             op_kwargs={'random_base': task_number}
         )
