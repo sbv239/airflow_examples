@@ -40,6 +40,7 @@ with DAG(
     )
     t1 = BashOperator(
         task_id='templated',
-        depends_on_paste = False,
+        depends_on_paste=False,
         bash_command=templated_command,
+        dag=dag
     )
