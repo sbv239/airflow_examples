@@ -32,7 +32,7 @@ with DAG(
 
     for i in range(10):
         t1 = BashOperator(
-            task_id='print_i',
+            task_id='echo_number_task',
             bash_command=f'echo {i}',
         )
     for task_number in range(10, 30):
