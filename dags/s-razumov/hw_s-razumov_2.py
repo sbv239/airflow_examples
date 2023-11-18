@@ -32,7 +32,7 @@ with DAG(
 ) as dag:
 
     t1 = BashOperator(
-        task_id='present_working_directory ',
+        task_id='present_working_directory',
         bash_command='pwd',
     )
 
