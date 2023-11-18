@@ -30,7 +30,8 @@ with DAG(
         if i < 10:
             task = BashOperator(
                     task_id = 'print_num_' + str(i),
-                    bash_command = f"echo {i}",
+                    bash_command = "echo $NUMBER",
+                    env = {"NUMBER": i},
             )
         else:
             task = PythonOperator(
@@ -48,4 +49,3 @@ with DAG(
     )
 
     task
-
