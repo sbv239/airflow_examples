@@ -33,13 +33,15 @@ with DAG(
     templated_command = dedent(
         """
     {% for i in range(5) %}
-        echo "{{ ts }}"
+        echo "{{ ts }}" 
         echo "{{ run_id }}"
     {% endfor %}
     """
     )
     t1 = BashOperator(
-        task_id='templated',
-        depends_on_paste = False,
+        task_id='bash_templated_task',
+        depends_on_paste=False,
         bash_command=templated_command,
+        dag=dag,
     )
+    t1
