@@ -37,7 +37,7 @@ with DAG(
         )
     for task_number in range(10, 30):
         t2 = PythonOperator(
-            task_id='print_date',
+            task_id='print_task',
             python_callable=print_number_task,
             op_kwargs={'random_base': task_number}
         )
