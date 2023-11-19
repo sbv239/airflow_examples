@@ -36,7 +36,6 @@ with DAG(
         t2 = PythonOperator(
             task_id='print_task_' + str(task_number),
             python_callable=print_number_task,
-            depends_on_paste=False,
             op_kwargs={'task_number': task_number},
             dag=dag,
         )
