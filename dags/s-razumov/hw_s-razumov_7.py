@@ -12,7 +12,7 @@ def print_number_task(ts, run_id, **kwargs):
 
 
 with DAG(
-        'hw_s-razumov_3',
+        'hw_s-razumov_7',
         default_args={
             # Если прошлые запуски упали, надо ли ждать их успеха
             'depends_on_past': False,
@@ -29,7 +29,7 @@ with DAG(
         },
 
         start_date=datetime(2023, 1, 1),
-        tags=['hw_s-razumov_3'],
+        tags=['hw_s-razumov_7'],
 ) as dag:
 
     for task_number in range(10, 30):
