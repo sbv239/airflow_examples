@@ -1,6 +1,7 @@
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
+from textwrap import dedent
 from datetime import timedelta, datetime
 
 with DAG(
@@ -31,6 +32,20 @@ with DAG(
         task_id = 'date',
         python_callable = show_date
     )
+
+    t1.doc_md = dedent("""
+        `print('hello world')`
+        #Header
+        **bold**
+        **kursiv**
+        """)
+    
+    t2.doc_md = dedent("""
+        `print('hello world')`
+        #Header
+        **bold**
+        **kursiv**
+        """)
 
     t1 >> t2
 
@@ -65,4 +80,19 @@ with DAG(
                 op_kwargs = {'task_number': i}
             )
     
+    task1.doc_md = dedent("""
+        `print('hello world')`
+        #Header
+        **bold**
+        **kursiv**
+        """)
+    
+    task2.doc_mc = dedent("""
+        `print('hello world')`
+        #Header
+        **bold**
+        **kursiv**
+        """)
+    
     task1>>task2
+
