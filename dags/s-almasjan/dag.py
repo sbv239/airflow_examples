@@ -15,7 +15,7 @@ with DAG(
     'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
     },
 
-    start_date = datetime(2023, 11, 20)
+    start_date = datetime(2023, 1, 1)
 
 ) as dag:
     
