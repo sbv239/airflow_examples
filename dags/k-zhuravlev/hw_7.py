@@ -8,7 +8,7 @@ from airflow.operators.python import PythonOperator
 
 
 with DAG(
-    "task_2_k-zhuravlev",
+    "task_7_k-zhuravlev",
 
 default_args={
     'depends_on_past': False,
