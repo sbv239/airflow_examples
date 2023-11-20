@@ -56,7 +56,7 @@ with DAG(
         if i < 10:
             task1 = BashOperator(
                 task_id = 'number_' + str(i),
-                bash_command = 'f"echo {i}"'
+                bash_command = f"echo {i}"
             )
         else:
             task2 = PythonOperator(
