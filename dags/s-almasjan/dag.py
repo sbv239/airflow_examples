@@ -49,18 +49,20 @@ with DAG(
 
 ) as dag:
     
-    def print_task_num(i):
-        print(f'task number is: {i}')
+    def print_task_num(task_number):
+        print(f'task number is: {task_number}')
 
     for i in range(30):
         if i < 10:
-            task = BashOperator(
-                task_id = 'it_num',
-                bash_command = 'f"echo {i}"'
+            task1 = BashOperator(
+                task_id = 'number_' + str(i),
+                bash_command = f"echo {i}"
             )
         else:
-            task = PythonOperator(
-                task_id = 'task_num',
+            task2 = PythonOperator(
+                task_id = 'task_num_almasjan' + str(i),
                 python_callable = print_task_num,
-                op_kwargs = {'i': i}
+                op_kwargs = {'task_number': i}
             )
+    
+    task1>>task2
