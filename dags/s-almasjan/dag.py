@@ -4,7 +4,7 @@ from airflow.operators.python import PythonOperator
 from datetime import timedelta, datetime
 
 with DAG(
-    'hw_s-almasjan_2',
+    'hw_2_s-almasjan',
 
     default_args={
     'depends_on_past': False,
@@ -15,7 +15,7 @@ with DAG(
     'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
     },
 
-    start_date = datetime(2023, 1, 1)
+    start_date=datetime(2022, 1, 1)
 
 ) as dag:
     
