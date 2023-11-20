@@ -55,12 +55,12 @@ with DAG(
     for i in range(30):
         if i < 10:
             task = BashOperator(
-                task_id = 'it_num',
+                task_id = 'it_num_almasjan',
                 bash_command = 'f"echo {i}"'
             )
         else:
             task = PythonOperator(
-                task_id = 'task_num',
+                task_id = 'task_num_almasjan',
                 python_callable = print_task_num,
                 op_kwargs = {'i': i}
             )
