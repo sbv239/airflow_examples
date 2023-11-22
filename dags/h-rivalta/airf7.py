@@ -9,7 +9,7 @@ from airflow import DAG
 
 from airflow.operators.bash import BashOperator
 with DAG(
-    'hw_h-rivalta_2', # id del DAG 
+    'hw_h-rivalta_8', # id del DAG 
     
     default_args={
     'depends_on_past': False,
