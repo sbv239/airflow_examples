@@ -9,6 +9,8 @@ from airflow.operators.python import PythonOperator
 from datetime import timedelta, datetime
 from textwrap import dedent
 
+from default_args import default_args
+
 
 def print_task_number(task_number):
     """
@@ -22,7 +24,7 @@ def print_task_number(task_number):
 
 with DAG(
     'hw_i-vafin_3_dag',
-    default_args={},
+    default_args=default_args,
     description=__doc__,
     schedule_interval=timedelta(days=1),
     start_date=datetime(2023, 11, 22),

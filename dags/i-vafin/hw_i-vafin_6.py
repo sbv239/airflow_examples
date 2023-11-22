@@ -8,10 +8,11 @@ from airflow.operators.bash import BashOperator
 from datetime import timedelta, datetime
 from textwrap import dedent
 
+from default_args import default_args
 
 with DAG(
     'hw_i-vafin_6_dag',
-    default_args={},
+    default_args=default_args,
     description=__doc__,
     schedule_interval=timedelta(days=1),
     start_date=datetime(2023, 11, 22),
