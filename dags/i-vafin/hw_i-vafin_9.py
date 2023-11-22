@@ -1,7 +1,6 @@
 """
 Task-9: работа с XCom
 """
-from default_args import default_args
 import os
 import sys
 from pathlib import Path
@@ -13,7 +12,7 @@ from datetime import timedelta, datetime
 from textwrap import dedent
 
 os.environ['PYTHONPATH'] = Path(__file__).parent
-
+from default_args import default_args
 
 def push_data_to_xcom(ti, **kwargs):
     """
