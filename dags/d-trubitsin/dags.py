@@ -3,8 +3,7 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
-from datetime import timedelta
-
+from datetime import timedelta, datetime
 
 with DAG(
     'hw_d-trubitsin_2',
@@ -19,6 +18,10 @@ with DAG(
     },
 
     description='First DAG',
+    schedule_interval=timedelta(days=1),
+    start_date=datetime(2023, 11, 23),
+    catchup=False,
+    tags=['d-trubitsin_2'],
 ) as dag:
     # вот так можно попросить Airflow подставить логическую дату
     # в формате YYYY-MM-DD
