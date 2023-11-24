@@ -28,7 +28,7 @@ with DAG(
     date = "{{ ds }}"
     t1 = BashOperator(
         task_id="task_1",
-        bash_command="pwd ",  # обратите внимание на пробел в конце!
+        bash_command="pwd",  # обратите внимание на пробел в конце!
         # пробел в конце нужен в случае BashOperator из-за проблем с шаблонизацией
         # вики на проблему https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=62694614
         # и обсуждение https://github.com/apache/airflow/issues/1017
