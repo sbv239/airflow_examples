@@ -6,7 +6,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-    'hw_p-startsev_2',
+    'hw_3_p-startsev',
     start_date=datetime(2023, 11, 25),
     default_args={
         'depends_on_past': False,
@@ -17,16 +17,17 @@ with DAG(
         'retry_delay': timedelta(minutes=5),
     },
 ) as dag:
-    t1 = BashOperator(
-        task_id = 'bash_operator',
-        bash_command = 'pwd'
-    )
-    def print_ds(ds):
-        print(ds)
-
-    t2 = PythonOperator(
-        task_id='print_ds',
-        python_callable=print_ds
-    )
-
-    t1 >> t2
+    for i in range(1, 11):
+        bash_task = BashOperator(
+            task_id=f'task{i}',
+            bash_command=f"echo {i}"
+        )
+    def print_task_number(task_number):
+        print("task number is: {task_number}")
+    
+    for i in range(11, 31):
+        python_task = PythonOperator(
+            task_id=f'task{i}',
+            python_callable=print_task_number,
+            op_kwargs={'n': {i}}
+        )
