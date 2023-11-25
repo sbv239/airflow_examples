@@ -22,11 +22,11 @@ with DAG(
     tags=["hw_7"]
 ) as dag:
     
-    def print_context(task_id, ts, run_id, **kwargs):
+    def print_context(task, ts, run_id, **kwargs):
         print(ts)
         print(run_id)
         print(kwargs)
-        print(task_id)
+        print(task)
 
     for i in range(20):
         t2 = PythonOperator(
