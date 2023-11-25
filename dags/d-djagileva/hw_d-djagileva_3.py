@@ -23,7 +23,7 @@ with DAG(
 
     for i in range(10):
         task = BashOperator(
-            task_id='cycle',  
+            task_id='task' + str(i),  
             bash_command=f"echo {i}",  
         )
 
@@ -31,7 +31,7 @@ with DAG(
         print(task_number)
         return f'task number is: {task_number}'
 
-    for i in range(20,31):
+    for i in range(10,30):
         task = PythonOperator(
             task_id = 'task' + str(i),  
             python_callable = print_context,
