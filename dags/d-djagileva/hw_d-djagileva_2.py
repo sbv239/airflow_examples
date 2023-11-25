@@ -5,14 +5,20 @@ from airflow.operators.python import PythonOperator
 
 with DAG(
     'tutorial',
-default_args={
-    'depends_on_past': False,
-    'email': ['airflow@example.com'],
-    'email_on_failure': False,
-    'email_on_retry': False,
-    'retries': 1,
-    'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
-}) as dag:
+    default_args={
+        'depends_on_past': False,
+        'email': ['airflow@example.com'],
+        'email_on_failure': False,
+        'email_on_retry': False,
+        'retries': 1,
+        'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
+    }, 
+    description='hw_d-djagileva_2',
+    schedule_interval=timedelta(days=1),
+    start_date=datetime(2023, 1, 1),
+    catchup=False,
+    tags=['hw_d-djagileva_2']
+) as dag:
 
     # t1, t2, t3 - это операторы (они формируют таски, а таски формируют даг)
     t1 = BashOperator(
