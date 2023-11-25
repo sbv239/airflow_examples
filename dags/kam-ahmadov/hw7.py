@@ -21,7 +21,8 @@ with DAG(
     catchup=False,
     tags=["hw_7"]
 ) as dag:
-    
+
+
     def print_context(task, ts, run_id, **kwargs):
         print(ts)
         print(run_id)
