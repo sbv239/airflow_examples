@@ -4,6 +4,7 @@ Hello, Airflow Documentation!!!
 from textwrap import dedent
 
 from datetime import timedelta
+from datetime import datetime
 
 from airflow import DAG
 from airflow.operators.bash import BashOperator
@@ -21,6 +22,7 @@ with DAG(
     'hw_d-ajmuratov-26_2',
     default_args=default_args,
     description='Home Work 2',
+    start_date=datetime(2023, 11, 26),
     catchup=False,
     tags=['Home Work 2']
 ) as dag:
