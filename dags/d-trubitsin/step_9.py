@@ -8,14 +8,14 @@ from airflow.operators.python import PythonOperator
 def push_xcom(ti):
     ti.xcom_push(
         key='sample_xcom_key',
-        value="xcom test"
+        value='xcom test'
     )
 
 
 def pull_xcom(ti):
     pull = ti.xcom_pull(
         key='sample_xcom_key',
-        task_ids='task_pull'
+        task_ids='push_task'
     )
     print(pull)
 
