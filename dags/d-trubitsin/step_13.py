@@ -9,7 +9,7 @@ from airflow.models import Variable
 
 def condition():
     task_id = Variable.get("is_startml")
-    print(task_id)
+    print("task_id: ", task_id)
     if task_id:
         return 'startml_desc'
     else:
