@@ -25,7 +25,7 @@ def print_false():
 
 
 with DAG(
-    'hw_d-trubitsin_12',
+    'hw_d-trubitsin_13',
 
     default_args={
         'depends_on_past': False,
@@ -40,7 +40,7 @@ with DAG(
     schedule_interval=timedelta(days=1),
     start_date=datetime(2023, 11, 26),
     catchup=False,
-    tags=['d-trubitsin_12'],
+    tags=['d-trubitsin_13'],
 ) as dag:
 
     d1 = DummyOperator(
