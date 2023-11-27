@@ -45,7 +45,7 @@ with DAG(
 ) as dag:
 
     d1 = DummyOperator(
-        task_id='dummy_1',
+        task_id='before_branching',
     )
 
     branching = BranchPythonOperator(
@@ -61,7 +61,7 @@ with DAG(
         python_callable=print_false,
     )
     d2 = DummyOperator(
-        task_id='dummy_2',
+        task_id='after_branching',
     )
 
     d1 >> branching >> [t1, t2] >> d2
