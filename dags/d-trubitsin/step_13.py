@@ -8,7 +8,8 @@ from airflow.models import Variable
 
 
 def condition():
-    task_id = Variable.get("is_startml")
+    task_id = False
+    # task_id = Variable.get("is_startml")
     print("task_id: ", task_id)
     if task_id:
         return 'startml_desc'
@@ -44,7 +45,7 @@ with DAG(
 ) as dag:
 
     d1 = DummyOperator(
-        task_id='dummy_1',
+        task_id='before_branching',
     )
 
     branching = BranchPythonOperator(
@@ -60,7 +61,7 @@ with DAG(
         python_callable=print_false,
     )
     d2 = DummyOperator(
-        task_id='dummy_2',
+        task_id='after_branching',
     )
 
     d1 >> branching >> [t1, t2] >> d2
