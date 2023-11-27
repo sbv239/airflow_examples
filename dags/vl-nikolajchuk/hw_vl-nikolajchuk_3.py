@@ -1,10 +1,11 @@
 from airflow import DAG
 from datetime import timedelta, datetime
+from textwrap import dedent
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-    'hw_vl-nikolajchuk_2',
+    'hw_vl-nikolajchuk_3',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -13,25 +14,26 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
         },
-        description = 'Dag for hw2',
+        description = 'Dag for hw3',
         schedule_interval=timedelta(days=1),
-        start_date = datetime(2023, 11, 26),
+        start_date = datetime(2023, 11, 27),
         catchup=False,
-        tags=['hw_2']
+        tags=['hw_3']
 ) as dag:
-        def print_ds(ds, **kwargs):
-            print(kwargs)
-            print(ds)
-            return "it's working"
+    def print_task(task, **kwargs):
+        print(kwargs)
+        print(task)
 
-        t1 = PythonOperator(
-            task_id='print_ds',
-            python_callable=print_ds,
+    for i in range(10):
+        t1 = BashOperator(
+            task_id=f'new_bash{i}',
+            bash_command=f'echo{i}'
+        )
+    for i in range(20):
+        t2 = PythonOperator(
+            task_id=f'task_{i}',
+            python_callable=print_task,
+            op_kwargs={'task number is': f'task_{i}'}
         )
 
-        t2 = BashOperator(
-            task_id='command_pwd',
-            bash_command='pwd'
-        )
 
-        t2 >> t1
