@@ -25,15 +25,17 @@ with DAG(
 ) as dag:
     for i in range(10):
         t1 = BashOperator(
-            task_id=f'task {i}',
+            task_id='bash_task_' + str(i),
             bash_command=f'echo {i}',
             dag=dag
         )
 
     def print_func(task_number):
-        print(f"task number is: {task_number}")
+        return (f"task number is: {task_number}")
 
-    for i in range(20):
+    for i in range(10, 30):
         t2 = PythonOperator(
+            task_id='python_task_' + str(i),
+            python_callable=print_func,
             op_kwargs={'task_number': i}
         )
