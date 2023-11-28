@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+from textwrap import dedent
 
 from airflow import DAG
 
@@ -24,13 +25,22 @@ with DAG(
     for i in range(10):
         t1 = BashOperator(
             task_id='print_the_context' + str(i),
-            bash_command=f"echo {i}",
+            env={'NUMBER': str(i)},
+            bash_command=f"echo $NUMBER"
         )
-
+        t1.doc_md = dedent("""
+            `code`, **bold text**, *cursive*
+            
+            new line
+                           
+            # Header
+        """)
         t1
 
-    def print_numbers(task_number):
-        print(f"task number is: {task_number}")
+    def print_numbers(ts, run_id, **kwargs):
+        print(ts)
+        print(run_id)
+        print(f"task number is: {kwargs.get('task_number')}")
 
     for i in range(20):
         t2 = PythonOperator(
@@ -38,5 +48,11 @@ with DAG(
             python_callable=print_numbers,
             op_kwargs={'task_number': i},
         )
-
+        t2.doc_md = dedent("""
+            `code`, **bold text**, *cursive*
+            
+            new line
+                           
+            # Header
+        """)
         t2
