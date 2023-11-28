@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 from airflow import DAG
-from airflow.operators.bash import BashOperator, PythonOperator
+from airflow.operators.bash import BashOperator
+from airflow.operators.python import PythonOperator
 
 with DAG(
     'hw_{nikacloudnikitina@gmail.com}_2', 
@@ -10,16 +11,22 @@ with DAG(
         'email_on_failure': False,
         'email_on_retry': False,
         'retries': 1,
-        'retry_delay': timedelta(minutes=5),  # timedelta из пакета datetime
+        'retry_delay': timedelta(minutes=5),
         }
 ) as dag:
     
     t1 = BashOperator(
-        task_id= 'first_try', 
+        task_id= 'hw_2_nn', 
         bash_command='pwd'
     )
 
-def print_context(ds, **kwargs):
-    print(kwargs)
-    print(ds)
-    return 'Whatever you return gets printed in the logs'
+    def print_context(ds, **kwargs):
+        print(ds)
+        return ds
+    
+    run_python = PythonOperator(
+		task_id="hw_2_nn",
+		python_callable=print_context
+	)
+
+
