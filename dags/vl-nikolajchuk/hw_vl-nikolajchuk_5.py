@@ -30,7 +30,7 @@ with DAG(
     )
 
     task = BashOperator(
-        task_id = 'print_ts_&_run_id',
+        task_id = 'print_ts_run_id',
         bash_command = templated_command
     )
 
