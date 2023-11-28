@@ -25,18 +25,30 @@ with DAG(
     catchup=False,
     tags=['HM3']
 ) as dag:
-    def print_curr_task_number(task_number):
-        print(f"task number is: {task_number}")
-    for i in range(30):
-        if i < 10:
-            t = BashOperator(
-                task_id=f'echo_curr_task_number_{i}',
-                bash_command=f'echo {i}'
-            )
-        else:
-            t = PythonOperator(
-                task_id=f'print_curr_task_number_{i}',
-                python_callable=print_curr_task_number,
-                op_args=i
-            )
-        t
+    
+    def print_start(ds):
+        print('3.2.1...start!!!')
+    run_this = PythonOperator(
+        task_id='start',
+        provide_context=True,
+        python_callable=print_start
+    )
+
+    def print_curr_task_number(**kwargs):
+        print(f"task number is: {kwargs['task_number']}")
+    for i in range(1, 11):
+        t = BashOperator(
+            task_id=f'echo_curr_task_number_{i}',
+            bash_command=f'echo {i}'
+        )
+        run_this >> t
+    for i in range(11, 31):
+        t = PythonOperator(
+            task_id=f'print_curr_task_number_{i}',
+            python_callable=print_curr_task_number,
+            provide_context=True,
+            op_kwargs={'task_number': i}
+        )
+        run_this >> t
+
+    run_this
