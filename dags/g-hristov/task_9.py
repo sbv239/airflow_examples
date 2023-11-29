@@ -40,4 +40,5 @@ with DAG(
         python_callable=pull_ti,
     )
 
+
     taskpo1>>taskpo2
