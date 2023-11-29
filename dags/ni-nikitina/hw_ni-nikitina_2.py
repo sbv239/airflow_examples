@@ -12,15 +12,15 @@ with DAG(
         'email_on_retry': False,
         'retries': 1,
         'retry_delay': timedelta(minutes=5),
-        }, 
-        description='Second Task',
+    }, 
+    description='Second Task',
 	schedule_interval=timedelta(days=1),
 	start_date=datetime(2023, 11, 29),
 	catchup=False
 ) as dag:
     
     t1 = BashOperator(
-        task_id= 'hw_2_nn', 
+        task_id= 'hw_2_nn_bo', 
         bash_command='pwd'
     )
 
@@ -28,9 +28,9 @@ with DAG(
         print(ds)
         return ds
     
-    run_python = PythonOperator(
-		task_id="hw_2_nn",
+    t2 = PythonOperator(
+		task_id="hw_2_nn_po",
 		python_callable=print_context
 	)
 
-
+t1 >> t2
