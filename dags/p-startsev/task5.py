@@ -6,8 +6,8 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
 with DAG(
-    'hw_p-startsev_2',
-    start_date=datetime(2023, 11, 25),
+    'hw_5_p-startsev',
+    start_date=datetime(2023, 5, 11),
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -17,16 +17,15 @@ with DAG(
         'retry_delay': timedelta(minutes=5),
     },
 ) as dag:
-    t1 = BashOperator(
-        task_id = 'bash_operator',
-        bash_command = 'pwd'
+    command_template = dedent(
+        """
+        {% for i in range(5) %}
+            echo "{{ ts }}"
+            echo "{{ run_id }}"
+        {% endfor %}
+        """
     )
-    def print_ds(ds):
-        print(ds)
-
-    t2 = PythonOperator(
-        task_id='print_ds',
-        python_callable=print_ds
+    task1 = BashOperator(
+        task_id='5_commands',
+        bash_command=command_template
     )
-
-    t1 >> t2
