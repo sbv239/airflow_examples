@@ -1,6 +1,7 @@
 from airflow import DAG
 from datetime import timedelta, datetime
-from airflow.operators.bash import BashOperator, PythonOperator
+from airflow.operators.bash import BashOperator
+from airflow.operators.python_operator import PythonOperator
 
 with DAG(
     'hw_m-kazakov_2',
