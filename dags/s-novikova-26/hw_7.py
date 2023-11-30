@@ -25,9 +25,9 @@ with DAG(
     catchup=False,
     tags=['HW 7']
 ) as dag:
-        def print_number(ts, run_id, **kwarg):
+        def print_number(ts, run_id, **kwargs):
 
-            print(f"task number is: {kwarg[task_number]}")
+            print(f"task number is: {kwargs['task_number']}")
             print("ts:", ts)
             print("run_id:", run_id)
 
