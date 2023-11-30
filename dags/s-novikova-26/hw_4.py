@@ -18,7 +18,7 @@ default_args={
 }
 
 with DAG(
-    'hw_3_s-novikova-26',
+    'hw_4_s-novikova-26',
     default_args=default_args,
     description='HW 3',
     start_date=datetime(2023, 11, 30),
