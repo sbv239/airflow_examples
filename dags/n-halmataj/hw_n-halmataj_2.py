@@ -1,40 +1,41 @@
-from datetime import datetime, timedelta
-
 from airflow import DAG
+from textwrap import dedent
+from datetime import timedelta, datetime
+
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 
+
 with DAG(
-        "hw_n-halmataj_2",
-        default_args={
-            'depends_on_past': False,
-            'email': ['airflow@example.com'],
-            'email_on_failure': False,
-            'email_on_retry': False,
-            'retries': 1,
-            'retry_delay': timedelta(minutes=5),
-        },
-        description="hw_n-halmataj_2 DAG",
-        schedule_interval=timedelta(days=1),
-        start_date=datetime(2023, 5, 22),
-        catchup=False,
-        tags=['second_task'],
+    'hw_n-halmataj_2',
+    default_args={
+        'depends_on_past': False,
+        'email': ['airflow@example.com'],
+        'email_on_failure': False,
+        'email_on_retry': False,
+        'retries': 1,
+        'retry_delay': timedelta(minutes=5),
+    },
+    description='second DAG',
+    schedule_interval=timedelta(days=1),
+    start_date=datetime(2023, 11, 20),
+    catchup=False,
+    tags=["hw_1"]
 ) as dag:
-    t1 = BashOperator(
-        task_id='print pwd',
-        bash_command="pwd",
-    )
 
-
-    def print_context(ds, **kwargs):
+    def print_ds(ds, **kwargs):
         print(kwargs)
         print(ds)
-        return "SOME TEXT"
+        return "it's working"
 
-
-    t2 = PythonOperator(
-        task_id='print_i',
-        python_callable=print_context,
+    t1 = PythonOperator(
+        task_id='print_ds',
+        python_callable=print_ds,
     )
 
-    t1 >> t2
+    t2 = BashOperator(
+        task_id='command_pwd',
+        bash_command='pwd'
+    )
+
+    t2 >> t1
