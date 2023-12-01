@@ -23,15 +23,15 @@ with DAG(
     tags=["hw_4"]
 ) as dag:
 
-    def print_task_no(task_number):
-        print("task number is: {task_number}")
-            
-            
-    for i in range (20):
+    def print_task_no(task_number, ts, run_id, **kwargs):
+        print(f"task number is: {task_number}, ts is: {ts}, run_id is: {run_id}")
+
+    for i in range(20):
         task2 = PythonOperator(
             task_id='print_task'+str(i),
             python_callable=print_task_no,
-            op_kwargs={'task_number': i}
+            op_kwargs={'task_number': i},
+            provide_context=True
         )
 
         task2.doc_md=dedent(
@@ -44,10 +44,11 @@ with DAG(
         """
         )
 
-    for i in range (10):
+    for i in range(10):
         task1 = BashOperator(
             task_id='Bash'+str(i),
-            bash_command=f"echo{i}"
+            bash_command=f"echo $NUMBER",
+            env={'NUMBER': str(i)}
         )
-
+        
     task2 >> task1
