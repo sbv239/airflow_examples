@@ -16,7 +16,7 @@ with DAG(
         },
         description="hw_n-halmataj_2 DAG",
         schedule_interval=timedelta(days=1),
-        start_date=datetime(2023, 12, 1),
+        start_date=datetime(2023, 1, 1),
         catchup=False,
         tags=['second_task'],
 ) as dag:
