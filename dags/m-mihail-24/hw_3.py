@@ -2,6 +2,7 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 from datetime import timedelta, datetime
+from textwrap import dedent
 
 with DAG(
     'm-mihail-24_3',
@@ -27,21 +28,21 @@ with DAG(
 ) as dag:
     for i in range(10):
         b3 = BashOperator(
-            task_id='task_number_bash',
+            task_id='task_number_bash_' + str(i),
             bash_command=f"echo {i}"
         )
+
 
     def print_num(task_number):
         print(f'task number is: {task_number}')
 
     for i in range(20):
         p3 = PythonOperator(
-            task_id='task_number_python',
+            task_id='task_number_python_' + str(i),
             python_callable=print_num,
             op_kwargs={'task_number': i}
         )
 
     b3 >> p3
-
 
 
