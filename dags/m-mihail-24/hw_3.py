@@ -31,7 +31,12 @@ with DAG(
             task_id='task_number_bash_' + str(i),
             bash_command=f"echo {i}"
         )
-
+        b3.doc_md = dedent(
+            f"""
+            ###Задача берет значения от 0 до 9 и *делает для каждого задачу*, также
+            **выводит каждое значение в bash при помощи `f'echo {{значение}}`**
+            """
+        )
 
     def print_num(task_number):
         print(f'task number is: {task_number}')
@@ -41,6 +46,12 @@ with DAG(
             task_id='task_number_python_' + str(i),
             python_callable=print_num,
             op_kwargs={'task_number': i}
+        )
+        p3.doc_md = dedent(
+            f"""
+            ###Задача берет значения от 0 до 19 и *делает для каждого задачу*, также
+            **выводит каждое значение в bash при помощи `f'echo {{значение}}`**
+            """
         )
 
     b3 >> p3
