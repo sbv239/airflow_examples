@@ -6,7 +6,7 @@ from airflow.operators.python import PythonOperator
 
 
 with DAG(
-    'simple_dag_db',
+    'm-mihail-24_10',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -19,7 +19,7 @@ with DAG(
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 1, 1),
     catchup=False,
-    tags=['example'],
+    tags=['example_11'],
 ) as dag:
 
     def get_active_user():
