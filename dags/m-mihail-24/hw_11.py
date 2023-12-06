@@ -1,33 +1,12 @@
 from datetime import datetime, timedelta
 
 from airflow import DAG
-from textwrap import dedent
-from airflow.operators.bash import BashOperator
+from airflow.providers.postgres.operators.postgres import PostgresHook
 from airflow.operators.python import PythonOperator
-from airflow.providers.postgres.hooks.postgres import PostgresHook
-
-
-def get_active_user():
-    from psycopg2.extras import RealDictCursor
-    postgres = PostgresHook(postgres_conn_id="startml_feed")
-    with postgres.get_conn() as conn:
-        with conn.cursor(cursor_factory=RealDictCursor) as cursor:
-            cursor.execute(
-                """
-                SELECT user_id, COUNT(user_id)
-                FROM feed_action
-                WHERE action = 'like'
-                GROUP BY user_id
-                ORDER BY COUNT(user_id) DESC
-                LIMIT 1
-                """
-            )
-            results = cursor.fetchone()
-            return results
 
 
 with DAG(
-    'm-mihail-24_11',
+    'simple_dag_db',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -40,14 +19,39 @@ with DAG(
     schedule_interval=timedelta(days=1),
     start_date=datetime(2022, 1, 1),
     catchup=False,
-    tags=['example_11'],
+    tags=['example'],
 ) as dag:
-    p11 = PythonOperator(
-        task_id='postgres_query',
+
+    def get_active_user():
+        from psycopg2.extras import RealDictCursor
+        postgres = PostgresHook(postgres_conn_id="startml_feed")
+        # .get_conn() работает схоже с psycopg2
+        with postgres.get_conn() as conn:
+            # как и в psycopg2, необходимо создавать курсор
+            with conn.cursor(cursor_factory=RealDictCursor) as cursor:
+                cursor.execute(
+                    """
+                    SELECT f.user_id, COUNT(f.user_id)
+                    FROM feed_action f
+                    WHERE f.action = 'like'
+                    GROUP BY f.user_id
+                    ORDER BY COUNT(f.user_id) DESC
+                    LIMIT 1
+                    """
+                )
+                results = cursor.fetchone()
+        return results
+
+
+    t1 = PythonOperator(
+        task_id="postgres_query",
         python_callable=get_active_user
     )
-    p11_print = PythonOperator(
-        task_id='print_result',
-        python_callable=lambda ti: print(ti.xcom_push(task_ids='postgres_query', key='return_value'))
+
+    # В принципе, он не обязателен - в задании просят только вернуть словарь
+    t2 = PythonOperator(
+        task_id="print_operator",
+        doc_md="Распечатать значение",
+        python_callable=lambda ti: print(ti.xcom_pull(task_ids="postgres_query", key="return_value"))
     )
-    p11 >> p11_print
+    t1 >> t2
