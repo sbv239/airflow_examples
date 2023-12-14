@@ -34,7 +34,7 @@ with DAG(
 
     t2 = PythonOperator(
         task_id='print_ds',
-        python_collable=print_ds
+        python_callable=print_ds
     )
 
     t1 >> t2
