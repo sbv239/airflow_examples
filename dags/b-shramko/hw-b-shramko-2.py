@@ -17,7 +17,7 @@ with DAG('hw-b-shramko-2',
          ) as dag:
     t1 = BashOperator(
         task_id='print_dir',
-        bash_command='pwd',
+        bash_command='pwd'
     )
 
 
