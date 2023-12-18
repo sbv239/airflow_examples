@@ -17,8 +17,8 @@ with DAG('hw-b-shramko-3',
          ) as dag:
     def print_task_number(task_number, ts, run_id, **kwargs):
         print(f"task number is: {task_number}")
-        print(f"ts is: {run_id}")
-        print(f"task number is: {task_number}")
+        print(f"ts is: {ts}")
+        print(f"run_id is: {run_id}")
         for var in kwargs:
             print(var)
 
