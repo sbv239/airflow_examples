@@ -29,8 +29,7 @@ with DAG('hw-b-shramko-7',
         if i <= 10:
             t1 = BashOperator(
                 task_id='Bash_print_number_' + str(i),
-                bash_command="echo $NUMBER",
-                env={"NUMBER": i}
+                bash_command=f'echo {i}'
             )
         if i > 10:
             t2 = PythonOperator(
